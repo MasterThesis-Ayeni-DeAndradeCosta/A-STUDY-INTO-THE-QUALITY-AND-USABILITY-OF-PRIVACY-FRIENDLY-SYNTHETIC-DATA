@@ -2,12 +2,11 @@
 
 ## 📌 Project Overview
 
-There is a growing demand for data in Industry. However, sharing sensitive personal information is a major concern. **Synthetic data**, created artificially, offers a potential solution. However, studies have shown that **synthetic data can still leak information** about individuals.
+There is currently a **huge demand for data** in industry. Since this data often contains **sensitive personal information**, it cannot be shared freely. In addition to existing **anonymization techniques**, we are currently seeing a significant movement in both **academia and industry** towards the use of **synthetic data**. The reasoning is that, since the data is **synthetic (artificial)**, it contains **no information about individuals**, and thus there are no privacy concerns.
 
-Another potential solution is a **hybrid approach**: partially anonymizing data before generating synthetic data. This provides **minimal privacy guarantees**.
+Nevertheless, in reality, **various papers** have already pointed out that **synthetic data can leak information** about individuals in the original dataset on which the synthetic dataset is based. Unlike traditional **anonymization techniques**, it is also **very difficult to quantify the privacy level** of a synthetic dataset. Therefore, we propose a **hybrid solution** where the data is **(partially) anonymized** before being used to generate a synthetic dataset. In this way, **minimal guarantees** can be provided about the **privacy properties**.
 
-The goal of this master’s thesis is to analyze the **usefulness of synthetic data** by comparing it with original and anonymized data in **realistic use cases** (e.g., building an ML model). Following this analysis, **a hybrid solution will be proposed**. To evaluate this approach, a **test setup** will be created to conduct a **wide range of experiments** easily. The usability of different alternatives—**original data, synthetic data, anonymized data, and hybrid data**—will then be compared. The results should provide an idea of the **practical usefulness** of the hybrid solution.
-
+The goal of this master’s thesis is to **analyze the usefulness** of the data obtained by applying this **hybrid solution**. To achieve this, a **test setup** will be created that allows a **wide range of experiments** to be easily conducted. The **usability of different alternatives**—**original data, synthetic data, anonymized data, and data obtained through the application of the hybrid solution**—will be compared by using them in **realistic use cases** (e.g., building an ML model). The results should provide an idea of the **practical usefulness** of our **hybrid solution**.
 ---
 
 ## 🎯 Objectives
