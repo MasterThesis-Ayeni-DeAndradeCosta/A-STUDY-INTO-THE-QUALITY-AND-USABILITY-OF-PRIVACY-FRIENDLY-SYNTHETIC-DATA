@@ -18,3 +18,8 @@ The goal of this master’s thesis is to **analyze the usefulness** of the data 
 - ⚙️ **Develop a reusable pipeline** for systematically testing and evaluating datasets (**original, anonymized, synthetic, and hybrid**) with **minimal adjustments**, enabling consistent comparisons of model performance and privacy metrics across different configurations.
 
 - 🌟 **Identify the best configuration** for the hybrid model to achieve an **optimal balance between privacy and usability**.
+
+## 🤝 Contributors
+
+- **Dele Ayeni** - [GitHub Profile](https://github.com/deleayeni)
+- **Isabelle De Andrade Costa** - [GitHub Profile](https://github.com/isabelledeac)
