@@ -7,7 +7,7 @@ There is currently a **huge demand for data** in industry. Since this data often
 Nevertheless, in reality, **various papers** have already pointed out that **synthetic data can leak information** about individuals in the original dataset on which the synthetic dataset is based. Unlike traditional **anonymization techniques**, it is also **very difficult to quantify the privacy level** of a synthetic dataset. Therefore, we propose a **hybrid solution** where the data is **(partially) anonymized** before being used to generate a synthetic dataset. In this way, **minimal guarantees** can be provided about the **privacy properties**.
 
 The goal of this master’s thesis is to **analyze the usefulness** of the data obtained by applying this **hybrid solution**. To achieve this, a **test setup** will be created that allows a **wide range of experiments** to be easily conducted. The **usability of different alternatives**—**original data, synthetic data, anonymized data, and data obtained through the application of the hybrid solution**—will be compared by using them in **realistic use cases** (e.g., building an ML model). The results should provide an idea of the **practical usefulness** of our **hybrid solution**.
----
+
 
 ## 🎯 Objectives
 
