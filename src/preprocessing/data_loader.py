@@ -17,6 +17,7 @@ def load_dataset(original_dataset_path, separator=","):
     dataset_name = os.path.splitext(os.path.basename(original_dataset_path))[0]
 
     # Read the original dataset
+    print(f"📂 Loading dataset from: {original_dataset_path}...")
     original_data = pd.read_csv(original_dataset_path, sep=separator)
     print(f"\nProcessing dataset: {dataset_name}")
     print(f"Original dataset size: {len(original_data)} rows")
