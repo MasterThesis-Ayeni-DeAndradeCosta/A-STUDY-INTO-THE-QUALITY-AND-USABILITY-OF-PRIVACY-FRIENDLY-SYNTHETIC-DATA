@@ -7,12 +7,16 @@ def handle_missing_values(original_data, strategy="drop"):
 
     Parameters:
     - original_data (DataFrame): Input dataset.
-    - strategy (str): "drop" to remove, "mean", "median", or "mode" to impute.
+     strategy (str or None): "drop" to remove, "mean", "median", or "mode" to impute.
+                               If None, returns the original dataset.
 
     Returns:
     - cleaned_data (DataFrame): Dataset after handling missing values.
-    - dropped_rows (int): Number of rows dropped (if any).
+    
     """
+    if strategy is None:
+        return original_data
+    
     # Count how many rows we had initially
     original_count = len(original_data)
 

@@ -50,10 +50,7 @@ def run_benchmarks():
     original_data, dataset_name = load_dataset(dataset_path, separator)
 
     # Handle missing values
-    if handle_missing:
-        cleaned_data = handle_missing_values(original_data, strategy=handle_missing)
-    else:
-        cleaned_data = original_data
+    cleaned_data = handle_missing_values(original_data, strategy=handle_missing)
 
     # Encode categorical features
     if encoding_type:
