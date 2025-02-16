@@ -17,6 +17,7 @@ import pandas as pd
 from preprocessing.data_loader import load_dataset
 from preprocessing.missing_value_handler import handle_missing_values
 from preprocessing.encoding import encode_categorical_features
+from synthetic_pipeline.data_synthesis import generate_synthetic_data
 
 
 def load_config(config_path="configs/benchmark_config.yaml"):
@@ -46,6 +47,10 @@ def run_benchmarks():
     handle_missing = config["preprocessing"]["handle_missing_values"]
     encoding_type = config["preprocessing"]["encoding_type"]
 
+    #synthetic parameters
+    enable_synthetic = config["synthesis"]["enable_synthetic_generation"]
+    test_size = config["synthesis"]["test_size"]
+
     # Load dataset
     original_data, dataset_name = load_dataset(dataset_path, separator)
 
@@ -59,6 +64,13 @@ def run_benchmarks():
         encoded_data = cleaned_data
 
     print("\nPreprocessing completed.")
+
+     # **Synthetic Data Generation**
+    if enable_synthetic:
+        synthetic_data, metadata = generate_synthetic_data(encoded_data, dataset_name, test_size)
+        print("\nSynthetic Data Generation Completed.")
+    else:
+        print("\nSynthetic Data Generation Skipped (Disabled in Configuration).")
 
 if __name__ == "__main__":
     run_benchmarks()
