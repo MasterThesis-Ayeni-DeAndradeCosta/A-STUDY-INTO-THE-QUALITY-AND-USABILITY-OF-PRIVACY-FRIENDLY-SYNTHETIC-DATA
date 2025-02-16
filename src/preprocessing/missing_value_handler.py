@@ -28,4 +28,4 @@ def handle_missing_values(original_data, strategy="drop"):
     # Print a message to see how many were dropped
     print(f"Dropped {dropped_rows} rows due to missing values")
 
-    return cleaned_data, dropped_rows
+    return cleaned_data

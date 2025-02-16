@@ -9,11 +9,15 @@ src_path = os.path.join(project_root, "src")
 if src_path not in sys.path:
     sys.path.insert(0, src_path)
 
+print("Current sys.path:", sys.path)
+
+# Now import modules from src
 import yaml
 import pandas as pd
-from src.preprocessing.data_loader import load_dataset
-from src.preprocessing.missing_value_handler import handle_missing_values
-from src.preprocessing.encoding import encode_categorical_features
+from preprocessing.data_loader import load_dataset
+from preprocessing.missing_value_handler import handle_missing_values
+from preprocessing.encoding import encode_categorical_features
+
 
 def load_config(config_path="configs/benchmark_config.yaml"):
     """
@@ -34,7 +38,7 @@ def run_benchmarks():
     config = load_config()
 
     # Dataset parameters
-    dataset_path = config["dataset"]["path"]
+    dataset_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", config["dataset"]["path"]))
     separator = config["dataset"]["separator"]
     target_column = config["dataset"]["target_column"]
 
