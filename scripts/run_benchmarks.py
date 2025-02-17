@@ -70,7 +70,7 @@ def run_benchmarks():
 
      # **Synthetic Data Generation**
     if enable_synthetic:
-        synthetic_data, metadata = generate_synthetic_data(encoded_data, dataset_name, test_size)
+        synthetic_data, metadata = generate_synthetic_data(encoded_data, dataset_name, config)
         print("\nSynthetic Data Generation Completed.")
     else:
         print("\nSynthetic Data Generation Skipped (Disabled in Configuration).")
