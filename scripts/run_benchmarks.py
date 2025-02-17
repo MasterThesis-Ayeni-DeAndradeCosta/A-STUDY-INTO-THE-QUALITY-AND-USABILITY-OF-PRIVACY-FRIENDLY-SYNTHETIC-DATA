@@ -100,7 +100,7 @@ def run_benchmarks():
     if enable_synthetic and X_synthetic is not None:
         datasets["Synthetic"] = (X_synthetic, y_synthetic)
 
-    trained_models = train_models(datasets)
+    trained_models = train_models(datasets, config)
 
     # **Step 4: Evaluate Models**
     print("\n Evaluating models...")
