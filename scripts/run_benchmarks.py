@@ -52,7 +52,7 @@ def run_benchmarks():
 
     #synthetic parameters
     enable_synthetic = config["synthesis"]["enable_synthetic_generation"]
-    test_size = config["synthesis"]["test_size"]
+    test_size = config["utility"]["test_size"]
 
     # Load dataset
     original_data, dataset_name = load_dataset(dataset_path, separator)

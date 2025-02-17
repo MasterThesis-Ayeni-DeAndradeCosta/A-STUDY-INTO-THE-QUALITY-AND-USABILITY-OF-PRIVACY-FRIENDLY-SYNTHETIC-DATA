@@ -33,9 +33,9 @@ def train_models(datasets, config):
         warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
     
     # Model selection from YAML
-    selected_models = config["models"]
+    selected_models = config["utility"]["models"]
 
-    # Initialize models dynamically based on YAML
+    # Dynamically initialize models
     models = {}
     if selected_models.get("LogisticRegression", False):
         models["Logistic Regression"] = LogisticRegression(max_iter=3000)
@@ -47,7 +47,6 @@ def train_models(datasets, config):
         models["Decision Tree"] = DecisionTreeClassifier()
     if selected_models.get("SVM", False):
         models["SVM"] = SVC()
-
 
     # # Predefined models
     # models = {
