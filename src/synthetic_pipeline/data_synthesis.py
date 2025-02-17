@@ -48,7 +48,7 @@ def load_or_train_synthesizer(preprocessed_data, dataset_name):
 
 def generate_synthetic_data(preprocessed_data, dataset_name, test_size=0.2):
     """
-    Generates synthetic data for a given dataset.
+    Generates synthetic data and saves it in the datasets/synthetic directory.
     
     Parameters:
     - preprocessed_data (DataFrame): The dataset after preprocessing.
