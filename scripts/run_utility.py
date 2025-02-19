@@ -21,7 +21,7 @@ def run_utility(encoded_data, synthetic_data, target_column, test_size, enable_s
     - datasets (dict): Dictionary containing training datasets.
     """
 
-    print("\ Preparing datasets for machine learning...")
+    print(" Preparing datasets for machine learning...")
 
     # Split original dataset into training and test sets
     X_train_original, X_test_original, y_train_original, y_test_original = prepare_original_data(
@@ -35,7 +35,7 @@ def run_utility(encoded_data, synthetic_data, target_column, test_size, enable_s
 
     print(f" Original Data - Training Size: {len(X_train_original)}, Testing Size: {len(X_test_original)}")
     if X_synthetic is not None:
-        print(f"Synthetic Data - Training Size: {len(X_synthetic)}")
+        print(f"ynthetic Data - Training Size: {len(X_synthetic)}")
 
     print("\nTraining models...")
 

@@ -42,3 +42,10 @@ def evaluate_synthetic_data(original_data, synthetic_data, metadata, target_colu
     #     metadata=metadata
     # )
     # fig.show()
+
+def compare_column_distributions(original_data, synthetic_data):
+    for column in original_data.columns:
+        if original_data[column].dtype in ['int64', 'float64']:  # Numerical Columns
+            print(f"\n Column: {column}")
+            print(f"Original Mean: {original_data[column].mean()}, Std: {original_data[column].std()}")
+            print(f"Synthetic Mean: {synthetic_data[column].mean()}, Std: {synthetic_data[column].std()}")

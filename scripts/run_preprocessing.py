@@ -13,10 +13,12 @@ def load_config(config_path="configs/benchmark_config.yaml"):
 def run_preprocessing(dataset_path, separator, target_column):
     """
     Preprocesses the dataset (handling missing values, encoding) and returns it.
+    Saves the cleaned datasets
 
     Returns:
     - encoded_data (DataFrame): The cleaned and encoded dataset.
     - dataset_name (str): Name of the dataset.
+    - original_data (DataFrame): The raw dataset before preprocessing.
     """
     config = load_config()
     handle_missing = config["preprocessing"]["handle_missing_values"]
@@ -27,8 +29,8 @@ def run_preprocessing(dataset_path, separator, target_column):
 
     # Check if cleaned dataset already exists
     if os.path.exists(cleaned_dataset_path):
-        print(f"✅ Cleaned dataset found: {cleaned_dataset_path}. Skipping preprocessing.")
-        return pd.read_csv(cleaned_dataset_path), dataset_name  # Return DataFrame directly
+        print(f"Cleaned dataset found: {cleaned_dataset_path}. Skipping preprocessing.")
+        return pd.read_csv(cleaned_dataset_path), dataset_name ,  pd.read_csv(cleaned_dataset_path) # Return DataFrame directly
 
     # Load dataset
     original_data, dataset_name = load_dataset(dataset_path, separator)
@@ -46,7 +48,7 @@ def run_preprocessing(dataset_path, separator, target_column):
     os.makedirs("datasets/cleaned", exist_ok=True)  # Ensure folder exists
     encoded_data.to_csv(cleaned_dataset_path, index=False)
 
-    return encoded_data, dataset_name  # Return DataFrame directly instead of path
+    return encoded_data, dataset_name, original_data 
 
 if __name__ == "__main__":
     config = load_config()

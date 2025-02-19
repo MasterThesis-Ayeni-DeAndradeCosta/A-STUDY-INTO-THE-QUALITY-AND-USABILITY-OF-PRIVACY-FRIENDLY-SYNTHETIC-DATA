@@ -17,8 +17,10 @@ def prepare_original_data(data, target_column, test_size=0.2, random_state=42):
     - y_train (Series): Training labels.
     - y_test (Series): Test labels.
     """
+    print(f"Splitting dataset: {data.shape}")
     X = data.drop(target_column, axis=1)
     y = data[target_column]
+    
     return train_test_split(X, y, test_size=test_size, random_state=random_state)
 
 
@@ -37,6 +39,17 @@ def prepare_synthetic_data(data, target_column):
     X = data.drop(target_column, axis=1)
     y = data[target_column]
     return X, y
+
+
+
+
+
+
+
+
+
+
+
 
 
 def encode_categorical_features(data, target_column):
