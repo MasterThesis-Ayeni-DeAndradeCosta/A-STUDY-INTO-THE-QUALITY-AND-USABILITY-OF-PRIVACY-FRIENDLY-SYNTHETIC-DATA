@@ -14,7 +14,7 @@ import numpy as np
 import warnings
 from sklearn.exceptions import ConvergenceWarning, UndefinedMetricWarning
 
-def train_models(datasets):
+def train_models(datasets, config):
     """
     Trains predefined models on the given datasets.
 
@@ -31,14 +31,31 @@ def train_models(datasets):
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", category=ConvergenceWarning)
         warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
-    # Predefined models
-    models = {
-        'Logistic Regression': LogisticRegression(max_iter=3000),
-        'KNN': KNeighborsClassifier(),
-        'Random Forest': RandomForestClassifier(),
-        'Decision Tree': DecisionTreeClassifier(),
-        'SVM': SVC()
-    }
+    
+    # Model selection from YAML
+    selected_models = config["utility"]["models"]
+
+    # Dynamically initialize models
+    models = {}
+    if selected_models.get("LogisticRegression", False):
+        models["Logistic Regression"] = LogisticRegression(max_iter=3000)
+    if selected_models.get("KNN", False):
+        models["KNN"] = KNeighborsClassifier()
+    if selected_models.get("RandomForest", False):
+        models["Random Forest"] = RandomForestClassifier()
+    if selected_models.get("DecisionTree", False):
+        models["Decision Tree"] = DecisionTreeClassifier()
+    if selected_models.get("SVM", False):
+        models["SVM"] = SVC()
+
+    # # Predefined models
+    # models = {
+    #     'Logistic Regression': LogisticRegression(max_iter=3000),
+    #     'KNN': KNeighborsClassifier(),
+    #     'Random Forest': RandomForestClassifier(),
+    #     'Decision Tree': DecisionTreeClassifier(),
+    #     'SVM': SVC()
+    # }
 
     trained_models = {dataset_name: {} for dataset_name in datasets.keys()}
 

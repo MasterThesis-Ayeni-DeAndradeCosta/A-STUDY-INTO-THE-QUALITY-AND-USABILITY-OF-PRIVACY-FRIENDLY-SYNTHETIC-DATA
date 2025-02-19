@@ -1,13 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
-def visualize_model_performance(results_df, dataset_name):
+def visualize_model_performance(results_df, dataset_name, output_dir="outputs"):
     """
     Visualizes model performance metrics for original and synthetic datasets.
 
     Parameters:
     - results_df (DataFrame): DataFrame containing model evaluation metrics.
     - dataset_name (str): Name of the dataset being visualized.
+    - output_dir (str): Directory where the figure will be saved.
     """
     model_names = []
     original_accuracy_scores = []
@@ -52,6 +54,13 @@ def visualize_model_performance(results_df, dataset_name):
 
     plt.suptitle(f'Model Performance: Original vs Synthetic Data for {dataset_name}', fontsize=14)
     plt.tight_layout()
+
+    # Save the figure
+    save_path = os.path.join(output_dir, f"{dataset_name}_model_performance.png")
+    plt.savefig(save_path, dpi=300)
+    print(f"Visualization saved at {save_path}")
+
+
     plt.show()
 
     # Print detailed performance metrics
