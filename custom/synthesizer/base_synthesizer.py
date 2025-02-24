@@ -8,8 +8,9 @@ class BaseSynthesizer(ABC):
     Every synthesizer must implement `fit()` and `sample()`.
     """
 
-    def __init__(self, metadata):
+    def __init__(self, metadata, **kwargs):
         self.metadata = metadata
+        self.params = kwargs
 
     @abstractmethod
     def fit(self, data: pd.DataFrame):
