@@ -1,19 +1,29 @@
 import sys
 import os
 
-# Get the absolute path of the project root
+# # Get the absolute path of the project root
+# project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# # Add `src/` to Python path
+# src_path = os.path.join(project_root, "src")
+# if src_path not in sys.path:
+#     sys.path.insert(0, src_path)
+
+# print("\nPYTHONPATH Directories:")
+# print("\n".join(sys.path))
+
+# Get the absolute path to the project root (MasterThesisCode/)
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-# Add `src/` to Python path
-src_path = os.path.join(project_root, "src")
-if src_path not in sys.path:
-    sys.path.insert(0, src_path)
+
+# Add the project root to PYTHONPATH if not already added
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 import yaml
 import pandas as pd
 # Import necessary modules
 from run_preprocessing import run_preprocessing
 from run_utility import run_utility  
-from synthetic_pipeline.data_synthesis import generate_synthetic_data, generate_synthetic_datasets
+from synthetic_pipeline.data_synthesis import generate_synthetic_datasets
 from synthetic_pipeline.synthetic_evaluation import evaluate_synthetic_data
 from modelOperations.model_training import evaluate_models
 from visualization.result_visualization import visualize_model_performance
