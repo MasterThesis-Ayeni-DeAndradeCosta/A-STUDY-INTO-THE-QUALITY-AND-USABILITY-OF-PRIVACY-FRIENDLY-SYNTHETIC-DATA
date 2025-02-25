@@ -64,7 +64,7 @@ def train_models(datasets, config):
     return trained_models
 
 
-def evaluate_models(trained_models, datasets):
+def evaluate_models(trained_models, X_test_original, y_test_original, datasets):
     """
     Evaluates trained models on corresponding test data.
 
@@ -82,7 +82,7 @@ def evaluate_models(trained_models, datasets):
         print(f'\nEvaluating models trained on {dataset_name} dataset...')
 
         # Get test set corresponding to this dataset
-        _, X_test, _, y_test = datasets[dataset_name]
+        X_test, y_test = X_test_original, y_test_original
 
         # Evaluate each model
         for model_name, model in models.items():
@@ -99,7 +99,7 @@ def evaluate_models(trained_models, datasets):
 
             # Store results
             model_results.append({
-                'Dataset': dataset_name,  # Now this will say "CTGAN Data" or "TVAE Data"
+                'Dataset': dataset_name,  # should say "CTGAN Data" or "TVAE Data"
                 'Model': model_name,
                 'Accuracy': round(np.mean(scores), 4),
                 'Precision': round(precision, 4),

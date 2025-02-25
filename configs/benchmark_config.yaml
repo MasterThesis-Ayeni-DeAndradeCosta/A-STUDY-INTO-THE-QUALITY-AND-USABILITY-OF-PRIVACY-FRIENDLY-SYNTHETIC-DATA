@@ -1,7 +1,7 @@
 dataset:
-  path: "datasets/original/studentPerformance.csv" # Path to the dataset
+  path: "datasets/original/bankMarketing.csv" # Path to the dataset
   separator: ";" # Delimiter used in the dataset (e.g., "," or "\t")
-  target_column: "Target"
+  target_column: "y"
 
 preprocessing:
   handle_missing_values: "drop" # Options: "drop", "mean", "median", "mode"
@@ -9,10 +9,40 @@ preprocessing:
 
 synthesis:
   enable_synthetic_generation: true # Set to false to skip
-  synthesizer_type: "GaussianCopula" # Options: "CTGAN", "TVAE", "GaussianCopula"
-  num_epochs: 50 # Number of training epochs
-  num_generated_rows: "same_as_original" # Options: "same_as_original", "custom"
-  custom_generated_rows: 10000 # If num_generated_rows is "custom", specify row count
+  synthesizers:
+    CTGAN:
+      enabled: true
+      import_path: "sdv.single_table"
+      class_name: "CTGANSynthesizer"
+      params:
+        epochs: 50
+        num_generated_rows: "same_as_original" # Options: "same_as_original", "custom"
+        custom_generated_rows: 10000 # Only used if num_generated_rows is "custom"
+
+    TVAE:
+      enabled: true
+      import_path: "sdv.single_table"
+      class_name: "TVAESynthesizer"
+      params:
+        epochs: 50
+        num_generated_rows: "same_as_original" #Options: "same_as_original", "custom"
+        custom_generated_rows: 5000 # TVAE will generate 5000 rows
+
+    GaussianCopula:
+      enabled: true
+      import_path: "sdv.single_table"
+      class_name: "GaussianCopulaSynthesizer"
+      params:
+        num_generated_rows: "same_as_original"
+
+    CustomSynthesizer:
+      enabled: false # Set to true if using a custom one
+      import_path: "custom.custom_synthesizer"
+      class_name: "CustomSynthesizer"
+      params:
+        noise_factor: 0.2
+        num_generated_rows: "custom"
+        custom_generated_rows: 7000
 
 utility:
   test_size: 0.2 # Proportion of the dataset used for testing

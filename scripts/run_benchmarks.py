@@ -1,22 +1,12 @@
 import sys
 import os
 
-# # Get the absolute path of the project root
-# project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-# # Add `src/` to Python path
-# src_path = os.path.join(project_root, "src")
-# if src_path not in sys.path:
-#     sys.path.insert(0, src_path)
-
-# print("\nPYTHONPATH Directories:")
-# print("\n".join(sys.path))
-
-# Get the absolute path to the project root (MasterThesisCode/)
+# Get the absolute path of the project root
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-
-# Add the project root to PYTHONPATH if not already added
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+# Add `src/` to Python path
+src_path = os.path.join(project_root, "src")
+if src_path not in sys.path:
+    sys.path.insert(0, src_path)
 
 import yaml
 import pandas as pd
