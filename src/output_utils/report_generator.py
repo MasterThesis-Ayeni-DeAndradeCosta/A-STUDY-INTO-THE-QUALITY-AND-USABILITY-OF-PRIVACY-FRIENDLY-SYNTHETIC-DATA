@@ -1,4 +1,5 @@
 import os
+from tabulate import tabulate
 
 def save_preprocessing_report(output_dir, dataset_name, original_data, processed_data):
     """
@@ -29,7 +30,13 @@ def save_model_performance(output_dir, results_df):
     - results_df (DataFrame): DataFrame containing model evaluation metrics.
     """
     report_path = os.path.join(output_dir, "model_performance.txt")
-    results_df.to_csv(report_path, sep="\t", index=False)
+
+    # Convert DataFrame to a formatted string table
+    table = tabulate(results_df, headers="keys", tablefmt="grid")  
+    
+    with open(report_path, "w") as f:
+        f.write(table)
+
     print(f"📄 Model performance saved at {report_path}")
 
 def save_synthetic_data_evaluation(output_dir, diagnostic, quality_report):

@@ -10,9 +10,13 @@ from sklearn.model_selection import cross_val_score
 from sklearn.metrics import precision_recall_fscore_support
 import pandas as pd
 import numpy as np
-
 import warnings
 from sklearn.exceptions import ConvergenceWarning, UndefinedMetricWarning
+
+from sklearn.metrics import (
+    roc_auc_score, log_loss, cohen_kappa_score, matthews_corrcoef,
+    accuracy_score
+)
 
 def train_models(datasets, config):
     """
@@ -20,19 +24,19 @@ def train_models(datasets, config):
 
     Parameters:
     - datasets (dict): Dictionary with dataset names as keys and (X_train, y_train) tuples as values.
+    - config (dict): Configuration dictionary containing model selection.
 
     Returns:
     - trained_models (dict): Dictionary with dataset names as keys and dictionaries of trained models as values.
     """
     print("\nTraining models...")
 
-    # Temporarily suppress warnings generated within this code block
-    # TEMPORARY SOLUTION: Suppress certain sklearn warnings to reduce output clutter.
+    # Suppress warnings for cleaner output
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", category=ConvergenceWarning)
         warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
     
-    # Model selection from YAML
+    # Get model selection from YAML
     selected_models = config["utility"]["models"]
 
     # Dynamically initialize models
@@ -48,79 +52,136 @@ def train_models(datasets, config):
     if selected_models.get("SVM", False):
         models["SVM"] = SVC()
 
-    # # Predefined models
-    # models = {
-    #     'Logistic Regression': LogisticRegression(max_iter=3000),
-    #     'KNN': KNeighborsClassifier(),
-    #     'Random Forest': RandomForestClassifier(),
-    #     'Decision Tree': DecisionTreeClassifier(),
-    #     'SVM': SVC()
-    # }
+    trained_models = {}
 
-    trained_models = {dataset_name: {} for dataset_name in datasets.keys()}
-
-    # Train each model on each dataset
-    for dataset_name, (X_train, y_train) in datasets.items():
+    # Train models on each dataset (including synthetic ones)
+    for dataset_name, (X_train, X_test, y_train, y_test) in datasets.items():
         print(f'\nTraining models on {dataset_name} dataset:')
+        trained_models[dataset_name] = {}
         for model_name, model in models.items():
-            print(f'Training {model_name}...')
+            print(f'Training {model_name} on {dataset_name}...')
             model.fit(X_train, y_train)  # Train the model
-            trained_models[dataset_name][model_name] = model  # Store the trained model
-            print(f'{model_name} trained successfully.')
+            trained_models[dataset_name][model_name] = model  # Store trained model
+            print(f'{model_name} trained successfully on {dataset_name}.')
 
     return trained_models
 
+
+# def evaluate_models(trained_models, X_test_original, y_test_original, datasets):
+#     """
+#     Evaluates trained models on corresponding test data.
+
+#     Parameters:
+#     - trained_models (dict): Dictionary with dataset names as keys and dictionaries of trained models as values.
+#     - datasets (dict): Dictionary with dataset names as keys and (X_train, X_test, y_train, y_test) tuples as values.
+
+#     Returns:
+#     - results_df (DataFrame): DataFrame containing evaluation metrics for each model and dataset.
+#     """
+#     model_results = []
+
+#     # Iterate through datasets
+#     for dataset_name, models in trained_models.items():
+#         print(f'\nEvaluating models trained on {dataset_name} dataset...')
+
+#         # Get test set corresponding to this dataset
+#         X_test, y_test = X_test_original, y_test_original
+
+#         # Evaluate each model
+#         for model_name, model in models.items():
+#             print(f'\nProcessing {model_name} on {dataset_name}...')
+
+#             # Cross-validation score
+#             scores = cross_val_score(model, X_test, y_test, cv=5, scoring='accuracy')
+
+#             # Predict on the test set
+#             predictions = model.predict(X_test)
+#             precision, recall, f1, _ = precision_recall_fscore_support(
+#                 y_test, predictions, average='weighted'
+#             )
+
+#             # Store results
+#             model_results.append({
+#                 'Dataset': dataset_name,  # should say "CTGAN Data" or "TVAE Data"
+#                 'Model': model_name,
+#                 'Accuracy': round(np.mean(scores), 4),
+#                 'Precision': round(float(precision), 4),
+#                 'Recall': round(float(recall), 4),
+#                 'F1': round(float(f1), 4),
+#             })
+
+#             print(f'Completed {model_name} evaluation on {dataset_name}.')
+
+#     # Convert results to a DataFrame
+#     results_df = pd.DataFrame(model_results)
+
+#     # Print results for quick inspection
+#     print("\nModel Performance Comparison:")
+#     print(results_df.to_string(index=False))
+
+#     return results_df
+
 def evaluate_models(trained_models, X_test_original, y_test_original, datasets):
     """
-    Evaluates trained models on test data and cross-validation.
+    Evaluates trained models on corresponding test data and organizes results by model.
 
     Parameters:
     - trained_models (dict): Dictionary with dataset names as keys and dictionaries of trained models as values.
-    - X_test_original (DataFrame): Test features for the original dataset.
-    - y_test_original (Series): Test labels for the original dataset.
-    - datasets (dict): Dictionary with dataset names as keys and (X_train, y_train) tuples as values.
+    - datasets (dict): Dictionary with dataset names as keys and (X_train, X_test, y_train, y_test) tuples as values.
 
     Returns:
     - results_df (DataFrame): DataFrame containing evaluation metrics for each model and dataset.
     """
     model_results = []
+    
+    # Get all model names from any dataset (since they should be the same for all)
+    model_names = next(iter(trained_models.values())).keys() if trained_models else []
+    
+    # Iterate by model first
+    for model_name in model_names:
+        for dataset_name in datasets.keys():  # Ensure order: Original -> CTGAN -> TVAE
+            if dataset_name in trained_models and model_name in trained_models[dataset_name]:
+                model = trained_models[dataset_name][model_name]
+                print(f'\nProcessing {model_name} on {dataset_name}...')
 
-    # Iterate through each dataset
-    for dataset_name, models in trained_models.items():
-        print(f'\nEvaluating models trained on {dataset_name} dataset:')
+                # Get corresponding test set (always using the same original test set for fairness)
+                X_test, y_test = X_test_original, y_test_original
 
-        # Iterate through each model
-        for model_name, model in models.items():
-            print(f'\nProcessing {model_name}...')
+                # Standard metrics
+                scores = cross_val_score(model, X_test, y_test, cv=5, scoring='accuracy')
+                predictions = model.predict(X_test)
+                precision, recall, f1, _ = precision_recall_fscore_support(
+                    y_test, predictions, average='weighted'
+                )
 
-            # Get training data for cross-validation
-            X_train, y_train = datasets[dataset_name]
+                # Additional Metrics
+                if hasattr(model, "predict_proba"):  # Models that support probability outputs
+                    prob_predictions = model.predict_proba(X_test)[:, 1]
+                    auc_roc = roc_auc_score(y_test, prob_predictions)
+                    logloss = log_loss(y_test, prob_predictions)
+                else:
+                    auc_roc = np.nan  # Not applicable for non-probabilistic models
+                    logloss = np.nan
 
-            # Cross-validation score
-            scores = cross_val_score(model, X_train, y_train, cv=5, scoring='accuracy')
+                kappa = cohen_kappa_score(y_test, predictions)
+                mcc = matthews_corrcoef(y_test, predictions)
 
-            # Predict on the original test set
-            predictions = model.predict(X_test_original)
-            precision, recall, f1, _ = precision_recall_fscore_support(
-                y_test_original,
-                predictions,
-                average='weighted'
-            )
+               # Store results
+                model_results.append({
+                    'Model': model_name,  # Primary sorting by model type
+                    'Dataset': dataset_name,  # Original, CTGAN, TVAE, etc.
+                    'Accuracy': round(np.mean(scores), 4),
+                    'Precision': round(float(precision), 4),
+                    'Recall': round(float(recall), 4),
+                    'F1': round(float(f1), 4),
+                    'AUC-ROC': round(float(auc_roc), 4) if not np.isnan(auc_roc) else "N/A",
+                    'Log Loss': round(float(logloss), 4) if not np.isnan(logloss) else "N/A",
+                    'Cohen Kappa': round(float(kappa), 4),
+                    'MCC': round(float(mcc), 4),
+                })
 
-            # Store results
-            model_results.append({
-                'Dataset': dataset_name,
-                'Model': model_name,
-                'Accuracy': round(np.mean(scores), 4),
-                'Precision': round(precision, 4),
-                'Recall': round(recall, 4),
-                'F1': round(f1, 4)
-            })
-
-            print(f'Completed {model_name} evaluation.')
-
-    # Convert results to a DataFrame
-    results_df = pd.DataFrame(model_results)
+    # Convert results to a DataFrame and sort by 'Model' first
+    results_df = pd.DataFrame(model_results).sort_values(by=["Model", "Dataset"])
 
     # Print results for quick inspection
     print("\nModel Performance Comparison:")
