@@ -147,21 +147,37 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets):
                 # Get corresponding test set (always using the same original test set for fairness)
                 X_test, y_test = X_test_original, y_test_original
 
-                # Compute accuracy and other metrics
+                # Standard metrics
                 scores = cross_val_score(model, X_test, y_test, cv=5, scoring='accuracy')
                 predictions = model.predict(X_test)
                 precision, recall, f1, _ = precision_recall_fscore_support(
                     y_test, predictions, average='weighted'
                 )
 
-                # Store results
+                # Additional Metrics
+                if hasattr(model, "predict_proba"):  # Models that support probability outputs
+                    prob_predictions = model.predict_proba(X_test)[:, 1]
+                    auc_roc = roc_auc_score(y_test, prob_predictions)
+                    logloss = log_loss(y_test, prob_predictions)
+                else:
+                    auc_roc = np.nan  # Not applicable for non-probabilistic models
+                    logloss = np.nan
+
+                kappa = cohen_kappa_score(y_test, predictions)
+                mcc = matthews_corrcoef(y_test, predictions)
+
+               # Store results
                 model_results.append({
-                    'Model': model_name,  # Now primary sorting is by model
+                    'Model': model_name,  # Primary sorting by model type
                     'Dataset': dataset_name,  # Original, CTGAN, TVAE, etc.
                     'Accuracy': round(np.mean(scores), 4),
                     'Precision': round(float(precision), 4),
                     'Recall': round(float(recall), 4),
                     'F1': round(float(f1), 4),
+                    'AUC-ROC': round(float(auc_roc), 4) if not np.isnan(auc_roc) else "N/A",
+                    'Log Loss': round(float(logloss), 4) if not np.isnan(logloss) else "N/A",
+                    'Cohen Kappa': round(float(kappa), 4),
+                    'MCC': round(float(mcc), 4),
                 })
 
     # Convert results to a DataFrame and sort by 'Model' first
