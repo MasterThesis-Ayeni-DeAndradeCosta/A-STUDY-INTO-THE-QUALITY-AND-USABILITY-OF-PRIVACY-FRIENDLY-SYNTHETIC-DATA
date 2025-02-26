@@ -10,10 +10,13 @@ from sklearn.model_selection import cross_val_score
 from sklearn.metrics import precision_recall_fscore_support
 import pandas as pd
 import numpy as np
-
 import warnings
 from sklearn.exceptions import ConvergenceWarning, UndefinedMetricWarning
 
+from sklearn.metrics import (
+    roc_auc_score, log_loss, cohen_kappa_score, matthews_corrcoef,
+    accuracy_score
+)
 
 def train_models(datasets, config):
     """
@@ -64,9 +67,63 @@ def train_models(datasets, config):
     return trained_models
 
 
+# def evaluate_models(trained_models, X_test_original, y_test_original, datasets):
+#     """
+#     Evaluates trained models on corresponding test data.
+
+#     Parameters:
+#     - trained_models (dict): Dictionary with dataset names as keys and dictionaries of trained models as values.
+#     - datasets (dict): Dictionary with dataset names as keys and (X_train, X_test, y_train, y_test) tuples as values.
+
+#     Returns:
+#     - results_df (DataFrame): DataFrame containing evaluation metrics for each model and dataset.
+#     """
+#     model_results = []
+
+#     # Iterate through datasets
+#     for dataset_name, models in trained_models.items():
+#         print(f'\nEvaluating models trained on {dataset_name} dataset...')
+
+#         # Get test set corresponding to this dataset
+#         X_test, y_test = X_test_original, y_test_original
+
+#         # Evaluate each model
+#         for model_name, model in models.items():
+#             print(f'\nProcessing {model_name} on {dataset_name}...')
+
+#             # Cross-validation score
+#             scores = cross_val_score(model, X_test, y_test, cv=5, scoring='accuracy')
+
+#             # Predict on the test set
+#             predictions = model.predict(X_test)
+#             precision, recall, f1, _ = precision_recall_fscore_support(
+#                 y_test, predictions, average='weighted'
+#             )
+
+#             # Store results
+#             model_results.append({
+#                 'Dataset': dataset_name,  # should say "CTGAN Data" or "TVAE Data"
+#                 'Model': model_name,
+#                 'Accuracy': round(np.mean(scores), 4),
+#                 'Precision': round(float(precision), 4),
+#                 'Recall': round(float(recall), 4),
+#                 'F1': round(float(f1), 4),
+#             })
+
+#             print(f'Completed {model_name} evaluation on {dataset_name}.')
+
+#     # Convert results to a DataFrame
+#     results_df = pd.DataFrame(model_results)
+
+#     # Print results for quick inspection
+#     print("\nModel Performance Comparison:")
+#     print(results_df.to_string(index=False))
+
+#     return results_df
+
 def evaluate_models(trained_models, X_test_original, y_test_original, datasets):
     """
-    Evaluates trained models on corresponding test data.
+    Evaluates trained models on corresponding test data and organizes results by model.
 
     Parameters:
     - trained_models (dict): Dictionary with dataset names as keys and dictionaries of trained models as values.
@@ -76,41 +133,39 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets):
     - results_df (DataFrame): DataFrame containing evaluation metrics for each model and dataset.
     """
     model_results = []
+    
+    # Get all model names from any dataset (since they should be the same for all)
+    model_names = next(iter(trained_models.values())).keys() if trained_models else []
+    
+    # Iterate by model first
+    for model_name in model_names:
+        for dataset_name in datasets.keys():  # Ensure order: Original -> CTGAN -> TVAE
+            if dataset_name in trained_models and model_name in trained_models[dataset_name]:
+                model = trained_models[dataset_name][model_name]
+                print(f'\nProcessing {model_name} on {dataset_name}...')
 
-    # Iterate through datasets
-    for dataset_name, models in trained_models.items():
-        print(f'\nEvaluating models trained on {dataset_name} dataset...')
+                # Get corresponding test set (always using the same original test set for fairness)
+                X_test, y_test = X_test_original, y_test_original
 
-        # Get test set corresponding to this dataset
-        X_test, y_test = X_test_original, y_test_original
+                # Compute accuracy and other metrics
+                scores = cross_val_score(model, X_test, y_test, cv=5, scoring='accuracy')
+                predictions = model.predict(X_test)
+                precision, recall, f1, _ = precision_recall_fscore_support(
+                    y_test, predictions, average='weighted'
+                )
 
-        # Evaluate each model
-        for model_name, model in models.items():
-            print(f'\nProcessing {model_name} on {dataset_name}...')
+                # Store results
+                model_results.append({
+                    'Model': model_name,  # Now primary sorting is by model
+                    'Dataset': dataset_name,  # Original, CTGAN, TVAE, etc.
+                    'Accuracy': round(np.mean(scores), 4),
+                    'Precision': round(float(precision), 4),
+                    'Recall': round(float(recall), 4),
+                    'F1': round(float(f1), 4),
+                })
 
-            # Cross-validation score
-            scores = cross_val_score(model, X_test, y_test, cv=5, scoring='accuracy')
-
-            # Predict on the test set
-            predictions = model.predict(X_test)
-            precision, recall, f1, _ = precision_recall_fscore_support(
-                y_test, predictions, average='weighted'
-            )
-
-            # Store results
-            model_results.append({
-                'Dataset': dataset_name,  # should say "CTGAN Data" or "TVAE Data"
-                'Model': model_name,
-                'Accuracy': round(np.mean(scores), 4),
-                'Precision': round(float(precision), 4),
-                'Recall': round(float(recall), 4),
-                'F1': round(float(f1), 4),
-            })
-
-            print(f'Completed {model_name} evaluation on {dataset_name}.')
-
-    # Convert results to a DataFrame
-    results_df = pd.DataFrame(model_results)
+    # Convert results to a DataFrame and sort by 'Model' first
+    results_df = pd.DataFrame(model_results).sort_values(by=["Model", "Dataset"])
 
     # Print results for quick inspection
     print("\nModel Performance Comparison:")
