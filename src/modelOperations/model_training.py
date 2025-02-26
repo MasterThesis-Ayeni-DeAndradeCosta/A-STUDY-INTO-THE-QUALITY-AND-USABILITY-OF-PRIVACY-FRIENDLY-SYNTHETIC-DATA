@@ -102,9 +102,9 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets):
                 'Dataset': dataset_name,  # should say "CTGAN Data" or "TVAE Data"
                 'Model': model_name,
                 'Accuracy': round(np.mean(scores), 4),
-                'Precision': round(precision, 4),
-                'Recall': round(recall, 4),
-                'F1': round(f1, 4)
+                'Precision': round(float(precision), 4),
+                'Recall': round(float(recall), 4),
+                'F1': round(float(f1), 4),
             })
 
             print(f'Completed {model_name} evaluation on {dataset_name}.')

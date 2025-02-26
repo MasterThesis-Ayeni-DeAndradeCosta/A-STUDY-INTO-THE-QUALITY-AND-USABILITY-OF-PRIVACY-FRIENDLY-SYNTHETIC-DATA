@@ -16,8 +16,8 @@ synthesis:
       class_name: "CTGANSynthesizer"
       params:
         epochs: 50
-        num_generated_rows: "same_as_original" # Options: "same_as_original", "custom"
-        custom_generated_rows: 10000 # Only used if num_generated_rows is "custom"
+      num_generated_rows: "same_as_original" # Options: "same_as_original", "custom"
+      custom_generated_rows: 10000 # Only used if num_generated_rows is "custom"
 
     TVAE:
       enabled: true
@@ -25,15 +25,15 @@ synthesis:
       class_name: "TVAESynthesizer"
       params:
         epochs: 50
-        num_generated_rows: "same_as_original" #Options: "same_as_original", "custom"
-        custom_generated_rows: 5000 # TVAE will generate 5000 rows
+      num_generated_rows: "same_as_original" #Options: "same_as_original", "custom"
+      custom_generated_rows: 5000 # TVAE will generate 5000 rows
 
     GaussianCopula:
       enabled: true
       import_path: "sdv.single_table"
       class_name: "GaussianCopulaSynthesizer"
-      params:
-        num_generated_rows: "same_as_original"
+      params: {}
+      num_generated_rows: "same_as_original"
 
     CustomSynthesizer:
       enabled: false # Set to true if using a custom one
@@ -41,14 +41,14 @@ synthesis:
       class_name: "CustomSynthesizer"
       params:
         noise_factor: 0.2
-        num_generated_rows: "custom"
-        custom_generated_rows: 7000
+      num_generated_rows: "custom"
+      custom_generated_rows: 7000
 
 utility:
   test_size: 0.2 # Proportion of the dataset used for testing
   models:
-    LogisticRegression: false
+    LogisticRegression: true
     KNN: true
-    RandomForest: false
+    RandomForest: true
     DecisionTree: false
     SVM: false

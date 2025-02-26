@@ -119,11 +119,12 @@ def generate_synthetic_datasets(preprocessed_data, dataset_name, config):
     synthetic_datasets = {}
     
     for synth_name, (synthesizer, _) in trained_synthesizers.items():
-        # Fetch synthesizer-specific parameters
-        synth_params = config["synthesis"]["synthesizers"][synth_name]["params"]
-        
-        num_generated_rows = synth_params.get("num_generated_rows", "same_as_original")
-        custom_generated_rows = synth_params.get("custom_generated_rows", 10000)
+        # Fetch synthesizer configurations
+        synth_config = config["synthesis"]["synthesizers"][synth_name]
+
+        # Get number of rows to generate from config (not from params)
+        num_generated_rows = synth_config.get("num_generated_rows", "same_as_original")
+        custom_generated_rows = synth_config.get("custom_generated_rows", 10000)
 
         # Determine number of rows to generate
         if num_generated_rows == "same_as_original":
@@ -140,7 +141,7 @@ def generate_synthetic_datasets(preprocessed_data, dataset_name, config):
 
         # Save synthetic data
         synthetic_data_filename = f"{dataset_name}_{synth_name}_synthetic.csv"
-        synthetic_data_path = os.path.join(SYNTHESIZER_DIR, synthetic_data_filename)
+        synthetic_data_path = os.path.join(SYNTHETIC_DATA_DIR, synthetic_data_filename)  # Save to datasets/synthetic
 
         synthetic_data.to_csv(synthetic_data_path, index=False)
         print(f" Synthetic data saved to {synthetic_data_path}")
