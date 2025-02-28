@@ -1,5 +1,7 @@
 import os
 from tabulate import tabulate
+import yaml
+import pandas as pd
 
 def save_preprocessing_report(output_dir, dataset_name, original_data, processed_data):
     """
@@ -57,3 +59,72 @@ def save_synthetic_data_evaluation(output_dir, diagnostic, quality_report):
         f.write(str(quality_report) + "\n")
 
     print(f"📄 Synthetic data evaluation saved at {report_path}")
+
+def save_synthetic_data_report(output_dir, synthetic_datasets, quality_reports):
+    """
+    Saves a report detailing the generated synthetic datasets along with quality metrics.
+
+    Parameters:
+    - output_dir (str): The directory where the report will be saved.
+    - synthetic_datasets (dict): Dictionary mapping synthesizer names to generated synthetic datasets.
+    - quality_reports (dict): Dictionary mapping synthesizer names to their quality evaluation results.
+    """
+    report_path = os.path.join(output_dir, "synthetic_data_report.txt")
+
+    with open(report_path, "w") as f:
+        f.write("Synthetic Data Generation Report\n")
+        f.write("=" * 50 + "\n\n")
+
+        for synth_name, synthetic_data in synthetic_datasets.items():
+            f.write(f"Synthesizer: {synth_name}\n")
+            f.write(f"Generated Rows: {len(synthetic_data)}\n")
+            f.write(f"Columns: {synthetic_data.shape[1]}\n")
+            f.write("Sample (First 5 Rows):\n")
+            f.write(synthetic_data.head().to_string(index=False) + "\n\n")
+
+           # Add Summary Quality Metrics
+            if synth_name in quality_reports:
+                f.write(f"Quality Metrics for {synth_name}:\n")
+
+                quality_report = quality_reports[synth_name]
+
+                try:
+                    overall_score = quality_report.get_score()
+                    f.write(f"- Overall Quality Score: {overall_score:.4f}\n")
+                except Exception as e:
+                    f.write(f"- Error retrieving overall quality score: {str(e)}\n")
+
+                try:
+                    column_shapes_score = quality_report.get_details("Column Shapes").get("score", None)
+                    if column_shapes_score is not None:
+                        f.write(f"- Column Shapes Score: {column_shapes_score:.4f}\n")
+                except Exception as e:
+                    f.write(f"- Error retrieving column shapes score: {str(e)}\n")
+
+                try:
+                    column_pair_trends_score = quality_report.get_details("Column Pair Trends").get("score", None)
+                    if column_pair_trends_score is not None:
+                        f.write(f"- Column Pair Trends Score: {column_pair_trends_score:.4f}\n")
+                except Exception as e:
+                    f.write(f"- Error retrieving column pair trends score: {str(e)}\n")
+            else:
+                f.write("Error: No quality report available.\n")
+
+            f.write("\n" + "=" * 50 + "\n\n")
+
+    print(f"📄 Synthetic data report saved at {report_path}")
+
+def save_yaml_config(output_dir, config):
+    """
+    Saves the YAML configuration used for the benchmark run.
+
+    Parameters:
+    - output_dir (str): The directory where the config file will be saved.
+    - config (dict): The loaded YAML configuration dictionary.
+    """
+    config_path = os.path.join(output_dir, "benchmark_config.yaml")
+
+    with open(config_path, "w", encoding="utf-8") as f:
+        yaml.dump(config, f, default_flow_style=False, allow_unicode=True)
+
+    print(f"📄 YAML configuration saved at {config_path}")
