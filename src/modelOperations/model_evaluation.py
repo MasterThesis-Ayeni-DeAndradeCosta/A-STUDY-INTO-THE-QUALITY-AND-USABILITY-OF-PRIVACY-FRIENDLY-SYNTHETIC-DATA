@@ -55,14 +55,12 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets, 
             if dataset_name in trained_models and model_name in trained_models[dataset_name]:
                 model = trained_models[dataset_name][model_name]
                 print(f'\nEvaluating {model_name} on {dataset_name}...')
-
-                # Get test data
-                X_test, y_test = X_test_original, y_test_original
-                y_pred = model.predict(X_test)
+                y_pred = model.predict(X_test_original)
 
                 metric_values = {}
+
                 for metric_name, metric_obj in enabled_metrics.items():
-                    metric_values[metric_name] = metric_obj.compute(y_test, y_pred, model, X_test)
+                    metric_values[metric_name] = metric_obj.compute(y_test_original, y_pred, model, X_test_original)
 
                 # Store results
                 model_results.append({

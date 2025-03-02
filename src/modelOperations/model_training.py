@@ -55,7 +55,7 @@ def train_models(datasets, config):
     trained_models = {}
 
     # Train models on each dataset (including synthetic ones)
-    for dataset_name, (X_train, X_test, y_train, y_test) in datasets.items():
+    for dataset_name, (X_train, y_train) in datasets.items():
         print(f'\nTraining models on {dataset_name} dataset:')
         trained_models[dataset_name] = {}
         for model_name, model in models.items():
