@@ -155,16 +155,9 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets):
                 )
 
                 # Additional Metrics
-                # Handling AUC-ROC for Multi-Class Classification
                 if hasattr(model, "predict_proba"):  # Models that support probability outputs
-                    prob_predictions = model.predict_proba(X_test)
-
-                    # Determine if classification is binary or multi-class
-                    if len(set(y_test)) > 2:
-                        auc_roc = roc_auc_score(y_test, prob_predictions, multi_class="ovr")  # Use "ovo" if needed
-                    else:
-                        auc_roc = roc_auc_score(y_test, prob_predictions[:, 1])  # Binary case
-                        
+                    prob_predictions = model.predict_proba(X_test)[:, 1]
+                    auc_roc = roc_auc_score(y_test, prob_predictions)
                     logloss = log_loss(y_test, prob_predictions)
                 else:
                     auc_roc = np.nan  # Not applicable for non-probabilistic models
@@ -172,6 +165,7 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets):
 
                 kappa = cohen_kappa_score(y_test, predictions)
                 mcc = matthews_corrcoef(y_test, predictions)
+
                # Store results
                 model_results.append({
                     'Model': model_name,  # Primary sorting by model type
