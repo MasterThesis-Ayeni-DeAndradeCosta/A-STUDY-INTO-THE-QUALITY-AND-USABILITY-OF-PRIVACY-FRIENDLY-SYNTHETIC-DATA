@@ -15,7 +15,8 @@ from run_preprocessing import run_preprocessing
 from run_utility import run_utility  
 from synthetic_pipeline.data_synthesis import generate_synthetic_datasets
 from synthetic_pipeline.synthetic_evaluation import evaluate_synthetic_data, compare_data_distributions
-from modelOperations.model_training import evaluate_models
+#from modelOperations.model_training import evaluate_models
+from modelOperations.model_evaluation import evaluate_models
 from visualization.result_visualization import visualize_model_performance
 
 # Import logging, output management, and report generation utilities
@@ -104,7 +105,7 @@ def run_benchmarks():
 
     # Step 4: Evaluate Models
     print("\n Evaluating models...")
-    results_df = evaluate_models(trained_models, X_test_original, y_test_original, datasets)
+    results_df = evaluate_models(trained_models, X_test_original, y_test_original, datasets, config)
     save_model_performance(output_dir, results_df)
     logger.info("Model Training and Evaluation completed.")
 
