@@ -3,7 +3,7 @@ from tabulate import tabulate
 import yaml
 import pandas as pd
 
-def save_preprocessing_report(output_dir, dataset_name, original_data, processed_data):
+def save_preprocessing_report(output_dir, dataset_name, original_data, processed_data,  test_set):
     """
     Saves preprocessing statistics.
 
@@ -19,6 +19,7 @@ def save_preprocessing_report(output_dir, dataset_name, original_data, processed
         f.write(f"Dataset: {dataset_name}\n")
         f.write(f"Original Rows: {original_data.shape[0]}, Columns: {original_data.shape[1]}\n")
         f.write(f"Processed Rows: {processed_data.shape[0]}, Columns: {processed_data.shape[1]}\n")
+        f.write(f"Test Set Rows Reserved: {test_set.shape[0]}\n") 
         f.write(f"Missing Values Dropped/Imputed: {original_data.isna().sum().sum()} -> {processed_data.isna().sum().sum()}\n")
 
     print(f"📄 Preprocessing report saved at {report_path}")
