@@ -6,7 +6,7 @@ from custom.synthesizer.base_synthesizer import BaseSynthesizer
 import importlib
 
 # Define consistent path for storing synthesizers
-SYNTHESIZER_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "synthesizers"))
+SYNTHESIZER_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..",  "..", "artifacts", "synthesizers"))
 os.makedirs(SYNTHESIZER_DIR, exist_ok=True)  # Ensure the directory exists
 
 # Define the synthetic data storage directory
