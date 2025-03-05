@@ -4,6 +4,7 @@ import yaml
 from preprocessing.data_loader import load_dataset
 from preprocessing.missing_value_handler import handle_missing_values
 from preprocessing.encoding import encode_categorical_features
+from sklearn.model_selection import train_test_split
 
 # Load configuration
 def load_config(config_path="configs/benchmark_config.yaml"):
@@ -12,43 +13,60 @@ def load_config(config_path="configs/benchmark_config.yaml"):
 
 def run_preprocessing(dataset_path, separator, target_column):
     """
-    Preprocesses the dataset (handling missing values, encoding) and returns it.
-    Saves the cleaned datasets
+    Preprocesses the dataset (handling missing values, encoding), splits out a test set, and saves the cleaned dataset.
 
     Returns:
-    - encoded_data (DataFrame): The cleaned and encoded dataset.
-    - dataset_name (str): Name of the dataset.
+    - cleaned_data (DataFrame): The cleaned and encoded dataset used for training.
+    - dataset_name (str): The name of the dataset.
     - original_data (DataFrame): The raw dataset before preprocessing.
+    - test_set (DataFrame): The portion set aside for final evaluation.
     """
     config = load_config()
+    test_size = config["dataset"]["test_size"]
     handle_missing = config["preprocessing"]["handle_missing_values"]
     encoding_type = config["preprocessing"]["encoding_type"]
 
     dataset_name = os.path.splitext(os.path.basename(dataset_path))[0]
     cleaned_dataset_path = f"datasets/cleaned/{dataset_name}_cleaned.csv"
+    test_dataset_path = f"datasets/test/{dataset_name}_test_set.csv"  # Save test set here
 
-    # Check if cleaned dataset already exists
-    if os.path.exists(cleaned_dataset_path):
+    # Ensure necessary directories exist
+    os.makedirs("datasets/cleaned", exist_ok=True)
+    os.makedirs("datasets/test", exist_ok=True)
+
+    # Check if datasets already exist
+    if os.path.exists(cleaned_dataset_path) and os.path.exists(test_dataset_path):
         print(f"Cleaned dataset found: {cleaned_dataset_path}. Skipping preprocessing.")
-        return pd.read_csv(cleaned_dataset_path), dataset_name ,  pd.read_csv(cleaned_dataset_path) # Return DataFrame directly
-
-    # Load dataset
-    original_data, dataset_name = load_dataset(dataset_path, separator)
-
-    # Handle missing values
-    cleaned_data = handle_missing_values(original_data, strategy=handle_missing)
-
-    # Encode categorical features
-    if encoding_type:
-        encoded_data = encode_categorical_features(cleaned_data, target_column)
+        cleaned_data = pd.read_csv(cleaned_dataset_path)
+        test_set = pd.read_csv(test_dataset_path)
+        original_data, _ = load_dataset(dataset_path, separator)
     else:
-        encoded_data = cleaned_data
+        # Load dataset
+        original_data, dataset_name = load_dataset(dataset_path, separator)
 
-    print(f" Preprocessing completed. Saving cleaned dataset to {cleaned_dataset_path}...")
-    os.makedirs("datasets/cleaned", exist_ok=True)  # Ensure folder exists
-    encoded_data.to_csv(cleaned_dataset_path, index=False)
+        # Handle missing values
+        cleaned_data = handle_missing_values(original_data, strategy=handle_missing)
 
-    return encoded_data, dataset_name, original_data 
+        # Encode categorical features
+        if encoding_type:
+            cleaned_data = encode_categorical_features(cleaned_data, target_column)
+
+        # Split into cleaned_data (training) and test_set
+        cleaned_data, test_set = train_test_split(
+            cleaned_data,
+            test_size=test_size,
+            stratify=cleaned_data[target_column],
+            random_state=42
+        )
+
+        # Save cleaned dataset and test set
+        cleaned_data.to_csv(cleaned_dataset_path, index=False)
+        test_set.to_csv(test_dataset_path, index=False)
+
+        print(f"Preprocessing completed. Saved cleaned dataset to {cleaned_dataset_path}.")
+        print(f"Saved test set to {test_dataset_path}.")
+
+    return cleaned_data, dataset_name, original_data, test_set
 
 if __name__ == "__main__":
     config = load_config()
@@ -56,4 +74,9 @@ if __name__ == "__main__":
     separator = config["dataset"]["separator"]
     target_column = config["dataset"]["target_column"]
 
-    run_preprocessing(dataset_path, separator, target_column)
+    cleaned_data, dataset_name, original_data, test_set = run_preprocessing(
+        dataset_path, separator, target_column
+    )
+
+    print("Cleaned dataset shape:", cleaned_data.shape)
+    print("Test set shape:", test_set.shape)
