@@ -8,7 +8,17 @@ import org.deidentifier.arx.criteria.DPresence;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The AnonymizationModel class is responsible for:
+ * - Defining and storing various privacy models for anonymization.
+ * - Dynamically configuring anonymization techniques based on external configurations.
+ * - Creating an ARXConfiguration that specifies privacy constraints.
+ * - Supporting multiple privacy models like k-Anonymity, l-Diversity, and t-Closeness.
+ */
 public class AnonymizationModel {
+    // A HashMap to dynamically store different privacy models
+    // Key: Privacy model name ("k-Anonymity", "L-Diversity", etc.)
+    // Value: Corresponding ARX PrivacyCriterion object
     private final Map<String, PrivacyCriterion> privacyModels = new HashMap<>();
 
     // Adicionar modelos de anonimização dinamicamente
