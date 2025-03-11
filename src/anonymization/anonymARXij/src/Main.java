@@ -14,7 +14,9 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        Map<String, Object> yamlConfig = ConfigLoader.loadYamlConfig("config.yaml");
+        // ✅ Correct: No arguments needed
+        Map<String, Object> yamlConfig = ConfigLoader.loadYamlConfig();
+
 
         String datasetPath = (String) yamlConfig.get("dataset");
         Data data = Data.create(datasetPath, StandardCharsets.UTF_8, ',');

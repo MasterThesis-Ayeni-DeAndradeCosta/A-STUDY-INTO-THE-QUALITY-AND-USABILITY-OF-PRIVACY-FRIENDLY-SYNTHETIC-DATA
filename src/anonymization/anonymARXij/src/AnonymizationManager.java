@@ -1,3 +1,4 @@
+
 import org.deidentifier.arx.*;
 import org.deidentifier.arx.aggregates.HierarchyBuilder;
 import org.deidentifier.arx.aggregates.HierarchyBuilderIntervalBased;
@@ -6,6 +7,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+
+import java.nio.file.Paths;
+import java.io.File;
 
 public class AnonymizationManager {
     private static Data data;
@@ -17,6 +21,19 @@ public class AnonymizationManager {
         this.data = data;
         this.hierarchies = hierarchies;
         this.hierarchyConfig = hierarchyConfig;
+    }
+
+    public static void loadHierarchy() {
+        String hierarchyPath = Paths.get("src", "hierarchies", "hierarchy_age_4.csv").toAbsolutePath().toString();
+        File file = new File(hierarchyPath);
+
+        if (!file.exists()) {
+            System.out.println("❌ File Not Found: " + file.getAbsolutePath());
+        } else {
+            System.out.println("✅ Found: " + file.getAbsolutePath());
+        }
+
+        // Now use hierarchyPath instead of relative "src/hierarchies/hierarchy_age_4.csv"
     }
 
 
