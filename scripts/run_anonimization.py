@@ -1,73 +1,91 @@
 import subprocess
 import os
-import sys
 
-# Get the absolute path of the project root
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-src_path = os.path.join(project_root, "src")
+# Define correct project paths
+project_root = os.path.abspath(".")  # Root of MasterThesisCode
+java_project_path = os.path.join(project_root, "src", "anonymization", "anonymARXij")
+jar_path = os.path.join(java_project_path, "bin", "anonymARXij.jar")
 
-# Ensure `src/` is in Python path
-if src_path not in sys.path:
-    sys.path.insert(0, src_path)
+# Paths to dependencies
+lib_path = os.path.join(project_root, "lib")
+arx_jar = os.path.join(lib_path, "libarx-3.9.1.jar")
+yaml_jar = os.path.join(lib_path, "snakeyaml-2.4.jar")
 
-# def run_anonymization(*args):
-#     """
-#     Runs the anonymization JAR file using a relative path.
-#     """
-#     # Construct the relative JAR file path
-#     jar_path = os.path.join(project_root, "src", "anonymization", "anonymARXij", "executable", "anonymARXij.jar")
+# Ensure the bin directory exists for compilation
+bin_path = os.path.join(java_project_path, "bin")
+os.makedirs(bin_path, exist_ok=True)
 
-#     # Ensure the JAR file exists
-#     if not os.path.exists(jar_path):
-#         raise FileNotFoundError(f"JAR file not found: {jar_path}")
+# Correct classpath without wildcard
+classpath = f"{os.path.abspath(arx_jar)};{os.path.abspath(yaml_jar)};{os.path.abspath(bin_path)}"
 
-#     # Build the command
-#     command = ["java", "-jar", jar_path] + list(args)
+def compile_java():
+    """Compiles the Java anonymization code with ARX dependencies."""
+    print("\n🔹 Compiling Java project...")
+    print("🔹 Using classpath:", classpath)
 
-#     try:
-#         # Run the JAR
-#         process = subprocess.run(command, capture_output=True, text=True, check=True)
+    compile_process = subprocess.run(
+        [
+            "javac",
+            "-d", "bin",
+            "-sourcepath", "src",
+            "-cp", classpath,
+            "src/Main.java",
+            "src/AnonymizationManager.java",
+            "src/AnonymizationModel.java",
+            "src/ConfigLoader.java",
+            "src/DataVisualizer.java"
+        ],
+        cwd=java_project_path,
+        capture_output=True, text=True
+    )
 
-#         # Print outputs
-#         print("STDOUT:", process.stdout)
-#         print("STDERR:", process.stderr)
-#         return process.stdout, process.stderr
+    if compile_process.returncode != 0:
+        print("❌ Java Compilation Failed!")
+        print("STDERR:", compile_process.stderr)
+        return False
+    return True
 
-#     except subprocess.CalledProcessError as e:
-#         print(f"Error running JAR: {e}")
-#         return e.stdout, e.stderr
-    
-# if __name__ == "__main__":
-#     # Example usage
-#     run_anonymization("arg1", "arg2")
+def create_jar():
+    """Creates a JAR file for the anonymization program."""
+    print("\n🔹 Creating JAR file...")
+
+    jar_process = subprocess.run(
+        ["jar", "cfve", jar_path, "Main", "-C", "bin", "."],
+        cwd=java_project_path,
+        capture_output=True, text=True
+    )
+
+    if jar_process.returncode != 0:
+        print("❌ JAR Creation Failed!")
+        print("STDERR:", jar_process.stderr)
+        return False
+    return True
 
 def run_anonymization():
-    # Ensure we use absolute paths
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    jar_path = os.path.abspath(os.path.join(project_root, "src", "anonymization", "anonymARXij", "executable", "anonymARXij.jar"))
-    dataset_path = os.path.abspath(os.path.join(project_root, "datasets", "crimeLAPD", "Crime_Data_from_2020_to_Present.csv"))
-    config_path = os.path.abspath(os.path.join(project_root, "configs", "config.yaml"))
+    """Runs the Java anonymization JAR."""
 
-    # Print the paths for debugging
-    print(f"Jar Path: {jar_path}")
-    print(f"Dataset Path: {dataset_path}")
-    print(f"Config Path: {config_path}")
+    if not compile_java():
+        print("⛔ Skipping JAR creation due to compilation errors.")
+        return False
+    if not create_jar():
+        print("⛔ Skipping execution due to JAR creation errors.")
+        return False
 
-    # Ensure the JAR file exists before running
-    if not os.path.exists(jar_path):
-        raise FileNotFoundError(f"JAR file not found: {jar_path}")
+    print("\n🔹 Running Java Anonymization Program...")
+    run_process = subprocess.run(
+        ["java", "-cp", f"{jar_path};{classpath}", "Main"],  # ✅ No dataset/output path needed
+        capture_output=True, text=True
+    )
 
-    # Build the command
-    command = ["java", "-jar", jar_path, dataset_path, config_path]
+    print("\n✅ STDOUT:", run_process.stdout)
+    print("❗ STDERR:", run_process.stderr)
 
-    try:
-        process = subprocess.run(command, capture_output=True, text=True, check=True)
-        print("STDOUT:", process.stdout)
-        print("STDERR:", process.stderr)
-    except subprocess.CalledProcessError as e:
-        print(f"Error: {e}")
-        print("STDOUT:", e.stdout)
-        print("STDERR:", e.stderr)
+    return run_process.returncode == 0
 
+# Example usage
 if __name__ == "__main__":
-    run_anonymization()
+    success = run_anonymization()
+    if success:
+        print("Anonymization completed successfully!")
+    else:
+        print("Anonymization failed!")
