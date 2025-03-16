@@ -14,6 +14,8 @@ import pandas as pd
 from run_preprocessing import run_preprocessing
 from run_utility import run_utility  
 from run_synthetic import run_synthetic 
+from run_anonymization import run_anonymization
+
 from synthetic_pipeline.data_synthesis import generate_synthetic_datasets
 from synthetic_pipeline.synthetic_evaluation import evaluate_synthetic_data, compare_data_distributions
 #from modelOperations.model_training import evaluate_models
@@ -53,10 +55,15 @@ def run_benchmarks():
     config = load_config()
     # Dataset parameters
     dataset_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", config["dataset"]["path"]))
+    
     separator = config["dataset"]["separator"]
     target_column = config["dataset"]["target_column"]
-    #synthetic parameters
+
+    #flags
     enable_synthetic = config["synthesis"]["enable_synthetic_generation"]
+    enable_anonymization = config["anonymization"].get("enable_anonymization", False)
+    enable_utility = config["utility"].get("enable_utility_evaluation", False)
+
     # Create formatted output directory
     dataset_name = os.path.splitext(os.path.basename(dataset_path))[0]
     output_dir = create_output_directory(dataset_name)
@@ -67,31 +74,68 @@ def run_benchmarks():
 
     # Step 1: Run Preprocessing and Get Cleaned Data**
     cleaned_data, dataset_name, original_data, test_set = run_preprocessing(dataset_path, separator, target_column)
+    cleaned_dataset_path = os.path.abspath(f"datasets/cleaned/{dataset_name}_cleaned.csv")
+
     if original_data is not None:
         save_preprocessing_report(output_dir, dataset_name, original_data, cleaned_data,  test_set)
     print("\nPreprocessing completed.")
 
-     # Step 2 : Synthetic Data Generation
-    synthetic_datasets, metadata = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config)
+    # Step 1.5: Run Anonymization (Flag handled internally)
+    success = run_anonymization(cleaned_dataset_path)
+    if not success:
+        print("❌ Anonymization failed.")
+        logger.error("Anonymization failed.")
+        return None
+    
+    # Step 2 : Synthetic Data Generation
+    synthetic_datasets, metadata = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config)  #disabled flag handled in run_synthetic
 
-    # Step 3: Run Utility for ML Training
-    trained_models, X_test_original, y_test_original, datasets = run_utility(
-    cleaned_data, synthetic_datasets, test_set, target_column, enable_synthetic, config
-    )
+    if enable_utility:
+        # Step 3: Run Utility for ML Training
+        trained_models, X_test_original, y_test_original, datasets = run_utility(
+            cleaned_data, synthetic_datasets, test_set, target_column, enable_synthetic, config
+        )
+        # Step 4: Evaluate Models
+        print("\n Evaluating models...")       
+        results_df = evaluate_models(trained_models, X_test_original, y_test_original, datasets, config)
+        save_model_performance(output_dir, results_df)
+        logger.info("Model Training and Evaluation completed.")
 
-    # Step 4: Evaluate Models
-    print("\n Evaluating models...")
-    results_df = evaluate_models(trained_models, X_test_original, y_test_original, datasets, config)
-    save_model_performance(output_dir, results_df)
-    logger.info("Model Training and Evaluation completed.")
+        # Step 5: Visualize results
+        visualize_model_performance(results_df, dataset_name, output_dir)
+        logger.info(" Visualizations saved.")
+        logger.info(" Benchmarking Completed. Results saved in output folder.")
+        print("\n Benchmarking Completed.")
+        return results_df
+    else:
+        print("\nUtility Evaluation Skipped (Disabled in Configuration).")
+        logger.info("Utility Evaluation Skipped (disabled in configuration).")
+        results_df = None  # Return None to indicate no results were generated
+    logger.info("Benchmarking Completed. Results saved in output folder.")
+    print("\nBenchmarking Completed.")
 
-    # Step 5: Visualize results
-    visualize_model_performance(results_df, dataset_name, output_dir)
-    logger.info(" Visualizations saved.")
-    logger.info(" Benchmarking Completed. Results saved in output folder.")
-
-    print("\n Benchmarking Completed.")
     return results_df
+
+
+
+    # # Step 3: Run Utility for ML Training
+    # trained_models, X_test_original, y_test_original, datasets = run_utility(
+    # cleaned_data, synthetic_datasets, test_set, target_column, enable_synthetic, config
+    # )
+
+    # # Step 4: Evaluate Models
+    # print("\n Evaluating models...")
+    # results_df = evaluate_models(trained_models, X_test_original, y_test_original, datasets, config)
+    # save_model_performance(output_dir, results_df)
+    # logger.info("Model Training and Evaluation completed.")
+
+    # # Step 5: Visualize results
+    # visualize_model_performance(results_df, dataset_name, output_dir)
+    # logger.info(" Visualizations saved.")
+    # logger.info(" Benchmarking Completed. Results saved in output folder.")
+
+    # print("\n Benchmarking Completed.")
+    # return results_df
 
 if __name__ == "__main__":
     run_benchmarks()
