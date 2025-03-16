@@ -16,6 +16,7 @@ from run_utility import run_utility
 from run_synthetic import run_synthetic 
 from run_anonymization import run_anonymization
 
+
 from synthetic_pipeline.data_synthesis import generate_synthetic_datasets
 from synthetic_pipeline.synthetic_evaluation import evaluate_synthetic_data, compare_data_distributions
 #from modelOperations.model_training import evaluate_models
@@ -61,7 +62,6 @@ def run_benchmarks():
 
     #flags
     enable_synthetic = config["synthesis"]["enable_synthetic_generation"]
-    enable_anonymization = config["anonymization"].get("enable_anonymization", False)
     enable_utility = config["utility"].get("enable_utility_evaluation", False)
 
     # Create formatted output directory

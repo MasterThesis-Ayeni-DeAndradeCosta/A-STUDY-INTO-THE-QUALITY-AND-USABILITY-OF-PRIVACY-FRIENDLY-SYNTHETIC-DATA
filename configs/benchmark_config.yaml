@@ -1,7 +1,7 @@
 dataset:
   path: "datasets/original/CrimeData.csv" # Path to the dataset
   separator: "," # Delimiter used in the dataset (e.g., "," or "\t")
-  target_column: "Target" # Name of the target column
+  target_column: "Status" # Name of the target column
   test_size: 0.2
 
 preprocessing:
@@ -9,7 +9,7 @@ preprocessing:
   encoding_type: "binary" # Type of encoding, currently only "binary" is supported
 
 synthesis:
-  enable_synthetic_generation: true # Set to false to skip
+  enable_synthetic_generation: false # Set to false to skip
   synthesizers:
     CTGAN:
       enabled: true
@@ -76,6 +76,7 @@ anonymization:
       value: 2
 
 utility:
+  enable_utility_evaluation: false
   models:
     LogisticRegression: true
     KNN: true
