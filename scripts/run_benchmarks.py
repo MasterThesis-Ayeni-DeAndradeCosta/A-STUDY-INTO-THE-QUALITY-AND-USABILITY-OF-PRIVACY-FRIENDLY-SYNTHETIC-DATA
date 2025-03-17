@@ -15,6 +15,7 @@ from run_preprocessing import run_preprocessing
 from run_utility import run_utility  
 from run_synthetic import run_synthetic 
 from run_anonymization import run_anonymization
+from run_postprocessing import run_postprocessing 
 
 
 from synthetic_pipeline.data_synthesis import generate_synthetic_datasets
@@ -82,7 +83,14 @@ def run_benchmarks():
 
     # Step 1.5: Run Anonymization (Flag handled internally)
     success = run_anonymization(cleaned_dataset_path)
-    if not success:
+
+    # After successful anonymization
+    if success:
+        # Path to anonymized data
+        anonymized_dataset_path = os.path.abspath(f"datasets/anonymized/{dataset_name}_anonymized.csv")
+        # Step 1.75: Post-process anonymized dataset (encoding)
+        postprocessed_data = run_postprocessing(anonymized_dataset_path, separator, target_column)
+    else:
         print("❌ Anonymization failed.")
         logger.error("Anonymization failed.")
         return None
