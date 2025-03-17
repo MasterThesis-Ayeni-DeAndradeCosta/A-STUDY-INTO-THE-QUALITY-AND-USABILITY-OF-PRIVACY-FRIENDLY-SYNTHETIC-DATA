@@ -13,13 +13,13 @@ def load_config(config_path="configs/benchmark_config.yaml"):
 
 def run_preprocessing(dataset_path, separator, target_column):
     """
-    Preprocesses the dataset (handling missing values, encoding), splits out a test set, and saves the cleaned dataset.
-
+    Preprocesses dataset: missing value handling, split, encoding, saving files.
     Returns:
-    - cleaned_data (DataFrame): The cleaned and encoded dataset used for training.
-    - dataset_name (str): The name of the dataset.
-    - original_data (DataFrame): The raw dataset before preprocessing.
-    - test_set (DataFrame): The portion set aside for final evaluation.
+    - cleaned_train (DataFrame): Encoded train split.
+    - dataset_name (str): Dataset name.
+    - original_data (DataFrame): Raw dataset before preprocessing.
+    - cleaned_test (DataFrame): Encoded test split.
+    - train_raw_path (str): Path to unencoded train CSV for anonymization.
     """
     config = load_config()
     test_size = config["dataset"]["test_size"]
@@ -27,46 +27,51 @@ def run_preprocessing(dataset_path, separator, target_column):
     encoding_type = config["preprocessing"]["encoding_type"]
 
     dataset_name = os.path.splitext(os.path.basename(dataset_path))[0]
-    cleaned_dataset_path = f"datasets/cleaned/{dataset_name}_cleaned.csv"
-    test_dataset_path = f"datasets/test/{dataset_name}_test_set.csv"  # Save test set here
 
-    # Ensure necessary directories exist
+    # File paths
+    train_raw_path = f"datasets/train/{dataset_name}_train_raw.csv"
+    cleaned_train_path = f"datasets/cleaned/{dataset_name}_cleaned.csv"
+    cleaned_test_path = f"datasets/test/{dataset_name}_test_set.csv"
+
+    os.makedirs("datasets/train", exist_ok=True)
     os.makedirs("datasets/cleaned", exist_ok=True)
     os.makedirs("datasets/test", exist_ok=True)
 
-    # Check if datasets already exist
-    if os.path.exists(cleaned_dataset_path) and os.path.exists(test_dataset_path):
-        print(f"Cleaned dataset found: {cleaned_dataset_path}. Skipping preprocessing.")
-        cleaned_data = pd.read_csv(cleaned_dataset_path)
-        test_set = pd.read_csv(test_dataset_path)
+    # Check if preprocessed files exist
+    if os.path.exists(train_raw_path) and os.path.exists(cleaned_train_path) and os.path.exists(cleaned_test_path):
+        print(f"✅ Preprocessed files found. Skipping preprocessing.")
+        cleaned_train = pd.read_csv(cleaned_train_path)
+        cleaned_test = pd.read_csv(cleaned_test_path)
         original_data, _ = load_dataset(dataset_path, separator)
-    else:
-        # Load dataset
-        original_data, dataset_name = load_dataset(dataset_path, separator)
+        return cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path
 
-        # Handle missing values
-        cleaned_data = handle_missing_values(original_data, strategy=handle_missing)
+    # Full preprocessing flow
+    original_data, _ = load_dataset(dataset_path, separator)
+    cleaned_full = handle_missing_values(original_data, strategy=handle_missing)
 
-        # Encode categorical features
-        if encoding_type:
-            cleaned_data = encode_categorical_features(cleaned_data, target_column)
+    # Split raw data
+    train_raw_df, test_raw_df = train_test_split(
+        cleaned_full,
+        test_size=test_size,
+        stratify=cleaned_full[target_column],
+        random_state=42
+    )
 
-        # Split into cleaned_data (training) and test_set
-        cleaned_data, test_set = train_test_split(
-            cleaned_data,
-            test_size=test_size,
-            stratify=cleaned_data[target_column],
-            random_state=42
-        )
+    train_raw_df.to_csv(train_raw_path, index=False)  # Save raw train for anonymization
 
-        # Save cleaned dataset and test set
-        cleaned_data.to_csv(cleaned_dataset_path, index=False)
-        test_set.to_csv(test_dataset_path, index=False)
+    # Encode
+    cleaned_train = encode_categorical_features(train_raw_df.copy(), target_column)
+    cleaned_test = encode_categorical_features(test_raw_df.copy(), target_column)
 
-        print(f"Preprocessing completed. Saved cleaned dataset to {cleaned_dataset_path}.")
-        print(f"Saved test set to {test_dataset_path}.")
+    # Save encoded versions
+    cleaned_train.to_csv(cleaned_train_path, index=False)
+    cleaned_test.to_csv(cleaned_test_path, index=False)
 
-    return cleaned_data, dataset_name, original_data, test_set
+    print(f"✅ Saved raw train set to: {train_raw_path}")
+    print(f"✅ Saved encoded train set to: {cleaned_train_path}")
+    print(f"✅ Saved encoded test set to: {cleaned_test_path}")
+
+    return cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path
 
 if __name__ == "__main__":
     config = load_config()
@@ -74,9 +79,9 @@ if __name__ == "__main__":
     separator = config["dataset"]["separator"]
     target_column = config["dataset"]["target_column"]
 
-    cleaned_data, dataset_name, original_data, test_set = run_preprocessing(
+    cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path = run_preprocessing(
         dataset_path, separator, target_column
     )
 
-    print("Cleaned dataset shape:", cleaned_data.shape)
-    print("Test set shape:", test_set.shape)
+    print("Encoded Train Shape:", cleaned_train.shape)
+    print("Encoded Test Shape:", cleaned_test.shape)

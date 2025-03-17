@@ -2,11 +2,12 @@ import os
 import pandas as pd
 from preprocessing.encoding import encode_categorical_features
 
-
 def run_postprocessing(anonymized_path, separator, target_column):
+    # Extract dataset name
     dataset_name = os.path.splitext(os.path.basename(anonymized_path))[0].replace("_anonymized", "")
     
-    encoded_output_path = f"datasets/anonymized/{dataset_name}_anonymized_encoded.csv"
+    # Build encoded output path
+    encoded_output_path = os.path.abspath(f"datasets/anonymized/{dataset_name}_anonymized_encoded.csv")
 
     # Load anonymized data
     df = pd.read_csv(anonymized_path, sep=separator)
@@ -21,5 +22,4 @@ def run_postprocessing(anonymized_path, separator, target_column):
     df_encoded.to_csv(encoded_output_path, index=False)
     print(f"✅ Encoded anonymized dataset saved to: {encoded_output_path}")
 
-    return df_encoded
-
+    return df_encoded  # Return for utility evaluation

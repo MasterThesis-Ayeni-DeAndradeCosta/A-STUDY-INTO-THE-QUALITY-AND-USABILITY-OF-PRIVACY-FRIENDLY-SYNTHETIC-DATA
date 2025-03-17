@@ -74,15 +74,15 @@ def run_benchmarks():
     logger.info(f" Benchmarking started for dataset: {dataset_name}")
 
     # Step 1: Run Preprocessing and Get Cleaned Data**
-    cleaned_data, dataset_name, original_data, test_set = run_preprocessing(dataset_path, separator, target_column)
-    cleaned_dataset_path = os.path.abspath(f"datasets/cleaned/{dataset_name}_cleaned.csv")
+    cleaned_data, dataset_name, original_data, test_set, train_raw_path = run_preprocessing(dataset_path, separator, target_column)
+    #cleaned_dataset_path = os.path.abspath(f"datasets/cleaned/{dataset_name}_cleaned.csv")
 
     if original_data is not None:
         save_preprocessing_report(output_dir, dataset_name, original_data, cleaned_data,  test_set)
     print("\nPreprocessing completed.")
 
     # Step 1.5: Run Anonymization (Flag handled internally)
-    success = run_anonymization(cleaned_dataset_path)
+    success = run_anonymization(train_raw_path)
 
     # After successful anonymization
     if success:
