@@ -1,38 +1,32 @@
 anonymization:
-  anonymized_output: datasets/anonymized/CrimeData_anonymized.csv
+  anonymized_output: datasets/anonymized/bankMarketing_anonymized.csv
   attributes:
     insensitive_attributes:
-    - DR_NO
-    - Time_occured
-    - Premis
-    - Weapon
-    - Status
+    - contact
+    - pdays
+    - previous
     quasi_identifiers:
-    - Victim_age
-    - Victim_sex
-    - Victim_descent
-    - LAT
-    - LON
+    - age
+    - marital
+    - education
     sensitive_attributes:
-    - Crime_Code
+    - balance
   enable_anonymization: true
   hierarchies:
-    Victim_age: src/anonymization/anonymARXij/src/hierarchies/hierarchy_age_4.csv
-    Victim_descent: src/anonymization/anonymARXij/src/hierarchies/hierarchy_descent.csv
-    Victim_sex: src/anonymization/anonymARXij/src/hierarchies/hierarchy_sex.csv
-  hierarchy_config:
-    LAT: 10
-    LON: 10
+    age: src/anonymization/anonymARXij/src/hierarchies_bankMarketing/age.csv
+    education: src/anonymization/anonymARXij/src/hierarchies_bankMarketing/education.csv
+    marital: src/anonymization/anonymARXij/src/hierarchies_bankMarketing/marital.csv
+  hierarchy_config: {}
   models:
     k_anonymity: 3
     l_diversity:
-      attribute: Crime_Code
+    - attribute: balance
       value: 2
   suppression_limit: 0.05
 dataset:
-  path: datasets/original/CrimeData.csv
-  separator: ','
-  target_column: Status
+  path: datasets/original/bankMarketing.csv
+  separator: ;
+  target_column: y
   test_size: 0.2
 preprocessing:
   encoding_type: binary
@@ -71,7 +65,7 @@ synthesis:
       params:
         epochs: 50
 utility:
-  enable_utility_evaluation: true
+  enable_utility_evaluation: false
   metrics:
     AUC-ROC: true
     Accuracy: true
@@ -86,5 +80,5 @@ utility:
     KNN: true
     LogisticRegression: true
     RandomForest: true
-    SVM: true
+    SVM: false
     XGBoost: false
