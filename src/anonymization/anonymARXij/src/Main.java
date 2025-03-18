@@ -19,7 +19,7 @@ public class Main {
 
 
         String datasetPath = (String) yamlConfig.get("dataset");
-        Data data = Data.create(datasetPath, StandardCharsets.UTF_8, ',');
+        Data data = Data.create(datasetPath, StandardCharsets.UTF_8, ';');
 
         double suppressionLimit = (double) yamlConfig.get("suppression_limit");
 

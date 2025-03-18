@@ -60,6 +60,8 @@ public class AnonymizationModel {
             addLDiversity((String) lDiv.get("attribute"), (int) lDiv.get("value"));
         }
 
+
+
         if (config.containsKey("t_closeness")) {
             Map<String, Object> tClose = (Map<String, Object>) config.get("t_closeness");
             addTCloseness((String) tClose.get("attribute"), (double) tClose.get("value"));
