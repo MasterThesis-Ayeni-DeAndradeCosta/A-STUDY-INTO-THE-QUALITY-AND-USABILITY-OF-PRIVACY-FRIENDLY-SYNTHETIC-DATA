@@ -31,6 +31,52 @@ def load_metrics(config):
 
     return metrics
 
+# def evaluate_models(trained_models, X_test_original, y_test_original, datasets, config):
+#     """
+#     Evaluates trained models using dynamically loaded metrics from configuration.
+
+#     Parameters:
+#     - trained_models (dict): Dictionary of trained models.
+#     - X_test_original (DataFrame): Original test data.
+#     - y_test_original (Series): Original test labels.
+#     - datasets (dict): Dictionary containing datasets.
+#     - config (dict): Configuration dictionary.
+
+#     Returns:
+#     - results_df (DataFrame): Evaluation metrics DataFrame for each model-dataset combination.
+#     """
+#     model_results = []
+#     enabled_metrics = load_metrics(config)  # Load only enabled metrics dynamically
+
+#     model_names = next(iter(trained_models.values())).keys() if trained_models else []
+
+#     for model_name in model_names:
+#         for dataset_name in datasets.keys():
+#             if dataset_name in trained_models and model_name in trained_models[dataset_name]:
+#                 model = trained_models[dataset_name][model_name]
+#                 print(f'\nEvaluating {model_name} on {dataset_name}...')
+#                 y_pred = model.predict(X_test_original)
+
+#                 metric_values = {}
+
+#                 for metric_name, metric_obj in enabled_metrics.items():
+#                     metric_values[metric_name] = metric_obj.compute(y_test_original, y_pred, model, X_test_original)
+
+#                 # Store results
+#                 model_results.append({
+#                     'Model': model_name,
+#                     'Dataset': dataset_name,
+#                     **metric_values
+#                 })
+
+#     results_df = pd.DataFrame(model_results).sort_values(by=["Model", "Dataset"])
+
+#     # Print results
+#     print("\nModel Performance Comparison:")
+#     print(results_df.to_string(index=False))
+
+#     return results_df
+
 def evaluate_models(trained_models, X_test_original, y_test_original, datasets, config):
     """
     Evaluates trained models using dynamically loaded metrics from configuration.
@@ -51,16 +97,24 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets, 
     model_names = next(iter(trained_models.values())).keys() if trained_models else []
 
     for model_name in model_names:
-        for dataset_name in datasets.keys():
-            if dataset_name in trained_models and model_name in trained_models[dataset_name]:
-                model = trained_models[dataset_name][model_name]
+        for dataset_name, model_dict in trained_models.items():
+            if model_name in model_dict:
+                model = model_dict[model_name]
                 print(f'\nEvaluating {model_name} on {dataset_name}...')
-                y_pred = model.predict(X_test_original)
+
+                # Align X_test_original to model training features
+                training_features = model.model.feature_names_in_  # Features seen during fit
+                X_test_aligned = X_test_original.loc[:, X_test_original.columns.isin(training_features)]
+
+                # Reindex to ensure correct column order
+                X_test_aligned = X_test_aligned.reindex(columns=training_features, fill_value=0)
+
+                # Predict using aligned test set
+                y_pred = model.predict(X_test_aligned)
 
                 metric_values = {}
-
                 for metric_name, metric_obj in enabled_metrics.items():
-                    metric_values[metric_name] = metric_obj.compute(y_test_original, y_pred, model, X_test_original)
+                    metric_values[metric_name] = metric_obj.compute(y_test_original, y_pred, model, X_test_aligned)
 
                 # Store results
                 model_results.append({
@@ -76,3 +130,4 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets, 
     print(results_df.to_string(index=False))
 
     return results_df
+

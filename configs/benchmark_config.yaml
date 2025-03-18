@@ -18,7 +18,7 @@ synthesis:
       params:
         epochs: 50
       num_generated_rows: "same_as_original" # Options: "same_as_original", "custom"
-      custom_generated_rows: 10000 # Only used if num_generated_rows is "custom"
+      custom_generated_: 10000 # Only used if num_generated_rows is "custom"
     TVAE:
       enabled: true
       import_path: "sdv.single_table"
@@ -76,13 +76,13 @@ anonymization:
       value: 2
 
 utility:
-  enable_utility_evaluation: false
+  enable_utility_evaluation: true
   models:
     LogisticRegression: true
     KNN: true
     RandomForest: true
     DecisionTree: true
-    SVM: true
+    SVM: false
     XGBoost: false
 
   metrics:

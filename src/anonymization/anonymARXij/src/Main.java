@@ -19,14 +19,26 @@ public class Main {
         File configFile = new File(configPath);
         String absoluteConfigPath = configFile.getAbsolutePath();
         System.out.println("🔹 Loading config from: " + absoluteConfigPath); // Debugging
-
         Map<String, Object> yamlConfig = ConfigLoader.loadYamlConfig(absoluteConfigPath);
 
         // ✅ Extract dataset settings
         Map<String, Object> datasetConfig = (Map<String, Object>) yamlConfig.get("dataset");
-        String datasetPath = new File((String) datasetConfig.get("path")).getAbsolutePath();
+        //String datasetPath = new File((String) datasetConfig.get("path")).getAbsolutePath();
+
+        String datasetPath;
+        if (args.length > 0) {
+            datasetPath = new File(args[0]).getAbsolutePath();
+            System.out.println("📂 Dataset Path (from args): " + datasetPath);
+        } else
+         {
+            datasetPath = new File((String) datasetConfig.get("path")).getAbsolutePath();
+            System.out.println("📂 Dataset Path (from config): " + datasetPath);
+         }
+
+
+
         char datasetSeparator = datasetConfig.get("separator").toString().charAt(0); // Ensure correct delimiter
-        System.out.println("📂 Dataset Path: " + datasetPath); // Debugging
+        //System.out.println("📂 Dataset Path: " + datasetPath); // Debugging
         System.out.println("🔹 Dataset Separator: " + datasetSeparator); // Debugging
 
         // ✅ Load dataset into ARX
