@@ -57,7 +57,7 @@ def run_preprocessing(dataset_path, separator, target_column):
         random_state=42
     )
 
-    train_raw_df.to_csv(train_raw_path, index=False)  # Save raw train for anonymization
+    train_raw_df.to_csv(train_raw_path, index=False, sep=separator)  # Save raw train for anonymization
 
     # Encode
     cleaned_train = encode_categorical_features(train_raw_df.copy(), target_column)
