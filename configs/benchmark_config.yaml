@@ -9,7 +9,7 @@ preprocessing:
   encoding_type: "binary" # Type of encoding, currently only "binary" is supported
 
 synthesis:
-  enable_synthetic_generation: false # Set to false to skip
+  enable_synthetic_generation: true # Set to false to skip
   synthesizers:
     CTGAN:
       enabled: true
@@ -20,7 +20,7 @@ synthesis:
       num_generated_rows: "same_as_original" # Options: "same_as_original", "custom"
       custom_generated_: 10000 # Only used if num_generated_rows is "custom"
     TVAE:
-      enabled: true
+      enabled: false
       import_path: "sdv.single_table"
       class_name: "TVAESynthesizer"
       params:
@@ -28,7 +28,7 @@ synthesis:
       num_generated_rows: "same_as_original" #Options: "same_as_original", "custom"
       custom_generated_rows: 5000 # TVAE will generate 5000 rows
     GaussianCopula:
-      enabled: true
+      enabled: false
       import_path: "sdv.single_table"
       class_name: "GaussianCopulaSynthesizer"
       params: {}
