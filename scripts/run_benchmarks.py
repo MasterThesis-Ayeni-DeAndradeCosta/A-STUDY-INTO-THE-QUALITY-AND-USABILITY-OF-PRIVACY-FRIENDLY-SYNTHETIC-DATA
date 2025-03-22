@@ -37,6 +37,8 @@ from output_utils.report_generator import (
     save_synthetic_data_evaluation
 )
 from output_utils.visualization_saver import save_model_performance_graph
+from run_analysis import run_analysis
+
 
 def load_config(config_path="configs/benchmark_config.yaml"):
     """
@@ -124,6 +126,9 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
         logger.info(" Visualizations saved.")
         logger.info(" Benchmarking Completed. Results saved in output folder.")
         print("\n Benchmarking Completed.")
+
+        run_analysis(output_dir)
+         
         return results_df
     else:
         print("\nUtility Evaluation Skipped (Disabled in Configuration).")
@@ -133,24 +138,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     print("\nBenchmarking Completed.")
 
     return results_df
-    # # Step 3: Run Utility for ML Training
-    # trained_models, X_test_original, y_test_original, datasets = run_utility(
-    # cleaned_data, synthetic_datasets, test_set, target_column, enable_synthetic, config
-    # )
-
-    # # Step 4: Evaluate Models
-    # print("\n Evaluating models...")
-    # results_df = evaluate_models(trained_models, X_test_original, y_test_original, datasets, config)
-    # save_model_performance(output_dir, results_df)
-    # logger.info("Model Training and Evaluation completed.")
-
-    # # Step 5: Visualize results
-    # visualize_model_performance(results_df, dataset_name, output_dir)
-    # logger.info(" Visualizations saved.")
-    # logger.info(" Benchmarking Completed. Results saved in output folder.")
-
-    # print("\n Benchmarking Completed.")
-    # return results_df
+    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

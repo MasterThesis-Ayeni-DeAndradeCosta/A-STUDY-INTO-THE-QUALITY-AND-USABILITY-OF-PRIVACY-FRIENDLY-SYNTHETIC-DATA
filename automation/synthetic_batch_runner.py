@@ -24,7 +24,7 @@ os.makedirs(BATCH_OUTPUT_DIR, exist_ok=True)
 PARAMETER_VARIATIONS = [
     {
         "path": "ALL_SYNTHS.epochs",
-        "values": [1, 2]
+        "values": [1, 2, 3, 4, 5]
     }
 ]
 
