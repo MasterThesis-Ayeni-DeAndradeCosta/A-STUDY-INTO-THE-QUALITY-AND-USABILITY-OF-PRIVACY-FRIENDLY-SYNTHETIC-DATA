@@ -115,6 +115,8 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
         print("\n Evaluating models...")       
         results_df = evaluate_models(trained_models, X_test_original, y_test_original, datasets, config)
         save_model_performance(output_dir, results_df)
+        results_csv_path = os.path.join(output_dir, "model_performance.csv")
+        results_df.to_csv(results_csv_path, index=False)
         logger.info("Model Training and Evaluation completed.")
 
         # Step 6: Visualize results
