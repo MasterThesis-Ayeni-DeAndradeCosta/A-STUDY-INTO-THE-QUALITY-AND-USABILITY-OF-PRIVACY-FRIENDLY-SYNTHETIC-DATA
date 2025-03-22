@@ -10,6 +10,8 @@ if src_path not in sys.path:
 
 import yaml
 import pandas as pd
+import argparse
+
 # Import necessary modules
 from run_preprocessing import run_preprocessing
 from run_utility import run_utility  
@@ -50,10 +52,10 @@ def load_config(config_path="configs/benchmark_config.yaml"):
         config = yaml.safe_load(file)
     return config
 
-def run_benchmarks():
+def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     """Executes the full benchmarking pipeline, saving logs, reports, and visualizations."""
     # Load configuration
-    config = load_config()
+    config = load_config(config_path=config_path)
     # Dataset parameters
     dataset_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", config["dataset"]["path"]))
     separator = config["dataset"]["separator"]
@@ -149,4 +151,8 @@ def run_benchmarks():
     # return results_df
 
 if __name__ == "__main__":
-    run_benchmarks()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", type=str, default="configs/benchmark_config.yaml", help="Path to YAML config")
+    args = parser.parse_args()
+
+    run_benchmarks(config_path=args.config)
