@@ -63,7 +63,14 @@ def run_benchmarks():
     enable_utility = config["utility"].get("enable_utility_evaluation", False)
     # Create formatted output directory
     dataset_name = os.path.splitext(os.path.basename(dataset_path))[0]
-    output_dir = create_output_directory(dataset_name)
+
+    if "output_dir" in config:
+        output_dir = config["output_dir"]
+    else:
+    # Use default singular directory if not provided
+        output_dir = create_output_directory(dataset_name, base_dir="singular")
+
+
     save_yaml_config(output_dir, config)
     # Setup logging
     logger = setup_logger(output_dir)
