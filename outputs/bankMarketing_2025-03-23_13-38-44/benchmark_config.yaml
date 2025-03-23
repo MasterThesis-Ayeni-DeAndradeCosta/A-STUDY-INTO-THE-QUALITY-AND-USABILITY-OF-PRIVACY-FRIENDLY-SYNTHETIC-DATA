@@ -1,0 +1,83 @@
+anonymization:
+  anonymized_output: datasets/anonymized/bankMarketing_anonymized.csv
+  attributes:
+    insensitive_attributes:
+    - Loan_Amount_Term
+    - Dependents
+    quasi_identifiers:
+    - Gender
+    - Married
+    - Education
+    sensitive_attributes:
+    - ApplicantIncome
+  enable_anonymization: true
+  hierarchies:
+    Education: src/anonymization/anonymARXij/src/hierarchies_loan/education.csv
+    Gender: src/anonymization/anonymARXij/src/hierarchies_loan/gender.csv
+    Married: src/anonymization/anonymARXij/src/hierarchies_loan/married.csv
+  hierarchy_config: {}
+  models:
+    k_anonymity: 5
+    l_diversity:
+      attribute: ApplicantIncome
+      value: 2
+  suppression_limit: 0.1
+dataset:
+  path: datasets/original/bankMarketing.csv
+  separator: ;
+  target_column: y
+  test_size: 0.2
+preprocessing:
+  encoding_type: binary
+  handle_missing_values: drop
+synthesis:
+  enable_synthetic_generation: true
+  synthesizers:
+    CTGAN:
+      class_name: CTGANSynthesizer
+      custom_generated_: 10000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params:
+        epochs: 50
+    CustomSynthesizer:
+      class_name: CustomSynthesizer
+      custom_generated_rows: 7000
+      enabled: false
+      import_path: custom.custom_synthesizer
+      num_generated_rows: custom
+      params:
+        noise_factor: 0.2
+    GaussianCopula:
+      class_name: GaussianCopulaSynthesizer
+      enabled: false
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params: {}
+    TVAE:
+      class_name: TVAESynthesizer
+      custom_generated_rows: 5000
+      enabled: false
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params:
+        epochs: 50
+utility:
+  enable_utility_evaluation: true
+  metrics:
+    AUC-ROC: true
+    Accuracy: true
+    CohenKappa: true
+    F1: true
+    LogLoss: true
+    MCC: true
+    Precision: true
+    Recall: true
+  models:
+    DecisionTree: true
+    KNN: true
+    LogisticRegression: true
+    RandomForest: true
+    SVM: false
+    XGBoost: false

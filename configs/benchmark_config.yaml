@@ -1,7 +1,7 @@
 dataset:
-  path: "datasets/original/bankMarketing.csv" # Path to the dataset
+  path: "datasets/original/studentPerformance.csv" # Path to the dataset
   separator: ";" # Delimiter used in the dataset (e.g., "," or "\t")
-  target_column: "y" # Name of the target column
+  target_column: "Target" # Name of the target column
   test_size: 0.2
 
 preprocessing:
@@ -44,32 +44,42 @@ synthesis:
 
 anonymization:
   enable_anonymization: true
-  anonymized_output: "datasets/anonymized/bankMarketing_anonymized.csv"
-  suppression_limit: 0.05
+  anonymized_output: "datasets/anonymized/studentPerformance_anonymized.csv"
+  suppression_limit: 0.1
   attributes:
     quasi_identifiers:
-      - "age"
-      - "marital"
-      - "education"
+      - "Age at enrollment"
+      - "Gender"
+      - "Nacionality"
     sensitive_attributes:
-      - "balance"
+      - "Scholarship_holder"
     insensitive_attributes:
-      - "contact"
-      - "pdays"
-      - "previous"
-      - "y"
+      - "Application mode"
+      - "Application order"
+      - "Curricular units 1st sem (credited)"
+      - "Curricular units 1st sem (enrolled)"
+      - "Curricular units 1st sem (evaluations)"
+      - "Curricular units 1st sem (approved)"
+      - "Curricular units 1st sem (without evaluations)"
+      - "Curricular units 2nd sem (credited)"
+      - "Curricular units 2nd sem (enrolled)"
+      - "Curricular units 2nd sem (evaluations)"
+      - "Curricular units 2nd sem (approved)"
+      - "Curricular units 2nd sem (without evaluations)"
+      - "Course"
+
 
   hierarchies:
-    "age": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/age.csv"
-    "marital": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/marital.csv"
-    "education": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/education.csv"
+    "Age at enrollment": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/age_enrollment.csv"
+    "Gender": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/gender.csv"
+    "Nacionality": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/nacionality.csv"
 
   hierarchy_config: {}
 
   models:
-    k_anonymity: 3
+    k_anonymity: 5
     l_diversity:
-      attribute: "balance"
+      attribute: "Scholarship_holder"
       value: 2
 
 utility:
