@@ -58,12 +58,10 @@ anonymization:
       - "pdays"
       - "previous"
       - "y"
-
   hierarchies:
     "age": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/age.csv"
     "marital": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/marital.csv"
     "education": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/education.csv"
-
   hierarchy_config: {}
 
   models:
@@ -91,3 +89,8 @@ utility:
     LogLoss: true # Disabled for models that don't support probabilities
     CohenKappa: true
     MCC: true
+
+analysis:
+  enable_analysis: true # Set to false to skip all analysis
+  generate_interactive_plots: false # Use Plotly for HTML plots
+  generate_excel_summary: true # Save Excel file with summary stats

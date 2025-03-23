@@ -1,13 +1,11 @@
 import sys
 import os
-
 # Get the absolute path of the project root
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 # Add `src/` to Python path
 src_path = os.path.join(project_root, "src")
 if src_path not in sys.path:
     sys.path.insert(0,  src_path)
-
 import yaml
 import pandas as pd
 import argparse
@@ -18,26 +16,18 @@ from run_utility import run_utility
 from run_synthetic import run_synthetic 
 from run_anonymization import run_anonymization
 from run_postprocessing import run_postprocessing 
+from run_analysis import run_analysis
 
-
-from synthetic_pipeline.data_synthesis import generate_synthetic_datasets
-from synthetic_pipeline.synthetic_evaluation import evaluate_synthetic_data, compare_data_distributions
-#from modelOperations.model_training import evaluate_models
 from modelOperations.model_evaluation import evaluate_models
 from visualization.result_visualization import visualize_model_performance
-
-# Import logging, output management, and report generation utilities
 from output_utils.output_manager import create_output_directory
 from output_utils.logger import setup_logger
 from output_utils.report_generator import (
     save_preprocessing_report, 
     save_model_performance, 
-    save_synthetic_data_report,
-    save_yaml_config,
-    save_synthetic_data_evaluation
-)
-from output_utils.visualization_saver import save_model_performance_graph
-from run_analysis import run_analysis
+    save_yaml_config
+    )
+
 
 
 def load_config(config_path="configs/benchmark_config.yaml"):
@@ -64,7 +54,10 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     target_column = config["dataset"]["target_column"]
     #flags
     enable_synthetic = config["synthesis"]["enable_synthetic_generation"]
+
     enable_utility = config["utility"].get("enable_utility_evaluation", False)
+    analysis_config = config.get("analysis", {})
+
     # Create formatted output directory
     dataset_name = os.path.splitext(os.path.basename(dataset_path))[0]
 
@@ -73,7 +66,6 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     else:
     # Use default singular directory if not provided
         output_dir = create_output_directory(dataset_name, base_dir="singular")
-
 
     save_yaml_config(output_dir, config)
     # Setup logging
@@ -127,8 +119,8 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
         logger.info(" Benchmarking Completed. Results saved in output folder.")
         print("\n Benchmarking Completed.")
 
-        run_analysis(output_dir)
-         
+        run_analysis(output_dir, analysis_config)
+
         return results_df
     else:
         print("\nUtility Evaluation Skipped (Disabled in Configuration).")
