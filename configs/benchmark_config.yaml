@@ -1,7 +1,7 @@
 dataset:
-  path: "datasets/original/studentMathScores.csv" # Path to the dataset
+  path: "datasets/original/crimeData.csv" # Path to the dataset
   separator: ";" # Delimiter used in the dataset (e.g., "," or "\t")
-  target_column: "G3" # Name of the target column
+  target_column: "STATUS" # Name of the target column
   test_size: 0.2
 
 preprocessing:
@@ -48,36 +48,36 @@ anonymization:
   suppression_limit: 0.1
   attributes:
     quasi_identifiers:
-      - "sex"
-      - "age"
-      - "famsize"
+      - "Victim_age"
+      - "Victim_sex"
+      - "Victim_descent"
+      - "LAT"
+      - "LON"
+
     sensitive_attributes:
-      - "health"
+      - "Crime_Code"
     insensitive_attributes:
-      - "traveltime"
-      - "studytime"
-      - "schoolsup"
-      - "paid"
-      - "higher"
-      - "romantic"
-      - "famrel"
-      - "freetime"
-      - "Dalc"
-      - "Walc"
-
-
+      - "DR_NO"
+      - "Time_occured"
+      - "Premis"
+      - "Weapon"
+      - "Status"
 
   hierarchies:
-    "sex": "src/anonymization/anonymARXij/src/hierarchies_studentMathScores/sex.csv"
-    "age": "src/anonymization/anonymARXij/src/hierarchies_studentMathScores/age.csv"
-    "famsize": "src/anonymization/anonymARXij/src/hierarchies_studentMathScores/famsize.csv"
+    "Victim_age": "src/anonymization/anonymARXij/src/hierarchies/hierarchy_age_4.csv"
+    "Victim_sex": "src/anonymization/anonymARXij/src/hierarchies/hierarchy_sex.csv"
+    "Victim_descent": "src/anonymization/anonymARXij/src/hierarchies/hierarchy_descent.csv"
 
-  hierarchy_config: {}
+
+  hierarchy_config:
+    hierarchy_config:
+      LAT: 10
+      LON: 10
 
   models:
     k_anonymity: 5
     l_diversity:
-      attribute: "Scholarship_holder"
+      attribute: "Crime_Code"
       value: 2
 
 utility:
