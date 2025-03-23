@@ -1,0 +1,91 @@
+anonymization:
+  anonymized_output: datasets/anonymized/studentMathScore_anonymized.csv
+  attributes:
+    insensitive_attributes:
+    - traveltime
+    - studytime
+    - schoolsup
+    - paid
+    - higher
+    - romantic
+    - famrel
+    - freetime
+    - Dalc
+    - Walc
+    quasi_identifiers:
+    - sex
+    - age
+    - famsize
+    sensitive_attributes:
+    - health
+  enable_anonymization: true
+  hierarchies:
+    age: src/anonymization/anonymARXij/src/hierarchies_studentMathScores/age.csv
+    famsize: src/anonymization/anonymARXij/src/hierarchies_studentMathScores/famsize.csv
+    sex: src/anonymization/anonymARXij/src/hierarchies_studentMathScores/sex.csv
+  hierarchy_config: {}
+  models:
+    k_anonymity: 5
+    l_diversity:
+      attribute: Scholarship_holder
+      value: 2
+  suppression_limit: 0.1
+dataset:
+  path: datasets/original/studentMathScore.csv
+  separator: ;
+  target_column: G3
+  test_size: 0.2
+preprocessing:
+  encoding_type: binary
+  handle_missing_values: drop
+synthesis:
+  enable_synthetic_generation: false
+  synthesizers:
+    CTGAN:
+      class_name: CTGANSynthesizer
+      custom_generated_: 10000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params:
+        epochs: 50
+    CustomSynthesizer:
+      class_name: CustomSynthesizer
+      custom_generated_rows: 7000
+      enabled: false
+      import_path: custom.custom_synthesizer
+      num_generated_rows: custom
+      params:
+        noise_factor: 0.2
+    GaussianCopula:
+      class_name: GaussianCopulaSynthesizer
+      enabled: false
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params: {}
+    TVAE:
+      class_name: TVAESynthesizer
+      custom_generated_rows: 5000
+      enabled: false
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params:
+        epochs: 50
+utility:
+  enable_utility_evaluation: true
+  metrics:
+    AUC-ROC: true
+    Accuracy: true
+    CohenKappa: true
+    F1: true
+    LogLoss: true
+    MCC: true
+    Precision: true
+    Recall: true
+  models:
+    DecisionTree: true
+    KNN: true
+    LogisticRegression: true
+    RandomForest: true
+    SVM: false
+    XGBoost: false

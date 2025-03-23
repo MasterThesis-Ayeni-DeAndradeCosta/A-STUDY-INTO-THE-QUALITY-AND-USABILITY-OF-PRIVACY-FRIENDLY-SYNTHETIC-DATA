@@ -1,7 +1,7 @@
 dataset:
-  path: "datasets/original/studentPerformance.csv" # Path to the dataset
+  path: "datasets/original/studentMathScores.csv" # Path to the dataset
   separator: ";" # Delimiter used in the dataset (e.g., "," or "\t")
-  target_column: "Target" # Name of the target column
+  target_column: "G3" # Name of the target column
   test_size: 0.2
 
 preprocessing:
@@ -9,7 +9,7 @@ preprocessing:
   encoding_type: "binary" # Type of encoding, currently only "binary" is supported
 
 synthesis:
-  enable_synthetic_generation: true # Set to false to skip
+  enable_synthetic_generation: false # Set to false to skip
   synthesizers:
     CTGAN:
       enabled: true
@@ -44,35 +44,33 @@ synthesis:
 
 anonymization:
   enable_anonymization: true
-  anonymized_output: "datasets/anonymized/studentPerformance_anonymized.csv"
+  anonymized_output: "datasets/anonymized/studentMathScore_anonymized.csv"
   suppression_limit: 0.1
   attributes:
     quasi_identifiers:
-      - "Age at enrollment"
-      - "Gender"
-      - "Nacionality"
+      - "sex"
+      - "age"
+      - "famsize"
     sensitive_attributes:
-      - "Scholarship_holder"
+      - "health"
     insensitive_attributes:
-      - "Application mode"
-      - "Application order"
-      - "Curricular units 1st sem (credited)"
-      - "Curricular units 1st sem (enrolled)"
-      - "Curricular units 1st sem (evaluations)"
-      - "Curricular units 1st sem (approved)"
-      - "Curricular units 1st sem (without evaluations)"
-      - "Curricular units 2nd sem (credited)"
-      - "Curricular units 2nd sem (enrolled)"
-      - "Curricular units 2nd sem (evaluations)"
-      - "Curricular units 2nd sem (approved)"
-      - "Curricular units 2nd sem (without evaluations)"
-      - "Course"
+      - "traveltime"
+      - "studytime"
+      - "schoolsup"
+      - "paid"
+      - "higher"
+      - "romantic"
+      - "famrel"
+      - "freetime"
+      - "Dalc"
+      - "Walc"
+
 
 
   hierarchies:
-    "Age at enrollment": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/age_enrollment.csv"
-    "Gender": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/gender.csv"
-    "Nacionality": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/nacionality.csv"
+    "sex": "src/anonymization/anonymARXij/src/hierarchies_studentMathScores/sex.csv"
+    "age": "src/anonymization/anonymARXij/src/hierarchies_studentMathScores/age.csv"
+    "famsize": "src/anonymization/anonymARXij/src/hierarchies_studentMathScores/famsize.csv"
 
   hierarchy_config: {}
 
