@@ -90,7 +90,15 @@ public class Main {
         System.out.println("🔹 Privacy Models Configured"); // Debugging
 
         // ✅ Extract anonymized output path correctly
-        String anonymizedOutputPath = new File((String) anonymizationConfig.get("anonymized_output")).getAbsolutePath();
+        //String anonymizedOutputPath = new File((String) anonymizationConfig.get("anonymized_output")).getAbsolutePath();
+        String anonymizedOutputPath;
+        if (args.length > 1) {
+            anonymizedOutputPath = new File(args[1]).getAbsolutePath();
+            System.out.println("📂 Anonymized Output Path (from args): " + anonymizedOutputPath);
+        } else {
+            throw new IllegalArgumentException("❌ Missing anonymized output path as second argument.");
+        }
+
         System.out.println("📂 Anonymized Output Path: " + anonymizedOutputPath); // Debugging
 
         // ✅ Run the anonymization process
