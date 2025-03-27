@@ -25,7 +25,9 @@ from output_utils.logger import setup_logger
 from output_utils.report_generator import (
     save_preprocessing_report, 
     save_model_performance, 
-    save_yaml_config
+    save_yaml_config,
+    save_postprocessing_report,
+    save_anonymous_data_report
     )
 
 
@@ -52,6 +54,9 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     dataset_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", config["dataset"]["path"]))
     separator = config["dataset"]["separator"]
     target_column = config["dataset"]["target_column"]
+    handle_missing_strategy = config["preprocessing"]["handle_missing_values"]
+    test_size = config["dataset"]["test_size"]
+    encoding_type = config["preprocessing"]["encoding_type"]
     #flags
     enable_synthetic = config["synthesis"]["enable_synthetic_generation"]
 
@@ -73,11 +78,11 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     logger.info(f" Benchmarking started for dataset: {dataset_name}")
 
     # Step 1: Run Preprocessing and Get Cleaned Data**
-    cleaned_data, dataset_name, original_data, test_set, train_raw_path = run_preprocessing(dataset_path, separator, target_column)
+    cleaned_data, dataset_name, original_data, test_set, train_raw_path, encoding_map  = run_preprocessing(dataset_path, separator, target_column)
     #cleaned_dataset_path = os.path.abspath(f"datasets/cleaned/{dataset_name}_cleaned.csv")
 
     if original_data is not None:
-        save_preprocessing_report(output_dir, dataset_name, original_data, cleaned_data,  test_set)
+        save_preprocessing_report(output_dir, dataset_name, original_data, cleaned_data,  test_set, handle_missing_strategy, test_size, encoding_type, encoding_map)
     print("\nPreprocessing completed.")
 
     # Step 2: Anonymization
@@ -85,7 +90,11 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     success = run_anonymization(train_raw_path)
     if success:
         anonymized_dataset_path = os.path.abspath(f"datasets/anonymized/{dataset_name}_anonymized.csv")
-        postprocessed_data, _ = run_postprocessing(anonymized_dataset_path, separator, target_column)
+        df_anonymized = pd.read_csv(anonymized_dataset_path, sep=separator)
+        save_anonymous_data_report(output_dir, dataset_name, df_anonymized, original_df=original_data)
+        postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_dataset_path, separator, target_column)
+        if postprocessed_data is not None and anon_encoding_map:
+            save_postprocessing_report(output_dir, dataset_name, encoding_type, anon_encoding_map)
     else:
         print("❌ Anonymization failed.")
         logger.error("Anonymization failed.")

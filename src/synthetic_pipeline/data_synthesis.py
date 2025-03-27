@@ -142,6 +142,9 @@ def generate_synthetic_datasets(preprocessed_data, dataset_name, config):
             num_rows_to_generate = len(preprocessed_data)
         elif num_generated_rows == "custom":
             num_rows_to_generate = custom_generated_rows
+        elif num_generated_rows == "multiple":
+            multiplier = synth_config.get("row_multiplier", 1.0)
+            num_rows_to_generate = int(len(preprocessed_data) * multiplier)
         else:
             print(f"⚠️ Warning: Invalid num_generated_rows value '{num_generated_rows}' for {synth_name}. Defaulting to original dataset size.")
             num_rows_to_generate = len(preprocessed_data)

@@ -25,7 +25,7 @@ PARAMETER_VARIATIONS = [
     {
         "enabled": True,
         "path": "ALL_SYNTHS.epochs",
-        "values": [1, 2, 3, 4, 5]
+        "values": [1, 2, 3]
     },
     {
         "enabled": False,
@@ -35,7 +35,7 @@ PARAMETER_VARIATIONS = [
     {
         "enabled": False,
         "path": "anonymization.models.k_anonymity",
-        "values": [2, 3, 5, 10, 15, 20]
+        "values": [2, 3, 5]
     }
 ]
 

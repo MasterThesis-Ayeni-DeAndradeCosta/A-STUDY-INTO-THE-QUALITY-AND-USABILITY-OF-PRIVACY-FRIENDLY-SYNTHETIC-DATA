@@ -20,6 +20,7 @@ def run_preprocessing(dataset_path, separator, target_column):
     - original_data (DataFrame): Raw dataset before preprocessing.
     - cleaned_test (DataFrame): Encoded test split.
     - train_raw_path (str): Path to unencoded train CSV for anonymization.
+    - encoding_map (dict): Mapping from original categorical columns to encoded columns
     """
     config = load_config()
     test_size = config["dataset"]["test_size"]
@@ -43,7 +44,8 @@ def run_preprocessing(dataset_path, separator, target_column):
         cleaned_train = pd.read_csv(cleaned_train_path)
         cleaned_test = pd.read_csv(cleaned_test_path)
         original_data, _ = load_dataset(dataset_path, separator)
-        return cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path
+        # Encoding map will not be available if skipped (you can return None or reload if needed)
+        return cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path, None
 
     # Full preprocessing flow
     original_data, _ = load_dataset(dataset_path, separator)
@@ -60,8 +62,8 @@ def run_preprocessing(dataset_path, separator, target_column):
     train_raw_df.to_csv(train_raw_path, index=False, sep=separator)  # Save raw train for anonymization
 
     # Encode
-    cleaned_train = encode_categorical_features(train_raw_df.copy(), target_column)
-    cleaned_test = encode_categorical_features(test_raw_df.copy(), target_column)
+    cleaned_train, encoding_map = encode_categorical_features(train_raw_df.copy(), target_column)
+    cleaned_test, _ = encode_categorical_features(test_raw_df.copy(), target_column)
 
     # Save encoded versions
     cleaned_train.to_csv(cleaned_train_path, index=False)
@@ -71,7 +73,7 @@ def run_preprocessing(dataset_path, separator, target_column):
     print(f"✅ Saved encoded train set to: {cleaned_train_path}")
     print(f"✅ Saved encoded test set to: {cleaned_test_path}")
 
-    return cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path
+    return cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path, encoding_map
 
 if __name__ == "__main__":
     config = load_config()
@@ -79,7 +81,7 @@ if __name__ == "__main__":
     separator = config["dataset"]["separator"]
     target_column = config["dataset"]["target_column"]
 
-    cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path = run_preprocessing(
+    cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path, encoding_map = run_preprocessing(
         dataset_path, separator, target_column
     )
 
