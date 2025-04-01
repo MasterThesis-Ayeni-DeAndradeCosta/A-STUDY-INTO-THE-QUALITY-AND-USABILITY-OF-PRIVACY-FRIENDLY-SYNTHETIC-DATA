@@ -12,7 +12,7 @@ def run_postprocessing(anonymized_path, separator, target_column):
     """
     if anonymized_path is None or not os.path.exists(anonymized_path):
         print("⚠️ No anonymized data found. Skipping postprocessing.")
-        return None, None
+        return None, None, None
 
     dataset_name = os.path.splitext(os.path.basename(anonymized_path))[0].replace("_anonymized", "")
     encoded_output_path = f"datasets/anonymized/{dataset_name}_anonymized_encoded.csv"
@@ -20,7 +20,7 @@ def run_postprocessing(anonymized_path, separator, target_column):
     # Load and encode anonymized data
     df_anonymized = pd.read_csv(anonymized_path, sep=separator)
     print(f"\n📂 Loaded anonymized data: {df_anonymized.shape}")
-    df_encoded = encode_categorical_features(df_anonymized, target_column)
+    df_encoded, encoding_map = encode_categorical_features(df_anonymized, target_column)
     print(f"✅ Encoding applied to anonymized data. Encoded shape: {df_encoded.shape}")
 
     # Save encoded anonymized data
@@ -28,7 +28,8 @@ def run_postprocessing(anonymized_path, separator, target_column):
     df_encoded.to_csv(encoded_output_path, index=False)
     print(f"✅ Encoded anonymized dataset saved to: {encoded_output_path}")
 
-    return df_encoded, encoded_output_path
+    return df_encoded, encoded_output_path, encoding_map
+
 
 if __name__ == "__main__":
     print("This script is not meant to be run directly.")

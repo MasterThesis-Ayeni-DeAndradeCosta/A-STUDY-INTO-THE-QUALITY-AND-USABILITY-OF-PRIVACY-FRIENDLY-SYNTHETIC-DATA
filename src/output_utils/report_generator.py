@@ -3,26 +3,101 @@ from tabulate import tabulate
 import yaml
 import pandas as pd
 
-def save_preprocessing_report(output_dir, dataset_name, original_data, processed_data,  test_set):
+import os
+
+def save_preprocessing_report(output_dir, dataset_name, original_data, processed_data, test_set,
+                              handle_missing_strategy, test_size, encoding_type=None, encoding_map=None):
     """
-    Saves preprocessing statistics.
+    Saves preprocessing statistics in a structured, readable format.
 
     Parameters:
     - output_dir (str): Directory where the report will be saved.
     - dataset_name (str): Name of the dataset.
     - original_data (DataFrame): The raw dataset before preprocessing.
     - processed_data (DataFrame): The dataset after preprocessing.
+    - test_set (DataFrame): The test set extracted from the data.
+    - handle_missing_strategy (str): Strategy used for missing value handling.
+    - test_size (float): Fraction used to split test set.
+    - encoding_type (str, optional): Encoding type applied (e.g., "binary", "one-hot").
+    - encoded_columns (list, optional): Categorical columns that were encoded.
+    - encoding_map (dict, optional): Mapping from original categorical columns to new encoded columns.
     """
     report_path = os.path.join(output_dir, "preprocessing_report.txt")
-    
-    with open(report_path, "w") as f:
-        f.write(f"Dataset: {dataset_name}\n")
-        f.write(f"Original Rows: {original_data.shape[0]}, Columns: {original_data.shape[1]}\n")
-        f.write(f"Processed Rows: {processed_data.shape[0]}, Columns: {processed_data.shape[1]}\n")
-        f.write(f"Test Set Rows Reserved: {test_set.shape[0]}\n") 
-        f.write(f"Missing Values Dropped/Imputed: {original_data.isna().sum().sum()} -> {processed_data.isna().sum().sum()}\n")
 
-    print(f"📄 Preprocessing report saved at {report_path}")
+    missing_before = original_data.isna().sum().sum()
+    missing_after = processed_data.isna().sum().sum()
+    handling_outcome = (
+        "All missing values successfully imputed."
+        if missing_after == 0 else f"{missing_after} missing values remain after preprocessing."
+    )
+
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write("Preprocessing Summary\n")
+        f.write("---------------------\n")
+        f.write(f"Dataset Name            : {dataset_name}\n")
+        f.write(f"Missing Value Strategy  : {handle_missing_strategy}\n")
+        f.write(f"Test Size (Fraction)    : {test_size:.2f}\n")
+
+        if encoding_type:
+            f.write(f"Encoding Type           : {encoding_type}\n")
+
+        f.write("\nDataset Dimensions\n")
+        f.write("------------------\n")
+        f.write(f"Original Data           : {original_data.shape[0]} rows x {original_data.shape[1]} columns\n")
+        f.write(f"Processed Data          : {processed_data.shape[0]} rows x {processed_data.shape[1]} columns\n")
+        f.write(f"Test Set Size           : {test_set.shape[0]} rows\n")
+
+        if handle_missing_strategy == "drop":
+            rows_dropped = original_data.shape[0] - (processed_data.shape[0] + test_set.shape[0])
+            f.write(f"Rows Dropped Due to Missing Values: {rows_dropped}\n")
+
+        f.write("\nMissing Values\n")
+        f.write("---------------\n")
+        f.write(f"Total Missing (Before)  : {missing_before}\n")
+        f.write(f"Total Missing (After)   : {missing_after}\n")
+        f.write(f"Handling Outcome        : {handling_outcome}\n")
+
+        f.write("\nMissing Values by Column (Before):\n")
+        for col, count in original_data.isna().sum().items():
+            if count > 0:
+                f.write(f"  - {col}: {count}\n")
+
+        if encoding_map:
+            f.write("\nEncoding Mapping\n")
+            f.write("----------------\n")
+            f.write("Below is the mapping of original categorical columns to the new encoded binary columns:\n")
+            for col, new_cols in encoding_map.items():
+                joined = ', '.join(new_cols)
+                f.write(f"- {col} ➝ {joined}\n")
+
+    print(f"Preprocessing report saved at {report_path}")
+
+def save_postprocessing_report(output_dir, dataset_name, encoding_type, encoding_map):
+    """
+    Saves a report after postprocessing (e.g., encoding anonymized data).
+
+    Parameters:
+    - output_dir (str): Directory where the report will be saved.
+    - dataset_name (str): Name of the dataset.
+    - encoding_type (str): Encoding method used (e.g., "binary").
+    - encoding_map (dict): Mapping from original categorical columns to encoded columns.
+    """
+    report_path = os.path.join(output_dir, "postprocessing_report.txt")
+
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write("Postprocessing Summary\n")
+        f.write("----------------------\n")
+        f.write(f"Dataset Name            : {dataset_name}\n")
+        f.write(f"Encoding Type           : {encoding_type}\n")
+
+        f.write("\nEncoding Mapping\n")
+        f.write("----------------\n")
+        f.write("Below is the mapping of original categorical columns to the new encoded binary columns:\n")
+        for col, new_cols in encoding_map.items():
+            joined = ', '.join(new_cols)
+            f.write(f"- {col} -> {joined}\n")
+
+    print(f"📄 Postprocessing report saved at {report_path}")
 
 def save_model_performance(output_dir, results_df):
     """
@@ -114,6 +189,59 @@ def save_synthetic_data_report(output_dir, synthetic_datasets, quality_reports):
             f.write("\n" + "=" * 50 + "\n\n")
 
     print(f"📄 Synthetic data report saved at {report_path}")
+
+
+def save_anonymous_data_report(output_dir, dataset_name, anonymized_df, original_df=None):
+    report_path = os.path.join(output_dir, "anonymous_data_report.txt")
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write("Anonymized Data Summary\n")
+        f.write("=======================\n")
+        f.write(f"Dataset Name      : {dataset_name}\n")
+        f.write(f"Shape             : {anonymized_df.shape[0]} rows x {anonymized_df.shape[1]} columns\n")
+        f.write(f"Total Missing     : {anonymized_df.isna().sum().sum()}\n\n")
+
+        f.write("Column Overview\n")
+        f.write("----------------\n")
+        for col in anonymized_df.columns:
+            n_unique = anonymized_df[col].nunique(dropna=False)
+            n_missing = anonymized_df[col].isna().sum()
+            f.write(f"- {col}: {n_unique} unique values, {n_missing} missing\n")
+
+        f.write("\nSample Preview (first 5 rows)\n")
+        f.write("--------------------------------\n")
+        f.write(anonymized_df.head().to_string(index=False))
+        f.write("\n\n")
+
+        if original_df is not None:
+            _compare_anonymized_to_original(f, anonymized_df, original_df)
+
+    print(f"📄 Anonymous data report saved at {report_path}")
+
+def _compare_anonymized_to_original(f, anonymized_df, original_df):
+    f.write("Comparison with Original Data\n")
+    f.write("==============================\n")
+
+    orig_cols = set(original_df.columns)
+    anon_cols = set(anonymized_df.columns)
+
+    removed_cols = orig_cols - anon_cols
+    added_cols = anon_cols - orig_cols
+
+    f.write(f"Removed Columns: {', '.join(removed_cols) if removed_cols else 'None'}\n")
+    f.write(f"New Columns Introduced: {', '.join(added_cols) if added_cols else 'None'}\n\n")
+
+    # Check categorical differences
+    cat_cols = original_df.select_dtypes(include='object').columns.intersection(anonymized_df.columns)
+
+    for col in cat_cols:
+        orig_vals = set(original_df[col].dropna().unique())
+        anon_vals = set(anonymized_df[col].dropna().unique())
+        new_vals = anon_vals - orig_vals
+
+        if new_vals:
+            f.write(f"⚠ Column '{col}' contains new values after anonymization: {new_vals}\n")
+    f.write("\n")
+
 
 def save_yaml_config(output_dir, config):
     """

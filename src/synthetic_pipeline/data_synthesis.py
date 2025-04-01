@@ -13,6 +13,14 @@ os.makedirs(SYNTHESIZER_DIR, exist_ok=True)  # Ensure the directory exists
 SYNTHETIC_DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "datasets", "synthetic"))
 os.makedirs(SYNTHETIC_DATA_DIR, exist_ok=True)  # Ensure the directory exists
 
+FILENAME_PARAM_MAP = {
+    "CTGAN": ["epochs"],
+    "TVAE": ["epochs"],
+    "CustomSynthesizer": ["noise_factor"],
+    # Add more synthesizers here as needed
+}
+
+
 def load_or_train_synthesizers(preprocessed_data, dataset_name, config):
     """
     Loads or trains multiple synthesizers dynamically.
@@ -50,7 +58,10 @@ def load_or_train_synthesizers(preprocessed_data, dataset_name, config):
                 raise TypeError(f"❌ {class_name} does not implement BaseSynthesizer!")
 
             # Define synthesizer file path
-            synthesizer_filename = f"{dataset_name}_{synth_name}_synthesizer.pkl"
+            #synthesizer_filename = f"{dataset_name}_{synth_name}_synthesizer.pkl"
+            params = synth_info.get("params", {})
+            synthesizer_filename = generate_synthesizer_filename(dataset_name, synth_name, params)
+
             synthesizer_path = os.path.join(SYNTHESIZER_DIR, synthesizer_filename)
 
             # Extract number of epochs if required
@@ -131,6 +142,9 @@ def generate_synthetic_datasets(preprocessed_data, dataset_name, config):
             num_rows_to_generate = len(preprocessed_data)
         elif num_generated_rows == "custom":
             num_rows_to_generate = custom_generated_rows
+        elif num_generated_rows == "multiple":
+            multiplier = synth_config.get("row_multiplier", 1.0)
+            num_rows_to_generate = int(len(preprocessed_data) * multiplier)
         else:
             print(f"⚠️ Warning: Invalid num_generated_rows value '{num_generated_rows}' for {synth_name}. Defaulting to original dataset size.")
             num_rows_to_generate = len(preprocessed_data)
@@ -149,3 +163,32 @@ def generate_synthetic_datasets(preprocessed_data, dataset_name, config):
         synthetic_datasets[synth_name] = synthetic_data
         
     return synthetic_datasets, metadata
+
+def generate_synthesizer_filename(dataset_name, synth_name, params):
+    """
+    Generate a synthesizer filename dynamically based on dataset, synthesizer type, and key params.
+
+    Args:
+        dataset_name (str): Name of the dataset.
+        synth_name (str): Name of the synthesizer (e.g., CTGAN, TVAE).
+        params (dict): Parameters used for training (e.g., epochs, noise_factor).
+
+    Returns:
+        str: Filename like 'bankMarketing_CTGAN_epochs50_synthesizer.pkl'
+    """
+    suffix_parts = []
+
+    # Get param keys to include in filename for this synthesizer
+    keys_to_include = FILENAME_PARAM_MAP.get(synth_name, [])
+
+    for key in keys_to_include:
+        if key in params:
+            value = params[key]
+            # Replace '.' with 'p' in float values for safe filenames (e.g., 0.2 → 0p2)
+            if isinstance(value, float):
+                value = str(value).replace('.', 'p')
+            suffix_parts.append(f"{key}{value}")
+
+    # Combine suffixes
+    suffix_str = "_" + "_".join(suffix_parts) if suffix_parts else ""
+    return f"{dataset_name}_{synth_name}{suffix_str}_synthesizer.pkl"

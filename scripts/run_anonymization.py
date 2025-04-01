@@ -2,6 +2,8 @@ import subprocess
 import os
 import yaml
 import sys
+import re
+
 
 # Define correct project paths
 project_root = os.path.abspath(".")  # Root of MasterThesisCode
@@ -69,27 +71,6 @@ def create_jar():
         return False
     return True
 
-# def run_anonymization():
-#     """Runs the Java anonymization JAR."""
-
-#     if not compile_java():
-#         print("⛔ Skipping JAR creation due to compilation errors.")
-#         return False
-#     if not create_jar():
-#         print("⛔ Skipping execution due to JAR creation errors.")
-#         return False
-
-#     print("\n🔹 Running Java Anonymization Program...")
-#     run_process = subprocess.run(
-#         ["java", "-cp", f"{jar_path};{classpath}", "Main"],  # ✅ No dataset/output path needed
-#         capture_output=True, text=True
-#     )
-
-#     print("\n✅ STDOUT:", run_process.stdout)
-#     print("❗ STDERR:", run_process.stderr)
-
-#     return run_process.returncode == 0
-
 def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.yaml"):
     config = load_config(config_path)
     enable_anonymization = config["anonymization"].get("enable_anonymization", False)
@@ -108,8 +89,17 @@ def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.y
     if dataset_path is None:
         config = load_config()
         dataset_path = os.path.abspath(config["dataset"]["path"])
+    
+    # Generate anonymized output path based on dataset name
+    # Extract base dataset name
+    dataset_name = os.path.splitext(os.path.basename(dataset_path))[0]  # e.g., 'loan_train_raw'
+    # Remove 'train_raw' from the name (if present)
+    clean_name = re.sub(r'_?train_raw', '', dataset_name)  # Result: 'loan'
+    # Final anonymized output path
+    anonymized_output_path = os.path.abspath(f"datasets/anonymized/{clean_name}_anonymized.csv")
+
     run_process = subprocess.run(
-        ["java", "-cp", f"{jar_path};{classpath}", "Main", dataset_path],  # Pass dataset path
+        ["java", "-cp", f"{jar_path};{classpath}", "Main", dataset_path, anonymized_output_path],  # Pass dataset path
         capture_output=True, text=True
     )
     print("\n✅ STDOUT:", run_process.stdout)

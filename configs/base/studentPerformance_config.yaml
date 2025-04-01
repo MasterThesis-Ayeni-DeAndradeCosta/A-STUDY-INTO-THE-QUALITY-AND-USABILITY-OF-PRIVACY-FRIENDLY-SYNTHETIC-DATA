@@ -1,0 +1,112 @@
+dataset:
+  path: "datasets/original/studentPerformance.csv" # Path to the dataset
+  separator: ";" # Delimiter used in the dataset (e.g., "," or "\t")
+  target_column: "Target" # Name of the target column
+  test_size: 0.2
+
+preprocessing:
+  handle_missing_values: "drop" # Options: "drop", "mean", "median", "mode"
+  encoding_type: "binary" # Type of encoding, currently only "binary" is supported
+
+synthesis:
+  enable_synthetic_generation: True # Set to false to skip
+  synthesizers:
+    CTGAN:
+      enabled: true
+      import_path: "sdv.single_table"
+      class_name: "CTGANSynthesizer"
+      params:
+        epochs: 50
+      num_generated_rows: "same_as_original" # Options: "same_as_original", "custom"
+      custom_generated_rows: 10000 # Only used if num_generated_rows is "custom"
+      row_multiplier: 8
+    TVAE:
+      enabled: true
+      import_path: "sdv.single_table"
+      class_name: "TVAESynthesizer"
+      params:
+        epochs: 50
+      num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
+      custom_generated_rows: 5000 # TVAE will generate 5000 rows
+      row_multiplier: 8
+    GaussianCopula:
+      enabled: true
+      import_path: "sdv.single_table"
+      class_name: "GaussianCopulaSynthesizer"
+      params: {}
+      num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
+      custom_generated_rows: 5000
+      row_multiplier: 8
+    CustomSynthesizer:
+      enabled: false # Set to true if using a custom one
+      import_path: "custom.custom_synthesizer"
+      class_name: "CustomSynthesizer"
+      params:
+        noise_factor: 0.2
+      num_generated_rows: "custom" # Options: "same_as_original", "custom", "multiple"
+      custom_generated_rows: 7000
+      row_multiplier: 8
+
+anonymization:
+  enable_anonymization: true
+  suppression_limit: 0.1
+  attributes:
+    quasi_identifiers:
+      - "Age at enrollment"
+      - "Gender"
+      - "Nacionality"
+
+    sensitive_attributes:
+      - "Scholarship_holder"
+
+    insensitive_attributes:
+      - "Application mode"
+      - "Application order"
+      - "Curricular units 1st sem (credited)"
+      - "Curricular units 1st sem (enrolled)"
+      - "Curricular units 1st sem (evaluations)"
+      - "Curricular units 1st sem (approved)"
+      - "Curricular units 1st sem (without evaluations)"
+      - "Curricular units 2nd sem (credited)"
+      - "Curricular units 2nd sem (enrolled)"
+      - "Curricular units 2nd sem (evaluations)"
+      - "Curricular units 2nd sem (approved)"
+      - "Curricular units 2nd sem (without evaluations)"
+      - "Course"
+
+  hierarchies:
+    "Age at enrollment": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/age_enrollment.csv"
+    "Gender": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/gender.csv"
+    "Nacionality": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/nacionality.csv"
+
+  hierarchy_config: {}
+  models:
+    k_anonymity: 5
+    l_diversity:
+      attribute: "Scholarship_holder"
+      value: 2
+
+utility:
+  enable_utility_evaluation: true
+  models:
+    LogisticRegression: true
+    KNN: true
+    RandomForest: true
+    DecisionTree: true
+    SVM: true
+    XGBoost: false
+
+  metrics:
+    Accuracy: true
+    Precision: true
+    Recall: true
+    F1: true
+    AUC-ROC: true
+    LogLoss: true # Disabled for models that don't support probabilities
+    CohenKappa: true
+    MCC: true
+
+analysis:
+  enable_analysis: true # Set to false to skip all analysis
+  generate_interactive_plots: false # Use Plotly for HTML plots
+  generate_excel_summary: true # Save Excel file with summary stats

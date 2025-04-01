@@ -68,8 +68,9 @@ def visualize_model_performance(results_df, dataset_name, output_dir="outputs"):
     save_path = os.path.join(output_dir, f"{dataset_name}_model_performance.png")
     plt.savefig(save_path, dpi=300)
     print(f"Visualization saved at {save_path}")
+    plt.close(fig)
 
-    plt.show()
+    #plt.show()
 
     # Print detailed performance metrics
     print("\nDetailed Model Performance Comparison:")
