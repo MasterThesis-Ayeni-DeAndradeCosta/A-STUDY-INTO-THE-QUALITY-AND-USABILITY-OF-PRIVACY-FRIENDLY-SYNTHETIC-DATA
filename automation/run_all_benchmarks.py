@@ -3,7 +3,9 @@ import subprocess
 import datetime
 import csv
 import yaml
+import shutil
 from analysis.batch_analysis import analyze_batch_results
+from analysis.analyze_from_yaml_configs import analyze_batch_results_from_configs
 
 # ---------------- HELPERS ----------------
 
@@ -45,7 +47,6 @@ def run_config(config_path, output_path):
         print(f"❌ Unexpected error on {config_path}: {e}")
         return False, -1
 
-
 def write_summary(summary, summary_file):
     """Writes a summary CSV file of all benchmark runs."""
     with open(summary_file, "w", newline="") as f:
@@ -60,6 +61,15 @@ def run_all_benchmarks(dataset_name):
     batch_folder = create_batch_folder(dataset_name)
     summary_file = os.path.join(batch_folder, "benchmark_summary.csv")
     summary = []
+
+    # ⬇️ Copy variation_info.yaml if it exists
+    variation_info_src = os.path.join("configs", "generated_configs", dataset_name, "variation_info.yaml")
+    variation_info_dst = os.path.join(batch_folder, "variation_info.yaml")
+    if os.path.exists(variation_info_src):
+        shutil.copy(variation_info_src, variation_info_dst)
+        print(f"📄 Copied variation_info.yaml to: {variation_info_dst}")
+    else:
+        print("⚠️ variation_info.yaml not found — batch analysis may fail.")
 
     print(f"\n🚀 Starting batch run for {len(config_paths)} configs...")
     print(f"📁 Master output folder: {batch_folder}")
@@ -88,7 +98,8 @@ def run_all_benchmarks(dataset_name):
     # Analyze results if possible
     try:
         print("📊 Running batch analysis...")
-        analyze_batch_results(batch_folder)
+        #analyze_batch_results(batch_folder)
+        analyze_batch_results_from_configs(batch_folder)
         print("✅ Analysis complete.")
     except Exception as e:
         print(f"⚠️ Could not run batch analysis: {e}")
@@ -98,4 +109,9 @@ def run_all_benchmarks(dataset_name):
 # ---------------- ENTRY ----------------
 
 if __name__ == "__main__":
-    run_all_benchmarks(dataset_name="loan")  # Replace if needed
+    config_root = "configs/generated_configs"
+    datasets = [d for d in os.listdir(config_root) if os.path.isdir(os.path.join(config_root, d))]
+
+    for dataset in datasets:
+        print(f"\n📂 Running batch for dataset: {dataset}")
+        run_all_benchmarks(dataset)  # Replace if needed
