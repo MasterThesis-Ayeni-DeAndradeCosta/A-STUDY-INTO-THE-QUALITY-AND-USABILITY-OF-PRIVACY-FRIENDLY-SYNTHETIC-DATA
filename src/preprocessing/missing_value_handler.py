@@ -25,7 +25,12 @@ def handle_missing_values(original_data, strategy="drop"):
         numeric_cols = df.select_dtypes(include=["number"]).columns
         imputer = SimpleImputer(strategy=strategy)
         df[numeric_cols] = imputer.fit_transform(df[numeric_cols])
-        cleaned_data = df
+        # Restore integer type where possible (important for ARX)
+        for col in numeric_cols:
+            if pd.api.types.is_integer_dtype(original_data[col]):
+                df[col] = df[col].round().astype(int)
+            cleaned_data = df
+
     elif strategy == "mode":
         for col in df.columns:
             if df[col].isnull().any():

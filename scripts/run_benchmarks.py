@@ -78,7 +78,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     logger.info(f" Benchmarking started for dataset: {dataset_name}")
 
     # Step 1: Run Preprocessing and Get Cleaned Data**
-    cleaned_data, dataset_name, original_data, test_set, train_raw_path, encoding_map  = run_preprocessing(dataset_path, separator, target_column)
+    cleaned_data, dataset_name, original_data, test_set, train_raw_path, encoding_map  = run_preprocessing(dataset_path, separator, target_column, config_path=config_path )
     #cleaned_dataset_path = os.path.abspath(f"datasets/cleaned/{dataset_name}_cleaned.csv")
 
     if original_data is not None:
@@ -87,14 +87,19 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
 
     # Step 2: Anonymization
     postprocessed_data = None
-    success = run_anonymization(train_raw_path)
+    success = run_anonymization(train_raw_path, config_path=config_path)
     if success:
         anonymized_dataset_path = os.path.abspath(f"datasets/anonymized/{dataset_name}_anonymized.csv")
-        df_anonymized = pd.read_csv(anonymized_dataset_path, sep=separator)
-        save_anonymous_data_report(output_dir, dataset_name, df_anonymized, original_df=original_data)
-        postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_dataset_path, separator, target_column)
-        if postprocessed_data is not None and anon_encoding_map:
-            save_postprocessing_report(output_dir, dataset_name, encoding_type, anon_encoding_map)
+        if os.path.exists(anonymized_dataset_path):
+            df_anonymized = pd.read_csv(anonymized_dataset_path, sep=separator)
+            save_anonymous_data_report(output_dir, dataset_name, df_anonymized, original_df=original_data)
+            postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_dataset_path, separator, target_column)
+
+            if postprocessed_data is not None and anon_encoding_map:
+                save_postprocessing_report(output_dir, dataset_name, encoding_type, anon_encoding_map)
+            else:
+                print(f"⚠️ Anonymized file not found: {anonymized_dataset_path}")
+                logger.warning(f"Anonymized file not found: {anonymized_dataset_path}")
     else:
         print("❌ Anonymization failed.")
         logger.error("Anonymization failed.")

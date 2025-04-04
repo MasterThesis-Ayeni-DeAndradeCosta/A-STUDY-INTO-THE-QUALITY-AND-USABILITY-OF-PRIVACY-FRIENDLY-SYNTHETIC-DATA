@@ -14,8 +14,16 @@ import java.util.HashMap;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) throws Exception {
-        // ✅ Load the correct config file (benchmark_config.yaml)
-        String configPath = "configs/benchmark_config.yaml";
+        // ✅ Load the correct config file (from the arguments)
+        //String configPath = "configs/benchmark_config.yaml";
+        String configPath;
+        if (args.length > 2) {
+            configPath = new File(args[2]).getAbsolutePath();
+            System.out.println("📄 Java received config path: " + configPath);
+        } else {
+            configPath = new File("configs/benchmark_config.yaml").getAbsolutePath();
+            System.out.println("⚠️ No config path provided. Falling back to: " + configPath);
+        }
         File configFile = new File(configPath);
         String absoluteConfigPath = configFile.getAbsolutePath();
         System.out.println("🔹 Loading config from: " + absoluteConfigPath); // Debugging

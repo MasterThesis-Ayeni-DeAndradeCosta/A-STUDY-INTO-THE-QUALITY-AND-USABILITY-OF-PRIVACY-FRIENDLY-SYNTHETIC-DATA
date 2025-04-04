@@ -4,6 +4,9 @@ import datetime
 import csv
 import yaml
 import shutil
+
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
 from analysis.batch_analysis import analyze_batch_results
 from analysis.analyze_from_yaml_configs import analyze_batch_results_from_configs
 

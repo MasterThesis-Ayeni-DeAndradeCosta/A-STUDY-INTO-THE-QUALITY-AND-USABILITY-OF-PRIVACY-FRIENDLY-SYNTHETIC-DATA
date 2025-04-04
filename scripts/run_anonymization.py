@@ -20,8 +20,17 @@ yaml_jar = os.path.join(lib_path, "snakeyaml-2.4.jar")
 # Ensure the bin directory exists for compilation
 bin_path = os.path.join(java_project_path, "bin")
 os.makedirs(bin_path, exist_ok=True)
+
 # Classpath for Java compilation and execution
-classpath = f"{os.path.abspath(arx_jar)};{os.path.abspath(yaml_jar)};{os.path.abspath(bin_path)}"
+#classpath = f"{os.path.abspath(arx_jar)};{os.path.abspath(yaml_jar)};{os.path.abspath(bin_path)}"
+
+#change needed for it to work on linux
+separator = ":" if os.name != "nt" else ";"
+classpath = separator.join([
+    os.path.abspath(arx_jar),
+    os.path.abspath(yaml_jar),
+    os.path.abspath(bin_path)
+])
 
 def load_config(config_path="configs/benchmark_config.yaml"):
     with open(config_path, "r") as file:
@@ -99,7 +108,8 @@ def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.y
     anonymized_output_path = os.path.abspath(f"datasets/anonymized/{clean_name}_anonymized.csv")
 
     run_process = subprocess.run(
-        ["java", "-cp", f"{jar_path};{classpath}", "Main", dataset_path, anonymized_output_path],  # Pass dataset path
+       # ["java", "-cp", f"{jar_path};{classpath}", "Main", dataset_path, anonymized_output_path], 
+        ["java", "-cp", separator.join([jar_path, classpath]), "Main", dataset_path, anonymized_output_path, os.path.abspath(config_path)],# Pass dataset path
         capture_output=True, text=True
     )
     print("\n✅ STDOUT:", run_process.stdout)

@@ -11,7 +11,7 @@ def load_config(config_path="configs/benchmark_config.yaml"):
     with open(config_path, "r") as file:
         return yaml.safe_load(file)
 
-def run_preprocessing(dataset_path, separator, target_column):
+def run_preprocessing(dataset_path, separator, target_column,  config_path="configs/benchmark_config.yaml"):
     """
     Preprocesses dataset: missing value handling, split, encoding, saving files.
     Returns:
@@ -22,7 +22,7 @@ def run_preprocessing(dataset_path, separator, target_column):
     - train_raw_path (str): Path to unencoded train CSV for anonymization.
     - encoding_map (dict): Mapping from original categorical columns to encoded columns
     """
-    config = load_config()
+    config = load_config(config_path)
     test_size = config["dataset"]["test_size"]
     handle_missing = config["preprocessing"]["handle_missing_values"]
     encoding_type = config["preprocessing"]["encoding_type"]
