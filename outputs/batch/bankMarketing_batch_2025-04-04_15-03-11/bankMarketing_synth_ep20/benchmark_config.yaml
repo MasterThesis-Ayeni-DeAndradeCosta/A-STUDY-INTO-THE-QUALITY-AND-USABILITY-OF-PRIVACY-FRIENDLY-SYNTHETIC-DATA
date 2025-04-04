@@ -5,32 +5,34 @@ analysis:
 anonymization:
   attributes:
     insensitive_attributes:
-    - Loan_Amount_Term
-    - Dependents
-    - Loan_Status
+    - contact
+    - pdays
+    - previous
+    - y
     quasi_identifiers:
-    - Gender
-    - Married
-    - Education
+    - age
+    - marital
+    - education
     sensitive_attributes:
-    - ApplicantIncome
-  enable_anonymization: false
+    - balance
+  enable_anonymization: true
   hierarchies:
-    Education: src/anonymization/anonymARXij/src/hierarchies_loan/education.csv
-    Gender: src/anonymization/anonymARXij/src/hierarchies_loan/gender.csv
-    Married: src/anonymization/anonymARXij/src/hierarchies_loan/married.csv
+    age: src/anonymization/anonymARXij/src/hierarchies_bankMarketing/age.csv
+    education: src/anonymization/anonymARXij/src/hierarchies_bankMarketing/education.csv
+    marital: src/anonymization/anonymARXij/src/hierarchies_bankMarketing/marital.csv
   hierarchy_config: {}
   models:
     k_anonymity: 5
     l_diversity:
-      attribute: ApplicantIncome
+      attribute: balance
       value: 2
   suppression_limit: 0.1
 dataset:
-  path: datasets/original/loan.csv
-  separator: ','
-  target_column: Loan_Status
+  path: datasets/original/bankMarketing.csv
+  separator: ;
+  target_column: y
   test_size: 0.3
+output_dir: outputs/batch/bankMarketing_batch_2025-04-04_15-03-11/bankMarketing_synth_ep20
 preprocessing:
   encoding_type: binary
   handle_missing_values: drop
@@ -39,12 +41,12 @@ synthesis:
   synthesizers:
     CTGAN:
       class_name: CTGANSynthesizer
-      custom_generated_rows: 614
+      custom_generated_rows: 45211
       enabled: true
       import_path: sdv.single_table
       num_generated_rows: same_as_original
       params:
-        epochs: 30
+        epochs: 20
       row_multiplier: 8
     CustomSynthesizer:
       class_name: CustomSynthesizer
@@ -57,21 +59,20 @@ synthesis:
       row_multiplier: 8
     GaussianCopula:
       class_name: GaussianCopulaSynthesizer
-      custom_generated_rows: 614
+      custom_generated_rows: 45211
       enabled: true
       import_path: sdv.single_table
       num_generated_rows: same_as_original
       params:
-        epochs: 30
-      row_multiplier: 8
+        epochs: 20
     TVAE:
       class_name: TVAESynthesizer
-      custom_generated_rows: 614
+      custom_generated_rows: 45211
       enabled: true
       import_path: sdv.single_table
       num_generated_rows: same_as_original
       params:
-        epochs: 30
+        epochs: 20
       row_multiplier: 8
 utility:
   enable_utility_evaluation: true

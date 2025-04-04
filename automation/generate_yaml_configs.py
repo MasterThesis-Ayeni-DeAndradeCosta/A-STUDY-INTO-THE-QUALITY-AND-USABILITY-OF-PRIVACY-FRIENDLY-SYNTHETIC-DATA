@@ -4,7 +4,7 @@ import pandas as pd
 import itertools
 
 # ---------- CONFIG ----------
-DATASET_NAME = "crimeData"
+DATASET_NAME = "studentPerformance"
 BASE_CONFIG_PATH = f"configs/base/{DATASET_NAME}_config.yaml"
 ORIGINAL_DATA_PATH = f"datasets/original/{DATASET_NAME}.csv"
 OUTPUT_DIR = f"configs/generated_configs/{DATASET_NAME}"
@@ -61,6 +61,7 @@ def generate_yaml_configs():
     for ep in EPOCHS:
         cfg = load_yaml(BASE_CONFIG_PATH)
         cfg["dataset"]["test_size"] = FIXED_TEST_SIZE
+        cfg["anonymization"]["enable_anonymization"] = False 
         gen_rows = int(rows * FIXED_ROW_MULTIPLIER)
 
         for synth in cfg["synthesis"]["synthesizers"]:
@@ -77,6 +78,7 @@ def generate_yaml_configs():
     for mult in ROW_MULTIPLIERS:
         cfg = load_yaml(BASE_CONFIG_PATH)
         cfg["dataset"]["test_size"] = FIXED_TEST_SIZE
+        cfg["anonymization"]["enable_anonymization"] = False 
         gen_rows = int(rows * mult)
 
         for synth in cfg["synthesis"]["synthesizers"]:
