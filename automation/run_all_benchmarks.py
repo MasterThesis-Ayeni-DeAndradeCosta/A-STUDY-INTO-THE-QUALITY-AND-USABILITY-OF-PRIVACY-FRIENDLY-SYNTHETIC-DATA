@@ -40,7 +40,7 @@ def run_config(config_path, output_path):
 
     try:
         subprocess.run(
-            ["python", "scripts/run_benchmarks.py", "--config", config_path],
+            [sys.executable, "scripts/run_benchmarks.py", "--config", config_path],
             check=True
         )
         return True, 0
