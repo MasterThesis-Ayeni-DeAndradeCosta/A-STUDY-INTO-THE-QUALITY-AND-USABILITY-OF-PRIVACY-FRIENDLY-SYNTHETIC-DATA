@@ -1,0 +1,92 @@
+analysis:
+  enable_analysis: true
+  generate_excel_summary: true
+  generate_interactive_plots: false
+anonymization:
+  attributes:
+    insensitive_attributes:
+    - contact
+    - pdays
+    - previous
+    - y
+    quasi_identifiers:
+    - age
+    - marital
+    - education
+    sensitive_attributes:
+    - balance
+  enable_anonymization: true
+  hierarchies:
+    age: src/anonymization/anonymARXij/src/hierarchies_bankMarketing/age.csv
+    education: src/anonymization/anonymARXij/src/hierarchies_bankMarketing/education.csv
+    marital: src/anonymization/anonymARXij/src/hierarchies_bankMarketing/marital.csv
+  hierarchy_config: {}
+  models:
+    k_anonymity: 20
+    l_diversity:
+      attribute: balance
+      value: 4
+  suppression_limit: 0.01
+dataset:
+  path: datasets/original/bankMarketing.csv
+  separator: ;
+  target_column: y
+  test_size: 0.2
+preprocessing:
+  encoding_type: binary
+  handle_missing_values: drop
+synthesis:
+  enable_synthetic_generation: false
+  synthesizers:
+    CTGAN:
+      class_name: CTGANSynthesizer
+      custom_generated_rows: 10000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params:
+        epochs: 50
+      row_multiplier: 8
+    CustomSynthesizer:
+      class_name: CustomSynthesizer
+      custom_generated_rows: 7000
+      enabled: false
+      import_path: custom.custom_synthesizer
+      num_generated_rows: custom
+      params:
+        noise_factor: 0.2
+      row_multiplier: 8
+    GaussianCopula:
+      class_name: GaussianCopulaSynthesizer
+      custom_generated_rows: 5000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params: {}
+    TVAE:
+      class_name: TVAESynthesizer
+      custom_generated_rows: 5000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params:
+        epochs: 50
+      row_multiplier: 8
+utility:
+  enable_utility_evaluation: true
+  metrics:
+    AUC-ROC: true
+    Accuracy: true
+    CohenKappa: true
+    F1: true
+    LogLoss: true
+    MCC: true
+    Precision: true
+    Recall: true
+  models:
+    DecisionTree: true
+    KNN: true
+    LogisticRegression: true
+    RandomForest: true
+    SVM: true
+    XGBoost: false

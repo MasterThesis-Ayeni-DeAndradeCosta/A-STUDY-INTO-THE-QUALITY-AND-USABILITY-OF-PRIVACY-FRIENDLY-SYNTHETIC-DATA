@@ -4,7 +4,7 @@ import pandas as pd
 import itertools
 
 # ---------- CONFIG ----------
-DATASET_NAME = "studentPerformance"
+DATASET_NAME = "crimeData"
 BASE_CONFIG_PATH = f"configs/base/{DATASET_NAME}_config.yaml"
 ORIGINAL_DATA_PATH = f"datasets/original/{DATASET_NAME}.csv"
 OUTPUT_DIR = f"configs/generated_configs/{DATASET_NAME}"
@@ -93,6 +93,9 @@ def generate_yaml_configs():
     for ts in TEST_SIZES:
         cfg = load_yaml(BASE_CONFIG_PATH)
         cfg["dataset"]["test_size"] = ts
+         # Ensure both synthesis and anonymization are enabled
+        cfg["synthesis"]["enable_synthetic_generation"] = True
+        cfg["anonymization"]["enable_anonymization"] = True
         name = f"{DATASET_NAME}_testsize_{str(ts).replace('.', 'p')}"
         save_yaml(cfg, name)
         total += 1
