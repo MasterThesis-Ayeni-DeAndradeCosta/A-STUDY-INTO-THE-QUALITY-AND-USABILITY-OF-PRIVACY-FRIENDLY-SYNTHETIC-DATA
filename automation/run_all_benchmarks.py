@@ -65,7 +65,7 @@ def run_all_benchmarks(dataset_name):
     summary_file = os.path.join(batch_folder, "benchmark_summary.csv")
     summary = []
 
-    # Copy variation_info.yaml if it exists
+    # ⬇️ Copy variation_info.yaml if it exists
     variation_info_src = os.path.join("configs", "generated_configs", dataset_name, "variation_info.yaml")
     variation_info_dst = os.path.join(batch_folder, "variation_info.yaml")
     if os.path.exists(variation_info_src):
