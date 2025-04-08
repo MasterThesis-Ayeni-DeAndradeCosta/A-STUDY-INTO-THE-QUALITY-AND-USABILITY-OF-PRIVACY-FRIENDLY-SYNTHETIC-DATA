@@ -76,21 +76,26 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     save_yaml_config(output_dir, config)
     # Setup logging
     logger = setup_logger(output_dir)
+    logger.info(f"Loaded config file: {config_path}")
     logger.info(f" Benchmarking started for dataset: {dataset_name}")
-
+    logger.info(f"Configuration loaded: enable_anonymization = {config.get('enable_anonymization')}, enable_synthesis = {config.get('enable_synthesis')}")
+    logger.info("Running preprocessing...")
     # Step 1: Run Preprocessing and Get Cleaned Data**
     cleaned_data, dataset_name, original_data, test_set, train_raw_path, encoding_map  = run_preprocessing(dataset_path, separator, target_column, config_path=config_path )
     #cleaned_dataset_path = os.path.abspath(f"datasets/cleaned/{dataset_name}_cleaned.csv")
-
+    
     if original_data is not None:
         save_preprocessing_report(output_dir, dataset_name, original_data, cleaned_data,  test_set, handle_missing_strategy, test_size, encoding_type, encoding_map)
-    print("\nPreprocessing completed.")
+        logger.info(f"Preprocessing completed. Rows before: {len(original_data)}, after: {len(cleaned_data)}")
 
+    print("\nPreprocessing completed.")
+    logger.info(f"enable_anonymization = {config.get('enable_anonymization')}")
     # Step 2: Anonymization
     postprocessed_data = None
     success = run_anonymization(train_raw_path, config_path=config_path)
     if success:
         anonymized_dataset_path = os.path.abspath(f"datasets/anonymized/{dataset_name}_anonymized.csv")
+        logger.info(f"Anonymized data saved to: {anonymized_dataset_path}")
         if os.path.exists(anonymized_dataset_path):
             df_anonymized = pd.read_csv(anonymized_dataset_path, sep=separator)
             save_anonymous_data_report(output_dir, dataset_name, df_anonymized, original_df=original_data)
@@ -104,9 +109,11 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     else:
         print("❌ Anonymization failed.")
         logger.error("Anonymization failed.")
-    
+
+    logger.info(f"enable_synthetic_generation = {enable_synthetic}")
     # Step 3 : Synthetic Data Generation
     synthetic_datasets, metadata = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config)  #disabled flag handled in run_synthetic
+    logger.info(f"Synthetic data generated with {len(synthetic_datasets)} synthesizers.")
     
     # Step 4: Run Utility for ML Training
     if enable_utility:
@@ -121,7 +128,8 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
         )
  
         # Step 5: Evaluate Models
-        print("\n Evaluating models...")       
+        print("\n Evaluating models...") 
+        logger.info("Evaluating models...")      
         results_df = evaluate_models(trained_models, X_test_original, y_test_original, datasets, config)
         save_model_performance(output_dir, results_df)
         results_csv_path = os.path.join(output_dir, "model_performance.csv")
