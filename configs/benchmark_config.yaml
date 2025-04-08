@@ -1,15 +1,15 @@
 dataset:
-  path: "datasets/original/loan.csv" # Path to the dataset
-  separator: "," # Delimiter used in the dataset (e.g., "," or "\t")
-  target_column: "Loan_Status" # Name of the target column
+  path: "datasets/original/studentPerformance.csv" # Path to the dataset
+  separator: ";" # Delimiter used in the dataset (e.g., "," or "\t")
+  target_column: "Target" # Name of the target column
   test_size: 0.2
 
 preprocessing:
-  handle_missing_values: "mean" # Options: "drop", "mean", "median", "mode"
+  handle_missing_values: "drop" # Options: "drop", "mean", "median", "mode"
   encoding_type: "binary" # Type of encoding, currently only "binary" is supported
 
 synthesis:
-  enable_synthetic_generation: true # Set to false to skip
+  enable_synthetic_generation: false # Set to false to skip
   synthesizers:
     CTGAN:
       enabled: true
@@ -46,41 +46,52 @@ synthesis:
       row_multiplier: 2
 
 anonymization:
-  enable_anonymization: false
+  enable_anonymization: true
   suppression_limit: 0.1
   attributes:
     quasi_identifiers:
+      - "Age at enrollment"
       - "Gender"
-      - "Married"
-      - "Education"
+      - "Nacionality"
 
     sensitive_attributes:
-      - "ApplicantIncome"
+      - "Scholarship_holder"
 
     insensitive_attributes:
-      - "Loan_Amount_Term"
-      - "Dependents"
-      - "Loan_Status"
+      - "Application mode"
+      - "Application order"
+      - "Curricular units 1st sem (credited)"
+      - "Curricular units 1st sem (enrolled)"
+      - "Curricular units 1st sem (evaluations)"
+      - "Curricular units 1st sem (approved)"
+      - "Curricular units 1st sem (without evaluations)"
+      - "Curricular units 2nd sem (credited)"
+      - "Curricular units 2nd sem (enrolled)"
+      - "Curricular units 2nd sem (evaluations)"
+      - "Curricular units 2nd sem (approved)"
+      - "Curricular units 2nd sem (without evaluations)"
+      - "Course"
+      - "Target"
 
   hierarchies:
-    "Gender": "src/anonymization/anonymARXij/src/hierarchies_loan/gender.csv"
-    "Married": "src/anonymization/anonymARXij/src/hierarchies_loan/married.csv"
-    "Education": "src/anonymization/anonymARXij/src/hierarchies_loan/education.csv"
+    "Age at enrollment": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/age_enrollment.csv"
+    "Gender": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/gender.csv"
+    "Nacionality": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/nacionality.csv"
 
   hierarchy_config: {}
   models:
     k_anonymity: 5
     l_diversity:
-      attribute: "ApplicantIncome"
+      attribute: "Scholarship_holder"
       value: 2
 
 hybrid:
-  enable_hybrid: true
+  enable_hybrid: false
   execution_order: "anonymization_first" # or "synthetic_first"
   reuse_params: false
   synthesizer: "CTGAN"
 
-  # Only required when reuse_configs is false
+  # Only required when reuse_params is false
   k_anonymity: 5
   l_diversity: 3
   epochs: 30
@@ -89,9 +100,9 @@ hybrid:
   save_intermediate_files: false
 
 utility:
-  enable_utility_evaluation: false
+  enable_utility_evaluation: true
   models:
-    LogisticRegression: true
+    LogisticRegression: false
     KNN: true
     RandomForest: true
     DecisionTree: false
