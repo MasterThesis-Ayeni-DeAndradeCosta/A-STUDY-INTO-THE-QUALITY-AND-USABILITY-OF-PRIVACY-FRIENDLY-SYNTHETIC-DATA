@@ -1,4 +1,5 @@
 import os
+from sympy import true
 from tabulate import tabulate
 import yaml
 import pandas as pd
@@ -189,6 +190,7 @@ def save_synthetic_data_report(output_dir, synthetic_datasets, quality_reports):
             f.write("\n" + "=" * 50 + "\n\n")
 
     print(f"📄 Synthetic data report saved at {report_path}")
+    return True
 
 
 def save_anonymous_data_report(output_dir, dataset_name, anonymized_df, original_df=None):

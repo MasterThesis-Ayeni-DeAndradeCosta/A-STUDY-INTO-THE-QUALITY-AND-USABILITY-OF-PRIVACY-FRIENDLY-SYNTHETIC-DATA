@@ -18,7 +18,7 @@ def load_config(config_path="configs/benchmark_config.yaml"):
         config = yaml.safe_load(file)
     return config
 
-def run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config):
+def run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config, logger=None):
     """
     Handles synthetic data generation, evaluation, and reporting.
 
@@ -37,13 +37,20 @@ def run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config)
 
     if not enable_synthetic:
         print("\nSynthetic Data Generation Skipped (Disabled in Configuration).")
+        if logger:
+            logger.info("Synthetic Data Generation Skipped (Disabled in Configuration).")
         return {}, None  # Return empty dictionary and None for metadata
 
     print("\nStarting Synthetic Data Generation...")
+    if logger:
+        logger.info("Starting Synthetic Data Generation Pipeline...")
 
     # Generate synthetic datasets
     synthetic_datasets, metadata = generate_synthetic_datasets(cleaned_data, dataset_name, config)
     print("\nSynthetic Data Generation Completed.")
+    if logger:
+        logger.info("Synthetic Data Generation Completed.")
+
 
     # Evaluate synthetic datasets
     quality_reports = {}
@@ -53,9 +60,15 @@ def run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config)
         quality_reports[synth_name] = quality_report  # Store results
 
     print("\nSynthetic Data Evaluation Completed.")
+    if logger:
+        logger.info("Synthetic Data Evaluation Completed.")
 
     # Save synthetic data report with quality metrics
-    save_synthetic_data_report(output_dir, synthetic_datasets, quality_reports)
+    success = save_synthetic_data_report(output_dir, synthetic_datasets, quality_reports)
+    if success:
+        print("\nSynthetic Data Report Generated Successfully.")
+        if logger:
+            logger.info("Synthetic Data Report Generated Successfully.")
 
     # Compare data distributions
     compare_data_distributions(output_dir, cleaned_data, synthetic_datasets, target_column)

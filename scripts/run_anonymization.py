@@ -80,20 +80,28 @@ def create_jar():
         return False
     return True
 
-def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.yaml"):
+def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.yaml", logger=None):
     config = load_config(config_path)
     enable_anonymization = config["anonymization"].get("enable_anonymization", False)
     if not enable_anonymization:
         print("\nAnonymization Skipped (Disabled in Configuration).")
+        if logger:
+            logger.info("Anonymization Skipped (Disabled in Configuration).")
         return True  # Consider True for "skipped but not failed"
     """Runs the Java anonymization JAR using the cleaned dataset path."""
     if not compile_java():
         print("⛔ Skipping JAR creation due to compilation errors.")
+        if logger:
+            logger.error("Java Compilation Failed!")
         return False
     if not create_jar():
         print("⛔ Skipping execution due to JAR creation errors.")
+        if logger:
+            logger.error("JAR Creation Failed!")
         return False
     print("\n🔹 Running Java Anonymization Program...")
+    if logger:
+        logger.info("Running Java Anonymization Program...")
     # Fallback to original dataset if none provided
     if dataset_path is None:
         config = load_config()
@@ -112,9 +120,21 @@ def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.y
         ["java", "-cp", separator.join([jar_path, classpath]), "Main", dataset_path, anonymized_output_path, os.path.abspath(config_path)],# Pass dataset path
         capture_output=True, text=True
     )
+    if run_process.returncode == 0:
+        if logger:
+            logger.info("✅ Java anonymization completed successfully.")
+        return True
+    else:
+        print("❌ Java anonymization failed!")
+        if logger:
+            logger.error("❌ Java anonymization failed with exit code: %s", run_process.returncode)
+            logger.error("STDERR: %s", run_process.stderr.strip())
+            return False
+
+    
     print("\n✅ STDOUT:", run_process.stdout)
     print("❗ STDERR:", run_process.stderr)
-
+    
     return run_process.returncode == 0
 
 # Example usage

@@ -11,7 +11,7 @@ def load_config(config_path="configs/benchmark_config.yaml"):
     with open(config_path, "r") as file:
         return yaml.safe_load(file)
 
-def run_preprocessing(dataset_path, separator, target_column,  config_path="configs/benchmark_config.yaml"):
+def run_preprocessing(dataset_path, separator, target_column,  config_path="configs/benchmark_config.yaml", logger=None):
     """
     Preprocesses dataset: missing value handling, split, encoding, saving files.
     Returns:
@@ -41,6 +41,8 @@ def run_preprocessing(dataset_path, separator, target_column,  config_path="conf
     # Check if preprocessed files exist
     if os.path.exists(train_raw_path) and os.path.exists(cleaned_train_path) and os.path.exists(cleaned_test_path):
         print(f"✅ Preprocessed files found. Skipping preprocessing.")
+        if logger:
+            logger.info("Preprocessed files found. Skipping preprocessing.")
         cleaned_train = pd.read_csv(cleaned_train_path)
         cleaned_test = pd.read_csv(cleaned_test_path)
         original_data, _ = load_dataset(dataset_path, separator)
@@ -72,6 +74,10 @@ def run_preprocessing(dataset_path, separator, target_column,  config_path="conf
     print(f"✅ Saved raw train set to: {train_raw_path}")
     print(f"✅ Saved encoded train set to: {cleaned_train_path}")
     print(f"✅ Saved encoded test set to: {cleaned_test_path}")
+    if logger:
+        logger.info(f"Saved raw train set to: {train_raw_path}")
+        logger.info(f"Saved encoded train set to: {cleaned_train_path}")
+        logger.info(f"Saved encoded test set to: {cleaned_test_path}")
 
     return cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path, encoding_map
 

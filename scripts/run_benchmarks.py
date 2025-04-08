@@ -60,7 +60,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     encoding_type = config["preprocessing"]["encoding_type"]
     #flags
     enable_synthetic = config["synthesis"]["enable_synthetic_generation"]
-
+    enable_anonymization = config["anonymization"]["enable_anonymization"]
     enable_utility = config["utility"].get("enable_utility_evaluation", False)
     analysis_config = config.get("analysis", {})
 
@@ -78,10 +78,11 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     logger = setup_logger(output_dir)
     logger.info(f"Loaded config file: {config_path}")
     logger.info(f" Benchmarking started for dataset: {dataset_name}")
-    logger.info(f"Configuration loaded: enable_anonymization = {config.get('enable_anonymization')}, enable_synthesis = {config.get('enable_synthesis')}")
+
+    logger.info(f"Configuration loaded: enable_anonymization = {enable_anonymization}, enable_synthesis = {enable_synthetic}")
     logger.info("Running preprocessing...")
     # Step 1: Run Preprocessing and Get Cleaned Data**
-    cleaned_data, dataset_name, original_data, test_set, train_raw_path, encoding_map  = run_preprocessing(dataset_path, separator, target_column, config_path=config_path )
+    cleaned_data, dataset_name, original_data, test_set, train_raw_path, encoding_map  = run_preprocessing(dataset_path, separator, target_column, config_path=config_path , logger=logger)
     #cleaned_dataset_path = os.path.abspath(f"datasets/cleaned/{dataset_name}_cleaned.csv")
     
     if original_data is not None:
@@ -92,14 +93,14 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     logger.info(f"enable_anonymization = {config.get('enable_anonymization')}")
     # Step 2: Anonymization
     postprocessed_data = None
-    success = run_anonymization(train_raw_path, config_path=config_path)
+    success = run_anonymization(train_raw_path, config_path=config_path, logger=logger)
     if success:
         anonymized_dataset_path = os.path.abspath(f"datasets/anonymized/{dataset_name}_anonymized.csv")
         logger.info(f"Anonymized data saved to: {anonymized_dataset_path}")
         if os.path.exists(anonymized_dataset_path):
             df_anonymized = pd.read_csv(anonymized_dataset_path, sep=separator)
             save_anonymous_data_report(output_dir, dataset_name, df_anonymized, original_df=original_data)
-            postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_dataset_path, separator, target_column)
+            postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_dataset_path, separator, target_column,logger=logger)
 
             if postprocessed_data is not None and anon_encoding_map:
                 save_postprocessing_report(output_dir, dataset_name, encoding_type, anon_encoding_map)
@@ -112,7 +113,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
 
     logger.info(f"enable_synthetic_generation = {enable_synthetic}")
     # Step 3 : Synthetic Data Generation
-    synthetic_datasets, metadata = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config)  #disabled flag handled in run_synthetic
+    synthetic_datasets, metadata = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config, logger=logger)  #disabled flag handled in run_synthetic
     logger.info(f"Synthetic data generated with {len(synthetic_datasets)} synthesizers.")
     
     # Step 4: Run Utility for ML Training
@@ -124,7 +125,8 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
             enable_synthetic,
             config,
             synthetic_datasets=synthetic_datasets if enable_synthetic else None,
-            anonymous_data=postprocessed_data
+            anonymous_data=postprocessed_data,
+            logger=logger
         )
  
         # Step 5: Evaluate Models
