@@ -18,7 +18,7 @@ def get_config_paths(dataset_name):
     return [
         os.path.join(config_dir, f)
         for f in os.listdir(config_dir)
-        if f.endswith(".yaml")
+        if f.endswith(".yaml")  and f != "variation_info.yaml"
     ]
 
 def create_batch_folder(dataset_name):
