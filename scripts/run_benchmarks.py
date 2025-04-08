@@ -17,6 +17,8 @@ from run_synthetic import run_synthetic
 from run_anonymization import run_anonymization
 from run_postprocessing import run_postprocessing 
 from run_analysis import run_analysis
+from run_hybrid import run_hybrid
+
 
 from modelOperations.model_evaluation import evaluate_models
 from visualization.result_visualization import visualize_model_performance
@@ -29,7 +31,6 @@ from output_utils.report_generator import (
     save_postprocessing_report,
     save_anonymous_data_report
     )
-
 
 
 def load_config(config_path="configs/benchmark_config.yaml"):

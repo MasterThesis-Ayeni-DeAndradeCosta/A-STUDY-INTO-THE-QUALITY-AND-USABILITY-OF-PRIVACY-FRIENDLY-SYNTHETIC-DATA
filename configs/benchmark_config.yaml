@@ -74,6 +74,20 @@ anonymization:
       attribute: "ApplicantIncome"
       value: 2
 
+hybrid:
+  enable_hybrid: true
+  execution_order: "anonymization_first" # or "synthetic_first"
+  reuse_params: false
+  synthesizer: "CTGAN"
+
+  # Only required when reuse_configs is false
+  k_anonymity: 5
+  l_diversity: 3
+  epochs: 30
+  num_generated_rows: 5000
+
+  save_intermediate_files: false
+
 utility:
   enable_utility_evaluation: false
   models:
