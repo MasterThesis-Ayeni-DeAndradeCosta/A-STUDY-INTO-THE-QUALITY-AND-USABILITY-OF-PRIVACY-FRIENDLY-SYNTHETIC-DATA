@@ -80,14 +80,8 @@ def create_jar():
         return False
     return True
 
-def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.yaml", logger=None):
+def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.yaml",anonymized_output_path=None, logger=None):
     config = load_config(config_path)
-    enable_anonymization = config["anonymization"].get("enable_anonymization", False)
-    if not enable_anonymization:
-        print("\nAnonymization Skipped (Disabled in Configuration).")
-        if logger:
-            logger.info("Anonymization Skipped (Disabled in Configuration).")
-        return True  # Consider True for "skipped but not failed"
     if logger:
         logger.info("Running Java Anonymization Program...........")
     """Runs the Java anonymization JAR using the cleaned dataset path."""
@@ -114,16 +108,16 @@ def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.y
         config = load_config()
         dataset_path = os.path.abspath(config["dataset"]["path"])
     
-    # Generate anonymized output path based on dataset name
-    # Extract base dataset name
-    dataset_name = os.path.splitext(os.path.basename(dataset_path))[0]  # e.g., 'loan_train_raw'
-    # Remove 'train_raw' from the name (if present)
-    clean_name = re.sub(r'_?train_raw', '', dataset_name)  # Result: 'loan'
-    # Final anonymized output path
-    anonymized_output_path = os.path.abspath(f"datasets/anonymized/{clean_name}_anonymized.csv")
-
+    if anonymized_output_path is None:
+         # Generate anonymized output path based on dataset name
+        # Extract base dataset name
+        dataset_name = os.path.splitext(os.path.basename(dataset_path))[0]  # e.g., 'loan_train_raw'
+        # Remove 'train_raw' from the name (if present)
+        clean_name = re.sub(r'_?train_raw', '', dataset_name)  # Result: 'loan'
+        # Final anonymized output path
+        anonymized_output_path = os.path.abspath(f"datasets/anonymized/{clean_name}_anonymized.csv")
+        
     run_process = subprocess.run(
-       # ["java", "-cp", f"{jar_path};{classpath}", "Main", dataset_path, anonymized_output_path], 
         ["java", "-cp", separator.join([jar_path, classpath]), "Main", dataset_path, anonymized_output_path, os.path.abspath(config_path)],# Pass dataset path
         capture_output=True, text=True
     )
