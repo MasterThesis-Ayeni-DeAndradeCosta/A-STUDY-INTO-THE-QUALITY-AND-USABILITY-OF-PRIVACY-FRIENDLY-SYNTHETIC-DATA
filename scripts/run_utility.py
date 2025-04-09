@@ -2,7 +2,7 @@ import pandas as pd
 from modelOperations.ml_data_preprocessing import prepare_original_data, prepare_synthetic_data
 from modelOperations.model_training import train_models
 
-def run_utility(cleaned_data, test_set, target_column, enable_synthetic, config, synthetic_datasets=None, anonymous_data=None, logger=None):
+def run_utility(cleaned_data, test_set, target_column, enable_synthetic, config, synthetic_datasets=None, anonymous_data=None, hybrid_data=None, logger=None):
     """
     Handles dataset preparation and model training.
     """
@@ -50,6 +50,17 @@ def run_utility(cleaned_data, test_set, target_column, enable_synthetic, config,
         print(f"Anonymized Data - Training Size: {len(X_anon)}")
         if logger:
             logger.info(f"Anonymized Data - Training Size: {len(X_anon)}")
+    
+    if hybrid_data is not None:
+        print("\nProcessing hybrid dataset...")
+        if logger:
+            logger.info("Processing hybrid dataset...")
+        X_hybrid = hybrid_data.drop(columns=[target_column])
+        y_hybrid = hybrid_data[target_column]
+        datasets["Hybrid"] = (X_hybrid, y_hybrid)
+        print(f"Hybrid Data - Training Size: {len(X_hybrid)}")
+        if logger:
+            logger.info(f"Hybrid Data - Training Size: {len(X_hybrid)}")
 
     # Train models on all available datasets
     print("\nTraining models on all datasets...")

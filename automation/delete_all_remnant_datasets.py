@@ -2,7 +2,7 @@ import os
 
 def delete_csv_files_in_folders():
     base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "datasets"))
-    folders_to_clean = ["anonymized", "cleaned", "synthetic", "train", "test"]
+    folders_to_clean = ["anonymized", "cleaned", "synthetic", "train", "test", "hybrid"]
 
     for folder in folders_to_clean:
         folder_path = os.path.join(base_path, folder)
