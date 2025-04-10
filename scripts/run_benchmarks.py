@@ -119,7 +119,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
 
     logger.info(f"enable_synthetic_generation = {enable_synthetic}")
     # Step 3 : Synthetic Data Generation
-    synthetic_datasets, metadata = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config, logger=logger)  #disabled flag handled in run_synthetic
+    synthetic_datasets = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config, logger=logger)  #disabled flag handled in run_synthetic
     logger.info(f"Synthetic data generated with {len(synthetic_datasets)} synthesizers.")
 
     

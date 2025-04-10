@@ -47,6 +47,18 @@ synthesis:
       custom_generated_rows: 7000
       row_multiplier: 8
 
+hybrid:
+  enable_hybrid: false
+  execution_order: "synthetic_first" # "anonymization_first" or "synthetic_first" ; only synthetic_first is supported for now
+  reuse_params: true
+  synthesizer: "CTGAN"
+  # Only required when reuse_params is false
+  k_anonymity: 5
+  l_diversity: 3
+  epochs: 30
+  num_generated_rows: 5000
+  save_intermediate_files: false
+  
 anonymization:
   enable_anonymization: true # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
   suppression_limit: 0.1

@@ -73,7 +73,7 @@ def run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config,
     # Compare data distributions
     compare_data_distributions(output_dir, cleaned_data, synthetic_datasets, target_column)
 
-    return synthetic_datasets, metadata
+    return synthetic_datasets
 
 if __name__ == "__main__":
     print("This script is not meant to be run directly. It should be called from run_benchmarks.py.")
