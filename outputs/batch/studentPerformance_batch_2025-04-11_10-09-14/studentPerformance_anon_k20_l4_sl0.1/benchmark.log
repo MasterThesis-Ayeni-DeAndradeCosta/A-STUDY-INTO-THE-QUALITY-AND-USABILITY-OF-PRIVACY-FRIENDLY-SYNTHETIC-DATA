@@ -1,0 +1,31 @@
+2025-04-11 10:09:36,522 - INFO - Loaded config file: configs/generated_configs/studentPerformance\studentPerformance_anon_k20_l4_sl0.1.yaml
+2025-04-11 10:09:36,526 - INFO -  Benchmarking started for dataset: studentPerformance
+2025-04-11 10:09:36,530 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False
+2025-04-11 10:09:36,532 - INFO - Running preprocessing...
+2025-04-11 10:09:37,104 - INFO - Saved raw train set to: datasets/train/studentPerformance_train_raw.csv
+2025-04-11 10:09:37,104 - INFO - Saved encoded train set to: datasets/cleaned/studentPerformance_cleaned.csv
+2025-04-11 10:09:37,106 - INFO - Saved encoded test set to: datasets/test/studentPerformance_test_set.csv
+2025-04-11 10:09:37,121 - INFO - Preprocessing completed. Rows before: 4424, after: 3539
+2025-04-11 10:09:37,126 - INFO - enable_anonymization = None
+2025-04-11 10:09:37,151 - INFO - Running Java Anonymization Program...........
+2025-04-11 10:09:37,153 - INFO - Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-04-11 10:09:41,048 - ERROR -  Java anonymization failed with exit code: 1
+2025-04-11 10:09:41,049 - ERROR - STDERR: Exception in thread "main" java.lang.IllegalArgumentException: Attribute 'Gender': hierarchy does not contain a transformation rule for value '9'
+	at org.deidentifier.arx.framework.data.GeneralizationHierarchy.<init>(GeneralizationHierarchy.java:104)
+	at org.deidentifier.arx.framework.data.DataManager.<init>(DataManager.java:218)
+	at org.deidentifier.arx.ARXAnonymizer.getDataManager(ARXAnonymizer.java:727)
+	at org.deidentifier.arx.ARXAnonymizer.anonymize(ARXAnonymizer.java:216)
+	at Main.main(Main.java:114)
+2025-04-11 10:09:41,050 - ERROR - Anonymization failed.
+2025-04-11 10:09:41,050 - INFO - enable_synthetic_generation = False
+2025-04-11 10:09:41,052 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-04-11 10:09:41,052 - INFO - Synthetic data generated with 2 synthesizers.
+2025-04-11 10:09:41,054 - INFO - Hybrid pipeline skipped (disabled in configuration).
+2025-04-11 10:09:41,056 - INFO - Preparing datasets for machine learning...
+2025-04-11 10:09:41,062 - INFO - Original Data - Training Size: 3539, Testing Size: 885
+2025-04-11 10:09:41,065 - INFO - Training models on all datasets...
+2025-04-11 10:10:12,761 - INFO - Model Training Completed.
+2025-04-11 10:10:12,809 - INFO - Evaluating models...
+2025-04-11 10:10:27,454 - INFO - Model Training and Evaluation completed.
+2025-04-11 10:10:39,722 - INFO -  Visualizations saved.
+2025-04-11 10:10:39,730 - INFO -  Benchmarking Completed. Results saved in output folder.

@@ -48,6 +48,7 @@ synthesis:
 
 anonymization:
   enable_anonymization: true # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
+  delete_after_evaluation: true
   suppression_limit: 0.1
   attributes:
     quasi_identifiers:
@@ -80,6 +81,18 @@ anonymization:
     l_diversity:
       attribute: "Crime_Code"
       value: 2
+
+hybrid:
+  enable_hybrid: false
+  execution_order: "synthetic_first" # "anonymization_first" or "synthetic_first" ; only synthetic_first is supported for now
+  reuse_params: true
+  synthesizer: "CTGAN"
+  # Only required when reuse_params is false
+  k_anonymity: 5
+  l_diversity: 3
+  epochs: 30
+  num_generated_rows: 5000
+  save_intermediate_files: false
 
 utility:
   enable_utility_evaluation: true # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).

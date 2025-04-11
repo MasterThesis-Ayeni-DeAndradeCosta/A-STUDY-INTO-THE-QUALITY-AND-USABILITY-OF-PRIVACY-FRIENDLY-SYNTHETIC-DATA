@@ -18,12 +18,14 @@ anonymization:
     - Curricular units 2nd sem (approved)
     - Curricular units 2nd sem (without evaluations)
     - Course
+    - Target
     quasi_identifiers:
     - Age at enrollment
     - Gender
     - Nacionality
     sensitive_attributes:
     - Scholarship_holder
+  delete_after_evaluation: true
   enable_anonymization: true
   hierarchies:
     Age at enrollment: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/age_enrollment.csv
@@ -41,9 +43,19 @@ dataset:
   separator: ;
   target_column: Target
   test_size: 0.45
+hybrid:
+  enable_hybrid: false
+  epochs: 30
+  execution_order: synthetic_first
+  k_anonymity: 5
+  l_diversity: 3
+  num_generated_rows: 5000
+  reuse_params: true
+  save_intermediate_files: false
+  synthesizer: CTGAN
 preprocessing:
   encoding_type: binary
-  handle_missing_values: drop
+  handle_missing_values: mode
 synthesis:
   enable_synthetic_generation: true
   synthesizers:

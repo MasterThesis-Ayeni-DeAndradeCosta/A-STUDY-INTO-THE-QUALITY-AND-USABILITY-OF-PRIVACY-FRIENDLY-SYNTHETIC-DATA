@@ -17,7 +17,7 @@ from run_synthetic import run_synthetic
 from run_anonymization import run_anonymization
 from run_postprocessing import run_postprocessing 
 from run_analysis import run_analysis
-#from run_hybrid import run_hybrid
+from run_hybrid import run_hybrid
 
 
 from modelOperations.model_evaluation import evaluate_models
@@ -47,6 +47,14 @@ def load_config(config_path="configs/benchmark_config.yaml"):
         config = yaml.safe_load(file)
     return config
 
+def generate_anonym_tag(config):
+    models = config["anonymization"]["models"]
+    k = models.get("k_anonymity", "kX")
+    l = models.get("l_diversity", {}).get("value", "lX")
+    sup = config["anonymization"].get("suppression_limit", "supX")
+    return f"k{k}_l{l}_sup{int(sup * 100):02d}"  # e.g., k3_l2_sup05
+
+
 def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     """Executes the full benchmarking pipeline, saving logs, reports, and visualizations."""
     # Load configuration
@@ -62,6 +70,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     enable_synthetic = config["synthesis"]["enable_synthetic_generation"]
     enable_anonymization = config["anonymization"]["enable_anonymization"]
     enable_utility = config["utility"].get("enable_utility_evaluation", False)
+    enable_hybrid = config["hybrid"].get("enable_hybrid", False)
     analysis_config = config.get("analysis", {})
 
     # Create formatted output directory
@@ -93,30 +102,69 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     logger.info(f"enable_anonymization = {config.get('enable_anonymization')}")
     # Step 2: Anonymization
     postprocessed_data = None
-    success = run_anonymization(train_raw_path, config_path=config_path, logger=logger)
-    if success:
-        anonymized_dataset_path = os.path.abspath(f"datasets/anonymized/{dataset_name}_anonymized.csv")
-        logger.info(f"Anonymized data saved to: {anonymized_dataset_path}")
-        if os.path.exists(anonymized_dataset_path):
-            df_anonymized = pd.read_csv(anonymized_dataset_path, sep=separator)
-            save_anonymous_data_report(output_dir, dataset_name, df_anonymized, original_df=original_data)
-            postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_dataset_path, separator, target_column,logger=logger)
+    if enable_anonymization:
+        anonym_tag = generate_anonym_tag(config)
+        anonymized_output_path = os.path.abspath(f"datasets/anonymized/{dataset_name}_{anonym_tag}_anonymized.csv")
+        success = run_anonymization(train_raw_path, config_path=config_path, anonymized_output_path=anonymized_output_path, logger=logger)
+        #success = run_anonymization(train_raw_path, config_path=config_path, logger=logger)
+        if success:
+            #anonymized_dataset_path = os.path.abspath(f"datasets/anonymized/{dataset_name}_anonymized.csv")
+            logger.info(f"Anonymized data saved to: {anonymized_output_path}")
+            if os.path.exists(anonymized_output_path):
+                df_anonymized = pd.read_csv(anonymized_output_path, sep=separator)
+                save_anonymous_data_report(output_dir, dataset_name, df_anonymized, original_df=original_data)
+                postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_output_path, separator, target_column,logger=logger)
 
-            if postprocessed_data is not None and anon_encoding_map:
-                save_postprocessing_report(output_dir, dataset_name, encoding_type, anon_encoding_map)
-            else:
-                print(f"⚠️ Anonymized file not found: {anonymized_dataset_path}")
-                logger.warning(f"Anonymized file not found: {anonymized_dataset_path}")
+                if postprocessed_data is not None and anon_encoding_map:
+                    save_postprocessing_report(output_dir, dataset_name, encoding_type, anon_encoding_map)
+                     # Optional cleanup of anonymized CSV file
+                    if config["anonymization"].get("delete_after_evaluation", False):
+                        try:
+                            os.remove(anonymized_output_path)
+                            print(f"🗑️ Deleted anonymized dataset: {anonymized_output_path}")
+                            logger.info(f"Deleted anonymized dataset: {anonymized_output_path}")
+                        except Exception as e:
+                            logger.warning(f"Failed to delete anonymized dataset: {e}")
+
+                else:
+                    print(f"⚠️ Anonymized file not found: {anonymized_output_path}")
+                    logger.warning(f"Anonymized file not found: {anonymized_output_path}")
+        else:
+            print("❌ Anonymization failed.")
+            logger.error("Anonymization failed.")
     else:
-        print("❌ Anonymization failed.")
-        logger.error("Anonymization failed.")
+        print("🔹 Anonymization Skipped (Disabled in Configuration).")
+        logger.info("Anonymization Skipped (Disabled in Configuration).")
+    
 
     logger.info(f"enable_synthetic_generation = {enable_synthetic}")
     # Step 3 : Synthetic Data Generation
-    synthetic_datasets, metadata = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config, logger=logger)  #disabled flag handled in run_synthetic
+    synthetic_datasets = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config, logger=logger)  #disabled flag handled in run_synthetic
     logger.info(f"Synthetic data generated with {len(synthetic_datasets)} synthesizers.")
+
     
-    # Step 4: Run Utility for ML Training
+    # step 4: Run Hybrid if enabled
+    hybrid_data = None
+    if enable_hybrid:
+        logger.info("Running hybrid pipeline...")
+        try:
+            hybrid_data = run_hybrid(
+                train_raw_path,
+                dataset_name,
+                target_column,
+                output_dir,
+                config,
+                config_path,
+                logger=logger
+            )
+            logger.info("Hybrid pipeline completed successfully.")
+        except Exception as e:
+            logger.error(f"Hybrid pipeline failed: {e}")
+            print(f" Hybrid pipeline failed: {e}")
+    else:
+        logger.info("Hybrid pipeline skipped (disabled in configuration).")
+        print("Hybrid pipeline skipped (disabled in configuration).")
+    # Step 5: Run Utility for ML Training
     if enable_utility:
         trained_models, X_test_original, y_test_original, datasets = run_utility(
             cleaned_data,
@@ -125,11 +173,12 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
             enable_synthetic,
             config,
             synthetic_datasets=synthetic_datasets if enable_synthetic else None,
-            anonymous_data=postprocessed_data,
+            anonymous_data=postprocessed_data if enable_anonymization else None,
+            hybrid_data=hybrid_data if enable_hybrid else None,
             logger=logger
         )
  
-        # Step 5: Evaluate Models
+        # Step 6: Evaluate Models
         print("\n Evaluating models...") 
         logger.info("Evaluating models...")      
         results_df = evaluate_models(trained_models, X_test_original, y_test_original, datasets, config)
@@ -138,7 +187,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
         results_df.to_csv(results_csv_path, index=False)
         logger.info("Model Training and Evaluation completed.")
 
-        # Step 6: Visualize results
+        # Step 7: Visualize results
         visualize_model_performance(results_df, dataset_name, output_dir)
         logger.info(" Visualizations saved.")
         logger.info(" Benchmarking Completed. Results saved in output folder.")

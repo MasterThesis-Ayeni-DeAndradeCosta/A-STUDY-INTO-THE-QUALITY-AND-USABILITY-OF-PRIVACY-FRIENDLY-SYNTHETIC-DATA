@@ -17,7 +17,10 @@ def run_postprocessing(anonymized_path, separator, target_column, logger=None):
         return None, None, None
 
     dataset_name = os.path.splitext(os.path.basename(anonymized_path))[0].replace("_anonymized", "")
-    encoded_output_path = f"datasets/anonymized/{dataset_name}_anonymized_encoded.csv"
+    base_dir = os.path.dirname(anonymized_path)
+    encoded_output_path = os.path.join(base_dir, f"{dataset_name}_anonymized_encoded.csv")
+
+    #encoded_output_path = f"datasets/anonymized/{dataset_name}_anonymized_encoded.csv"
 
     # Load and encode anonymized data
     df_anonymized = pd.read_csv(anonymized_path, sep=separator)

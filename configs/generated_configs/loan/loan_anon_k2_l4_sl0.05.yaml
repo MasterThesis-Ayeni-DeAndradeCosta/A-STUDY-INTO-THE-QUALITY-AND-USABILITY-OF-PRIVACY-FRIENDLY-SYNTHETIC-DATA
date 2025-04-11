@@ -14,6 +14,7 @@ anonymization:
     - Education
     sensitive_attributes:
     - ApplicantIncome
+  delete_after_evaluation: true
   enable_anonymization: true
   hierarchies:
     Education: src/anonymization/anonymARXij/src/hierarchies_loan/education.csv
@@ -31,7 +32,16 @@ dataset:
   separator: ','
   target_column: Loan_Status
   test_size: 0.2
-output_dir: outputs\batch\loan_batch_2025-04-08_19-29-06\loan_anon_k2_l4_sl0.05
+hybrid:
+  enable_hybrid: false
+  epochs: 30
+  execution_order: synthetic_first
+  k_anonymity: 5
+  l_diversity: 3
+  num_generated_rows: 5000
+  reuse_params: true
+  save_intermediate_files: false
+  synthesizer: CTGAN
 preprocessing:
   encoding_type: binary
   handle_missing_values: drop

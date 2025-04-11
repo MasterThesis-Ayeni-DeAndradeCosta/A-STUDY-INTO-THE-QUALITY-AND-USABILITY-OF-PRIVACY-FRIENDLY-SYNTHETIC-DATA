@@ -1,0 +1,26 @@
+2025-04-11 10:36:40,361 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-04-11 10:36:40,362 - INFO -  Benchmarking started for dataset: studentPerformance
+2025-04-11 10:36:40,362 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False
+2025-04-11 10:36:40,363 - INFO - Running preprocessing...
+2025-04-11 10:36:40,389 - INFO - Preprocessed files found. Skipping preprocessing.
+2025-04-11 10:36:40,491 - INFO - Preprocessing completed. Rows before: 4424, after: 3981
+2025-04-11 10:36:40,493 - INFO - enable_anonymization = None
+2025-04-11 10:36:40,520 - INFO - Running Java Anonymization Program...........
+2025-04-11 10:36:40,521 - INFO - Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-04-11 10:36:41,785 - ERROR -  Java anonymization failed with exit code: 1
+2025-04-11 10:36:41,785 - ERROR - STDERR: Exception in thread "main" java.lang.IllegalArgumentException: Attribute 'Gender': hierarchy does not contain a transformation rule for value '9'
+	at org.deidentifier.arx.framework.data.GeneralizationHierarchy.<init>(GeneralizationHierarchy.java:104)
+	at org.deidentifier.arx.framework.data.DataManager.<init>(DataManager.java:218)
+	at org.deidentifier.arx.ARXAnonymizer.getDataManager(ARXAnonymizer.java:727)
+	at org.deidentifier.arx.ARXAnonymizer.anonymize(ARXAnonymizer.java:216)
+	at Main.main(Main.java:114)
+2025-04-11 10:36:41,786 - ERROR - Anonymization failed.
+2025-04-11 10:36:41,786 - INFO - enable_synthetic_generation = False
+2025-04-11 10:36:41,786 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-04-11 10:36:41,786 - INFO - Synthetic data generated with 2 synthesizers.
+2025-04-11 10:36:41,786 - INFO - Hybrid pipeline skipped (disabled in configuration).
+2025-04-11 10:36:41,786 - INFO - Preparing datasets for machine learning...
+2025-04-11 10:36:41,794 - INFO - Original Data - Training Size: 3981, Testing Size: 476
+2025-04-11 10:36:41,795 - INFO - Training models on all datasets...
+2025-04-11 10:36:59,931 - INFO - Model Training Completed.
+2025-04-11 10:36:59,931 - INFO - Evaluating models...
