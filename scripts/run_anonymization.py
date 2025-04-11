@@ -32,6 +32,25 @@ classpath = separator.join([
     os.path.abspath(bin_path)
 ])
 
+def generate_anonym_tag(config):
+    """
+    Generates a unique tag for the anonymized file based on key parameters.
+    """
+    anon_config = config.get("anonymization", {})
+    models = anon_config.get("models", {})
+
+    k = models.get("k_anonymity", "kX")
+    l_config = models.get("l_diversity", {})
+    l_val = l_config.get("value", "lX")
+    sup = anon_config.get("suppression_limit", "supX")
+
+    # Format values
+    sup_str = f"sup{int(sup * 100):02d}" if isinstance(sup, float) else str(sup)
+    l_tag = f"l{l_val}" if isinstance(l_val, int) else str(l_val)
+
+    return f"k{k}_{l_tag}_{sup_str}"
+
+
 def load_config(config_path="configs/benchmark_config.yaml"):
     with open(config_path, "r") as file:
         config = yaml.safe_load(file)
@@ -114,8 +133,10 @@ def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.y
         dataset_name = os.path.splitext(os.path.basename(dataset_path))[0]  # e.g., 'loan_train_raw'
         # Remove 'train_raw' from the name (if present)
         clean_name = re.sub(r'_?train_raw', '', dataset_name)  # Result: 'loan'
+        
+        anonym_tag = generate_anonym_tag(config)
         # Final anonymized output path
-        anonymized_output_path = os.path.abspath(f"datasets/anonymized/{clean_name}_anonymized.csv")
+        anonymized_output_path = os.path.abspath(f"datasets/anonymized/{clean_name}_{anonym_tag}_anonymized.csv")
         
     run_process = subprocess.run(
         ["java", "-cp", separator.join([jar_path, classpath]), "Main", dataset_path, anonymized_output_path, os.path.abspath(config_path)],# Pass dataset path
@@ -123,6 +144,7 @@ def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.y
     )
     if run_process.returncode == 0:
         if logger:
+            logger.info(f"Anonimized file saved to : {anonymized_output_path}")
             logger.info("Java anonymization completed successfully.")
         return True
     else:

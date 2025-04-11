@@ -57,6 +57,15 @@ def write_summary(summary, summary_file):
         writer.writeheader()
         writer.writerows(summary)
 
+def write_or_append_summary(row, summary_file, write_header=False):
+    """Writes a single row to the summary file, optionally with headers."""
+    file_exists = os.path.isfile(summary_file)
+    with open(summary_file, "a", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=row.keys())
+        if write_header and not file_exists:
+            writer.writeheader()
+        writer.writerow(row)
+
 # ---------------- MAIN ----------------
 
 def run_all_benchmarks(dataset_name):
@@ -65,38 +74,41 @@ def run_all_benchmarks(dataset_name):
     summary_file = os.path.join(batch_folder, "benchmark_summary.csv")
     summary = []
 
-    # ⬇️ Copy variation_info.yaml if it exists
+    # Copy variation_info.yaml if it exists
     variation_info_src = os.path.join("configs", "generated_configs", dataset_name, "variation_info.yaml")
     variation_info_dst = os.path.join(batch_folder, "variation_info.yaml")
     if os.path.exists(variation_info_src):
         shutil.copy(variation_info_src, variation_info_dst)
-        print(f"📄 Copied variation_info.yaml to: {variation_info_dst}")
+        print(f"BATCH : Copied variation_info.yaml to: {variation_info_dst}")
     else:
-        print("⚠️ variation_info.yaml not found — batch analysis may fail.")
+        print("BATCH : variation_info.yaml not found — batch analysis may fail.")
 
-    print(f"\n🚀 Starting batch run for {len(config_paths)} configs...")
-    print(f"📁 Master output folder: {batch_folder}")
+    print(f"\n BATCH : Starting batch run for {len(config_paths)} configs...")
+    print(f" (BATCH)Master output folder: {batch_folder}")
+
+    header_written = False
 
     for i, config_path in enumerate(config_paths, 1):
         filename = os.path.basename(config_path)
         output_path = os.path.join(batch_folder, filename.replace(".yaml", ""))
 
         print(f"\n▶ [{i}/{len(config_paths)}] Running: {filename}")
-        print(f"📂 Output: {output_path}")
+        print(f"BATCH Output: {output_path}")
 
         os.makedirs(output_path, exist_ok=True)
         success, exit_code = run_config(config_path, output_path)
 
-        summary.append({
+        row = {
             "config_file": filename,
             "output_path": output_path,
             "success": success,
             "exit_code": exit_code,
             "timestamp": datetime.datetime.now().isoformat()
-        })
+        }
+        write_or_append_summary(row, summary_file, write_header=not header_written)
+        header_written = True
 
-    write_summary(summary, summary_file)
-    print(f"\n✅ Summary written to: {summary_file}")
+    print(f"\n BATCH Summary written to: {summary_file}")
 
     # Analyze results if possible
     try:
@@ -116,5 +128,5 @@ if __name__ == "__main__":
     datasets = [d for d in os.listdir(config_root) if os.path.isdir(os.path.join(config_root, d))]
 
     for dataset in datasets:
-        print(f"\n📂 Running batch for dataset: {dataset}")
+        print(f"\n Running batch for dataset: {dataset}")
         run_all_benchmarks(dataset)  # Replace if needed

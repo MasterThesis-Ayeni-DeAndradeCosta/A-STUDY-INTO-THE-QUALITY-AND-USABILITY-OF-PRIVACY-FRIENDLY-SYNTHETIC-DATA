@@ -47,6 +47,14 @@ def load_config(config_path="configs/benchmark_config.yaml"):
         config = yaml.safe_load(file)
     return config
 
+def generate_anonym_tag(config):
+    models = config["anonymization"]["models"]
+    k = models.get("k_anonymity", "kX")
+    l = models.get("l_diversity", {}).get("value", "lX")
+    sup = config["anonymization"].get("suppression_limit", "supX")
+    return f"k{k}_l{l}_sup{int(sup * 100):02d}"  # e.g., k3_l2_sup05
+
+
 def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     """Executes the full benchmarking pipeline, saving logs, reports, and visualizations."""
     # Load configuration
@@ -95,20 +103,32 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     # Step 2: Anonymization
     postprocessed_data = None
     if enable_anonymization:
-        success = run_anonymization(train_raw_path, config_path=config_path, logger=logger)
+        anonym_tag = generate_anonym_tag(config)
+        anonymized_output_path = os.path.abspath(f"datasets/anonymized/{dataset_name}_{anonym_tag}_anonymized.csv")
+        success = run_anonymization(train_raw_path, config_path=config_path, anonymized_output_path=anonymized_output_path, logger=logger)
+        #success = run_anonymization(train_raw_path, config_path=config_path, logger=logger)
         if success:
-            anonymized_dataset_path = os.path.abspath(f"datasets/anonymized/{dataset_name}_anonymized.csv")
-            logger.info(f"Anonymized data saved to: {anonymized_dataset_path}")
-            if os.path.exists(anonymized_dataset_path):
-                df_anonymized = pd.read_csv(anonymized_dataset_path, sep=separator)
+            #anonymized_dataset_path = os.path.abspath(f"datasets/anonymized/{dataset_name}_anonymized.csv")
+            logger.info(f"Anonymized data saved to: {anonymized_output_path}")
+            if os.path.exists(anonymized_output_path):
+                df_anonymized = pd.read_csv(anonymized_output_path, sep=separator)
                 save_anonymous_data_report(output_dir, dataset_name, df_anonymized, original_df=original_data)
-                postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_dataset_path, separator, target_column,logger=logger)
+                postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_output_path, separator, target_column,logger=logger)
 
                 if postprocessed_data is not None and anon_encoding_map:
                     save_postprocessing_report(output_dir, dataset_name, encoding_type, anon_encoding_map)
+                     # Optional cleanup of anonymized CSV file
+                    if config["anonymization"].get("delete_after_evaluation", False):
+                        try:
+                            os.remove(anonymized_output_path)
+                            print(f"🗑️ Deleted anonymized dataset: {anonymized_output_path}")
+                            logger.info(f"Deleted anonymized dataset: {anonymized_output_path}")
+                        except Exception as e:
+                            logger.warning(f"Failed to delete anonymized dataset: {e}")
+
                 else:
-                    print(f"⚠️ Anonymized file not found: {anonymized_dataset_path}")
-                    logger.warning(f"Anonymized file not found: {anonymized_dataset_path}")
+                    print(f"⚠️ Anonymized file not found: {anonymized_output_path}")
+                    logger.warning(f"Anonymized file not found: {anonymized_output_path}")
         else:
             print("❌ Anonymization failed.")
             logger.error("Anonymization failed.")
@@ -119,7 +139,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
 
     logger.info(f"enable_synthetic_generation = {enable_synthetic}")
     # Step 3 : Synthetic Data Generation
-    synthetic_datasets, metadata = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config, logger=logger)  #disabled flag handled in run_synthetic
+    synthetic_datasets = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config, logger=logger)  #disabled flag handled in run_synthetic
     logger.info(f"Synthetic data generated with {len(synthetic_datasets)} synthesizers.")
 
     

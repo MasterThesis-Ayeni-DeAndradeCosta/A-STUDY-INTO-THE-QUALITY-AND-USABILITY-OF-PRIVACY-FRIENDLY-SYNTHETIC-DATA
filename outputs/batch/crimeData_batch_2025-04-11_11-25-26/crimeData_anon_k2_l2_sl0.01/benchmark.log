@@ -1,0 +1,28 @@
+2025-04-11 11:25:46,655 - INFO - Loaded config file: configs/generated_configs/crimeData\crimeData_anon_k2_l2_sl0.01.yaml
+2025-04-11 11:25:46,657 - INFO -  Benchmarking started for dataset: crimeData
+2025-04-11 11:25:46,658 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False
+2025-04-11 11:25:46,658 - INFO - Running preprocessing...
+2025-04-11 11:26:14,656 - INFO - Saved raw train set to: datasets/train/crimeData_train_raw.csv
+2025-04-11 11:26:14,656 - INFO - Saved encoded train set to: datasets/cleaned/crimeData_cleaned.csv
+2025-04-11 11:26:14,656 - INFO - Saved encoded test set to: datasets/test/crimeData_test_set.csv
+2025-04-11 11:26:16,091 - INFO - Preprocessing completed. Rows before: 974477, after: 260402
+2025-04-11 11:26:16,092 - INFO - enable_anonymization = None
+2025-04-11 11:26:16,112 - INFO - Running Java Anonymization Program...........
+2025-04-11 11:26:16,113 - INFO - Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-04-11 11:26:19,635 - ERROR -  Java anonymization failed with exit code: 1
+2025-04-11 11:26:19,636 - ERROR - STDERR: Error creating interval-based hierarchy for LAT: For input string: "BATTERY - SIMPLE ASSAULT"
+Error creating interval-based hierarchy for LON: For input string: "W"
+Exception in thread "main" java.lang.IllegalArgumentException: Attribute 'Victim_age': hierarchy does not contain a transformation rule for value 'FIST'
+	at org.deidentifier.arx.framework.data.GeneralizationHierarchy.<init>(GeneralizationHierarchy.java:104)
+	at org.deidentifier.arx.framework.data.DataManager.<init>(DataManager.java:218)
+	at org.deidentifier.arx.ARXAnonymizer.getDataManager(ARXAnonymizer.java:727)
+	at org.deidentifier.arx.ARXAnonymizer.anonymize(ARXAnonymizer.java:216)
+	at Main.main(Main.java:114)
+2025-04-11 11:26:19,636 - ERROR - Anonymization failed.
+2025-04-11 11:26:19,637 - INFO - enable_synthetic_generation = False
+2025-04-11 11:26:19,638 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-04-11 11:26:19,638 - INFO - Synthetic data generated with 2 synthesizers.
+2025-04-11 11:26:19,638 - INFO - Hybrid pipeline skipped (disabled in configuration).
+2025-04-11 11:26:19,638 - INFO - Preparing datasets for machine learning...
+2025-04-11 11:26:19,700 - INFO - Original Data - Training Size: 260402, Testing Size: 65101
+2025-04-11 11:26:19,700 - INFO - Training models on all datasets...
