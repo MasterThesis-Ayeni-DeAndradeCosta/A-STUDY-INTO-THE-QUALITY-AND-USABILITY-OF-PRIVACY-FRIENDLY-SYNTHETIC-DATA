@@ -117,6 +117,15 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
 
                 if postprocessed_data is not None and anon_encoding_map:
                     save_postprocessing_report(output_dir, dataset_name, encoding_type, anon_encoding_map)
+                     # Optional cleanup of anonymized CSV file
+                    if config["anonymization"].get("delete_after_evaluation", False):
+                        try:
+                            os.remove(anonymized_output_path)
+                            print(f"🗑️ Deleted anonymized dataset: {anonymized_output_path}")
+                            logger.info(f"Deleted anonymized dataset: {anonymized_output_path}")
+                        except Exception as e:
+                            logger.warning(f"Failed to delete anonymized dataset: {e}")
+
                 else:
                     print(f"⚠️ Anonymized file not found: {anonymized_output_path}")
                     logger.warning(f"Anonymized file not found: {anonymized_output_path}")

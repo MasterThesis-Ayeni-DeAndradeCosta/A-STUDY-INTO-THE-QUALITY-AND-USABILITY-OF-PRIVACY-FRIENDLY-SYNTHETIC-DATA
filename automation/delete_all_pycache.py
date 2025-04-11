@@ -11,9 +11,9 @@ def delete_pycache_and_pyc_files():
                 full_path = os.path.join(root, d)
                 try:
                     shutil.rmtree(full_path)
-                    print(f"🗑️ Deleted folder: {full_path}")
+                    print(f"Deleted folder: {full_path}")
                 except Exception as e:
-                    print(f"❌ Failed to delete folder {full_path}. Reason: {e}")
+                    print(f"Failed to delete folder {full_path}. Reason: {e}")
 
         # Remove .pyc files
         for f in files:
@@ -21,9 +21,9 @@ def delete_pycache_and_pyc_files():
                 full_path = os.path.join(root, f)
                 try:
                     os.remove(full_path)
-                    print(f"🗑️ Deleted file: {full_path}")
+                    print(f"Deleted file: {full_path}")
                 except Exception as e:
-                    print(f"❌ Failed to delete file {full_path}. Reason: {e}")
+                    print(f"Failed to delete file {full_path}. Reason: {e}")
 
 if __name__ == "__main__":
     delete_pycache_and_pyc_files()

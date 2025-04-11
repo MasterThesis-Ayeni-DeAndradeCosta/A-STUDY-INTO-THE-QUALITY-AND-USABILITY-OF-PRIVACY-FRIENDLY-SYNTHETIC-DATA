@@ -31,7 +31,7 @@ def run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config,
 
     Returns:
     - synthetic_datasets (dict): Generated synthetic datasets.
-    - metadata (dict): Metadata of the synthetic datasets.
+   
     """
     enable_synthetic = config["synthesis"]["enable_synthetic_generation"]
 

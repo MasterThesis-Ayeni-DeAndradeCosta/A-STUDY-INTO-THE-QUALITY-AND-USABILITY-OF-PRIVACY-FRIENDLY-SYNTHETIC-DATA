@@ -1,7 +1,7 @@
 dataset:
-  path: "datasets/original/studentPerformance.csv" # Path to the dataset
-  separator: ";" # Delimiter used in the dataset (e.g., "," or "\t")
-  target_column: "Target" # Name of the target column
+  path: "datasets/original/loan.csv" # Path to the dataset
+  separator: "," # Delimiter used in the dataset (e.g., "," or "\t")
+  target_column: "Loan_Status" # Name of the target column
   test_size: 0.2
 
 preprocessing:
@@ -17,7 +17,7 @@ synthesis:
       class_name: "CTGANSynthesizer"
       params:
         epochs: 50
-      num_generated_rows: "custom" # Options: "same_as_original", "custom", "multiple"
+      num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
       custom_generated_rows: 10000 # Only used if num_generated_rows is "custom"
       row_multiplier: 8
     TVAE:
@@ -26,7 +26,7 @@ synthesis:
       class_name: "TVAESynthesizer"
       params:
         epochs: 50
-      num_generated_rows: "multiple" #Options: "same_as_original", "custom", "multiple"
+      num_generated_rows: "same_as_original" #Options: "same_as_original", "custom", "multiple"
       custom_generated_rows: 5000 # TVAE will generate 5000 rows
       row_multiplier: 4 # TVAE will generate 2x rows as original
     GaussianCopula:
@@ -34,62 +34,54 @@ synthesis:
       import_path: "sdv.single_table"
       class_name: "GaussianCopulaSynthesizer"
       params: {}
-      num_generated_rows: "multiple"
+      num_generated_rows: "same_as_original"
+      custom_generated_rows: 5000 # Only used if num_generated_rows is "custom"
+      row_multiplier: 2 # GaussianCopula will generate 2x rows as original
     CustomSynthesizer:
       enabled: false # Set to true if using a custom one
       import_path: "custom.custom_synthesizer"
       class_name: "CustomSynthesizer"
       params:
         noise_factor: 0.2
-      num_generated_rows: "multiple" #Options: "same_as_original", "custom", "multiple"
+      num_generated_rows: "same_as_original" #Options: "same_as_original", "custom", "multiple"
       custom_generated_rows: 7000
       row_multiplier: 2
 
 anonymization:
   enable_anonymization: true # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
+  delete_after_evaluation: false
   suppression_limit: 0.1
   attributes:
     quasi_identifiers:
-      - "Age at enrollment"
       - "Gender"
-      - "Nacionality"
+      - "Married"
+      - "Education"
 
     sensitive_attributes:
-      - "Scholarship_holder"
+      - "ApplicantIncome"
 
     insensitive_attributes:
-      - "Application mode"
-      - "Application order"
-      - "Curricular units 1st sem (credited)"
-      - "Curricular units 1st sem (enrolled)"
-      - "Curricular units 1st sem (evaluations)"
-      - "Curricular units 1st sem (approved)"
-      - "Curricular units 1st sem (without evaluations)"
-      - "Curricular units 2nd sem (credited)"
-      - "Curricular units 2nd sem (enrolled)"
-      - "Curricular units 2nd sem (evaluations)"
-      - "Curricular units 2nd sem (approved)"
-      - "Curricular units 2nd sem (without evaluations)"
-      - "Course"
-      - "Target"
+      - "Loan_Amount_Term"
+      - "Dependents"
+      - "Loan_Status"
 
   hierarchies:
-    "Age at enrollment": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/age_enrollment.csv"
-    "Gender": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/gender.csv"
-    "Nacionality": "src/anonymization/anonymARXij/src/hierarchies_studentPerformance/nacionality.csv"
+    "Gender": "src/anonymization/anonymARXij/src/hierarchies_loan/gender.csv"
+    "Married": "src/anonymization/anonymARXij/src/hierarchies_loan/married.csv"
+    "Education": "src/anonymization/anonymARXij/src/hierarchies_loan/education.csv"
 
   hierarchy_config: {}
   models:
     k_anonymity: 5
     l_diversity:
-      attribute: "Scholarship_holder"
+      attribute: "ApplicantIncome"
       value: 2
 
 hybrid:
-  enable_hybrid: true
+  enable_hybrid: false
   execution_order: "synthetic_first" # "anonymization_first" or "synthetic_first" ; only synthetic_first is supported for now
   reuse_params: true
-  synthesizer: "CTGAN"
+  synthesizer: "TVAE"
   # Only required when reuse_params is false
   k_anonymity: 5
   l_diversity: 3
@@ -100,10 +92,10 @@ hybrid:
 utility:
   enable_utility_evaluation: true
   models:
-    LogisticRegression: false
+    LogisticRegression: true
     KNN: true
     RandomForest: true
-    DecisionTree: false
+    DecisionTree: true
     SVM: false
     XGBoost: false
 

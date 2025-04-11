@@ -154,11 +154,10 @@ def generate_synthetic_datasets(preprocessed_data, dataset_name, config):
         print(f"✅ Synthetic data generated successfully: {len(synthetic_data)} rows created.")
 
         # Save synthetic data
-        synthetic_data_filename = f"{dataset_name}_{synth_name}_synthetic.csv"
-        synthetic_data_path = os.path.join(SYNTHETIC_DATA_DIR, synthetic_data_filename)  # Save to datasets/synthetic
-
-        synthetic_data.to_csv(synthetic_data_path, index=False)
-        print(f" Synthetic data saved to {synthetic_data_path}")
+        #synthetic_data_filename = f"{dataset_name}_{synth_name}_synthetic.csv"
+        #synthetic_data_path = os.path.join(SYNTHETIC_DATA_DIR, synthetic_data_filename)  # Save to datasets/synthetic
+        #synthetic_data.to_csv(synthetic_data_path, index=False)
+        #print(f" Synthetic data saved to {synthetic_data_path}")
 
         synthetic_datasets[synth_name] = synthetic_data
         

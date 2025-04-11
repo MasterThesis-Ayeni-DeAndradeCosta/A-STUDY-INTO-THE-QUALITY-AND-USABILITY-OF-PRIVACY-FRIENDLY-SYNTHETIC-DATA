@@ -90,7 +90,8 @@ def run_benchmark_batch_parallel_execution(dataset_name, max_workers=None):
 
     print(f"\n [BATCH] Starting batch run for {len(config_paths)} configs...")
 
-    max_workers = max_workers or max(1, os.cpu_count() - 2)
+    cpu_count_val = os.cpu_count() or 2
+    max_workers = max_workers or max(1, cpu_count_val - 2)
     print(f" cpu count is {os.cpu_count()}, using max_workers={max_workers}")
 
     future_to_meta = {}
