@@ -1,7 +1,7 @@
 dataset:
-  path: "datasets/original/loan.csv" # Path to the dataset
-  separator: "," # Delimiter used in the dataset (e.g., "," or "\t")
-  target_column: "Loan_Status" # Name of the target column
+  path: "datasets/original/bankMarketing.csv" # Path to the dataset
+  separator: ";" # Delimiter used in the dataset (e.g., "," or "\t")
+  target_column: "y" # Name of the target column
   test_size: 0.2
 
 preprocessing:
@@ -9,7 +9,7 @@ preprocessing:
   encoding_type: "binary" # Type of encoding, currently only "binary" is supported
 
 synthesis:
-  enable_synthetic_generation: true # Set to false to skip # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
+  enable_synthetic_generation: false # Set to false to skip # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
   synthesizers:
     CTGAN:
       enabled: true
@@ -53,28 +53,30 @@ anonymization:
   suppression_limit: 0.1
   attributes:
     quasi_identifiers:
-      - "Gender"
-      - "Married"
-      - "Education"
+      - "age"
+      - "marital"
+      - "education"
 
     sensitive_attributes:
-      - "ApplicantIncome"
+      - "balance"
 
     insensitive_attributes:
-      - "Loan_Amount_Term"
-      - "Dependents"
-      - "Loan_Status"
+      - "contact"
+      - "pdays"
+      - "previous"
+      - "y"
 
   hierarchies:
-    "Gender": "src/anonymization/anonymARXij/src/hierarchies_loan/gender.csv"
-    "Married": "src/anonymization/anonymARXij/src/hierarchies_loan/married.csv"
-    "Education": "src/anonymization/anonymARXij/src/hierarchies_loan/education.csv"
+    "age": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/age.csv"
+    "marital": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/marital.csv"
+    "education": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/education.csv"
 
   hierarchy_config: {}
+
   models:
     k_anonymity: 5
     l_diversity:
-      attribute: "ApplicantIncome"
+      attribute: "balance"
       value: 2
 
 hybrid:
@@ -92,10 +94,10 @@ hybrid:
 utility:
   enable_utility_evaluation: true
   models:
-    LogisticRegression: true
+    LogisticRegression: false
     KNN: true
     RandomForest: true
-    DecisionTree: true
+    DecisionTree: false
     SVM: false
     XGBoost: false
 

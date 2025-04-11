@@ -1,0 +1,23 @@
+2025-04-11 11:35:28,907 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-04-11 11:35:28,909 - INFO -  Benchmarking started for dataset: crimeData
+2025-04-11 11:35:28,909 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False
+2025-04-11 11:35:28,909 - INFO - Running preprocessing...
+2025-04-11 11:35:55,758 - INFO - Saved raw train set to: datasets/train/crimeData_train_raw.csv
+2025-04-11 11:35:55,758 - INFO - Saved encoded train set to: datasets/cleaned/crimeData_cleaned.csv
+2025-04-11 11:35:55,758 - INFO - Saved encoded test set to: datasets/test/crimeData_test_set.csv
+2025-04-11 11:35:57,270 - INFO - Preprocessing completed. Rows before: 974477, after: 260402
+2025-04-11 11:35:57,270 - INFO - enable_anonymization = None
+2025-04-11 11:35:57,303 - INFO - Running Java Anonymization Program...........
+2025-04-11 11:35:57,303 - INFO - Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-04-11 11:35:57,571 - ERROR -  Java anonymization failed with exit code: 1
+2025-04-11 11:35:57,571 - ERROR - STDERR: Exception in thread "main" java.lang.ClassCastException: class java.util.LinkedHashMap cannot be cast to class java.lang.Integer (java.util.LinkedHashMap and java.lang.Integer are in module java.base of loader 'bootstrap')
+	at AnonymizationManager.configureHierarchies(AnonymizationManager.java:87)
+	at Main.main(Main.java:90)
+2025-04-11 11:35:57,571 - ERROR - Anonymization failed.
+2025-04-11 11:35:57,571 - INFO - enable_synthetic_generation = False
+2025-04-11 11:35:57,571 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-04-11 11:35:57,571 - INFO - Synthetic data generated with 2 synthesizers.
+2025-04-11 11:35:57,571 - INFO - Hybrid pipeline skipped (disabled in configuration).
+2025-04-11 11:35:57,571 - INFO - Preparing datasets for machine learning...
+2025-04-11 11:35:57,637 - INFO - Original Data - Training Size: 260402, Testing Size: 65101
+2025-04-11 11:35:57,637 - INFO - Training models on all datasets...
