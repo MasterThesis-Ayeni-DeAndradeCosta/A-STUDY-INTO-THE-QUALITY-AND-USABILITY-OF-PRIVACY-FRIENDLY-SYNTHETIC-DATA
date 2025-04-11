@@ -128,5 +128,5 @@ if __name__ == "__main__":
     datasets = [d for d in os.listdir(config_root) if os.path.isdir(os.path.join(config_root, d))]
 
     for dataset in datasets:
-        print(f"\n📂 Running batch for dataset: {dataset}")
+        print(f"\n Running batch for dataset: {dataset}")
         run_all_benchmarks(dataset)  # Replace if needed

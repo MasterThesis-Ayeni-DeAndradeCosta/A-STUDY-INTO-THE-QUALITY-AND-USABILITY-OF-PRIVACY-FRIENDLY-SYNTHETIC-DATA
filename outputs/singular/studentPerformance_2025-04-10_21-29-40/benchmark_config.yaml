@@ -1,36 +1,47 @@
 analysis:
-  enable_analysis: true
+  enable_analysis: false
   generate_excel_summary: true
   generate_interactive_plots: false
 anonymization:
   attributes:
     insensitive_attributes:
-    - Loan_Amount_Term
-    - Dependents
-    - Loan_Status
+    - Application mode
+    - Application order
+    - Curricular units 1st sem (credited)
+    - Curricular units 1st sem (enrolled)
+    - Curricular units 1st sem (evaluations)
+    - Curricular units 1st sem (approved)
+    - Curricular units 1st sem (without evaluations)
+    - Curricular units 2nd sem (credited)
+    - Curricular units 2nd sem (enrolled)
+    - Curricular units 2nd sem (evaluations)
+    - Curricular units 2nd sem (approved)
+    - Curricular units 2nd sem (without evaluations)
+    - Course
+    - Target
     quasi_identifiers:
+    - Age at enrollment
     - Gender
-    - Married
-    - Education
+    - Nacionality
     sensitive_attributes:
-    - ApplicantIncome
+    - Scholarship_holder
   enable_anonymization: true
   hierarchies:
-    Education: src/anonymization/anonymARXij/src/hierarchies_loan/education.csv
-    Gender: src/anonymization/anonymARXij/src/hierarchies_loan/gender.csv
-    Married: src/anonymization/anonymARXij/src/hierarchies_loan/married.csv
+    Age at enrollment: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/age_enrollment.csv
+    Gender: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/gender.csv
+    Nacionality: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/nacionality.csv
   hierarchy_config: {}
   models:
     k_anonymity: 5
     l_diversity:
-      attribute: ApplicantIncome
+      attribute: Scholarship_holder
       value: 2
   suppression_limit: 0.1
 dataset:
-  path: datasets/original/loan.csv
-  separator: ','
-  target_column: Loan_Status
-  test_size: 0.55
+  path: datasets/original/studentPerformance.csv
+  separator: ;
+  target_column: Target
+  test_size: 0.2
 hybrid:
   enable_hybrid: false
   epochs: 30
@@ -41,7 +52,6 @@ hybrid:
   reuse_params: true
   save_intermediate_files: false
   synthesizer: CTGAN
-output_dir: outputs/batch/loan_batch_2025-04-10_20-11-31/loan_testsize_0p55
 preprocessing:
   encoding_type: binary
   handle_missing_values: drop
@@ -53,7 +63,7 @@ synthesis:
       custom_generated_rows: 10000
       enabled: true
       import_path: sdv.single_table
-      num_generated_rows: same_as_original
+      num_generated_rows: custom
       params:
         epochs: 50
       row_multiplier: 8
@@ -62,27 +72,25 @@ synthesis:
       custom_generated_rows: 7000
       enabled: false
       import_path: custom.custom_synthesizer
-      num_generated_rows: custom
+      num_generated_rows: multiple
       params:
         noise_factor: 0.2
-      row_multiplier: 8
+      row_multiplier: 2
     GaussianCopula:
       class_name: GaussianCopulaSynthesizer
-      custom_generated_rows: 10000
       enabled: true
       import_path: sdv.single_table
-      num_generated_rows: same_as_original
+      num_generated_rows: multiple
       params: {}
-      row_multiplier: 8
     TVAE:
       class_name: TVAESynthesizer
-      custom_generated_rows: 10000
+      custom_generated_rows: 5000
       enabled: true
       import_path: sdv.single_table
-      num_generated_rows: same_as_original
+      num_generated_rows: multiple
       params:
         epochs: 50
-      row_multiplier: 8
+      row_multiplier: 4
 utility:
   enable_utility_evaluation: true
   metrics:
@@ -95,9 +103,9 @@ utility:
     Precision: true
     Recall: true
   models:
-    DecisionTree: true
+    DecisionTree: false
     KNN: true
-    LogisticRegression: true
+    LogisticRegression: false
     RandomForest: true
-    SVM: true
+    SVM: false
     XGBoost: false

@@ -69,7 +69,7 @@ def run_hybrid(train_raw_path, dataset_name, target_column, output_dir, config, 
     }
 
     # Step 1: Run Synthetic
-    synthetic_datasets, _ = run_synthetic(
+    synthetic_datasets = run_synthetic(
         cleaned_data,
         dataset_name,
         target_column,
