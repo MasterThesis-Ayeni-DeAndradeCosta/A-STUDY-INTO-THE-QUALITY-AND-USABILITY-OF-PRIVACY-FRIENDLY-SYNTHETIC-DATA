@@ -33,17 +33,17 @@ def run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config,
     - synthetic_datasets (dict): Generated synthetic datasets.
    
     """
-    enable_synthetic = config["synthesis"]["enable_synthetic_generation"]
+    # enable_synthetic = config["synthesis"]["enable_synthetic_generation"]
 
-    if not enable_synthetic:
-        print("\nSynthetic Data Generation Skipped (Disabled in Configuration).")
-        if logger:
-            logger.info("Synthetic Data Generation Skipped (Disabled in Configuration).")
-        return {}, None  # Return empty dictionary and None for metadata
+    # if not enable_synthetic:
+    #     print("\nSynthetic Data Generation Skipped (Disabled in Configuration).")
+    #     if logger:
+    #         logger.info("Synthetic Data Generation Skipped (Disabled in Configuration).")
+    #     return {} # Return empty dictionary and None for metadata
 
     print("\nStarting Synthetic Data Generation...")
     if logger:
-        logger.info("Starting Synthetic Data Generation Pipeline...")
+        logger.info("Executing run_synthetic...")
 
     # Generate synthetic datasets
     synthetic_datasets, metadata = generate_synthetic_datasets(cleaned_data, dataset_name, config)
