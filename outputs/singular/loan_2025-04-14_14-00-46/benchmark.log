@@ -1,0 +1,89 @@
+2025-04-14 14:00:46,915 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-04-14 14:00:46,915 - INFO -  Benchmarking started for dataset: loan
+2025-04-14 14:00:46,915 - INFO - Configuration loaded: enable_anonymization = False, enable_synthesis = False, enable_hybrid = True, enable_utility = True
+2025-04-14 14:00:46,915 - INFO - Running preprocessing...
+2025-04-14 14:00:47,029 - INFO - Saved raw train set to: datasets/train/loan_train_raw.csv
+2025-04-14 14:00:47,030 - INFO - Saved encoded train set to: datasets/cleaned/loan_cleaned.csv
+2025-04-14 14:00:47,030 - INFO - Saved encoded test set to: datasets/test/loan_test_set.csv
+2025-04-14 14:00:47,035 - INFO - Preprocessing completed. Rows before: 614, after: 384
+2025-04-14 14:00:47,036 - INFO - enable_anonymization = None
+2025-04-14 14:00:47,036 - INFO - Anonymization Skipped (Disabled in Configuration).
+2025-04-14 14:00:47,037 - INFO - enable_synthetic_generation = False
+2025-04-14 14:00:47,037 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-04-14 14:00:47,037 - INFO - Running hybrid pipeline...
+2025-04-14 14:00:47,037 - INFO - Executing run_hybrid...
+2025-04-14 14:00:48,609 - INFO -  Anonymized file created at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10.csv
+2025-04-14 14:00:48,627 - INFO - Loaded anonymized data: (384, 13)
+2025-04-14 14:00:48,666 - INFO - Encoding applied to anonymized data. Encoded shape: (384, 12)
+2025-04-14 14:00:48,666 - INFO - Encoded anonymized dataset saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10_anonymized_encoded.csv
+2025-04-14 14:00:48,677 - INFO -  Encoded anonymized dataset saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10_encoded.csv
+2025-04-14 14:00:48,694 - INFO - Executing run_synthetic...
+2025-04-14 14:00:48,694 - INFO - Detected metadata:
+2025-04-14 14:00:48,694 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "Gender_0": {
+            "sdtype": "categorical"
+        },
+        "Gender_1": {
+            "sdtype": "categorical"
+        },
+        "Married_0": {
+            "sdtype": "categorical"
+        },
+        "Married_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_0": {
+            "sdtype": "categorical"
+        },
+        "Dependents_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_2": {
+            "sdtype": "categorical"
+        },
+        "Education_0": {
+            "sdtype": "categorical"
+        },
+        "Education_1": {
+            "sdtype": "categorical"
+        },
+        "ApplicantIncome": {
+            "sdtype": "numerical"
+        },
+        "Loan_Amount_Term": {
+            "sdtype": "categorical"
+        },
+        "Loan_Status": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-14 14:00:48,710 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 14, 14, 0, 48, 710186), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_e3b060ca05be4e1f90195a9613e33fec'}
+2025-04-14 14:00:48,710 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 14, 14, 0, 48, 710186), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_e3b060ca05be4e1f90195a9613e33fec', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 384, 'TOTAL NUMBER OF COLUMNS': 12}
+2025-04-14 14:00:48,717 - INFO - Fitting table  metadata
+2025-04-14 14:00:48,717 - INFO - Fitting formatters for table 
+2025-04-14 14:00:48,718 - INFO - Fitting constraints for table 
+2025-04-14 14:00:48,718 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-14 14:00:48,719 - INFO - Fitting HyperTransformer for table 
+2025-04-14 14:00:48,722 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 14, 14, 0, 48, 722570), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_e3b060ca05be4e1f90195a9613e33fec', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 384, 'TOTAL NUMBER OF COLUMNS': 12}
+2025-04-14 14:00:48,734 - INFO - Guidance: There are no missing values in column ApplicantIncome. Extra column not created.
+2025-04-14 14:01:05,457 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 14, 14, 1, 5, 457196), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_e3b060ca05be4e1f90195a9613e33fec'}
+2025-04-14 14:01:05,510 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 14, 14, 1, 5, 470503), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_e3b060ca05be4e1f90195a9613e33fec', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 384, 'TOTAL NUMBER OF COLUMNS': 12}
+2025-04-14 14:01:05,522 - INFO - Synthetic Data Generation Completed.
+2025-04-14 14:01:06,058 - INFO - Synthetic Data Evaluation Completed.
+2025-04-14 14:01:06,066 - INFO - Synthetic Data Report Generated Successfully.
+2025-04-14 14:01:06,118 - INFO -  Hybrid dataset generated successfully. Type: <class 'pandas.core.frame.DataFrame'>, Shape: (384, 12)
+2025-04-14 14:01:06,121 - INFO -  Final hybrid synthetic dataset saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10_CTGAN_HYBRID.csv
+2025-04-14 14:01:06,121 - INFO - Hybrid pipeline completed successfully.
+2025-04-14 14:01:06,121 - INFO - Preparing datasets for machine learning...
+2025-04-14 14:01:06,121 - INFO - Original Data - Training Size: 384, Testing Size: 96
+2025-04-14 14:01:06,121 - INFO - Processing hybrid dataset...
+2025-04-14 14:01:06,125 - INFO - Hybrid Data - Training Size: 384
+2025-04-14 14:01:06,125 - INFO - Training models on all datasets...
+2025-04-14 14:01:07,280 - INFO - Model Training Completed.
+2025-04-14 14:01:07,281 - INFO - Evaluating models...
+2025-04-14 14:01:07,426 - INFO - Model Training and Evaluation completed.
+2025-04-14 14:01:07,928 - INFO -  Visualizations saved.
+2025-04-14 14:01:07,929 - INFO -  Benchmarking Completed. Results saved in output folder.

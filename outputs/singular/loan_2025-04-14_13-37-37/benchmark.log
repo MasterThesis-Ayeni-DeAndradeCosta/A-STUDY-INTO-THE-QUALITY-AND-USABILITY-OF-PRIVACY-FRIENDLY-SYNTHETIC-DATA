@@ -1,0 +1,86 @@
+2025-04-14 13:37:37,775 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-04-14 13:37:37,775 - INFO -  Benchmarking started for dataset: loan
+2025-04-14 13:37:37,775 - INFO - Configuration loaded: enable_anonymization = False, enable_synthesis = False, enable_hybrid = True, enable_utility = True
+2025-04-14 13:37:37,775 - INFO - Running preprocessing...
+2025-04-14 13:37:37,852 - INFO - Saved raw train set to: datasets/train/loan_train_raw.csv
+2025-04-14 13:37:37,856 - INFO - Saved encoded train set to: datasets/cleaned/loan_cleaned.csv
+2025-04-14 13:37:37,856 - INFO - Saved encoded test set to: datasets/test/loan_test_set.csv
+2025-04-14 13:37:37,858 - INFO - Preprocessing completed. Rows before: 614, after: 384
+2025-04-14 13:37:37,859 - INFO - enable_anonymization = None
+2025-04-14 13:37:37,859 - INFO - Anonymization Skipped (Disabled in Configuration).
+2025-04-14 13:37:37,859 - INFO - enable_synthetic_generation = False
+2025-04-14 13:37:37,860 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-04-14 13:37:37,860 - INFO - Synthetic data generated with 2 synthesizers.
+2025-04-14 13:37:37,860 - INFO - Running hybrid pipeline...
+2025-04-14 13:37:37,860 - INFO - Executing run_hybrid...
+2025-04-14 13:37:39,176 - INFO -  Anonymized file created at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10.csv
+2025-04-14 13:37:39,198 - INFO - Loaded anonymized data: (384, 13)
+2025-04-14 13:37:39,237 - INFO - Encoding applied to anonymized data. Encoded shape: (384, 12)
+2025-04-14 13:37:39,238 - INFO - Encoded anonymized dataset saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10_anonymized_encoded.csv
+2025-04-14 13:37:39,241 - INFO -  Encoded anonymized dataset saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10_encoded.csv
+2025-04-14 13:37:39,261 - INFO - Starting Synthetic Data Generation Pipeline...
+2025-04-14 13:37:39,269 - INFO - Detected metadata:
+2025-04-14 13:37:39,269 - INFO - {
+    "columns": {
+        "Gender_0": {
+            "sdtype": "categorical"
+        },
+        "Gender_1": {
+            "sdtype": "categorical"
+        },
+        "Married_0": {
+            "sdtype": "categorical"
+        },
+        "Married_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_0": {
+            "sdtype": "categorical"
+        },
+        "Dependents_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_2": {
+            "sdtype": "categorical"
+        },
+        "Education_0": {
+            "sdtype": "categorical"
+        },
+        "Education_1": {
+            "sdtype": "categorical"
+        },
+        "ApplicantIncome": {
+            "sdtype": "numerical"
+        },
+        "Loan_Amount_Term": {
+            "sdtype": "categorical"
+        },
+        "Loan_Status": {
+            "sdtype": "categorical"
+        }
+    },
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1"
+}
+2025-04-14 13:37:39,283 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 14, 13, 37, 39, 283874), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_e4561efddcba400d903a00a87a122317'}
+2025-04-14 13:37:39,285 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 14, 13, 37, 39, 285589), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_e4561efddcba400d903a00a87a122317', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 384, 'TOTAL NUMBER OF COLUMNS': 12}
+2025-04-14 13:37:39,287 - INFO - Fitting table  metadata
+2025-04-14 13:37:39,288 - INFO - Fitting formatters for table 
+2025-04-14 13:37:39,288 - INFO - Fitting constraints for table 
+2025-04-14 13:37:39,289 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-14 13:37:39,289 - INFO - Fitting HyperTransformer for table 
+2025-04-14 13:37:39,295 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 14, 13, 37, 39, 295996), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_e4561efddcba400d903a00a87a122317', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 384, 'TOTAL NUMBER OF COLUMNS': 12}
+2025-04-14 13:37:39,304 - INFO - Guidance: There are no missing values in column ApplicantIncome. Extra column not created.
+2025-04-14 13:37:54,656 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 14, 13, 37, 54, 656082), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_e4561efddcba400d903a00a87a122317'}
+2025-04-14 13:37:54,704 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 14, 13, 37, 54, 656082), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_e4561efddcba400d903a00a87a122317', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 384, 'TOTAL NUMBER OF COLUMNS': 12}
+2025-04-14 13:37:54,704 - INFO - Synthetic Data Generation Completed.
+2025-04-14 13:37:55,109 - INFO - Synthetic Data Evaluation Completed.
+2025-04-14 13:37:55,114 - INFO - Synthetic Data Report Generated Successfully.
+2025-04-14 13:37:55,175 - ERROR - Hybrid pipeline failed: not enough values to unpack (expected 2, got 1)
+2025-04-14 13:37:55,176 - INFO - Preparing datasets for machine learning...
+2025-04-14 13:37:55,178 - INFO - Original Data - Training Size: 384, Testing Size: 96
+2025-04-14 13:37:55,178 - INFO - Training models on all datasets...
+2025-04-14 13:37:56,166 - INFO - Model Training Completed.
+2025-04-14 13:37:56,180 - INFO - Evaluating models...
+2025-04-14 13:37:56,238 - INFO - Model Training and Evaluation completed.
+2025-04-14 13:37:56,793 - INFO -  Visualizations saved.
+2025-04-14 13:37:56,793 - INFO -  Benchmarking Completed. Results saved in output folder.
