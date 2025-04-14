@@ -99,7 +99,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
         logger.info(f"Preprocessing completed. Rows before: {len(original_data)}, after: {len(cleaned_data)}")
 
     print("\nPreprocessing completed.")
-    logger.info(f"enable_anonymization = {config.get('enable_anonymization')}")
+    logger.info(f"enable_anonymization = {enable_anonymization}")
     # Step 2: Anonymization
     postprocessed_data = None
     if enable_anonymization:
