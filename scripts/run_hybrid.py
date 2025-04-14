@@ -103,4 +103,6 @@ def run_hybrid(train_raw_path, dataset_name, target_column, output_dir, config, 
     if logger:
         logger.info(f" Final hybrid synthetic dataset saved to: {hybrid_output_path}")
 
-    return hybrid_df
+    #return hybrid_df
+    return {synthesizer_name: hybrid_df}
+
