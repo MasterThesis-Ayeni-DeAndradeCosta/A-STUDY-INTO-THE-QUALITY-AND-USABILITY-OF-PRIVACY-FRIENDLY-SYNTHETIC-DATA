@@ -1,9 +1,17 @@
 import os
+import sys
 import pandas as pd
 from sdv.metadata import SingleTableMetadata
 #from sdv.single_table import CTGANSynthesizer, TVAESynthesizer, GaussianCopulaSynthesizer
 from custom.synthesizer.base_synthesizer import BaseSynthesizer
+from output_utils.config_utils import generate_anonym_tag
 import importlib
+
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+src_path = os.path.join(project_root, "src")
+if src_path not in sys.path:
+    sys.path.insert(0, src_path)
+
 
 # Define consistent path for storing synthesizers
 SYNTHESIZER_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..",  "..", "artifacts", "synthesizers"))
@@ -165,29 +173,58 @@ def generate_synthetic_datasets(preprocessed_data, dataset_name, config):
 
 def generate_synthesizer_filename(dataset_name, synth_name, params):
     """
-    Generate a synthesizer filename dynamically based on dataset, synthesizer type, and key params.
+    Generate a synthesizer filename by appending the synthesizer name and training params
+    to the full dataset name (which may already include hybrid or anonym tags).
 
     Args:
-        dataset_name (str): Name of the dataset.
-        synth_name (str): Name of the synthesizer (e.g., CTGAN, TVAE).
-        params (dict): Parameters used for training (e.g., epochs, noise_factor).
+        dataset_name (str): Full dataset name, including any anonym/hybrid tags
+        synth_name (str): e.g. 'CTGAN'
+        params (dict): Training parameters like {"epochs": 50}
 
     Returns:
-        str: Filename like 'bankMarketing_CTGAN_epochs50_synthesizer.pkl'
+        str: Filename like 'loan_CTGAN_epochs50_synthesizer.pkl' or
+             'loan_k3_l2_sup05_CTGAN_epochs50_synthesizer.pkl'
     """
-    suffix_parts = []
+    suffix_parts = [synth_name]
 
-    # Get param keys to include in filename for this synthesizer
     keys_to_include = FILENAME_PARAM_MAP.get(synth_name, [])
-
     for key in keys_to_include:
         if key in params:
             value = params[key]
-            # Replace '.' with 'p' in float values for safe filenames (e.g., 0.2 → 0p2)
             if isinstance(value, float):
                 value = str(value).replace('.', 'p')
             suffix_parts.append(f"{key}{value}")
 
-    # Combine suffixes
-    suffix_str = "_" + "_".join(suffix_parts) if suffix_parts else ""
-    return f"{dataset_name}_{synth_name}{suffix_str}_synthesizer.pkl"
+    suffix = "_".join(suffix_parts)
+    return f"{dataset_name}_{suffix}_synthesizer.pkl"
+
+
+# def generate_synthesizer_filename(dataset_name, synth_name, params):
+#     """
+#     Generate a synthesizer filename dynamically based on dataset, synthesizer type, and key params.
+
+#     Args:
+#         dataset_name (str): Name of the dataset.
+#         synth_name (str): Name of the synthesizer (e.g., CTGAN, TVAE).
+#         params (dict): Parameters used for training (e.g., epochs, noise_factor).
+
+#     Returns:
+#         str: Filename like 'bankMarketing_CTGAN_epochs50_synthesizer.pkl'
+#     """
+#     suffix_parts = []
+
+#     # Get param keys to include in filename for this synthesizer
+#     keys_to_include = FILENAME_PARAM_MAP.get(synth_name, [])
+
+#     for key in keys_to_include:
+#         if key in params:
+#             value = params[key]
+#             # Replace '.' with 'p' in float values for safe filenames (e.g., 0.2 → 0p2)
+#             if isinstance(value, float):
+#                 value = str(value).replace('.', 'p')
+#             suffix_parts.append(f"{key}{value}")
+
+#     # Combine suffixes
+#     suffix_str = "_" + "_".join(suffix_parts) if suffix_parts else ""
+#     return f"{dataset_name}_{synth_name}{suffix_str}_synthesizer.pkl"
+

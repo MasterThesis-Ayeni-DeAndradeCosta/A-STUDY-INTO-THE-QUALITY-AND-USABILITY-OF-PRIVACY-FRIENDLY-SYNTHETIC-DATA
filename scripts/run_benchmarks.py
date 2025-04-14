@@ -88,7 +88,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     logger.info(f"Loaded config file: {config_path}")
     logger.info(f" Benchmarking started for dataset: {dataset_name}")
 
-    logger.info(f"Configuration loaded: enable_anonymization = {enable_anonymization}, enable_synthesis = {enable_synthetic}")
+    logger.info(f"Configuration loaded: enable_anonymization = {enable_anonymization}, enable_synthesis = {enable_synthetic}, enable_hybrid = {enable_hybrid}, enable_utility = {enable_utility}")
     logger.info("Running preprocessing...")
     # Step 1: Run Preprocessing and Get Cleaned Data**
     cleaned_data, dataset_name, original_data, test_set, train_raw_path, encoding_map  = run_preprocessing(dataset_path, separator, target_column, config_path=config_path , logger=logger)
@@ -99,7 +99,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
         logger.info(f"Preprocessing completed. Rows before: {len(original_data)}, after: {len(cleaned_data)}")
 
     print("\nPreprocessing completed.")
-    logger.info(f"enable_anonymization = {config.get('enable_anonymization')}")
+    logger.info(f"enable_anonymization = {enable_anonymization}")
     # Step 2: Anonymization
     postprocessed_data = None
     if enable_anonymization:
@@ -138,9 +138,18 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     
 
     logger.info(f"enable_synthetic_generation = {enable_synthetic}")
+
     # Step 3 : Synthetic Data Generation
-    synthetic_datasets = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config, logger=logger)  #disabled flag handled in run_synthetic
-    logger.info(f"Synthetic data generated with {len(synthetic_datasets)} synthesizers.")
+
+    #synthetic_datasets = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config, logger=logger)  #disabled flag handled in run_synthetic
+    #logger.info(f"Synthetic data generated with {len(synthetic_datasets)} synthesizers.")
+    synthetic_datasets = {}
+    if enable_synthetic:
+        logger.info("Starting standard synthetic data generation pipeline...")
+        synthetic_datasets = run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config, logger=logger)
+        logger.info(f"Synthetic data generated with {len(synthetic_datasets)} synthesizer(s).")
+    else:
+        logger.info("Synthetic Data Generation Skipped (Disabled in Configuration).")
 
     
     # step 4: Run Hybrid if enabled
