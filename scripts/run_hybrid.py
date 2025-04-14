@@ -9,7 +9,7 @@ import copy
 
 def run_hybrid(train_raw_path, dataset_name, target_column, output_dir, config, config_path, logger=None):
     """
-    Runs the hybrid pipeline: synthetic → anonymization.
+    Hybrid pipeline: anonymization → synthetic generation.
 
     Parameters:
         cleaned_data (DataFrame): Cleaned and encoded training data.
@@ -19,7 +19,7 @@ def run_hybrid(train_raw_path, dataset_name, target_column, output_dir, config, 
         config (dict): Full YAML config dict.
 
     Returns:
-        DataFrame: Encoded anonymized synthetic dataset (for utility training).
+        DataFrame: Synthetic data generated from postprocessed anonymized data.
     """
 
     hybrid_cfg = config.get("hybrid", {})
