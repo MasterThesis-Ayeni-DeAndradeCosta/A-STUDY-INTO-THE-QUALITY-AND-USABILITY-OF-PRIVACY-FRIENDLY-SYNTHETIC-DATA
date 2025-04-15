@@ -1,0 +1,115 @@
+analysis:
+  enable_analysis: true
+  generate_excel_summary: true
+  generate_interactive_plots: false
+anonymization:
+  attributes:
+    insensitive_attributes:
+    - Application mode
+    - Application order
+    - Curricular units 1st sem (credited)
+    - Curricular units 1st sem (enrolled)
+    - Curricular units 1st sem (evaluations)
+    - Curricular units 1st sem (approved)
+    - Curricular units 1st sem (without evaluations)
+    - Curricular units 2nd sem (credited)
+    - Curricular units 2nd sem (enrolled)
+    - Curricular units 2nd sem (evaluations)
+    - Curricular units 2nd sem (approved)
+    - Curricular units 2nd sem (without evaluations)
+    - Course
+    - Target
+    quasi_identifiers:
+    - Age at enrollment
+    - Gender
+    - Nacionality
+    sensitive_attributes:
+    - Scholarship_holder
+  delete_after_evaluation: true
+  enable_anonymization: true
+  hierarchies:
+    Age at enrollment: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/age_enrollment.csv
+    Gender: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/gender.csv
+    Nacionality: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/nacionality.csv
+  hierarchy_config: {}
+  models:
+    k_anonymity: 3
+    l_diversity:
+      attribute: Scholarship_holder
+      value: 3
+  suppression_limit: 0.05
+dataset:
+  path: datasets/original/studentPerformance.csv
+  separator: ;
+  target_column: Target
+  test_size: 0.2
+hybrid:
+  enable_hybrid: false
+  epochs: 30
+  execution_order: synthetic_first
+  k_anonymity: 5
+  l_diversity: 3
+  num_generated_rows: 5000
+  reuse_params: true
+  save_intermediate_files: false
+  synthesizer: CTGAN
+output_dir: outputs/batch/studentPerformance_batch_2025-04-11_14-38-45/studentPerformance_anon_k3_l3_sl0.05
+preprocessing:
+  encoding_type: binary
+  handle_missing_values: mode
+synthesis:
+  enable_synthetic_generation: false
+  synthesizers:
+    CTGAN:
+      class_name: CTGANSynthesizer
+      custom_generated_rows: 10000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params:
+        epochs: 50
+      row_multiplier: 8
+    CustomSynthesizer:
+      class_name: CustomSynthesizer
+      custom_generated_rows: 7000
+      enabled: false
+      import_path: custom.custom_synthesizer
+      num_generated_rows: custom
+      params:
+        noise_factor: 0.2
+      row_multiplier: 8
+    GaussianCopula:
+      class_name: GaussianCopulaSynthesizer
+      custom_generated_rows: 5000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params: {}
+      row_multiplier: 8
+    TVAE:
+      class_name: TVAESynthesizer
+      custom_generated_rows: 5000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params:
+        epochs: 50
+      row_multiplier: 8
+utility:
+  enable_utility_evaluation: true
+  metrics:
+    AUC-ROC: true
+    Accuracy: true
+    CohenKappa: true
+    F1: true
+    LogLoss: true
+    MCC: true
+    Precision: true
+    Recall: true
+  models:
+    DecisionTree: true
+    KNN: true
+    LogisticRegression: true
+    RandomForest: true
+    SVM: true
+    XGBoost: false
