@@ -4,7 +4,7 @@ import pandas as pd
 import itertools
 
 # ---------- CONFIG ----------
-DATASET_NAME = "loan"
+DATASET_NAME = "crimeData"
 BASE_CONFIG_PATH = f"configs/base/{DATASET_NAME}_config.yaml"
 ORIGINAL_DATA_PATH = f"datasets/original/{DATASET_NAME}.csv"
 OUTPUT_DIR = f"configs/generated_configs/{DATASET_NAME}"
