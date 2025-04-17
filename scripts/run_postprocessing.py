@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from preprocessing.encoding import encode_categorical_features
 
-def run_postprocessing(anonymized_path, separator, target_column, logger=None):
+def run_postprocessing(anonymized_path, separator, target_column, encoder=None, logger=None):
     """
     Post-processes the anonymized dataset by encoding it only.
 
@@ -27,7 +27,7 @@ def run_postprocessing(anonymized_path, separator, target_column, logger=None):
     print(f"\n📂 Loaded anonymized data: {df_anonymized.shape}")
     if logger:
         logger.info(f"Loaded anonymized data: {df_anonymized.shape}")
-    df_encoded, encoding_map = encode_categorical_features(df_anonymized, target_column)
+    df_encoded, encoding_map = encode_categorical_features(df_anonymized, target_column, encoder=encoder)
     print(f"✅ Encoding applied to anonymized data. Encoded shape: {df_encoded.shape}")
     if logger:
         logger.info(f"Encoding applied to anonymized data. Encoded shape: {df_encoded.shape}")

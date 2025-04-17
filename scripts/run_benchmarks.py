@@ -91,7 +91,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     logger.info(f"Configuration loaded: enable_anonymization = {enable_anonymization}, enable_synthesis = {enable_synthetic}, enable_hybrid = {enable_hybrid}, enable_utility = {enable_utility}")
     logger.info("Running preprocessing...")
     # Step 1: Run Preprocessing and Get Cleaned Data**
-    cleaned_data, dataset_name, original_data, test_set, train_raw_path, encoding_map  = run_preprocessing(dataset_path, separator, target_column, config_path=config_path , logger=logger)
+    cleaned_data, dataset_name, original_data, test_set, train_raw_path, encoding_map, encoder = run_preprocessing(dataset_path, separator, target_column, config_path=config_path , logger=logger)
     #cleaned_dataset_path = os.path.abspath(f"datasets/cleaned/{dataset_name}_cleaned.csv")
     
     if original_data is not None:
@@ -113,7 +113,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
             if os.path.exists(anonymized_output_path):
                 df_anonymized = pd.read_csv(anonymized_output_path, sep=separator)
                 save_anonymous_data_report(output_dir, dataset_name, df_anonymized, original_df=original_data)
-                postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_output_path, separator, target_column,logger=logger)
+                postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_output_path, separator, target_column, encoder=encoder, logger=logger)
 
                 if postprocessed_data is not None and anon_encoding_map:
                     save_postprocessing_report(output_dir, dataset_name, encoding_type, anon_encoding_map)
