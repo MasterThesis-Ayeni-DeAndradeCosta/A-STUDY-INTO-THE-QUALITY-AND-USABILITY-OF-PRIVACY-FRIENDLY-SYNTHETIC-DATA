@@ -190,7 +190,7 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
         # Step 6: Evaluate Models
         print("\n Evaluating models...") 
         logger.info("Evaluating models...")      
-        results_df = evaluate_models(trained_models, X_test_original, y_test_original, datasets, config)
+        results_df = evaluate_models(trained_models, X_test_original, y_test_original, datasets, config, logger=logger)
         save_model_performance(output_dir, results_df)
         results_csv_path = os.path.join(output_dir, "model_performance.csv")
         results_df.to_csv(results_csv_path, index=False)

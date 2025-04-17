@@ -1,0 +1,478 @@
+2025-04-17 14:24:33,417 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-04-17 14:24:33,418 - INFO -  Benchmarking started for dataset: loan
+2025-04-17 14:24:33,418 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = True, enable_hybrid = True, enable_utility = True
+2025-04-17 14:24:33,418 - INFO - Running preprocessing...
+2025-04-17 14:24:33,495 - INFO - Saved raw train set to: datasets/train/loan_train_raw.csv
+2025-04-17 14:24:33,495 - INFO - Saved encoded train set to: datasets/cleaned/loan_cleaned.csv
+2025-04-17 14:24:33,495 - INFO - Saved encoded test set to: datasets/test/loan_test_set.csv
+2025-04-17 14:24:33,498 - INFO - Preprocessing completed. Rows before: 614, after: 491
+2025-04-17 14:24:33,498 - INFO - enable_anonymization = True
+2025-04-17 14:24:33,502 - INFO - Running Java Anonymization Program...........
+2025-04-17 14:24:33,502 - INFO - Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-04-17 14:24:35,075 - INFO - Anonimized file saved to : C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized.csv
+2025-04-17 14:24:35,075 - INFO - Java anonymization completed successfully.
+2025-04-17 14:24:35,076 - INFO - Anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized.csv
+2025-04-17 14:24:35,115 - INFO - Loaded anonymized data: (491, 13)
+2025-04-17 14:24:35,153 - INFO - Encoding applied to anonymized data. Encoded shape: (491, 13)
+2025-04-17 14:24:35,157 - INFO - Encoded anonymized dataset saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized_encoded.csv
+2025-04-17 14:24:35,162 - INFO - Deleted anonymized dataset: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized.csv
+2025-04-17 14:24:35,163 - INFO - enable_synthetic_generation = True
+2025-04-17 14:24:35,163 - INFO - Starting standard synthetic data generation pipeline...
+2025-04-17 14:24:35,163 - INFO - Executing run_synthetic...
+2025-04-17 14:24:35,180 - INFO - Detected metadata:
+2025-04-17 14:24:35,181 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "Loan_ID_0": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_1": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_2": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_3": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_4": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_5": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_6": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_7": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_8": {
+            "sdtype": "categorical"
+        },
+        "Gender_0": {
+            "sdtype": "categorical"
+        },
+        "Gender_1": {
+            "sdtype": "categorical"
+        },
+        "Married_0": {
+            "sdtype": "categorical"
+        },
+        "Married_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_0": {
+            "sdtype": "categorical"
+        },
+        "Dependents_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_2": {
+            "sdtype": "categorical"
+        },
+        "Education_0": {
+            "sdtype": "categorical"
+        },
+        "Education_1": {
+            "sdtype": "categorical"
+        },
+        "Self_Employed_0": {
+            "sdtype": "categorical"
+        },
+        "Self_Employed_1": {
+            "sdtype": "categorical"
+        },
+        "ApplicantIncome": {
+            "sdtype": "numerical"
+        },
+        "CoapplicantIncome": {
+            "sdtype": "numerical"
+        },
+        "LoanAmount": {
+            "sdtype": "numerical"
+        },
+        "Loan_Amount_Term": {
+            "sdtype": "numerical"
+        },
+        "Credit_History": {
+            "sdtype": "numerical"
+        },
+        "Property_Area_0": {
+            "sdtype": "categorical"
+        },
+        "Property_Area_1": {
+            "sdtype": "categorical"
+        },
+        "Loan_Status": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-17 14:24:35,189 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 24, 35, 189342), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_c65afa7b4a864e3fb5ab0616d0d628b6'}
+2025-04-17 14:24:35,190 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 24, 35, 190347), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_c65afa7b4a864e3fb5ab0616d0d628b6', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-17 14:24:35,192 - INFO - Fitting table  metadata
+2025-04-17 14:24:35,193 - INFO - Fitting formatters for table 
+2025-04-17 14:24:35,198 - INFO - No rounding scheme detected for column 'Credit_History'. Data will not be rounded.
+2025-04-17 14:24:35,199 - INFO - Fitting constraints for table 
+2025-04-17 14:24:35,199 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-17 14:24:35,201 - INFO - Fitting HyperTransformer for table 
+2025-04-17 14:24:35,219 - INFO - No rounding scheme detected for column 'Credit_History'. Data will not be rounded.
+2025-04-17 14:24:35,232 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 24, 35, 232989), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_c65afa7b4a864e3fb5ab0616d0d628b6', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-17 14:24:35,254 - INFO - Guidance: There are no missing values in column ApplicantIncome. Extra column not created.
+2025-04-17 14:24:35,493 - INFO - Guidance: There are no missing values in column CoapplicantIncome. Extra column not created.
+2025-04-17 14:24:35,556 - INFO - Guidance: There are no missing values in column LoanAmount. Extra column not created.
+2025-04-17 14:24:35,673 - INFO - Guidance: There are no missing values in column Loan_Amount_Term. Extra column not created.
+2025-04-17 14:24:35,770 - INFO - Guidance: There are no missing values in column Credit_History. Extra column not created.
+2025-04-17 14:25:03,238 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 3, 238615), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_c65afa7b4a864e3fb5ab0616d0d628b6'}
+2025-04-17 14:25:03,261 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 3, 261036), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_e05da302e5694d948f5212198b1ee82f'}
+2025-04-17 14:25:03,262 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 3, 262015), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_e05da302e5694d948f5212198b1ee82f', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-17 14:25:03,263 - INFO - Fitting table  metadata
+2025-04-17 14:25:03,264 - INFO - Fitting formatters for table 
+2025-04-17 14:25:03,266 - INFO - No rounding scheme detected for column 'Credit_History'. Data will not be rounded.
+2025-04-17 14:25:03,267 - INFO - Fitting constraints for table 
+2025-04-17 14:25:03,267 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-17 14:25:03,268 - INFO - Fitting HyperTransformer for table 
+2025-04-17 14:25:03,280 - INFO - No rounding scheme detected for column 'Credit_History'. Data will not be rounded.
+2025-04-17 14:25:03,290 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 3, 290564), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_e05da302e5694d948f5212198b1ee82f', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-17 14:25:03,313 - INFO - Guidance: There are no missing values in column ApplicantIncome. Extra column not created.
+2025-04-17 14:25:03,442 - INFO - Guidance: There are no missing values in column CoapplicantIncome. Extra column not created.
+2025-04-17 14:25:03,482 - INFO - Guidance: There are no missing values in column LoanAmount. Extra column not created.
+2025-04-17 14:25:03,610 - INFO - Guidance: There are no missing values in column Loan_Amount_Term. Extra column not created.
+2025-04-17 14:25:03,648 - INFO - Guidance: There are no missing values in column Credit_History. Extra column not created.
+2025-04-17 14:25:11,601 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 11, 601217), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_e05da302e5694d948f5212198b1ee82f'}
+2025-04-17 14:25:11,622 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 11, 622918), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_4547a7a4487e477896a6a423eae25e93'}
+2025-04-17 14:25:11,622 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 11, 622918), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_4547a7a4487e477896a6a423eae25e93', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-17 14:25:11,624 - INFO - Fitting table  metadata
+2025-04-17 14:25:11,625 - INFO - Fitting formatters for table 
+2025-04-17 14:25:11,628 - INFO - No rounding scheme detected for column 'Credit_History'. Data will not be rounded.
+2025-04-17 14:25:11,628 - INFO - Fitting constraints for table 
+2025-04-17 14:25:11,629 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-17 14:25:11,638 - INFO - Fitting HyperTransformer for table 
+2025-04-17 14:25:11,724 - INFO - No rounding scheme detected for column 'Credit_History'. Data will not be rounded.
+2025-04-17 14:25:11,800 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 11, 800307), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_4547a7a4487e477896a6a423eae25e93', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-17 14:25:11,801 - INFO - Fitting GaussianMultivariate(distribution="{'Loan_ID_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Loan_ID_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Loan_ID_2': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Loan_ID_3': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Loan_ID_4': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Loan_ID_5': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Loan_ID_6': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Loan_ID_7': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Loan_ID_8': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Gender_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Gender_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Married_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Married_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Dependents_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Dependents_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Dependents_2': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Education_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Education_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Self_Employed_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Self_Employed_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'ApplicantIncome': <class 'copulas.univariate.beta.BetaUnivariate'>, 'CoapplicantIncome': <class 'copulas.univariate.beta.BetaUnivariate'>, 'LoanAmount': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Loan_Amount_Term': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Credit_History': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Property_Area_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Property_Area_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Loan_Status': <class 'copulas.univariate.beta.BetaUnivariate'>}")
+2025-04-17 14:25:12,552 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 12, 552234), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_4547a7a4487e477896a6a423eae25e93'}
+2025-04-17 14:25:12,663 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 12, 565903), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_c65afa7b4a864e3fb5ab0616d0d628b6', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-17 14:25:12,754 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 12, 663748), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_e05da302e5694d948f5212198b1ee82f', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-17 14:25:12,882 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 12, 755438), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_4547a7a4487e477896a6a423eae25e93', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-17 14:25:12,883 - INFO - Synthetic Data Generation Completed.
+2025-04-17 14:25:20,042 - INFO - Synthetic Data Evaluation Completed.
+2025-04-17 14:25:20,049 - INFO - Synthetic Data Report Generated Successfully.
+2025-04-17 14:25:20,171 - INFO - Synthetic data generated with 3 synthesizer(s).
+2025-04-17 14:25:20,171 - INFO - Running hybrid pipeline...
+2025-04-17 14:25:20,171 - INFO - Executing run_hybrid …
+2025-04-17 14:25:20,172 - INFO - Loaded cached encoded anon data to C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized_encoded.csv
+2025-04-17 14:25:20,195 - INFO - [HYBRID] Synthesizing with CTGAN …
+2025-04-17 14:25:20,195 - INFO - Executing run_synthetic...
+2025-04-17 14:25:20,200 - INFO - Detected metadata:
+2025-04-17 14:25:20,201 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "Gender_0": {
+            "sdtype": "categorical"
+        },
+        "Gender_1": {
+            "sdtype": "categorical"
+        },
+        "Gender_2": {
+            "sdtype": "categorical"
+        },
+        "Married_0": {
+            "sdtype": "categorical"
+        },
+        "Married_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_0": {
+            "sdtype": "categorical"
+        },
+        "Dependents_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_2": {
+            "sdtype": "categorical"
+        },
+        "Education_0": {
+            "sdtype": "categorical"
+        },
+        "Education_1": {
+            "sdtype": "categorical"
+        },
+        "ApplicantIncome": {
+            "sdtype": "numerical"
+        },
+        "Loan_Amount_Term": {
+            "sdtype": "numerical"
+        },
+        "Loan_Status": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-17 14:25:20,204 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 20, 204670), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_6a09742f783e45819c66510801e82df7'}
+2025-04-17 14:25:20,204 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 20, 204670), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_6a09742f783e45819c66510801e82df7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 13}
+2025-04-17 14:25:20,206 - INFO - Fitting table  metadata
+2025-04-17 14:25:20,207 - INFO - Fitting formatters for table 
+2025-04-17 14:25:20,208 - INFO - Fitting constraints for table 
+2025-04-17 14:25:20,209 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-17 14:25:20,209 - INFO - Fitting HyperTransformer for table 
+2025-04-17 14:25:20,218 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 20, 218096), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_6a09742f783e45819c66510801e82df7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 13}
+2025-04-17 14:25:20,230 - INFO - Guidance: There are no missing values in column ApplicantIncome. Extra column not created.
+2025-04-17 14:25:20,350 - INFO - Guidance: There are no missing values in column Loan_Amount_Term. Extra column not created.
+2025-04-17 14:25:33,758 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 33, 758425), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_6a09742f783e45819c66510801e82df7'}
+2025-04-17 14:25:33,817 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 33, 770200), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_6a09742f783e45819c66510801e82df7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 13}
+2025-04-17 14:25:33,818 - INFO - Synthetic Data Generation Completed.
+2025-04-17 14:25:34,318 - INFO - Synthetic Data Evaluation Completed.
+2025-04-17 14:25:34,322 - INFO - Synthetic Data Report Generated Successfully.
+2025-04-17 14:25:34,359 - INFO - Saved hybrid dataset to C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10_CTGAN_HYBRID.csv
+2025-04-17 14:25:34,360 - INFO - [HYBRID] Synthesizing with TVAE …
+2025-04-17 14:25:34,360 - INFO - Executing run_synthetic...
+2025-04-17 14:25:34,372 - INFO - Detected metadata:
+2025-04-17 14:25:34,373 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "Gender_0": {
+            "sdtype": "categorical"
+        },
+        "Gender_1": {
+            "sdtype": "categorical"
+        },
+        "Gender_2": {
+            "sdtype": "categorical"
+        },
+        "Married_0": {
+            "sdtype": "categorical"
+        },
+        "Married_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_0": {
+            "sdtype": "categorical"
+        },
+        "Dependents_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_2": {
+            "sdtype": "categorical"
+        },
+        "Education_0": {
+            "sdtype": "categorical"
+        },
+        "Education_1": {
+            "sdtype": "categorical"
+        },
+        "ApplicantIncome": {
+            "sdtype": "numerical"
+        },
+        "Loan_Amount_Term": {
+            "sdtype": "numerical"
+        },
+        "Loan_Status": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-17 14:25:34,376 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 34, 376145), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_600930cf6d04448da11d45191351e6a7'}
+2025-04-17 14:25:34,376 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 34, 376145), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_600930cf6d04448da11d45191351e6a7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 13}
+2025-04-17 14:25:34,377 - INFO - Fitting table  metadata
+2025-04-17 14:25:34,378 - INFO - Fitting formatters for table 
+2025-04-17 14:25:34,379 - INFO - Fitting constraints for table 
+2025-04-17 14:25:34,379 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-17 14:25:34,380 - INFO - Fitting HyperTransformer for table 
+2025-04-17 14:25:34,392 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 34, 392149), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_600930cf6d04448da11d45191351e6a7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 13}
+2025-04-17 14:25:34,407 - INFO - Guidance: There are no missing values in column ApplicantIncome. Extra column not created.
+2025-04-17 14:25:34,532 - INFO - Guidance: There are no missing values in column Loan_Amount_Term. Extra column not created.
+2025-04-17 14:25:39,098 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 39, 98452), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_600930cf6d04448da11d45191351e6a7'}
+2025-04-17 14:25:39,153 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 39, 109429), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_600930cf6d04448da11d45191351e6a7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 13}
+2025-04-17 14:25:39,155 - INFO - Synthetic Data Generation Completed.
+2025-04-17 14:25:39,663 - INFO - Synthetic Data Evaluation Completed.
+2025-04-17 14:25:39,666 - INFO - Synthetic Data Report Generated Successfully.
+2025-04-17 14:25:39,710 - INFO - Saved hybrid dataset to C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10_TVAE_HYBRID.csv
+2025-04-17 14:25:39,710 - INFO - [HYBRID] Synthesizing with GaussianCopula …
+2025-04-17 14:25:39,710 - INFO - Executing run_synthetic...
+2025-04-17 14:25:39,718 - INFO - Detected metadata:
+2025-04-17 14:25:39,719 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "Gender_0": {
+            "sdtype": "categorical"
+        },
+        "Gender_1": {
+            "sdtype": "categorical"
+        },
+        "Gender_2": {
+            "sdtype": "categorical"
+        },
+        "Married_0": {
+            "sdtype": "categorical"
+        },
+        "Married_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_0": {
+            "sdtype": "categorical"
+        },
+        "Dependents_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_2": {
+            "sdtype": "categorical"
+        },
+        "Education_0": {
+            "sdtype": "categorical"
+        },
+        "Education_1": {
+            "sdtype": "categorical"
+        },
+        "ApplicantIncome": {
+            "sdtype": "numerical"
+        },
+        "Loan_Amount_Term": {
+            "sdtype": "numerical"
+        },
+        "Loan_Status": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-17 14:25:39,723 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 39, 723624), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_a507f49655af46a881426c9c48713be4'}
+2025-04-17 14:25:39,724 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 39, 724620), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_a507f49655af46a881426c9c48713be4', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 13}
+2025-04-17 14:25:39,725 - INFO - Fitting table  metadata
+2025-04-17 14:25:39,726 - INFO - Fitting formatters for table 
+2025-04-17 14:25:39,727 - INFO - Fitting constraints for table 
+2025-04-17 14:25:39,727 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-17 14:25:39,731 - INFO - Fitting HyperTransformer for table 
+2025-04-17 14:25:39,807 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 39, 807701), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_a507f49655af46a881426c9c48713be4', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 13}
+2025-04-17 14:25:39,808 - INFO - Fitting GaussianMultivariate(distribution="{'Gender_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Gender_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Gender_2': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Married_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Married_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Dependents_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Dependents_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Dependents_2': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Education_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Education_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'ApplicantIncome': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Loan_Amount_Term': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Loan_Status': <class 'copulas.univariate.beta.BetaUnivariate'>}")
+2025-04-17 14:25:40,174 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 40, 174676), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_a507f49655af46a881426c9c48713be4'}
+2025-04-17 14:25:40,245 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 14, 25, 40, 181639), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_a507f49655af46a881426c9c48713be4', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 491, 'TOTAL NUMBER OF COLUMNS': 13}
+2025-04-17 14:25:40,246 - INFO - Synthetic Data Generation Completed.
+2025-04-17 14:25:40,758 - INFO - Synthetic Data Evaluation Completed.
+2025-04-17 14:25:40,761 - INFO - Synthetic Data Report Generated Successfully.
+2025-04-17 14:25:40,797 - INFO - Saved hybrid dataset to C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10_GaussianCopula_HYBRID.csv
+2025-04-17 14:25:40,797 - INFO - Hybrid pipeline complete to 3 dataset(s) ready.
+2025-04-17 14:25:40,798 - INFO - Hybrid pipeline completed successfully.
+2025-04-17 14:25:40,798 - INFO - Preparing datasets for machine learning...
+2025-04-17 14:25:40,799 - INFO - Original Data - Training Size: 491, Testing Size: 123
+2025-04-17 14:25:40,799 - INFO - Processing synthetic dataset generated by CTGAN...
+2025-04-17 14:25:40,800 - INFO - Synthetic Data (CTGAN) - Training Size: 491
+2025-04-17 14:25:40,801 - INFO - Processing synthetic dataset generated by TVAE...
+2025-04-17 14:25:40,802 - INFO - Synthetic Data (TVAE) - Training Size: 491
+2025-04-17 14:25:40,802 - INFO - Processing synthetic dataset generated by GaussianCopula...
+2025-04-17 14:25:40,803 - INFO - Synthetic Data (GaussianCopula) - Training Size: 491
+2025-04-17 14:25:40,803 - INFO - Processing anonymized dataset...
+2025-04-17 14:25:40,804 - INFO - Anonymized Data - Training Size: 491
+2025-04-17 14:25:40,805 - INFO - Processing hybrid dataset generated by CTGAN...
+2025-04-17 14:25:40,806 - INFO - Hybrid Data (CTGAN_HYBRID) - Training Size: 491
+2025-04-17 14:25:40,808 - INFO - Processing hybrid dataset generated by TVAE...
+2025-04-17 14:25:40,809 - INFO - Hybrid Data (TVAE_HYBRID) - Training Size: 491
+2025-04-17 14:25:40,809 - INFO - Processing hybrid dataset generated by GaussianCopula...
+2025-04-17 14:25:40,810 - INFO - Hybrid Data (GaussianCopula_HYBRID) - Training Size: 491
+2025-04-17 14:25:40,810 - INFO - Training models on all datasets...
+2025-04-17 14:25:44,352 - INFO - Model Training Completed.
+2025-04-17 14:25:44,352 - INFO - Evaluating models...
+2025-04-17 14:25:44,353 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-04-17 14:25:44,353 - INFO - Evaluating LogisticRegression on Original...
+2025-04-17 14:25:44,355 - INFO - Predictions completed for LogisticRegression on Original
+2025-04-17 14:25:44,362 - INFO - Evaluating LogisticRegression on CTGAN...
+2025-04-17 14:25:44,364 - INFO - Predictions completed for LogisticRegression on CTGAN
+2025-04-17 14:25:44,369 - INFO - Evaluating LogisticRegression on TVAE...
+2025-04-17 14:25:44,370 - INFO - Predictions completed for LogisticRegression on TVAE
+2025-04-17 14:25:44,371 - WARNING -  [WARNING] :LogisticRegression on TVAE predicted only one class: {'Y'}
+2025-04-17 14:25:44,379 - INFO - Evaluating LogisticRegression on GaussianCopula...
+2025-04-17 14:25:44,380 - INFO - Predictions completed for LogisticRegression on GaussianCopula
+2025-04-17 14:25:44,385 - INFO - Evaluating LogisticRegression on Anonymous...
+2025-04-17 14:25:44,387 - INFO - Predictions completed for LogisticRegression on Anonymous
+2025-04-17 14:25:44,387 - WARNING -  [WARNING] :LogisticRegression on Anonymous predicted only one class: {'Y'}
+2025-04-17 14:25:44,394 - INFO - Evaluating LogisticRegression on CTGAN_HYBRID...
+2025-04-17 14:25:44,395 - INFO - Predictions completed for LogisticRegression on CTGAN_HYBRID
+2025-04-17 14:25:44,401 - INFO - Evaluating LogisticRegression on TVAE_HYBRID...
+2025-04-17 14:25:44,402 - INFO - Predictions completed for LogisticRegression on TVAE_HYBRID
+2025-04-17 14:25:44,409 - INFO - Evaluating LogisticRegression on GaussianCopula_HYBRID...
+2025-04-17 14:25:44,411 - INFO - Predictions completed for LogisticRegression on GaussianCopula_HYBRID
+2025-04-17 14:25:44,415 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-04-17 14:25:44,416 - INFO - Evaluating KNN on Original...
+2025-04-17 14:25:44,428 - INFO - Predictions completed for KNN on Original
+2025-04-17 14:25:44,433 - INFO - Evaluating KNN on CTGAN...
+2025-04-17 14:25:44,445 - INFO - Predictions completed for KNN on CTGAN
+2025-04-17 14:25:44,451 - INFO - Evaluating KNN on TVAE...
+2025-04-17 14:25:44,462 - INFO - Predictions completed for KNN on TVAE
+2025-04-17 14:25:44,463 - WARNING -  [WARNING] :KNN on TVAE predicted only one class: {'Y'}
+2025-04-17 14:25:44,469 - INFO - Evaluating KNN on GaussianCopula...
+2025-04-17 14:25:44,479 - INFO - Predictions completed for KNN on GaussianCopula
+2025-04-17 14:25:44,485 - INFO - Evaluating KNN on Anonymous...
+2025-04-17 14:25:44,489 - INFO - Predictions completed for KNN on Anonymous
+2025-04-17 14:25:44,496 - INFO - Evaluating KNN on CTGAN_HYBRID...
+2025-04-17 14:25:44,500 - INFO - Predictions completed for KNN on CTGAN_HYBRID
+2025-04-17 14:25:44,505 - INFO - Evaluating KNN on TVAE_HYBRID...
+2025-04-17 14:25:44,510 - INFO - Predictions completed for KNN on TVAE_HYBRID
+2025-04-17 14:25:44,510 - WARNING -  [WARNING] :KNN on TVAE_HYBRID predicted only one class: {'Y'}
+2025-04-17 14:25:44,517 - INFO - Evaluating KNN on GaussianCopula_HYBRID...
+2025-04-17 14:25:44,521 - INFO - Predictions completed for KNN on GaussianCopula_HYBRID
+2025-04-17 14:25:44,528 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-04-17 14:25:44,528 - INFO - Evaluating RandomForest on Original...
+2025-04-17 14:25:44,533 - INFO - Predictions completed for RandomForest on Original
+2025-04-17 14:25:44,540 - INFO - Evaluating RandomForest on CTGAN...
+2025-04-17 14:25:44,545 - INFO - Predictions completed for RandomForest on CTGAN
+2025-04-17 14:25:44,551 - INFO - Evaluating RandomForest on TVAE...
+2025-04-17 14:25:44,556 - INFO - Predictions completed for RandomForest on TVAE
+2025-04-17 14:25:44,557 - WARNING -  [WARNING] :RandomForest on TVAE predicted only one class: {'Y'}
+2025-04-17 14:25:44,564 - INFO - Evaluating RandomForest on GaussianCopula...
+2025-04-17 14:25:44,569 - INFO - Predictions completed for RandomForest on GaussianCopula
+2025-04-17 14:25:44,575 - INFO - Evaluating RandomForest on Anonymous...
+2025-04-17 14:25:44,580 - INFO - Predictions completed for RandomForest on Anonymous
+2025-04-17 14:25:44,585 - INFO - Evaluating RandomForest on CTGAN_HYBRID...
+2025-04-17 14:25:44,590 - INFO - Predictions completed for RandomForest on CTGAN_HYBRID
+2025-04-17 14:25:44,596 - INFO - Evaluating RandomForest on TVAE_HYBRID...
+2025-04-17 14:25:44,600 - INFO - Predictions completed for RandomForest on TVAE_HYBRID
+2025-04-17 14:25:44,600 - WARNING -  [WARNING] :RandomForest on TVAE_HYBRID predicted only one class: {'Y'}
+2025-04-17 14:25:44,606 - INFO - Evaluating RandomForest on GaussianCopula_HYBRID...
+2025-04-17 14:25:44,612 - INFO - Predictions completed for RandomForest on GaussianCopula_HYBRID
+2025-04-17 14:25:44,617 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-04-17 14:25:44,618 - INFO - Evaluating DecisionTree on Original...
+2025-04-17 14:25:44,619 - INFO - Predictions completed for DecisionTree on Original
+2025-04-17 14:25:44,625 - INFO - Evaluating DecisionTree on CTGAN...
+2025-04-17 14:25:44,627 - INFO - Predictions completed for DecisionTree on CTGAN
+2025-04-17 14:25:44,632 - INFO - Evaluating DecisionTree on TVAE...
+2025-04-17 14:25:44,633 - INFO - Predictions completed for DecisionTree on TVAE
+2025-04-17 14:25:44,634 - WARNING -  [WARNING] :DecisionTree on TVAE predicted only one class: {'Y'}
+2025-04-17 14:25:44,642 - INFO - Evaluating DecisionTree on GaussianCopula...
+2025-04-17 14:25:44,643 - INFO - Predictions completed for DecisionTree on GaussianCopula
+2025-04-17 14:25:44,648 - INFO - Evaluating DecisionTree on Anonymous...
+2025-04-17 14:25:44,650 - INFO - Predictions completed for DecisionTree on Anonymous
+2025-04-17 14:25:44,656 - INFO - Evaluating DecisionTree on CTGAN_HYBRID...
+2025-04-17 14:25:44,657 - INFO - Predictions completed for DecisionTree on CTGAN_HYBRID
+2025-04-17 14:25:44,662 - INFO - Evaluating DecisionTree on TVAE_HYBRID...
+2025-04-17 14:25:44,664 - INFO - Predictions completed for DecisionTree on TVAE_HYBRID
+2025-04-17 14:25:44,671 - INFO - Evaluating DecisionTree on GaussianCopula_HYBRID...
+2025-04-17 14:25:44,673 - INFO - Predictions completed for DecisionTree on GaussianCopula_HYBRID
+2025-04-17 14:25:44,678 - INFO - Preparing evaluation for model 'SVM' across all datasets...
+2025-04-17 14:25:44,679 - INFO - Evaluating SVM on Original...
+2025-04-17 14:25:44,682 - INFO - Predictions completed for SVM on Original
+2025-04-17 14:25:44,683 - WARNING -  [WARNING] :SVM on Original predicted only one class: {'Y'}
+2025-04-17 14:25:44,691 - INFO - Evaluating SVM on CTGAN...
+2025-04-17 14:25:44,695 - INFO - Predictions completed for SVM on CTGAN
+2025-04-17 14:25:44,695 - WARNING -  [WARNING] :SVM on CTGAN predicted only one class: {'Y'}
+2025-04-17 14:25:44,700 - INFO - Evaluating SVM on TVAE...
+2025-04-17 14:25:44,702 - INFO - Predictions completed for SVM on TVAE
+2025-04-17 14:25:44,702 - WARNING -  [WARNING] :SVM on TVAE predicted only one class: {'Y'}
+2025-04-17 14:25:44,709 - INFO - Evaluating SVM on GaussianCopula...
+2025-04-17 14:25:44,713 - INFO - Predictions completed for SVM on GaussianCopula
+2025-04-17 14:25:44,713 - WARNING -  [WARNING] :SVM on GaussianCopula predicted only one class: {'Y'}
+2025-04-17 14:25:44,720 - INFO - Evaluating SVM on Anonymous...
+2025-04-17 14:25:44,724 - INFO - Predictions completed for SVM on Anonymous
+2025-04-17 14:25:44,724 - WARNING -  [WARNING] :SVM on Anonymous predicted only one class: {'Y'}
+2025-04-17 14:25:44,730 - INFO - Evaluating SVM on CTGAN_HYBRID...
+2025-04-17 14:25:44,732 - INFO - Predictions completed for SVM on CTGAN_HYBRID
+2025-04-17 14:25:44,732 - WARNING -  [WARNING] :SVM on CTGAN_HYBRID predicted only one class: {'Y'}
+2025-04-17 14:25:44,740 - INFO - Evaluating SVM on TVAE_HYBRID...
+2025-04-17 14:25:44,742 - INFO - Predictions completed for SVM on TVAE_HYBRID
+2025-04-17 14:25:44,742 - WARNING -  [WARNING] :SVM on TVAE_HYBRID predicted only one class: {'Y'}
+2025-04-17 14:25:44,747 - INFO - Evaluating SVM on GaussianCopula_HYBRID...
+2025-04-17 14:25:44,750 - INFO - Predictions completed for SVM on GaussianCopula_HYBRID
+2025-04-17 14:25:44,750 - WARNING -  [WARNING] :SVM on GaussianCopula_HYBRID predicted only one class: {'Y'}
+2025-04-17 14:25:44,765 - INFO - Evaluation completed for all models.
+2025-04-17 14:25:44,770 - INFO - Model Training and Evaluation completed.
+2025-04-17 14:25:45,402 - INFO -  Visualizations saved.
+2025-04-17 14:25:45,403 - INFO -  Benchmarking Completed. Results saved in output folder.
