@@ -3,7 +3,7 @@ import pandas as pd
 import yaml
 from preprocessing.data_loader import load_dataset
 from preprocessing.missing_value_handler import handle_missing_values
-from preprocessing.encoding import encode_categorical_features
+from preprocessing.encoding import encode_categorical_features_train_test
 from sklearn.model_selection import train_test_split
 
 # Load configuration
@@ -64,8 +64,9 @@ def run_preprocessing(dataset_path, separator, target_column,  config_path="conf
     train_raw_df.to_csv(train_raw_path, index=False, sep=separator)  # Save raw train for anonymization
 
     # Encode
-    cleaned_train, encoding_map = encode_categorical_features(train_raw_df.copy(), target_column)
-    cleaned_test, _ = encode_categorical_features(test_raw_df.copy(), target_column)
+    #cleaned_train, encoding_map = encode_categorical_features(train_raw_df.copy(), target_column)
+    #cleaned_test, _ = encode_categorical_features(test_raw_df.copy(), target_column)
+    cleaned_train, cleaned_test, encoder, encoding_map = encode_categorical_features_train_test(train_raw_df.copy(), target_column, test_data=test_raw_df.copy())
 
     # Save encoded versions
     cleaned_train.to_csv(cleaned_train_path, index=False)
