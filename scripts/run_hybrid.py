@@ -1,108 +1,127 @@
-from math import log
+from math import log  # noqa: F401 – kept for consistency with existing imports
 import os
-import pandas as pd
 import copy
+import pandas as pd
 
-from run_synthetic import run_synthetic
 from run_anonymization import run_anonymization
 from run_postprocessing import run_postprocessing
+from run_synthetic import run_synthetic
 from output_utils.config_utils import generate_anonym_tag
 
+# -----------------------------------------------------------------------------
+# Hybrid pipeline: reuse existing anonymized data (if present) → encode →
+# generate synthetic data with *every* synthesizer that has `enabled: true`.
+# -----------------------------------------------------------------------------
 
-def run_hybrid(train_raw_path, dataset_name, target_column, output_dir, config, config_path, logger=None):
+def run_hybrid(
+    train_raw_path: str,
+    dataset_name: str,
+    target_column: str,
+    output_dir: str,
+    config: dict,
+    config_path: str,
+    logger=None,
+):
+    """Create **hybrid synthetic datasets**.
+
+    Steps
+    -----
+    1. Look for an *encoded anonymized* file produced by the standalone
+       anonymization pipeline (pattern
+       ``datasets/anonymized/{dataset}_{tag}_anonymized_encoded.csv``).
+    2. If absent, look for the raw anonymized CSV
+       ``datasets/anonymized/{dataset}_{tag}_anonymized.csv`` and encode it.
+    3. If *that* is also missing, run the Java/ARX anonymizer now and then
+       encode.
+    4. Iterate over every synthesizer whose config sets ``enabled: true`` and
+       call :pyfunc:`run_synthetic` with a *mini config* so only that
+       synthesizer is active.  Existing pickles are reused, avoiding retrain.
+    5. Save each hybrid dataset to
+       ``datasets/hybrid/{dataset}_{tag}_{Synth}_HYBRID.csv``.
+
+    The function returns a ``dict[str, pd.DataFrame]`` mapping each synthesizer
+    name to its hybrid dataset so downstream code (utility evaluation) can just
+    consume it.
     """
-    Runs the hybrid pipeline: anonymization → postprocessing → synthesis.
 
-    Saves all files in datasets/hybrid/.
-
-    Returns:
-        pd.DataFrame: Hybrid synthetic data generated from anonymized → postprocessed data.
-    """
     if logger:
-        logger.info("Executing run_hybrid...")
+        logger.info("Executing run_hybrid …")
 
-    separator = config["dataset"]["separator"]
-    hybrid_cfg = config.get("hybrid", {})
+    sep = config["dataset"]["separator"]
+    anon_tag = generate_anonym_tag(config)
 
-    # Create hybrid directory if not exists
-    hybrid_dir = os.path.abspath("datasets/hybrid")
-    os.makedirs(hybrid_dir, exist_ok=True)
+    # ---------- paths ----------
+    anon_dir = os.path.abspath("datasets/anonymized")
+    hyb_dir = os.path.abspath("datasets/hybrid")
+    os.makedirs(anon_dir, exist_ok=True)
+    os.makedirs(hyb_dir, exist_ok=True)
 
-    anonym_tag = generate_anonym_tag(config)
-    hybrid_dataset_name = f"{dataset_name}_{anonym_tag}"
+    base_name = f"{dataset_name}_{anon_tag}_anonymized"
+    anon_csv = os.path.join(anon_dir, f"{base_name}.csv")
+    enc_csv = os.path.join(anon_dir, f"{base_name}_encoded.csv")
 
-    # STEP 1: Run anonymization
-    anonym_csv_path = os.path.join(hybrid_dir, f"{hybrid_dataset_name}.csv")
-    success = run_anonymization(train_raw_path, config_path, anonymized_output_path=anonym_csv_path)
-    if not success:
+    # ---------- obtain *encoded* anonymized data ----------
+    if os.path.exists(enc_csv):
         if logger:
-            logger.error("Hybrid pipeline failed during anonymization step.")
-        raise RuntimeError("Hybrid pipeline failed during anonymization step.")
-    if logger:
-        logger.info(f" Anonymized file created at {anonym_csv_path}")
+            logger.info(f"Loaded cached encoded anon data to {enc_csv}")
+        encoded_df = pd.read_csv(enc_csv, sep=sep)
+    else:
+        # ensure anonymized CSV exists first
+        if not os.path.exists(anon_csv):
+            if logger:
+                logger.info("No anonymized CSV - running ARX anonymization …")
+            success = run_anonymization(
+                train_raw_path,
+                config_path,
+                anonymized_output_path=anon_csv,
+                logger=logger,
+            )
+            if not success:
+                raise RuntimeError("Hybrid pipeline: anonymization failed.")
 
-    # STEP 2: Postprocess (encode anonymized data)
-    postprocessed_data, _, _ = run_postprocessing(anonym_csv_path, separator, target_column, logger=logger)
-
-    encoded_path = os.path.join(hybrid_dir, f"{hybrid_dataset_name}_encoded.csv")
-    if postprocessed_data is None:
+        # encode once and cache
+        enc_df, _, _ = run_postprocessing(anon_csv, sep, target_column, logger)
+        if enc_df is None:
+            raise RuntimeError("Hybrid pipeline: post-processing failed.")
+        enc_df.to_csv(enc_csv, index=False, sep=sep)
         if logger:
-            logger.error("Postprocessing failed: No encoded data returned.")
-        raise RuntimeError("Hybrid pipeline failed during postprocessing.")
-    postprocessed_data.to_csv(encoded_path, index=False, sep=separator)
-    if logger:
-        logger.info(f" Encoded anonymized dataset saved to: {encoded_path}")
+            logger.info(f"Encoded anon data saved to {enc_csv}")
+        encoded_df = enc_df
 
-    # STEP 3: Run synthesis using the saved encoded file (to avoid metadata mismatch)
-    loaded_encoded_data = pd.read_csv(encoded_path, sep=separator)
-
-    synthesizer_name = hybrid_cfg.get("synthesizer")
-    if synthesizer_name is None:
+    # ---------- generate hybrid datasets ----------
+    hybrid_sets: dict[str, pd.DataFrame] = {}
+    for synth_name, synth_cfg in config["synthesis"]["synthesizers"].items():
+        if not synth_cfg.get("enabled", False):
+            continue
         if logger:
-            logger.error("Hybrid config did not specify a 'synthesizer'.")
-        raise ValueError("Hybrid config must specify a 'synthesizer'.")
+            logger.info(f"[HYBRID] Synthesizing with {synth_name} …")
 
-    synth_config_original = config["synthesis"]["synthesizers"].get(synthesizer_name)
-    if not synth_config_original:
-        raise ValueError(f"Synthesizer '{synthesizer_name}' not found in synthesis config.")
-
-    # Construct mini-config with just one enabled synthesizer
-    synth_config = copy.deepcopy(synth_config_original)
-    synth_config["enabled"] = True
-    hybrid_config = copy.deepcopy(config)
-    hybrid_config["synthesis"] = {
-        "enable_synthetic_generation": True,
-        "synthesizers": {
-            synthesizer_name: synth_config
+        mini_cfg = copy.deepcopy(config)
+        mini_cfg["synthesis"] = {
+            "enable_synthetic_generation": True,
+            "synthesizers": {synth_name: {**copy.deepcopy(synth_cfg), "enabled": True}},
         }
-    }
 
-    hybrid_synthetic_datasets = run_synthetic(
-    loaded_encoded_data,
-    hybrid_dataset_name,
-    target_column,
-    output_dir,
-    hybrid_config,
-    logger=logger
-)
+        synth_ds = run_synthetic(
+            encoded_df,
+            f"{dataset_name}_{anon_tag}",
+            target_column,
+            output_dir,
+            mini_cfg,
+            logger=logger,
+        )
 
-    
-    hybrid_df = hybrid_synthetic_datasets.get(synthesizer_name)
-    if hybrid_df is None:
+        df = synth_ds.get(synth_name)
+        if df is None:
+            raise RuntimeError(f"{synth_name} returned no data.")
+
+        out_csv = os.path.join(hyb_dir, f"{dataset_name}_{anon_tag}_{synth_name}_HYBRID.csv")
+        df.to_csv(out_csv, index=False, sep=sep)
         if logger:
-            logger.error(f"Synthesizer '{synthesizer_name}' did not return a dataset.")
-        raise RuntimeError(f"Synthesizer '{synthesizer_name}' did not return a dataset.")
-    
+            logger.info(f"Saved hybrid dataset to {out_csv}")
+        hybrid_sets[synth_name] = df
 
     if logger:
-        logger.info(f" Hybrid dataset generated successfully. Type: {type(hybrid_df)}, Shape: {hybrid_df.shape}")
+        logger.info(f"Hybrid pipeline complete to {len(hybrid_sets)} dataset(s) ready.")
 
-    # Save the final dataset
-    hybrid_output_path = os.path.join(hybrid_dir, f"{hybrid_dataset_name}_{synthesizer_name}_HYBRID.csv")
-    hybrid_df.to_csv(hybrid_output_path, index=False, sep=separator)
-    if logger:
-        logger.info(f" Final hybrid synthetic dataset saved to: {hybrid_output_path}")
-
-    #return hybrid_df
-    return {synthesizer_name: hybrid_df}
-
+    return hybrid_sets

@@ -1,41 +1,42 @@
 dataset:
-  path: "datasets/original/crimeData.csv" # Path to the dataset
+  path: "datasets/original/loan.csv" # Path to the dataset
   separator: "," # Delimiter used in the dataset (e.g., "," or "\t")
-  target_column: "Status" # Name of the target column
+  target_column: "Loan_Status" # Name of the target column
   test_size: 0.2
 
 preprocessing:
-  handle_missing_values: "drop" # Options: "drop", "mean", "median", "mode"
+  handle_missing_values: "mean" # Options: "drop", "mean", "median", "mode"
   encoding_type: "binary" # Type of encoding, currently only "binary" is supported
 
 synthesis:
   enable_synthetic_generation: true # Set to false to skip # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
   synthesizers:
     CTGAN:
-      enabled: false
+      enabled: true
       import_path: "sdv.single_table"
       class_name: "CTGANSynthesizer"
       params:
         epochs: 50
-      num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
+      num_generated_rows: "same_as_original" # Options: "same_as_original", "custom"
       custom_generated_rows: 10000 # Only used if num_generated_rows is "custom"
       row_multiplier: 8
     TVAE:
-      enabled: false
+      enabled: true
       import_path: "sdv.single_table"
       class_name: "TVAESynthesizer"
       params:
         epochs: 50
       num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
-      custom_generated_rows: 5000 # TVAE will generate 5000 rows
+      custom_generated_rows: 10000 # TVAE will generate 5000 rows
       row_multiplier: 8
     GaussianCopula:
       enabled: true
       import_path: "sdv.single_table"
       class_name: "GaussianCopulaSynthesizer"
       params: {}
-      num_generated_rows: "same_as_original"
-      custom_generated_rows: 5000
+      num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
+      custom_generated_rows: 10000
+      row_multiplier: 8
     CustomSynthesizer:
       enabled: false # Set to true if using a custom one
       import_path: "custom.custom_synthesizer"
@@ -52,46 +53,40 @@ anonymization:
   suppression_limit: 0.1
   attributes:
     quasi_identifiers:
-      - "Victim_age"
-      - "Victim_sex"
-      - "Victim_descent"
-      - "LAT"
-      - "LON"
+      - "Gender"
+      - "Married"
+      - "Education"
 
     sensitive_attributes:
-      - "Crime_Code"
+      - "ApplicantIncome"
+
     insensitive_attributes:
-      - "DR_NO"
-      - "Time_occured"
-      - "Premis"
-      - "Weapon"
-      - "Status"
+      - "Loan_Amount_Term"
+      - "Dependents"
+      - "Loan_Status"
 
   hierarchies:
-    "Victim_age": "src/anonymization/anonymARXij/src/hierarchies/hierarchy_age_4.csv"
-    "Victim_sex": "src/anonymization/anonymARXij/src/hierarchies/hierarchy_sex.csv"
-    "Victim_descent": "src/anonymization/anonymARXij/src/hierarchies/hierarchy_descent.csv"
+    "Gender": "src/anonymization/anonymARXij/src/hierarchies_loan/gender.csv"
+    "Married": "src/anonymization/anonymARXij/src/hierarchies_loan/married.csv"
+    "Education": "src/anonymization/anonymARXij/src/hierarchies_loan/education.csv"
 
-  hierarchy_config:
-    LAT: 10
-    LON: 10
-
+  hierarchy_config: {}
   models:
     k_anonymity: 5
     l_diversity:
-      attribute: "Crime_Code"
+      attribute: "ApplicantIncome"
       value: 2
 
 hybrid:
   enable_hybrid: true
-  reuse_params: true
-  synthesizer: "GaussianCopulaSynthesizer"
-  # Only required when reuse_params is false
-  k_anonymity: 5
-  l_diversity: 3
-  epochs: 30
-  num_generated_rows: 5000
   save_intermediate_files: false
+  reuse_params: true
+  #synthesizer: "CTGAN"  no longer necessary
+  # Only required when reuse_params is false
+  #k_anonymity: 5
+  #l_diversity: 3
+  #epochs: 30
+  #num_generated_rows: 5000
 
 utility:
   enable_utility_evaluation: true # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).

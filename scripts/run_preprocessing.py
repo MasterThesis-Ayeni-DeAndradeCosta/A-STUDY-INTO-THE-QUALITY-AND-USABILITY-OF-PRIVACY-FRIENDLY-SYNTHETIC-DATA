@@ -5,6 +5,7 @@ from preprocessing.data_loader import load_dataset
 from preprocessing.missing_value_handler import handle_missing_values
 from preprocessing.encoding import encode_categorical_features_train_test
 from sklearn.model_selection import train_test_split
+import joblib
 
 # Load configuration
 def load_config(config_path="configs/benchmark_config.yaml"):
@@ -33,21 +34,24 @@ def run_preprocessing(dataset_path, separator, target_column,  config_path="conf
     train_raw_path = f"datasets/train/{dataset_name}_train_raw.csv"
     cleaned_train_path = f"datasets/cleaned/{dataset_name}_cleaned.csv"
     cleaned_test_path = f"datasets/test/{dataset_name}_test_set.csv"
+    encoder_path = f"artifacts/{dataset_name}_binary_encoder.pkl"
+    os.makedirs("artifacts", exist_ok=True)
 
     os.makedirs("datasets/train", exist_ok=True)
     os.makedirs("datasets/cleaned", exist_ok=True)
     os.makedirs("datasets/test", exist_ok=True)
 
     # Check if preprocessed files exist
-    if os.path.exists(train_raw_path) and os.path.exists(cleaned_train_path) and os.path.exists(cleaned_test_path):
+    if os.path.exists(train_raw_path) and os.path.exists(cleaned_train_path) and os.path.exists(cleaned_test_path) and os.path.exists(encoder_path):
         print(f"✅ Preprocessed files found. Skipping preprocessing.")
         if logger:
             logger.info("Preprocessed files found. Skipping preprocessing.")
         cleaned_train = pd.read_csv(cleaned_train_path)
         cleaned_test = pd.read_csv(cleaned_test_path)
         original_data, _ = load_dataset(dataset_path, separator)
+        encoder = joblib.load(encoder_path)
         # Encoding map will not be available if skipped (you can return None or reload if needed)
-        return cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path, None
+        return cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path, None, encoder
 
     # Full preprocessing flow
     original_data, _ = load_dataset(dataset_path, separator)
@@ -68,6 +72,11 @@ def run_preprocessing(dataset_path, separator, target_column,  config_path="conf
     #cleaned_test, _ = encode_categorical_features(test_raw_df.copy(), target_column)
     cleaned_train, cleaned_test, encoder, encoding_map = encode_categorical_features_train_test(train_raw_df.copy(), target_column, test_data=test_raw_df.copy())
 
+    joblib.dump(encoder, encoder_path)
+    print(f"💾 Saved encoder to: {encoder_path}")
+    if logger:
+        logger.info(f"Saved encoder to: {encoder_path}")
+
     # Save encoded versions
     cleaned_train.to_csv(cleaned_train_path, index=False)
     cleaned_test.to_csv(cleaned_test_path, index=False)
@@ -80,7 +89,7 @@ def run_preprocessing(dataset_path, separator, target_column,  config_path="conf
         logger.info(f"Saved encoded train set to: {cleaned_train_path}")
         logger.info(f"Saved encoded test set to: {cleaned_test_path}")
 
-    return cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path, encoding_map
+    return cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path, encoding_map, encoder
 
 if __name__ == "__main__":
     config = load_config()
@@ -88,7 +97,7 @@ if __name__ == "__main__":
     separator = config["dataset"]["separator"]
     target_column = config["dataset"]["target_column"]
 
-    cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path, encoding_map = run_preprocessing(
+    cleaned_train, dataset_name, original_data, cleaned_test, train_raw_path, encoding_map, encoder = run_preprocessing(
         dataset_path, separator, target_column
     )
 
