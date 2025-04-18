@@ -1,0 +1,592 @@
+2025-04-18 21:12:25,578 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-04-18 21:12:25,578 - INFO -  Benchmarking started for dataset: loan
+2025-04-18 21:12:25,578 - INFO - Using dataset path: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\original\loan.csv
+2025-04-18 21:12:25,578 - INFO - Target column: Loan_Status, separator: ','
+2025-04-18 21:12:25,578 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = True, enable_hybrid = True, enable_utility = True, delete_after_evaluation = True
+2025-04-18 21:12:25,578 - INFO - Running preprocessing...
+2025-04-18 21:12:25,584 - INFO -  [PREPROCESSING] Preprocessed files found. Skipping preprocessing.
+2025-04-18 21:12:25,647 - INFO - Preprocessing completed. Rows before: 614, after: 384
+2025-04-18 21:12:25,647 - INFO - Preprocessed data saved to: outputs\singular\loan_2025-04-18_21-12-25\preprocessing_report.txt
+2025-04-18 21:12:25,649 - INFO - enable_anonymization = True
+2025-04-18 21:12:25,649 - INFO - Starting Anonymization Pipeline with output path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized.csv.......
+2025-04-18 21:12:25,657 - INFO -  [ANONYMIZATION] Executing run_anonymization, config_path : configs/benchmark_config.yaml...........
+2025-04-18 21:12:25,657 - INFO -  [ANONYMIZATION] Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-04-18 21:12:26,953 - INFO -  [ANONYMIZATION] Anonimized file saved to : C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized.csv
+2025-04-18 21:12:26,953 - INFO -  [ANONYMIZATION] Java anonymization completed successfully.
+2025-04-18 21:12:26,953 - INFO -  [ANONYMIZATION] Java STDOUT:
+? Java received config path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+? Loading config from: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+Loading config from: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+? Dataset Path (from args): C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\train\loan_train_raw.csv
+? Dataset Separator: ,
+? Suppression Limit: 0.1
+
+? Configured Attributes:
+  ? Quasi-Identifier: Gender
+  ? Quasi-Identifier: Married
+  ? Quasi-Identifier: Education
+  ? Sensitive Attribute: ApplicantIncome
+  ? Insensitive Attribute: Loan_Amount_Term
+  ? Insensitive Attribute: Dependents
+  ? Insensitive Attribute: Loan_Status
+
+? Defined Hierarchies:
+  ? Married -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\married.csv
+  ? Education -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\education.csv
+  ? Gender -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\gender.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\married.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\education.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\gender.csv
+? Privacy Models Configured
+? Anonymized Output Path (from args): C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized.csv
+? Anonymized Output Path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized.csv
+? Anonymization completed. Output saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized.csv
+Anonymized Data Quality Metrics:
+ - Ambiguity: 0.9947916666666666
+ - AECS: 0.9804421768707483
+ - Discernibility: 0.9927621357383758
+ - Granularity: 0.9947916666666666
+ - MSE: 0.9947916666666666
+ - Non-Uniform Entropy: 1.0
+ - Precision: 0.9947916666666666
+ - Record-level SE: 0.9957277647038991
+Equivalence Class Statistics:
+ - Number of Classes: 7
+ - Average Class Size: 54.57142857142857
+Suppression Statistics:
+ - Suppressed Records: 2
+ - Suppression Percentage: 0.52%
+2025-04-18 21:12:26,954 - INFO - Anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized.csv
+2025-04-18 21:12:26,984 - INFO - Anonymous data report saved at: outputs\singular\loan_2025-04-18_21-12-25\anonymous_data_report.txt
+2025-04-18 21:12:26,984 - INFO -  [POSTPROCESSING] Postprocessing anonymized data: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized.csv
+2025-04-18 21:12:26,986 - INFO -  [POSTPROCESSING] Loaded anonymized data: (384, 13)
+2025-04-18 21:12:26,989 - INFO -  [POSTPROCESSING] Loaded fallback maps from training data. Categorical cols: 8, Numeric cols: 5
+2025-04-18 21:12:26,990 - INFO -  [POSTPROCESSING] Normalizing anonymized data using ARX artifact cleaning and fallback values.
+2025-04-18 21:12:27,002 - INFO -  [POSTPROCESSING] Normalized anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized_processed.csv
+2025-04-18 21:12:27,012 - INFO -  [POSTPROCESSING] Binary Encoding applied to anonymized data. Encoded shape: (384, 28)
+2025-04-18 21:12:27,015 - INFO -  [POSTPROCESSING] Encoded anonymized dataset saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized_encoded.csv
+2025-04-18 21:12:27,015 - INFO -  [POSTPROCESSING] Encoding map generated for anonymized data: 0 original categorical columns.
+2025-04-18 21:12:27,019 - INFO - Postprocessing report saved at: outputs\singular\loan_2025-04-18_21-12-25\postprocessing_report.txt
+2025-04-18 21:12:27,019 - INFO - enable_synthetic_generation = True
+2025-04-18 21:12:27,019 - INFO - Starting standard Synthetic Data Generation pipeline...
+2025-04-18 21:12:27,020 - INFO - Executing run_synthetic.....
+2025-04-18 21:12:27,020 - INFO - [SYNTHETIC PIPELINE] executing run_synthetic for loan...
+2025-04-18 21:12:27,020 - INFO - [SYNTHETIC] Processing dataset: loan
+2025-04-18 21:12:27,021 - INFO - [SYNTHETIC] Original dataset size: 384 rows
+2025-04-18 21:12:27,033 - INFO - Detected metadata:
+2025-04-18 21:12:27,034 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "Loan_ID_0": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_1": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_2": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_3": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_4": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_5": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_6": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_7": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_8": {
+            "sdtype": "categorical"
+        },
+        "Gender_0": {
+            "sdtype": "categorical"
+        },
+        "Gender_1": {
+            "sdtype": "categorical"
+        },
+        "Married_0": {
+            "sdtype": "categorical"
+        },
+        "Married_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_0": {
+            "sdtype": "categorical"
+        },
+        "Dependents_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_2": {
+            "sdtype": "categorical"
+        },
+        "Education_0": {
+            "sdtype": "categorical"
+        },
+        "Education_1": {
+            "sdtype": "categorical"
+        },
+        "Self_Employed_0": {
+            "sdtype": "categorical"
+        },
+        "Self_Employed_1": {
+            "sdtype": "categorical"
+        },
+        "ApplicantIncome": {
+            "sdtype": "numerical"
+        },
+        "CoapplicantIncome": {
+            "sdtype": "numerical"
+        },
+        "LoanAmount": {
+            "sdtype": "numerical"
+        },
+        "Loan_Amount_Term": {
+            "sdtype": "categorical"
+        },
+        "Credit_History": {
+            "sdtype": "categorical"
+        },
+        "Property_Area_0": {
+            "sdtype": "categorical"
+        },
+        "Property_Area_1": {
+            "sdtype": "categorical"
+        },
+        "Loan_Status": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-18 21:12:27,035 - INFO - [SYNTHETIC] Preparing synthesizer: CTGAN
+2025-04-18 21:12:27,035 - INFO - [SYNTHETIC] Params from config: {'epochs': 50}
+2025-04-18 21:12:27,035 - INFO - [SYNTHETIC] Found existing CTGAN synthesizer: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\artifacts\synthesizers\loan_CTGAN_epochs50_synthesizer.pkl
+2025-04-18 21:12:27,077 - INFO - {'EVENT': 'Load', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 21, 12, 27, 77139), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_a4a2374d4ff84d3995c6030b63aecbba'}
+2025-04-18 21:12:27,077 - INFO - [SYNTHETIC] Preparing synthesizer: TVAE
+2025-04-18 21:12:27,078 - INFO - [SYNTHETIC] Params from config: {'epochs': 50}
+2025-04-18 21:12:27,078 - INFO - [SYNTHETIC] Found existing TVAE synthesizer: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\artifacts\synthesizers\loan_TVAE_epochs50_synthesizer.pkl
+2025-04-18 21:12:27,118 - INFO - {'EVENT': 'Load', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 21, 12, 27, 118249), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_e894de60e0d449a2b90e059bf0887fdc'}
+2025-04-18 21:12:27,119 - INFO - [SYNTHETIC] Preparing synthesizer: GaussianCopula
+2025-04-18 21:12:27,119 - INFO - [SYNTHETIC] Params from config: {}
+2025-04-18 21:12:27,119 - INFO - [SYNTHETIC] Found existing GaussianCopula synthesizer: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\artifacts\synthesizers\loan_GaussianCopula_synthesizer.pkl
+2025-04-18 21:12:27,145 - INFO - {'EVENT': 'Load', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 21, 12, 27, 145909), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_73a862b345db46d58d7dbc207bd9847b'}
+2025-04-18 21:12:27,146 - INFO - [SYNTHETIC] Using CTGAN to generate 384 rows...
+2025-04-18 21:12:27,230 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 21, 12, 27, 146858), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_a4a2374d4ff84d3995c6030b63aecbba', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 384, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-18 21:12:27,231 - INFO - [SYNTHETIC] CTGAN completed: 384 rows generated.
+2025-04-18 21:12:27,231 - INFO - [SYNTHETIC] Target class distribution for CTGAN: {'Y': 236, 'N': 148}
+2025-04-18 21:12:27,232 - INFO - [SYNTHETIC] Using TVAE to generate 384 rows...
+2025-04-18 21:12:27,304 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 21, 12, 27, 232620), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_e894de60e0d449a2b90e059bf0887fdc', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 384, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-18 21:12:27,305 - INFO - [SYNTHETIC] TVAE completed: 384 rows generated.
+2025-04-18 21:12:27,305 - INFO - [SYNTHETIC] Target class distribution for TVAE: {'Y': 384}
+2025-04-18 21:12:27,306 - INFO - [SYNTHETIC] Using GaussianCopula to generate 384 rows...
+2025-04-18 21:12:27,413 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 21, 12, 27, 306556), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_73a862b345db46d58d7dbc207bd9847b', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 384, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-18 21:12:27,414 - INFO - [SYNTHETIC] GaussianCopula completed: 384 rows generated.
+2025-04-18 21:12:27,415 - INFO - [SYNTHETIC] Target class distribution for GaussianCopula: {'Y': 258, 'N': 126}
+2025-04-18 21:12:27,417 - INFO - [SYNTHETIC PIPELINE] Synthetic Data Generation Completed.
+2025-04-18 21:12:27,417 - INFO - [SYNTHETIC PIPELINE] Synthesizers used: ['CTGAN', 'TVAE', 'GaussianCopula']
+2025-04-18 21:12:34,109 - INFO -  [SYNTHETIC PIPELINE]  Synthetic Data Evaluation Completed.
+2025-04-18 21:12:34,118 - INFO -  [SYNTHETIC PIPELINE] Synthetic Data Report Generated Successfully.
+2025-04-18 21:12:34,231 - INFO - Synthetic data generated with 3 synthesizer(s).
+2025-04-18 21:12:34,232 - INFO - Running Hybrid Pipeline...
+2025-04-18 21:12:34,232 - INFO -  [HYBRID] Executing run_hybrid...
+2025-04-18 21:12:34,232 - INFO -  [HYBRID] Looking for encoded anonymized data in C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized_encoded.csv
+2025-04-18 21:12:34,233 - INFO -  [HYBRID ] Loaded cached encoded anonymous data from C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized_encoded.csv
+2025-04-18 21:12:34,251 - INFO -  [HYBRID] Starting synthetic generation for hybrid pipeline...
+2025-04-18 21:12:34,252 - INFO - Executing run_synthetic.....
+2025-04-18 21:12:34,252 - INFO - [SYNTHETIC PIPELINE] executing run_synthetic for loan_k5_l2_sup10...
+2025-04-18 21:12:34,252 - INFO - [SYNTHETIC] Processing dataset: loan_k5_l2_sup10
+2025-04-18 21:12:34,252 - INFO - [SYNTHETIC] Original dataset size: 384 rows
+2025-04-18 21:12:34,264 - INFO - Detected metadata:
+2025-04-18 21:12:34,264 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "Loan_ID_0": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_1": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_2": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_3": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_4": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_5": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_6": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_7": {
+            "sdtype": "categorical"
+        },
+        "Loan_ID_8": {
+            "sdtype": "categorical"
+        },
+        "Gender_0": {
+            "sdtype": "categorical"
+        },
+        "Gender_1": {
+            "sdtype": "categorical"
+        },
+        "Married_0": {
+            "sdtype": "categorical"
+        },
+        "Married_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_0": {
+            "sdtype": "categorical"
+        },
+        "Dependents_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_2": {
+            "sdtype": "categorical"
+        },
+        "Education_0": {
+            "sdtype": "categorical"
+        },
+        "Education_1": {
+            "sdtype": "categorical"
+        },
+        "Self_Employed_0": {
+            "sdtype": "categorical"
+        },
+        "Self_Employed_1": {
+            "sdtype": "categorical"
+        },
+        "ApplicantIncome": {
+            "sdtype": "numerical"
+        },
+        "CoapplicantIncome": {
+            "sdtype": "categorical"
+        },
+        "LoanAmount": {
+            "sdtype": "categorical"
+        },
+        "Loan_Amount_Term": {
+            "sdtype": "categorical"
+        },
+        "Credit_History": {
+            "sdtype": "categorical"
+        },
+        "Property_Area_0": {
+            "sdtype": "categorical"
+        },
+        "Property_Area_1": {
+            "sdtype": "categorical"
+        },
+        "Loan_Status": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-18 21:12:34,265 - INFO - [SYNTHETIC] Preparing synthesizer: CTGAN
+2025-04-18 21:12:34,265 - INFO - [SYNTHETIC] Params from config: {'epochs': 50}
+2025-04-18 21:12:34,266 - INFO - [SYNTHETIC] Found existing CTGAN synthesizer: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\artifacts\synthesizers\loan_k5_l2_sup10_CTGAN_epochs50_synthesizer.pkl
+2025-04-18 21:12:34,305 - INFO - {'EVENT': 'Load', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 21, 12, 34, 305883), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_916ac8e158d0461eb71d463b5c2c9300'}
+2025-04-18 21:12:34,305 - INFO - [SYNTHETIC] Preparing synthesizer: TVAE
+2025-04-18 21:12:34,305 - INFO - [SYNTHETIC] Params from config: {'epochs': 50}
+2025-04-18 21:12:34,307 - INFO - [SYNTHETIC] Found existing TVAE synthesizer: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\artifacts\synthesizers\loan_k5_l2_sup10_TVAE_epochs50_synthesizer.pkl
+2025-04-18 21:12:34,340 - INFO - {'EVENT': 'Load', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 21, 12, 34, 340650), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_18ece79479464f08aa133be9186e8ac3'}
+2025-04-18 21:12:34,340 - INFO - [SYNTHETIC] Preparing synthesizer: GaussianCopula
+2025-04-18 21:12:34,340 - INFO - [SYNTHETIC] Params from config: {}
+2025-04-18 21:12:34,341 - INFO - [SYNTHETIC] Found existing GaussianCopula synthesizer: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\artifacts\synthesizers\loan_k5_l2_sup10_GaussianCopula_synthesizer.pkl
+2025-04-18 21:12:34,371 - INFO - {'EVENT': 'Load', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 21, 12, 34, 371679), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_080cad3532d841e28213282b7530643f'}
+2025-04-18 21:12:34,372 - INFO - [SYNTHETIC] Using CTGAN to generate 384 rows...
+2025-04-18 21:12:34,441 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 21, 12, 34, 372702), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_916ac8e158d0461eb71d463b5c2c9300', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 384, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-18 21:12:34,441 - INFO - [SYNTHETIC] CTGAN completed: 384 rows generated.
+2025-04-18 21:12:34,441 - INFO - [SYNTHETIC] Target class distribution for CTGAN: {'Y': 203, 'N': 181}
+2025-04-18 21:12:34,442 - INFO - [SYNTHETIC] Using TVAE to generate 384 rows...
+2025-04-18 21:12:34,503 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 21, 12, 34, 442345), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_18ece79479464f08aa133be9186e8ac3', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 384, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-18 21:12:34,504 - INFO - [SYNTHETIC] TVAE completed: 384 rows generated.
+2025-04-18 21:12:34,504 - INFO - [SYNTHETIC] Target class distribution for TVAE: {'Y': 384}
+2025-04-18 21:12:34,505 - INFO - [SYNTHETIC] Using GaussianCopula to generate 384 rows...
+2025-04-18 21:12:34,607 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 21, 12, 34, 505134), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_080cad3532d841e28213282b7530643f', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 384, 'TOTAL NUMBER OF COLUMNS': 28}
+2025-04-18 21:12:34,607 - INFO - [SYNTHETIC] GaussianCopula completed: 384 rows generated.
+2025-04-18 21:12:34,608 - INFO - [SYNTHETIC] Target class distribution for GaussianCopula: {'Y': 252, 'N': 132}
+2025-04-18 21:12:34,609 - INFO - [SYNTHETIC PIPELINE] Synthetic Data Generation Completed.
+2025-04-18 21:12:34,609 - INFO - [SYNTHETIC PIPELINE] Synthesizers used: ['CTGAN', 'TVAE', 'GaussianCopula']
+2025-04-18 21:12:41,234 - INFO -  [SYNTHETIC PIPELINE]  Synthetic Data Evaluation Completed.
+2025-04-18 21:12:41,243 - INFO -  [SYNTHETIC PIPELINE] Synthetic Data Report Generated Successfully.
+2025-04-18 21:12:41,366 - INFO - [HYBRID] Generated hybrid dataset shape for CTGAN: (384, 28)
+2025-04-18 21:12:41,367 - INFO - [HYBRID] Target distribution for CTGAN: {'Y': 203, 'N': 181}
+2025-04-18 21:12:41,369 - INFO -  [HYBRID] Saved hybrid dataset to C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10_CTGAN_HYBRID.csv
+2025-04-18 21:12:41,370 - INFO - [HYBRID] Generated hybrid dataset shape for TVAE: (384, 28)
+2025-04-18 21:12:41,370 - INFO - [HYBRID] Target distribution for TVAE: {'Y': 384}
+2025-04-18 21:12:41,374 - INFO -  [HYBRID] Saved hybrid dataset to C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10_TVAE_HYBRID.csv
+2025-04-18 21:12:41,374 - INFO - [HYBRID] Generated hybrid dataset shape for GaussianCopula: (384, 28)
+2025-04-18 21:12:41,375 - INFO - [HYBRID] Target distribution for GaussianCopula: {'Y': 252, 'N': 132}
+2025-04-18 21:12:41,378 - INFO -  [HYBRID] Saved hybrid dataset to C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\loan_k5_l2_sup10_GaussianCopula_HYBRID.csv
+2025-04-18 21:12:41,378 - INFO -  [HYBRID] Hybrid pipeline complete — 3 dataset(s) ready.
+2025-04-18 21:12:41,378 - INFO - [HYBRID] Total rows across all hybrid datasets: 1152
+2025-04-18 21:12:41,379 - INFO - Hybrid pipeline completed successfully.
+2025-04-18 21:12:41,379 - INFO - Hybrid pipeline duration: 7.15 seconds
+2025-04-18 21:12:41,379 - INFO - Starting Utility...
+2025-04-18 21:12:41,379 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-04-18 21:12:41,380 - INFO - [UTILITY] Original Data - Training Size: 384, Testing Size: 96
+2025-04-18 21:12:41,381 - INFO - [UTILITY] Target class distribution (Original): {'Y': 266, 'N': 118}
+2025-04-18 21:12:41,381 - INFO - [UTILITY] Processing synthetic dataset generated by CTGAN...
+2025-04-18 21:12:41,383 - INFO - [UTILITY] Synthetic Data (CTGAN) - Training Size: 384
+2025-04-18 21:12:41,384 - INFO - [UTILITY] Target class distribution (CTGAN): {'Y': 236, 'N': 148}
+2025-04-18 21:12:41,384 - WARNING -  Skipping synthetic dataset 'TVAE' - only one class in target.
+2025-04-18 21:12:41,385 - INFO - [UTILITY] Processing synthetic dataset generated by GaussianCopula...
+2025-04-18 21:12:41,386 - INFO - [UTILITY] Synthetic Data (GaussianCopula) - Training Size: 384
+2025-04-18 21:12:41,386 - INFO - [UTILITY] Target class distribution (GaussianCopula): {'Y': 258, 'N': 126}
+2025-04-18 21:12:41,387 - INFO - [UTILITY] Processing anonymized dataset...
+2025-04-18 21:12:41,387 - INFO - [UTILITY] Anonymized Data - Training Size: 384
+2025-04-18 21:12:41,388 - INFO - [UTILITY] Target class distribution (Anonymous): {'Y': 266, 'N': 118}
+2025-04-18 21:12:41,388 - INFO - [UTILITY] Processing hybrid dataset generated by CTGAN...
+2025-04-18 21:12:41,389 - INFO - [UTILITY] Hybrid Data (CTGAN_HYBRID) - Training Size: 384
+2025-04-18 21:12:41,389 - INFO - [UTILITY] Target class distribution (CTGAN_HYBRID): {'Y': 203, 'N': 181}
+2025-04-18 21:12:41,390 - WARNING -  Skipping hybrid dataset 'TVAE_HYBRID' - only one class in target.
+2025-04-18 21:12:41,390 - INFO - [UTILITY] Processing hybrid dataset generated by GaussianCopula...
+2025-04-18 21:12:41,391 - INFO - [UTILITY] Hybrid Data (GaussianCopula_HYBRID) - Training Size: 384
+2025-04-18 21:12:41,392 - INFO - [UTILITY] Target class distribution (GaussianCopula_HYBRID): {'Y': 252, 'N': 132}
+2025-04-18 21:12:41,392 - INFO - [UTILITY] Training models on all datasets...
+2025-04-18 21:12:41,392 - INFO - [UTILITY] Total datasets used for training: 6
+2025-04-18 21:12:41,393 - INFO - [TRAINING] Training models from scratch...
+2025-04-18 21:12:41,393 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 384, Features: 27
+2025-04-18 21:12:41,393 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-04-18 21:12:41,401 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 0.01 sec
+2025-04-18 21:12:41,401 - INFO - [TRAINING] Training KNN on Original...
+2025-04-18 21:12:41,403 - INFO - [TRAINING] KNN trained successfully on Original in 0.00 sec
+2025-04-18 21:12:41,404 - INFO - [TRAINING] Training RandomForest on Original...
+2025-04-18 21:12:41,491 - INFO - [TRAINING] RandomForest trained successfully on Original in 0.09 sec
+2025-04-18 21:12:41,491 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-04-18 21:12:41,494 - INFO - [TRAINING] DecisionTree trained successfully on Original in 0.00 sec
+2025-04-18 21:12:41,494 - INFO - [TRAINING] Training SVM on Original...
+2025-04-18 21:12:41,499 - INFO - [TRAINING] SVM trained successfully on Original in 0.00 sec
+2025-04-18 21:12:41,500 - INFO - [TRAINING] Finished training 5 model(s) for dataset: Original
+2025-04-18 21:12:41,500 - INFO - [TRAINING] Starting training for dataset: CTGAN — Rows: 384, Features: 27
+2025-04-18 21:12:41,500 - INFO - [TRAINING] Training LogisticRegression on CTGAN...
+2025-04-18 21:12:41,506 - INFO - [TRAINING] LogisticRegression trained successfully on CTGAN in 0.01 sec
+2025-04-18 21:12:41,506 - INFO - [TRAINING] Training KNN on CTGAN...
+2025-04-18 21:12:41,510 - INFO - [TRAINING] KNN trained successfully on CTGAN in 0.00 sec
+2025-04-18 21:12:41,510 - INFO - [TRAINING] Training RandomForest on CTGAN...
+2025-04-18 21:12:41,601 - INFO - [TRAINING] RandomForest trained successfully on CTGAN in 0.09 sec
+2025-04-18 21:12:41,601 - INFO - [TRAINING] Training DecisionTree on CTGAN...
+2025-04-18 21:12:41,604 - INFO - [TRAINING] DecisionTree trained successfully on CTGAN in 0.00 sec
+2025-04-18 21:12:41,604 - INFO - [TRAINING] Training SVM on CTGAN...
+2025-04-18 21:12:41,609 - INFO - [TRAINING] SVM trained successfully on CTGAN in 0.00 sec
+2025-04-18 21:12:41,609 - INFO - [TRAINING] Finished training 5 model(s) for dataset: CTGAN
+2025-04-18 21:12:41,609 - INFO - [TRAINING] Starting training for dataset: GaussianCopula — Rows: 384, Features: 27
+2025-04-18 21:12:41,610 - INFO - [TRAINING] Training LogisticRegression on GaussianCopula...
+2025-04-18 21:12:41,617 - INFO - [TRAINING] LogisticRegression trained successfully on GaussianCopula in 0.01 sec
+2025-04-18 21:12:41,618 - INFO - [TRAINING] Training KNN on GaussianCopula...
+2025-04-18 21:12:41,619 - INFO - [TRAINING] KNN trained successfully on GaussianCopula in 0.00 sec
+2025-04-18 21:12:41,619 - INFO - [TRAINING] Training RandomForest on GaussianCopula...
+2025-04-18 21:12:41,715 - INFO - [TRAINING] RandomForest trained successfully on GaussianCopula in 0.09 sec
+2025-04-18 21:12:41,715 - INFO - [TRAINING] Training DecisionTree on GaussianCopula...
+2025-04-18 21:12:41,718 - INFO - [TRAINING] DecisionTree trained successfully on GaussianCopula in 0.00 sec
+2025-04-18 21:12:41,718 - INFO - [TRAINING] Training SVM on GaussianCopula...
+2025-04-18 21:12:41,724 - INFO - [TRAINING] SVM trained successfully on GaussianCopula in 0.01 sec
+2025-04-18 21:12:41,724 - INFO - [TRAINING] Finished training 5 model(s) for dataset: GaussianCopula
+2025-04-18 21:12:41,724 - INFO - [TRAINING] Starting training for dataset: Anonymous — Rows: 384, Features: 27
+2025-04-18 21:12:41,724 - INFO - [TRAINING] Training LogisticRegression on Anonymous...
+2025-04-18 21:12:41,733 - INFO - [TRAINING] LogisticRegression trained successfully on Anonymous in 0.01 sec
+2025-04-18 21:12:41,734 - INFO - [TRAINING] Training KNN on Anonymous...
+2025-04-18 21:12:41,735 - INFO - [TRAINING] KNN trained successfully on Anonymous in 0.00 sec
+2025-04-18 21:12:41,735 - INFO - [TRAINING] Training RandomForest on Anonymous...
+2025-04-18 21:12:41,824 - INFO - [TRAINING] RandomForest trained successfully on Anonymous in 0.09 sec
+2025-04-18 21:12:41,824 - INFO - [TRAINING] Training DecisionTree on Anonymous...
+2025-04-18 21:12:41,827 - INFO - [TRAINING] DecisionTree trained successfully on Anonymous in 0.00 sec
+2025-04-18 21:12:41,827 - INFO - [TRAINING] Training SVM on Anonymous...
+2025-04-18 21:12:41,832 - INFO - [TRAINING] SVM trained successfully on Anonymous in 0.00 sec
+2025-04-18 21:12:41,832 - INFO - [TRAINING] Finished training 5 model(s) for dataset: Anonymous
+2025-04-18 21:12:41,832 - INFO - [TRAINING] Starting training for dataset: CTGAN_HYBRID — Rows: 384, Features: 27
+2025-04-18 21:12:41,833 - INFO - [TRAINING] Training LogisticRegression on CTGAN_HYBRID...
+2025-04-18 21:12:41,839 - INFO - [TRAINING] LogisticRegression trained successfully on CTGAN_HYBRID in 0.01 sec
+2025-04-18 21:12:41,840 - INFO - [TRAINING] Training KNN on CTGAN_HYBRID...
+2025-04-18 21:12:41,841 - INFO - [TRAINING] KNN trained successfully on CTGAN_HYBRID in 0.00 sec
+2025-04-18 21:12:41,841 - INFO - [TRAINING] Training RandomForest on CTGAN_HYBRID...
+2025-04-18 21:12:41,932 - INFO - [TRAINING] RandomForest trained successfully on CTGAN_HYBRID in 0.09 sec
+2025-04-18 21:12:41,933 - INFO - [TRAINING] Training DecisionTree on CTGAN_HYBRID...
+2025-04-18 21:12:41,935 - INFO - [TRAINING] DecisionTree trained successfully on CTGAN_HYBRID in 0.00 sec
+2025-04-18 21:12:41,936 - INFO - [TRAINING] Training SVM on CTGAN_HYBRID...
+2025-04-18 21:12:41,940 - INFO - [TRAINING] SVM trained successfully on CTGAN_HYBRID in 0.00 sec
+2025-04-18 21:12:41,940 - INFO - [TRAINING] Finished training 5 model(s) for dataset: CTGAN_HYBRID
+2025-04-18 21:12:41,940 - INFO - [TRAINING] Starting training for dataset: GaussianCopula_HYBRID — Rows: 384, Features: 27
+2025-04-18 21:12:41,941 - INFO - [TRAINING] Training LogisticRegression on GaussianCopula_HYBRID...
+2025-04-18 21:12:41,947 - INFO - [TRAINING] LogisticRegression trained successfully on GaussianCopula_HYBRID in 0.01 sec
+2025-04-18 21:12:41,947 - INFO - [TRAINING] Training KNN on GaussianCopula_HYBRID...
+2025-04-18 21:12:41,950 - INFO - [TRAINING] KNN trained successfully on GaussianCopula_HYBRID in 0.00 sec
+2025-04-18 21:12:41,951 - INFO - [TRAINING] Training RandomForest on GaussianCopula_HYBRID...
+2025-04-18 21:12:42,036 - INFO - [TRAINING] RandomForest trained successfully on GaussianCopula_HYBRID in 0.09 sec
+2025-04-18 21:12:42,036 - INFO - [TRAINING] Training DecisionTree on GaussianCopula_HYBRID...
+2025-04-18 21:12:42,039 - INFO - [TRAINING] DecisionTree trained successfully on GaussianCopula_HYBRID in 0.00 sec
+2025-04-18 21:12:42,039 - INFO - [TRAINING] Training SVM on GaussianCopula_HYBRID...
+2025-04-18 21:12:42,043 - INFO - [TRAINING] SVM trained successfully on GaussianCopula_HYBRID in 0.00 sec
+2025-04-18 21:12:42,043 - INFO - [TRAINING] Finished training 5 model(s) for dataset: GaussianCopula_HYBRID
+2025-04-18 21:12:42,044 - INFO - [TRAINING] Total models trained across all datasets: 30
+2025-04-18 21:12:42,044 - INFO - [UTILITY] Trained model names: ['Original', 'CTGAN', 'GaussianCopula', 'Anonymous', 'CTGAN_HYBRID', 'GaussianCopula_HYBRID']
+2025-04-18 21:12:42,044 - INFO - [UTILITY] Model Training Completed.
+2025-04-18 21:12:42,045 - INFO - Starting the Evaluating of models...
+2025-04-18 21:12:42,045 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-04-18 21:12:42,045 - INFO - Evaluating LogisticRegression on Original...
+2025-04-18 21:12:42,047 - INFO - Predictions completed for LogisticRegression on Original
+2025-04-18 21:12:42,049 - INFO - Prediction distribution for LogisticRegression on Original: {'Y': 76, 'N': 20}
+2025-04-18 21:12:42,059 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-04-18 21:12:42,060 - INFO - Evaluating LogisticRegression on CTGAN...
+2025-04-18 21:12:42,062 - INFO - Predictions completed for LogisticRegression on CTGAN
+2025-04-18 21:12:42,062 - INFO - Prediction distribution for LogisticRegression on CTGAN: {'Y': 95, 'N': 1}
+2025-04-18 21:12:42,070 - INFO - Computed 8 metric(s) for LogisticRegression on CTGAN
+2025-04-18 21:12:42,072 - INFO - Evaluating LogisticRegression on GaussianCopula...
+2025-04-18 21:12:42,073 - INFO - Predictions completed for LogisticRegression on GaussianCopula
+2025-04-18 21:12:42,073 - INFO - Prediction distribution for LogisticRegression on GaussianCopula: {'Y': 92, 'N': 4}
+2025-04-18 21:12:42,080 - INFO - Computed 8 metric(s) for LogisticRegression on GaussianCopula
+2025-04-18 21:12:42,081 - INFO - Evaluating LogisticRegression on Anonymous...
+2025-04-18 21:12:42,082 - INFO - Predictions completed for LogisticRegression on Anonymous
+2025-04-18 21:12:42,083 - INFO - Prediction distribution for LogisticRegression on Anonymous: {'Y': 94, 'N': 2}
+2025-04-18 21:12:42,091 - INFO - Computed 8 metric(s) for LogisticRegression on Anonymous
+2025-04-18 21:12:42,092 - INFO - Evaluating LogisticRegression on CTGAN_HYBRID...
+2025-04-18 21:12:42,093 - INFO - Predictions completed for LogisticRegression on CTGAN_HYBRID
+2025-04-18 21:12:42,094 - INFO - Prediction distribution for LogisticRegression on CTGAN_HYBRID: {'Y': 81, 'N': 15}
+2025-04-18 21:12:42,104 - INFO - Computed 8 metric(s) for LogisticRegression on CTGAN_HYBRID
+2025-04-18 21:12:42,104 - INFO - Evaluating LogisticRegression on GaussianCopula_HYBRID...
+2025-04-18 21:12:42,106 - INFO - Predictions completed for LogisticRegression on GaussianCopula_HYBRID
+2025-04-18 21:12:42,106 - INFO - Prediction distribution for LogisticRegression on GaussianCopula_HYBRID: {'Y': 92, 'N': 4}
+2025-04-18 21:12:42,113 - INFO - Computed 8 metric(s) for LogisticRegression on GaussianCopula_HYBRID
+2025-04-18 21:12:42,113 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-04-18 21:12:42,113 - INFO - Evaluating KNN on Original...
+2025-04-18 21:12:42,242 - INFO - Predictions completed for KNN on Original
+2025-04-18 21:12:42,243 - INFO - Prediction distribution for KNN on Original: {'Y': 77, 'N': 19}
+2025-04-18 21:12:42,262 - INFO - Computed 8 metric(s) for KNN on Original
+2025-04-18 21:12:42,263 - INFO - Evaluating KNN on CTGAN...
+2025-04-18 21:12:42,272 - INFO - Predictions completed for KNN on CTGAN
+2025-04-18 21:12:42,273 - INFO - Prediction distribution for KNN on CTGAN: {'Y': 75, 'N': 21}
+2025-04-18 21:12:42,294 - INFO - Computed 8 metric(s) for KNN on CTGAN
+2025-04-18 21:12:42,294 - INFO - Evaluating KNN on GaussianCopula...
+2025-04-18 21:12:42,303 - INFO - Predictions completed for KNN on GaussianCopula
+2025-04-18 21:12:42,304 - INFO - Prediction distribution for KNN on GaussianCopula: {'Y': 74, 'N': 22}
+2025-04-18 21:12:42,323 - INFO - Computed 8 metric(s) for KNN on GaussianCopula
+2025-04-18 21:12:42,323 - INFO - Evaluating KNN on Anonymous...
+2025-04-18 21:12:42,336 - INFO - Predictions completed for KNN on Anonymous
+2025-04-18 21:12:42,336 - INFO - Prediction distribution for KNN on Anonymous: {'Y': 75, 'N': 21}
+2025-04-18 21:12:42,358 - INFO - Computed 8 metric(s) for KNN on Anonymous
+2025-04-18 21:12:42,358 - INFO - Evaluating KNN on CTGAN_HYBRID...
+2025-04-18 21:12:42,369 - INFO - Predictions completed for KNN on CTGAN_HYBRID
+2025-04-18 21:12:42,369 - INFO - Prediction distribution for KNN on CTGAN_HYBRID: {'Y': 53, 'N': 43}
+2025-04-18 21:12:42,392 - INFO - Computed 8 metric(s) for KNN on CTGAN_HYBRID
+2025-04-18 21:12:42,393 - INFO - Evaluating KNN on GaussianCopula_HYBRID...
+2025-04-18 21:12:42,403 - INFO - Predictions completed for KNN on GaussianCopula_HYBRID
+2025-04-18 21:12:42,403 - INFO - Prediction distribution for KNN on GaussianCopula_HYBRID: {'Y': 74, 'N': 22}
+2025-04-18 21:12:42,426 - INFO - Computed 8 metric(s) for KNN on GaussianCopula_HYBRID
+2025-04-18 21:12:42,426 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-04-18 21:12:42,426 - INFO - Evaluating RandomForest on Original...
+2025-04-18 21:12:42,430 - INFO - Predictions completed for RandomForest on Original
+2025-04-18 21:12:42,431 - INFO - Prediction distribution for RandomForest on Original: {'Y': 77, 'N': 19}
+2025-04-18 21:12:42,444 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-04-18 21:12:42,444 - INFO - Evaluating RandomForest on CTGAN...
+2025-04-18 21:12:42,448 - INFO - Predictions completed for RandomForest on CTGAN
+2025-04-18 21:12:42,449 - INFO - Prediction distribution for RandomForest on CTGAN: {'Y': 89, 'N': 7}
+2025-04-18 21:12:42,463 - INFO - Computed 8 metric(s) for RandomForest on CTGAN
+2025-04-18 21:12:42,464 - INFO - Evaluating RandomForest on GaussianCopula...
+2025-04-18 21:12:42,468 - INFO - Predictions completed for RandomForest on GaussianCopula
+2025-04-18 21:12:42,469 - INFO - Prediction distribution for RandomForest on GaussianCopula: {'Y': 96}
+2025-04-18 21:12:42,469 - WARNING -  [WARNING] :RandomForest on GaussianCopula predicted only one class: {'Y'}
+2025-04-18 21:12:42,471 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,472 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,474 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,484 - INFO - Computed 8 metric(s) for RandomForest on GaussianCopula
+2025-04-18 21:12:42,485 - INFO - Evaluating RandomForest on Anonymous...
+2025-04-18 21:12:42,489 - INFO - Predictions completed for RandomForest on Anonymous
+2025-04-18 21:12:42,489 - INFO - Prediction distribution for RandomForest on Anonymous: {'Y': 63, 'N': 33}
+2025-04-18 21:12:42,505 - INFO - Computed 8 metric(s) for RandomForest on Anonymous
+2025-04-18 21:12:42,505 - INFO - Evaluating RandomForest on CTGAN_HYBRID...
+2025-04-18 21:12:42,510 - INFO - Predictions completed for RandomForest on CTGAN_HYBRID
+2025-04-18 21:12:42,511 - INFO - Prediction distribution for RandomForest on CTGAN_HYBRID: {'Y': 57, 'N': 39}
+2025-04-18 21:12:42,525 - INFO - Computed 8 metric(s) for RandomForest on CTGAN_HYBRID
+2025-04-18 21:12:42,527 - INFO - Evaluating RandomForest on GaussianCopula_HYBRID...
+2025-04-18 21:12:42,535 - INFO - Predictions completed for RandomForest on GaussianCopula_HYBRID
+2025-04-18 21:12:42,535 - INFO - Prediction distribution for RandomForest on GaussianCopula_HYBRID: {'Y': 71, 'N': 25}
+2025-04-18 21:12:42,553 - INFO - Computed 8 metric(s) for RandomForest on GaussianCopula_HYBRID
+2025-04-18 21:12:42,553 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-04-18 21:12:42,554 - INFO - Evaluating DecisionTree on Original...
+2025-04-18 21:12:42,557 - INFO - Predictions completed for DecisionTree on Original
+2025-04-18 21:12:42,557 - INFO - Prediction distribution for DecisionTree on Original: {'Y': 67, 'N': 29}
+2025-04-18 21:12:42,569 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-04-18 21:12:42,569 - INFO - Evaluating DecisionTree on CTGAN...
+2025-04-18 21:12:42,571 - INFO - Predictions completed for DecisionTree on CTGAN
+2025-04-18 21:12:42,572 - INFO - Prediction distribution for DecisionTree on CTGAN: {'Y': 71, 'N': 25}
+2025-04-18 21:12:42,581 - INFO - Computed 8 metric(s) for DecisionTree on CTGAN
+2025-04-18 21:12:42,582 - INFO - Evaluating DecisionTree on GaussianCopula...
+2025-04-18 21:12:42,584 - INFO - Predictions completed for DecisionTree on GaussianCopula
+2025-04-18 21:12:42,585 - INFO - Prediction distribution for DecisionTree on GaussianCopula: {'Y': 50, 'N': 46}
+2025-04-18 21:12:42,593 - INFO - Computed 8 metric(s) for DecisionTree on GaussianCopula
+2025-04-18 21:12:42,593 - INFO - Evaluating DecisionTree on Anonymous...
+2025-04-18 21:12:42,596 - INFO - Predictions completed for DecisionTree on Anonymous
+2025-04-18 21:12:42,597 - INFO - Prediction distribution for DecisionTree on Anonymous: {'Y': 61, 'N': 35}
+2025-04-18 21:12:42,606 - INFO - Computed 8 metric(s) for DecisionTree on Anonymous
+2025-04-18 21:12:42,607 - INFO - Evaluating DecisionTree on CTGAN_HYBRID...
+2025-04-18 21:12:42,609 - INFO - Predictions completed for DecisionTree on CTGAN_HYBRID
+2025-04-18 21:12:42,610 - INFO - Prediction distribution for DecisionTree on CTGAN_HYBRID: {'Y': 49, 'N': 47}
+2025-04-18 21:12:42,621 - INFO - Computed 8 metric(s) for DecisionTree on CTGAN_HYBRID
+2025-04-18 21:12:42,621 - INFO - Evaluating DecisionTree on GaussianCopula_HYBRID...
+2025-04-18 21:12:42,622 - INFO - Predictions completed for DecisionTree on GaussianCopula_HYBRID
+2025-04-18 21:12:42,623 - INFO - Prediction distribution for DecisionTree on GaussianCopula_HYBRID: {'Y': 53, 'N': 43}
+2025-04-18 21:12:42,633 - INFO - Computed 8 metric(s) for DecisionTree on GaussianCopula_HYBRID
+2025-04-18 21:12:42,634 - INFO - Preparing evaluation for model 'SVM' across all datasets...
+2025-04-18 21:12:42,634 - INFO - Evaluating SVM on Original...
+2025-04-18 21:12:42,637 - INFO - Predictions completed for SVM on Original
+2025-04-18 21:12:42,637 - INFO - Prediction distribution for SVM on Original: {'Y': 96}
+2025-04-18 21:12:42,638 - WARNING -  [WARNING] :SVM on Original predicted only one class: {'Y'}
+2025-04-18 21:12:42,639 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,642 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,644 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,646 - INFO - Computed 8 metric(s) for SVM on Original
+2025-04-18 21:12:42,647 - INFO - Evaluating SVM on CTGAN...
+2025-04-18 21:12:42,652 - INFO - Predictions completed for SVM on CTGAN
+2025-04-18 21:12:42,652 - INFO - Prediction distribution for SVM on CTGAN: {'Y': 96}
+2025-04-18 21:12:42,652 - WARNING -  [WARNING] :SVM on CTGAN predicted only one class: {'Y'}
+2025-04-18 21:12:42,655 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,658 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,661 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,664 - INFO - Computed 8 metric(s) for SVM on CTGAN
+2025-04-18 21:12:42,664 - INFO - Evaluating SVM on GaussianCopula...
+2025-04-18 21:12:42,670 - INFO - Predictions completed for SVM on GaussianCopula
+2025-04-18 21:12:42,671 - INFO - Prediction distribution for SVM on GaussianCopula: {'Y': 96}
+2025-04-18 21:12:42,671 - WARNING -  [WARNING] :SVM on GaussianCopula predicted only one class: {'Y'}
+2025-04-18 21:12:42,673 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,675 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,677 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,678 - INFO - Computed 8 metric(s) for SVM on GaussianCopula
+2025-04-18 21:12:42,679 - INFO - Evaluating SVM on Anonymous...
+2025-04-18 21:12:42,685 - INFO - Predictions completed for SVM on Anonymous
+2025-04-18 21:12:42,686 - INFO - Prediction distribution for SVM on Anonymous: {'Y': 96}
+2025-04-18 21:12:42,687 - WARNING -  [WARNING] :SVM on Anonymous predicted only one class: {'Y'}
+2025-04-18 21:12:42,690 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,694 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,697 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,702 - INFO - Computed 8 metric(s) for SVM on Anonymous
+2025-04-18 21:12:42,702 - INFO - Evaluating SVM on CTGAN_HYBRID...
+2025-04-18 21:12:42,707 - INFO - Predictions completed for SVM on CTGAN_HYBRID
+2025-04-18 21:12:42,708 - INFO - Prediction distribution for SVM on CTGAN_HYBRID: {'Y': 94, 'N': 2}
+2025-04-18 21:12:42,713 - INFO - Computed 8 metric(s) for SVM on CTGAN_HYBRID
+2025-04-18 21:12:42,714 - INFO - Evaluating SVM on GaussianCopula_HYBRID...
+2025-04-18 21:12:42,717 - INFO - Predictions completed for SVM on GaussianCopula_HYBRID
+2025-04-18 21:12:42,717 - INFO - Prediction distribution for SVM on GaussianCopula_HYBRID: {'Y': 96}
+2025-04-18 21:12:42,718 - WARNING -  [WARNING] :SVM on GaussianCopula_HYBRID predicted only one class: {'Y'}
+2025-04-18 21:12:42,719 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,721 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,722 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 21:12:42,724 - INFO - Computed 8 metric(s) for SVM on GaussianCopula_HYBRID
+2025-04-18 21:12:42,730 - INFO - Evaluation completed for all models.
+2025-04-18 21:12:42,731 - INFO - Model evaluation completed in 0.69 seconds.
+2025-04-18 21:12:42,738 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest', 'SVM']
+2025-04-18 21:12:42,738 - INFO - Model Training and Evaluation completed.
+2025-04-18 21:12:43,312 - INFO -  Visualizations saved.
+2025-04-18 21:12:43,312 - INFO -  Benchmarking Completed. Results saved in output folder.
+2025-04-18 21:12:43,652 - INFO - Deleted anonymized file: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized.csv
+2025-04-18 21:12:43,655 - INFO - Deleted anonymized file: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized_encoded.csv
+2025-04-18 21:12:43,659 - INFO - Deleted anonymized file: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k5_l2_sup10_anonymized_processed.csv
