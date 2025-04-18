@@ -19,9 +19,56 @@ from sklearn.metrics import (
 import pickle
 import os
 from .model_registry import MODEL_REGISTRY
+import time
 
 MODEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..",  "artifacts", "models"))  # Save models inside artifacts/
 os.makedirs(MODEL_DIR, exist_ok=True)
+
+
+def train_models(datasets, config, logger=None):
+    print("\nTraining models from scratch...")
+    if logger:
+        logger.info("[TRAINING] Training models from scratch...")
+    selected_models = config["utility"]["models"]
+    trained_models = {}
+
+    for dataset_name, (X_train, y_train) in datasets.items():
+        trained_models[dataset_name] = {}
+        if logger:
+            logger.info(f"[TRAINING] Starting training for dataset: {dataset_name} — Rows: {len(X_train)}, Features: {X_train.shape[1]}")
+
+        for model_name, is_enabled in selected_models.items():
+            if is_enabled and model_name in MODEL_REGISTRY:
+                print(f"\nTraining {model_name} on {dataset_name}...")
+                if logger:
+                    logger.info(f"[TRAINING] Training {model_name} on {dataset_name}...")
+
+                # Always create a fresh model instance (no loading from file)
+                #model_instance = MODEL_REGISTRY[model_name]()
+                #model_instance.train(X_train, y_train)
+                #trained_models[dataset_name][model_name] = model_instance
+                try:
+                    start_time = time.perf_counter()
+                    model_instance = MODEL_REGISTRY[model_name]()  # Fresh instance
+                    model_instance.train(X_train, y_train)
+                    duration = time.perf_counter() - start_time
+                    trained_models[dataset_name][model_name] = model_instance
+                    print(f"{model_name} trained successfully on {dataset_name}.")
+                    if logger:
+                        logger.info(f"[TRAINING] {model_name} trained successfully on {dataset_name} in {duration:.2f} sec")
+
+                except Exception as e:
+                    msg = f" ERROR Training failed for {model_name} on {dataset_name}: {e}"
+                    print(msg)
+                    if logger:
+                        logger.exception(msg)
+        if logger:
+            logger.info(f"[TRAINING] Finished training {len(trained_models[dataset_name])} model(s) for dataset: {dataset_name}")
+    total_models = sum(len(models) for models in trained_models.values())
+    if logger:
+        logger.info(f"[TRAINING] Total models trained across all datasets: {total_models}")
+
+    return trained_models
 
 # def train_models(datasets, config):
 #     """
@@ -70,39 +117,3 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 #             print(f'{model_name} trained successfully on {dataset_name}.')
 
 #     return trained_models
-
-def train_models(datasets, config, logger=None):
-    print("\nTraining models from scratch...")
-    if logger:
-        logger.info("Training models from scratch...")
-    selected_models = config["utility"]["models"]
-    trained_models = {}
-
-    for dataset_name, (X_train, y_train) in datasets.items():
-        trained_models[dataset_name] = {}
-
-        for model_name, is_enabled in selected_models.items():
-            if is_enabled and model_name in MODEL_REGISTRY:
-                print(f"\nTraining {model_name} on {dataset_name}...")
-                if logger:
-                    logger.info(f"Training {model_name} on {dataset_name}...")
-
-                # Always create a fresh model instance (no loading from file)
-                #model_instance = MODEL_REGISTRY[model_name]()
-                #model_instance.train(X_train, y_train)
-                #trained_models[dataset_name][model_name] = model_instance
-                try:
-                    model_instance = MODEL_REGISTRY[model_name]()  # Fresh instance
-                    model_instance.train(X_train, y_train)
-                    trained_models[dataset_name][model_name] = model_instance
-                    print(f"{model_name} trained successfully on {dataset_name}.")
-                    if logger:
-                        logger.info(f"{model_name} trained successfully on {dataset_name}.")
-
-                except Exception as e:
-                    msg = f" Training failed for {model_name} on {dataset_name}: {e}"
-                    print(msg)
-                    if logger:
-                        logger.exception(msg)
-
-    return trained_models
