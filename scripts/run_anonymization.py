@@ -56,10 +56,12 @@ def load_config(config_path="configs/benchmark_config.yaml"):
         config = yaml.safe_load(file)
     return config
 
-def compile_java():
+def compile_java(logger=None):
     """Compiles the Java anonymization code with ARX dependencies."""
     print("\n🔹 Compiling Java project...")
     print("🔹 Using classpath:", classpath)
+    if logger:
+        logger.info(" [ANONYMIZATION] Compiling Java source files...")
 
     compile_process = subprocess.run(
         [
@@ -81,11 +83,16 @@ def compile_java():
         print("❌ Java Compilation Failed!")
         print("STDERR:", compile_process.stderr)
         return False
+    if logger:
+        logger.info(" [ANONYMIZATION] Java compilation successful.")
     return True
 
-def create_jar():
+def create_jar(logger=None):
     """Creates a JAR file for the anonymization program."""
     print("\n🔹 Creating JAR file...")
+    if logger:
+        logger.info("[ANONYMIZATION] Creating JAR file for anonymization...")
+
 
     jar_process = subprocess.run(
         ["jar", "cfve", jar_path, "Main", "-C", "bin", "."],
@@ -97,27 +104,29 @@ def create_jar():
         print("❌ JAR Creation Failed!")
         print("STDERR:", jar_process.stderr)
         return False
+    if logger:
+        logger.info(" [ANONYMIZATION] JAR file created successfully.")
     return True
 
 def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.yaml",anonymized_output_path=None, logger=None):
     config = load_config(config_path)
     if logger:
-        logger.info("Running Java Anonymization Program...........")
+        logger.info(f" [ANONYMIZATION] Executing run_anonymization, config_path : {config_path}...........")
     """Runs the Java anonymization JAR using the cleaned dataset path."""
     if not os.path.exists(jar_path):
-        if not compile_java():
+        if not compile_java(logger):
             print("⛔ Skipping JAR creation due to compilation errors.")
             if logger:
-                logger.error("Java Compilation Failed!")
+                logger.error(" [ANONYMIZATION] Java Compilation Failed!")
             return False
-        if not create_jar():
+        if not create_jar(logger):
             print("⛔ Skipping execution due to JAR creation errors.")
             if logger:
-                logger.error("JAR Creation Failed!")
+                logger.error(" [ANONYMIZATION] JAR Creation Failed!")
             return False
     else :
         if logger:
-            logger.info(f"Using JAR file at {jar_path} to anonymize the dataset.")
+            logger.info(f" [ANONYMIZATION] Using JAR file at {jar_path} to anonymize the dataset.")
 
 
     print("\n🔹 Running Java Anonymization Program...")
@@ -126,9 +135,11 @@ def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.y
     if dataset_path is None:
         config = load_config()
         dataset_path = os.path.abspath(config["dataset"]["path"])
+        if logger:
+            logger.warning(f" [ANONYMIZATION] No dataset path provided, falling back to config path datasetpath {dataset_path}.")
     
     if anonymized_output_path is None:
-         # Generate anonymized output path based on dataset name
+        # Generate anonymized output path based on dataset name
         # Extract base dataset name
         dataset_name = os.path.splitext(os.path.basename(dataset_path))[0]  # e.g., 'loan_train_raw'
         # Remove 'train_raw' from the name (if present)
@@ -144,14 +155,18 @@ def run_anonymization(dataset_path=None, config_path="configs/benchmark_config.y
     )
     if run_process.returncode == 0:
         if logger:
-            logger.info(f"Anonimized file saved to : {anonymized_output_path}")
-            logger.info("Java anonymization completed successfully.")
+            logger.info(f" [ANONYMIZATION] Anonimized file saved to : {anonymized_output_path}")
+            logger.info(" [ANONYMIZATION] Java anonymization completed successfully.")
+            # Log stdout only if it's non-empty
+            stdout_clean = run_process.stdout.strip()
+            if stdout_clean:
+                logger.info(" [ANONYMIZATION] Java STDOUT:\n" + stdout_clean)
         return True
     else:
         print("❌ Java anonymization failed!")
         if logger:
-            logger.error(" Java anonymization failed with exit code: %s", run_process.returncode)
-            logger.error("STDERR: %s", run_process.stderr.strip())
+            logger.error(" [ANONYMIZATION] Java anonymization failed with exit code: %s", run_process.returncode)
+            logger.error(" [ANONYMIZATION] STDERR: %s", run_process.stderr.strip())
             return False
 
     

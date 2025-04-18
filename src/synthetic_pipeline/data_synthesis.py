@@ -6,6 +6,7 @@ from sdv.metadata import SingleTableMetadata
 from custom.synthesizer.base_synthesizer import BaseSynthesizer
 from output_utils.config_utils import generate_anonym_tag
 import importlib
+import time  # NEW
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 src_path = os.path.join(project_root, "src")
@@ -29,7 +30,7 @@ FILENAME_PARAM_MAP = {
 }
 
 
-def load_or_train_synthesizers(preprocessed_data, dataset_name, config):
+def load_or_train_synthesizers(preprocessed_data, dataset_name, config, logger=None):
     """
     Loads or trains multiple synthesizers dynamically.
 
@@ -56,68 +57,123 @@ def load_or_train_synthesizers(preprocessed_data, dataset_name, config):
             # Dynamically import synthesizer class
             module_name = synth_info["import_path"]
             class_name = synth_info["class_name"]
-            params = synth_info.get("params", {})
+
+            # ✅ Safe param copy
+            original_params = synth_info.get("params", {})
+            params = original_params.copy()
+
+            if logger:  # NEW
+                logger.info(f"[SYNTHETIC] Preparing synthesizer: {synth_name}")  
+                logger.info(f"[SYNTHETIC] Params from config: {params}")  
 
             module = importlib.import_module(module_name)
             synthesizer_class = getattr(module, class_name)
 
             # Ensure synthesizer follows BaseSynthesizer structure (for custom ones)
             if not issubclass(synthesizer_class, BaseSynthesizer) and "sdv" not in module_name:
+                if logger:
+                    logger.error(f" {class_name} does not implement BaseSynthesizer!")
                 raise TypeError(f"❌ {class_name} does not implement BaseSynthesizer!")
 
             # Define synthesizer file path
             #synthesizer_filename = f"{dataset_name}_{synth_name}_synthesizer.pkl"
-            params = synth_info.get("params", {})
+            #params = synth_info.get("params", {})  #accidentally got parms twice
             synthesizer_filename = generate_synthesizer_filename(dataset_name, synth_name, params)
 
             synthesizer_path = os.path.join(SYNTHESIZER_DIR, synthesizer_filename)
 
-            # Extract number of epochs if required
-            if "epochs" in params and class_name in ["CTGANSynthesizer", "TVAESynthesizer"]:
-                epochs = params["epochs"]
-                del params["epochs"]  # Remove epochs from params to avoid passing it to GaussianCopula
-            else:
-                epochs = None  # Not needed for GaussianCopula
+            #this code most likely caused the issue, sdv always defaulted to 300 epochs
+            # Extract number of epochs if requireds
+            # if "epochs" in params and class_name in ["CTGANSynthesizer", "TVAESynthesizer"]:
+            #     epochs = params["epochs"]
+            #     del params["epochs"]  # Remove epochs from params to avoid passing it to GaussianCopula
+            # else:
+            #     epochs = None  # Not needed for GaussianCopula
+            
+            # ✅ Safely extract epochs if it's in the config and supported by the class
+            epochs = None
+            if class_name in ["CTGANSynthesizer", "TVAESynthesizer"]:
+                epochs = params.get("epochs")
+                if epochs is not None:
+                    del params["epochs"]  # Remove it from params to avoid double passing
+
+            
 
             # Load or train synthesizer
             if os.path.exists(synthesizer_path):
                 print(f"✅ Found existing {synth_name} synthesizer: {synthesizer_path}")
+                if logger:
+                    logger.info(f"[SYNTHETIC] Found existing {synth_name} synthesizer: {synthesizer_path}")
                 if hasattr(synthesizer_class, "load"):
                     synthesizer = synthesizer_class.load(synthesizer_path)
                 else: 
                     print(f"⚠️ Warning: {synth_name} does not support loading. Training a new one...")
+                    if logger:
+                        logger.warning(f"[SYNTHETIC] {synth_name} does not support loading. Training a new one...")
                     synthesizer = synthesizer_class(metadata, **params)
 
             else:
                 print(f"Training new {synth_name} synthesizer...")
+                if logger:
+                    logger.info(" [SYNTHETIC] No pre-trained synthesizer found")
+                    logger.info(f"[SYNTHETIC] Training new {synth_name} synthesizer from scratch...")
 
                 # Check if the synthesizer requires `epochs`
-                if "epochs" in params:
-                    init_params = synthesizer_class.__init__.__code__.co_varnames  # Get constructor args
-                    if "epochs" in init_params:
-                        synthesizer = synthesizer_class(metadata, epochs=params["epochs"], **params)
-                    else:
-                        print(f"⚠️ Warning: {synth_name} does not accept 'epochs', ignoring it.")
-                        synthesizer = synthesizer_class(metadata, **params)
+                init_params = synthesizer_class.__init__.__code__.co_varnames  # Get constructor args
+
+                if epochs is not None and "epochs" in init_params:
+                    # Synthesizer supports epochs and we want to set it
+                    synthesizer = synthesizer_class(metadata, epochs=epochs, **params)
+                    if logger:
+                        logger.info(f"[SYNTHETIC] {synth_name} initialized with epochs: {epochs}")
+                        logger.info(f"[SYNTHETIC] Training parameters for {synth_name}: {params}")
                 else:
-                     synthesizer = synthesizer_class(metadata, **params)
-                     
+                    if epochs is not None:
+                        print(f"⚠️ Warning: {synth_name} does not accept 'epochs', ignoring it.")
+                        if logger:
+                            logger.warning(f"[SYNTHETIC] {synth_name} does not accept 'epochs', ignoring it.")
+                    synthesizer = synthesizer_class(metadata, **params)
+
+
+                if logger :
+                    logger.info(f"[SYNTHETIC] fitting {synth_name} ") 
+                start_time = time.time()     
                 synthesizer.fit(preprocessed_data)
+                end_time = time.time() 
+                if logger:
+                    logger.info(f"[SYNTHETIC] Fitting complete for {synth_name}. Duration: {end_time - start_time:.2f} seconds.")  # NEW
+                # ✅ Confirm how many epochs were actually used
+                actual_epochs = getattr(synthesizer, "epochs", None)
+                if actual_epochs is not None:
+                    print(f"📢 [CONFIRM] {synth_name} actually trained with epochs = {actual_epochs}")
+                    if logger:
+                        logger.info(f"[SYNTHETIC] CONFIRMATION {synth_name} actually trained with epochs = {actual_epochs}")
+                else:
+                    print(f"⚠️ Could not determine actual epochs used for {synth_name}")
+                    if logger:
+                        logger.warning(f"[SYNTHETIC] WARNING Could not determine actual epochs used for {synth_name}")
+                
                 synthesizer.save(synthesizer_path)
                 print(f"✅ {synth_name} trained and saved.")
+                if logger:
+                    logger.info(f"[SYNTHETIC] {synth_name} trained and saved.")
 
             trained_synthesizers[synth_name] = (synthesizer, metadata)
 
         except (ImportError, AttributeError, TypeError) as e:
             print(f"❌ Error loading synthesizer '{synth_name}': {e}")
+            if logger:
+                logger.error(f"[SYNTHETIC] Error loading synthesizer '{synth_name}': {e}")
 
     if not trained_synthesizers:
+        if logger:
+            logger.error("No valid synthesizer enabled in config.")
         raise ValueError("No valid synthesizer enabled in config.")
 
     return trained_synthesizers, metadata
 
 
-def generate_synthetic_datasets(preprocessed_data, dataset_name, config):
+def generate_synthetic_datasets(preprocessed_data, dataset_name, config, logger=None):
     """
     Generates synthetic data using multiple synthesizers.
 
@@ -131,9 +187,12 @@ def generate_synthetic_datasets(preprocessed_data, dataset_name, config):
     """
     print(f"\nProcessing dataset: {dataset_name}")
     print(f"Original dataset size: {len(preprocessed_data)} rows")
+    if logger:
+        logger.info(f"[SYNTHETIC] Processing dataset: {dataset_name}")
+        logger.info(f"[SYNTHETIC] Original dataset size: {len(preprocessed_data)} rows")
 
     # Load or train multiple synthesizers
-    trained_synthesizers, metadata = load_or_train_synthesizers(preprocessed_data, dataset_name, config)
+    trained_synthesizers, metadata = load_or_train_synthesizers(preprocessed_data, dataset_name, config, logger=logger)
 
     synthetic_datasets = {}
     
@@ -155,17 +214,33 @@ def generate_synthetic_datasets(preprocessed_data, dataset_name, config):
             num_rows_to_generate = int(len(preprocessed_data) * multiplier)
         else:
             print(f"⚠️ Warning: Invalid num_generated_rows value '{num_generated_rows}' for {synth_name}. Defaulting to original dataset size.")
+            if logger:
+                logger.warning(f"[SYNTHETIC] Invalid num_generated_rows value '{num_generated_rows}' for {synth_name}. Defaulting to original dataset size.")
             num_rows_to_generate = len(preprocessed_data)
 
         print(f"\nUsing {synth_name} synthesizer to generate {num_rows_to_generate} synthetic rows.")
+        # Log synth start
+        if logger:
+            logger.info(f"[SYNTHETIC] Using {synth_name} to generate {num_rows_to_generate} rows...")
         synthetic_data = synthesizer.sample(num_rows=num_rows_to_generate)
         print(f"✅ Synthetic data generated successfully: {len(synthetic_data)} rows created.")
+        if logger:
+            logger.info(f"[SYNTHETIC] {synth_name} completed: {len(synthetic_data)} rows generated.")
 
         # Save synthetic data
         #synthetic_data_filename = f"{dataset_name}_{synth_name}_synthetic.csv"
         #synthetic_data_path = os.path.join(SYNTHETIC_DATA_DIR, synthetic_data_filename)  # Save to datasets/synthetic
         #synthetic_data.to_csv(synthetic_data_path, index=False)
         #print(f" Synthetic data saved to {synthetic_data_path}")
+        # NEW: Log class distribution of target column
+        target_col = config["dataset"]["target_column"]  # NEW
+        if target_col in synthetic_data.columns:  # NEW
+            counts = synthetic_data[target_col].value_counts().to_dict()  # NEW
+            if logger :
+                logger.info(f"[SYNTHETIC] Target class distribution for {synth_name}: {counts}")  # NEW
+        else:  # NEW
+            if logger : 
+                logger.warning(f"[SYNTHETIC] {synth_name} generated data without target column '{target_col}'!")  # NEW
 
         synthetic_datasets[synth_name] = synthetic_data
         

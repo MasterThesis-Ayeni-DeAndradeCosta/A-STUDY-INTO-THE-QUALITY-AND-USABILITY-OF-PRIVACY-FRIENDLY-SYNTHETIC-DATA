@@ -43,13 +43,18 @@ def run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config,
 
     print("\nStarting Synthetic Data Generation...")
     if logger:
-        logger.info("Executing run_synthetic...")
+        logger.info("Executing run_synthetic.....")
+
 
     # Generate synthetic datasets
-    synthetic_datasets, metadata = generate_synthetic_datasets(cleaned_data, dataset_name, config)
+    if logger:
+        logger.info(f"[SYNTHETIC PIPELINE] executing run_synthetic for {dataset_name}...")
+    synthetic_datasets, metadata = generate_synthetic_datasets(cleaned_data, dataset_name, config, logger=logger)
     print("\nSynthetic Data Generation Completed.")
     if logger:
-        logger.info("Synthetic Data Generation Completed.")
+        logger.info("[SYNTHETIC PIPELINE] Synthetic Data Generation Completed.")
+        logger.info(f"[SYNTHETIC PIPELINE] Synthesizers used: {list(synthetic_datasets.keys())}")
+
 
 
     # Evaluate synthetic datasets
@@ -61,17 +66,24 @@ def run_synthetic(cleaned_data, dataset_name, target_column, output_dir, config,
 
     print("\nSynthetic Data Evaluation Completed.")
     if logger:
-        logger.info("Synthetic Data Evaluation Completed.")
+        logger.info(" [SYNTHETIC PIPELINE]  Synthetic Data Evaluation Completed.")
 
     # Save synthetic data report with quality metrics
     success = save_synthetic_data_report(output_dir, synthetic_datasets, quality_reports)
     if success:
         print("\nSynthetic Data Report Generated Successfully.")
         if logger:
-            logger.info("Synthetic Data Report Generated Successfully.")
+            logger.info(" [SYNTHETIC PIPELINE] Synthetic Data Report Generated Successfully.")
 
     # Compare data distributions
-    compare_data_distributions(output_dir, cleaned_data, synthetic_datasets, target_column)
+    # compare_data_distributions(output_dir, cleaned_data, synthetic_datasets, target_column)
+    try:
+        compare_data_distributions(output_dir, cleaned_data, synthetic_datasets, target_column)
+    except Exception as e:
+        if logger:
+            logger.error(f"[SYNTHETIC PIPELINE] Failed to compare distributions: {e}")
+        else:
+            print(f"[SYNTHETIC PIPELINE] Failed to compare distributions: {e}")
 
     return synthetic_datasets
 

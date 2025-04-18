@@ -1,0 +1,497 @@
+2025-04-18 19:53:22,462 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-04-18 19:53:22,463 - INFO -  Benchmarking started for dataset: studentPerformance
+2025-04-18 19:53:22,463 - INFO - Using dataset path: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\original\studentPerformance.csv
+2025-04-18 19:53:22,463 - INFO - Target column: Target, separator: ';'
+2025-04-18 19:53:22,463 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = True, enable_hybrid = True, enable_utility = True, delete_after_evaluation = False
+2025-04-18 19:53:22,463 - INFO - Running preprocessing...
+2025-04-18 19:53:22,468 - INFO - [PREPROCESSING] No preprocessed files found. Starting full preprocessing pipeline...
+2025-04-18 19:53:22,485 - INFO - [PREPROCESSING] Missing value handling strategy: 'mode' applied.
+2025-04-18 19:53:22,488 - INFO - [PREPROCESSING] Split data into train (3539 rows) and test (885 rows). Test size: 0.2
+2025-04-18 19:53:22,559 - INFO -  [PREPROCESSING] Saved raw train set to: datasets/train/studentPerformance_train_raw.csv
+2025-04-18 19:53:22,560 - INFO -  [PREPROCESSING] Saved encoder to: artifacts/studentPerformance_binary_encoder.pkl
+2025-04-18 19:53:22,560 - INFO -  [PREPROCESSING]Saved encoded train set to: datasets/cleaned/studentPerformance_cleaned.csv
+2025-04-18 19:53:22,560 - INFO -  [PREPROCESSING] Saved encoded test set to: datasets/test/studentPerformance_test_set.csv
+2025-04-18 19:53:22,560 - INFO - [PREPROCESSING] run_preprocessing finished executing.
+2025-04-18 19:53:22,565 - INFO - Preprocessing completed. Rows before: 4424, after: 3539
+2025-04-18 19:53:22,566 - INFO - Preprocessed data saved to: outputs\singular\studentPerformance_2025-04-18_19-53-22\preprocessing_report.txt
+2025-04-18 19:53:22,569 - INFO - enable_anonymization = True
+2025-04-18 19:53:22,569 - INFO - Starting Anonymization Pipeline with output path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv.......
+2025-04-18 19:53:22,578 - INFO -  [ANONYMIZATION] Executing run_anonymization, config_path : configs/benchmark_config.yaml...........
+2025-04-18 19:53:22,579 - INFO -  [ANONYMIZATION] Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-04-18 19:53:24,053 - INFO -  [ANONYMIZATION] Anonimized file saved to : C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+2025-04-18 19:53:24,053 - INFO -  [ANONYMIZATION] Java anonymization completed successfully.
+2025-04-18 19:53:24,053 - INFO -  [ANONYMIZATION] Java STDOUT:
+? Java received config path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+? Loading config from: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+Loading config from: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+? Dataset Path (from args): C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\train\studentPerformance_train_raw.csv
+? Dataset Separator: ;
+? Suppression Limit: 0.1
+
+? Configured Attributes:
+  ? Quasi-Identifier: Age at enrollment
+  ? Quasi-Identifier: Gender
+  ? Quasi-Identifier: Nacionality
+  ? Sensitive Attribute: Scholarship_holder
+  ? Insensitive Attribute: Application mode
+  ? Insensitive Attribute: Application order
+  ? Insensitive Attribute: Curricular units 1st sem (credited)
+  ? Insensitive Attribute: Curricular units 1st sem (enrolled)
+  ? Insensitive Attribute: Curricular units 1st sem (evaluations)
+  ? Insensitive Attribute: Curricular units 1st sem (approved)
+  ? Insensitive Attribute: Curricular units 1st sem (without evaluations)
+  ? Insensitive Attribute: Curricular units 2nd sem (credited)
+  ? Insensitive Attribute: Curricular units 2nd sem (enrolled)
+  ? Insensitive Attribute: Curricular units 2nd sem (evaluations)
+  ? Insensitive Attribute: Curricular units 2nd sem (approved)
+  ? Insensitive Attribute: Curricular units 2nd sem (without evaluations)
+  ? Insensitive Attribute: Course
+  ? Insensitive Attribute: Target
+
+? Defined Hierarchies:
+  ? Age at enrollment -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\age_enrollment.csv
+  ? Gender -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\gender.csv
+  ? Nacionality -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\nacionality.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\age_enrollment.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\gender.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\nacionality.csv
+? Privacy Models Configured
+? Anonymized Output Path (from args): C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+? Anonymized Output Path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+? Anonymization completed. Output saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+Anonymized Data Quality Metrics:
+ - Ambiguity: 0.973952008349468
+ - AECS: 0.9490752824196967
+ - Discernibility: 0.8184090590646209
+ - Granularity: 0.96225865008276
+ - MSE: 0.9786895005106658
+ - Non-Uniform Entropy: 0.6105061091750543
+ - Precision: 0.8928369595931054
+ - Record-level SE: 0.9646446245403221
+Equivalence Class Statistics:
+ - Number of Classes: 17
+ - Average Class Size: 202.76470588235293
+Suppression Statistics:
+ - Suppressed Records: 92
+ - Suppression Percentage: 2.60%
+2025-04-18 19:53:24,054 - INFO - Anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+2025-04-18 19:53:24,106 - INFO - Anonymous data report saved at: outputs\singular\studentPerformance_2025-04-18_19-53-22\anonymous_data_report.txt
+2025-04-18 19:53:24,106 - INFO -  [POSTPROCESSING] Postprocessing anonymized data: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+2025-04-18 19:53:24,116 - INFO -  [POSTPROCESSING] Loaded anonymized data: (3539, 37)
+2025-04-18 19:53:24,154 - INFO -  [POSTPROCESSING] Loaded fallback maps from training data. Categorical cols: 1, Numeric cols: 36
+2025-04-18 19:53:24,154 - INFO -  [POSTPROCESSING] Normalizing anonymized data using ARX artifact cleaning and fallback values.
+2025-04-18 19:53:24,312 - INFO -  [POSTPROCESSING] Normalized anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized_processed.csv
+2025-04-18 19:53:24,312 - INFO -  [POSTPROCESSING] No encoder present. Skipping encoding of anonymized data.Will use processed anonymous data directly
+2025-04-18 19:53:24,313 - INFO - Postprocessing report saved at: outputs\singular\studentPerformance_2025-04-18_19-53-22\postprocessing_report.txt
+2025-04-18 19:53:24,313 - INFO - enable_synthetic_generation = True
+2025-04-18 19:53:24,314 - INFO - Starting standard Synthetic Data Generation pipeline...
+2025-04-18 19:53:24,314 - INFO - Executing run_synthetic.....
+2025-04-18 19:53:24,314 - INFO - [SYNTHETIC PIPELINE] executing run_synthetic for studentPerformance...
+2025-04-18 19:53:24,315 - INFO - [SYNTHETIC] Processing dataset: studentPerformance
+2025-04-18 19:53:24,315 - INFO - [SYNTHETIC] Original dataset size: 3539 rows
+2025-04-18 19:53:24,340 - INFO - Detected metadata:
+2025-04-18 19:53:24,340 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "Marital status": {
+            "sdtype": "categorical"
+        },
+        "Application mode": {
+            "sdtype": "numerical"
+        },
+        "Application order": {
+            "sdtype": "categorical"
+        },
+        "Course": {
+            "sdtype": "numerical"
+        },
+        "Daytime/evening attendance": {
+            "sdtype": "categorical"
+        },
+        "Previous qualification": {
+            "sdtype": "numerical"
+        },
+        "Previous qualification (grade)": {
+            "sdtype": "numerical"
+        },
+        "Nacionality": {
+            "sdtype": "numerical"
+        },
+        "Mother's qualification": {
+            "sdtype": "numerical"
+        },
+        "Father's qualification": {
+            "sdtype": "numerical"
+        },
+        "Mother's occupation": {
+            "sdtype": "numerical"
+        },
+        "Father's occupation": {
+            "sdtype": "numerical"
+        },
+        "Admission grade": {
+            "sdtype": "numerical"
+        },
+        "Displaced": {
+            "sdtype": "categorical"
+        },
+        "Educational special needs": {
+            "sdtype": "categorical"
+        },
+        "Debtor": {
+            "sdtype": "categorical"
+        },
+        "Tuition fees up to date": {
+            "sdtype": "categorical"
+        },
+        "Gender": {
+            "sdtype": "categorical"
+        },
+        "Scholarship_holder": {
+            "sdtype": "categorical"
+        },
+        "Age at enrollment": {
+            "sdtype": "numerical"
+        },
+        "International": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (credited)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (enrolled)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (evaluations)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (approved)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (grade)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (without evaluations)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (credited)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (enrolled)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (evaluations)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (approved)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (grade)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (without evaluations)": {
+            "sdtype": "categorical"
+        },
+        "Unemployment rate": {
+            "sdtype": "numerical"
+        },
+        "Inflation rate": {
+            "sdtype": "numerical"
+        },
+        "GDP": {
+            "sdtype": "numerical"
+        },
+        "Target": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-18 19:53:24,341 - INFO - [SYNTHETIC] Preparing synthesizer: CTGAN
+2025-04-18 19:53:24,342 - INFO - [SYNTHETIC] Params from config: {'epochs': 50}
+2025-04-18 19:53:24,342 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-18 19:53:24,342 - INFO - [SYNTHETIC] Training new CTGAN synthesizer from scratch...
+2025-04-18 19:53:24,343 - WARNING - [UserWarning] We strongly recommend saving the metadata using 'save_to_json' for replicability in future SDV versions. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sdv\single_table\base.py:97)
+2025-04-18 19:53:24,347 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 53, 24, 347758), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_1d808718cd614ce98bbce087f324b149'}
+2025-04-18 19:53:24,347 - INFO - [SYNTHETIC] CTGAN initialized with epochs: 50
+2025-04-18 19:53:24,347 - INFO - [SYNTHETIC] Training parameters for CTGAN: {}
+2025-04-18 19:53:24,347 - INFO - [SYNTHETIC] fitting CTGAN 
+2025-04-18 19:53:24,347 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 53, 24, 347758), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_1d808718cd614ce98bbce087f324b149', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 19:53:24,374 - INFO - Fitting table  metadata
+2025-04-18 19:53:24,375 - INFO - Fitting formatters for table 
+2025-04-18 19:53:24,380 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-04-18 19:53:24,383 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-04-18 19:53:24,385 - INFO - Fitting constraints for table 
+2025-04-18 19:53:24,385 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-18 19:53:24,392 - INFO - Fitting HyperTransformer for table 
+2025-04-18 19:53:24,436 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-04-18 19:53:24,455 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-04-18 19:53:24,513 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 53, 24, 513949), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_1d808718cd614ce98bbce087f324b149', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 19:53:24,516 - INFO - Guidance: There are no missing values in column Application mode. Extra column not created.
+2025-04-18 19:53:24,813 - INFO - Guidance: There are no missing values in column Course. Extra column not created.
+2025-04-18 19:53:25,074 - INFO - Guidance: There are no missing values in column Previous qualification. Extra column not created.
+2025-04-18 19:53:25,121 - INFO - Guidance: There are no missing values in column Previous qualification (grade). Extra column not created.
+2025-04-18 19:53:25,355 - INFO - Guidance: There are no missing values in column Nacionality. Extra column not created.
+2025-04-18 19:53:25,418 - INFO - Guidance: There are no missing values in column Mother's qualification. Extra column not created.
+2025-04-18 19:53:25,545 - INFO - Guidance: There are no missing values in column Father's qualification. Extra column not created.
+2025-04-18 19:53:25,727 - INFO - Guidance: There are no missing values in column Mother's occupation. Extra column not created.
+2025-04-18 19:53:25,864 - INFO - Guidance: There are no missing values in column Father's occupation. Extra column not created.
+2025-04-18 19:53:26,048 - INFO - Guidance: There are no missing values in column Admission grade. Extra column not created.
+2025-04-18 19:53:26,297 - INFO - Guidance: There are no missing values in column Age at enrollment. Extra column not created.
+2025-04-18 19:53:26,539 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (credited). Extra column not created.
+2025-04-18 19:53:26,797 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (enrolled). Extra column not created.
+2025-04-18 19:53:27,028 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (evaluations). Extra column not created.
+2025-04-18 19:53:27,256 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (approved). Extra column not created.
+2025-04-18 19:53:27,492 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (grade). Extra column not created.
+2025-04-18 19:53:27,829 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (without evaluations). Extra column not created.
+2025-04-18 19:53:27,954 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (credited). Extra column not created.
+2025-04-18 19:53:28,108 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (enrolled). Extra column not created.
+2025-04-18 19:53:28,264 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (evaluations). Extra column not created.
+2025-04-18 19:53:28,495 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (approved). Extra column not created.
+2025-04-18 19:53:28,586 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (grade). Extra column not created.
+2025-04-18 19:53:28,820 - INFO - Guidance: There are no missing values in column Unemployment rate. Extra column not created.
+2025-04-18 19:53:29,051 - INFO - Guidance: There are no missing values in column Inflation rate. Extra column not created.
+2025-04-18 19:53:29,206 - INFO - Guidance: There are no missing values in column GDP. Extra column not created.
+2025-04-18 19:54:28,580 - INFO - [SYNTHETIC] Fitting complete for CTGAN. Duration: 64.23 seconds.
+2025-04-18 19:54:28,580 - INFO - [SYNTHETIC] CONFIRMATION CTGAN actually trained with epochs = 50
+2025-04-18 19:54:28,580 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 54, 28, 580942), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_1d808718cd614ce98bbce087f324b149'}
+2025-04-18 19:54:28,613 - INFO - [SYNTHETIC] CTGAN trained and saved.
+2025-04-18 19:54:28,613 - INFO - [SYNTHETIC] Preparing synthesizer: TVAE
+2025-04-18 19:54:28,613 - INFO - [SYNTHETIC] Params from config: {'epochs': 50}
+2025-04-18 19:54:28,614 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-18 19:54:28,614 - INFO - [SYNTHETIC] Training new TVAE synthesizer from scratch...
+2025-04-18 19:54:28,617 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 54, 28, 617219), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_9cdd397449e04c24a0b92ae12c0282dc'}
+2025-04-18 19:54:28,617 - INFO - [SYNTHETIC] TVAE initialized with epochs: 50
+2025-04-18 19:54:28,617 - INFO - [SYNTHETIC] Training parameters for TVAE: {}
+2025-04-18 19:54:28,618 - INFO - [SYNTHETIC] fitting TVAE 
+2025-04-18 19:54:28,618 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 54, 28, 618202), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_9cdd397449e04c24a0b92ae12c0282dc', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 19:54:28,649 - INFO - Fitting table  metadata
+2025-04-18 19:54:28,650 - INFO - Fitting formatters for table 
+2025-04-18 19:54:28,656 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-04-18 19:54:28,659 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-04-18 19:54:28,661 - INFO - Fitting constraints for table 
+2025-04-18 19:54:28,662 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-18 19:54:28,671 - INFO - Fitting HyperTransformer for table 
+2025-04-18 19:54:28,723 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-04-18 19:54:28,744 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-04-18 19:54:28,808 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 54, 28, 808206), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_9cdd397449e04c24a0b92ae12c0282dc', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 19:54:28,811 - INFO - Guidance: There are no missing values in column Application mode. Extra column not created.
+2025-04-18 19:54:28,935 - INFO - Guidance: There are no missing values in column Course. Extra column not created.
+2025-04-18 19:54:29,175 - INFO - Guidance: There are no missing values in column Previous qualification. Extra column not created.
+2025-04-18 19:54:29,221 - INFO - Guidance: There are no missing values in column Previous qualification (grade). Extra column not created.
+2025-04-18 19:54:29,446 - INFO - Guidance: There are no missing values in column Nacionality. Extra column not created.
+2025-04-18 19:54:29,506 - INFO - Guidance: There are no missing values in column Mother's qualification. Extra column not created.
+2025-04-18 19:54:29,637 - INFO - Guidance: There are no missing values in column Father's qualification. Extra column not created.
+2025-04-18 19:54:29,801 - INFO - Guidance: There are no missing values in column Mother's occupation. Extra column not created.
+2025-04-18 19:54:29,941 - INFO - Guidance: There are no missing values in column Father's occupation. Extra column not created.
+2025-04-18 19:54:30,140 - INFO - Guidance: There are no missing values in column Admission grade. Extra column not created.
+2025-04-18 19:54:30,398 - INFO - Guidance: There are no missing values in column Age at enrollment. Extra column not created.
+2025-04-18 19:54:30,647 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (credited). Extra column not created.
+2025-04-18 19:54:30,917 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (enrolled). Extra column not created.
+2025-04-18 19:54:31,147 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (evaluations). Extra column not created.
+2025-04-18 19:54:31,400 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (approved). Extra column not created.
+2025-04-18 19:54:31,588 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (grade). Extra column not created.
+2025-04-18 19:54:31,809 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (without evaluations). Extra column not created.
+2025-04-18 19:54:31,923 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (credited). Extra column not created.
+2025-04-18 19:54:32,079 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (enrolled). Extra column not created.
+2025-04-18 19:54:32,236 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (evaluations). Extra column not created.
+2025-04-18 19:54:32,479 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (approved). Extra column not created.
+2025-04-18 19:54:32,575 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (grade). Extra column not created.
+2025-04-18 19:54:32,809 - INFO - Guidance: There are no missing values in column Unemployment rate. Extra column not created.
+2025-04-18 19:54:33,048 - INFO - Guidance: There are no missing values in column Inflation rate. Extra column not created.
+2025-04-18 19:54:33,212 - INFO - Guidance: There are no missing values in column GDP. Extra column not created.
+2025-04-18 19:54:47,807 - INFO - [SYNTHETIC] Fitting complete for TVAE. Duration: 19.19 seconds.
+2025-04-18 19:54:47,807 - INFO - [SYNTHETIC] CONFIRMATION TVAE actually trained with epochs = 50
+2025-04-18 19:54:47,807 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 54, 47, 807944), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_9cdd397449e04c24a0b92ae12c0282dc'}
+2025-04-18 19:54:47,837 - INFO - [SYNTHETIC] TVAE trained and saved.
+2025-04-18 19:54:47,838 - INFO - [SYNTHETIC] Preparing synthesizer: GaussianCopula
+2025-04-18 19:54:47,838 - INFO - [SYNTHETIC] Params from config: {}
+2025-04-18 19:54:47,838 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-18 19:54:47,839 - INFO - [SYNTHETIC] Training new GaussianCopula synthesizer from scratch...
+2025-04-18 19:54:47,841 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 54, 47, 841867), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_83a7a7bf8b0a473fb92a6e9be389f1c7'}
+2025-04-18 19:54:47,841 - INFO - [SYNTHETIC] fitting GaussianCopula 
+2025-04-18 19:54:47,842 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 54, 47, 842833), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_83a7a7bf8b0a473fb92a6e9be389f1c7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 19:54:47,872 - INFO - Fitting table  metadata
+2025-04-18 19:54:47,873 - INFO - Fitting formatters for table 
+2025-04-18 19:54:47,879 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-04-18 19:54:47,881 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-04-18 19:54:47,883 - INFO - Fitting constraints for table 
+2025-04-18 19:54:47,883 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-18 19:54:47,895 - INFO - Fitting HyperTransformer for table 
+2025-04-18 19:54:48,023 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-04-18 19:54:48,039 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-04-18 19:54:48,196 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 54, 48, 196987), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_83a7a7bf8b0a473fb92a6e9be389f1c7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 19:54:48,197 - INFO - Fitting GaussianMultivariate(distribution="{'Marital status': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Application mode': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Application order': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Course': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Daytime/evening attendance': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Previous qualification': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Previous qualification (grade)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Nacionality': <class 'copulas.univariate.beta.BetaUnivariate'>, "Mother's qualification": <class 'copulas.univariate.beta.BetaUnivariate'>, "Father's qualification": <class 'copulas.univariate.beta.BetaUnivariate'>, "Mother's occupation": <class 'copulas.univariate.beta.BetaUnivariate'>, "Father's occupation": <class 'copulas.univariate.beta.BetaUnivariate'>, 'Admission grade': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Displaced': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Educational special needs': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Debtor': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Tuition fees up to date': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Gender': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Scholarship_holder': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Age at enrollment': <class 'copulas.univariate.beta.BetaUnivariate'>, 'International': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (credited)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (enrolled)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (evaluations)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (approved)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (grade)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (without evaluations)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (credited)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (enrolled)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (evaluations)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (approved)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (grade)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (without evaluations)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Unemployment rate': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Inflation rate': <class 'copulas.univariate.beta.BetaUnivariate'>, 'GDP': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Target': <class 'copulas.univariate.beta.BetaUnivariate'>}")
+2025-04-18 19:54:51,672 - INFO - [SYNTHETIC] Fitting complete for GaussianCopula. Duration: 3.83 seconds.
+2025-04-18 19:54:51,672 - WARNING - [SYNTHETIC] WARNING Could not determine actual epochs used for GaussianCopula
+2025-04-18 19:54:51,672 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 54, 51, 672791), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_83a7a7bf8b0a473fb92a6e9be389f1c7'}
+2025-04-18 19:54:51,687 - INFO - [SYNTHETIC] GaussianCopula trained and saved.
+2025-04-18 19:54:51,688 - INFO - [SYNTHETIC] Using CTGAN to generate 3539 rows...
+2025-04-18 19:54:52,005 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 54, 51, 688957), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_1d808718cd614ce98bbce087f324b149', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 19:54:52,005 - INFO - [SYNTHETIC] CTGAN completed: 3539 rows generated.
+2025-04-18 19:54:52,006 - INFO - [SYNTHETIC] Target class distribution for CTGAN: {'Graduate': 1584, 'Dropout': 1313, 'Enrolled': 642}
+2025-04-18 19:54:52,007 - INFO - [SYNTHETIC] Using TVAE to generate 3539 rows...
+2025-04-18 19:54:52,243 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 54, 52, 7076), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_9cdd397449e04c24a0b92ae12c0282dc', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 19:54:52,243 - INFO - [SYNTHETIC] TVAE completed: 3539 rows generated.
+2025-04-18 19:54:52,243 - INFO - [SYNTHETIC] Target class distribution for TVAE: {'Graduate': 2266, 'Dropout': 1268, 'Enrolled': 5}
+2025-04-18 19:54:52,245 - INFO - [SYNTHETIC] Using GaussianCopula to generate 3539 rows...
+2025-04-18 19:54:52,913 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 54, 52, 245042), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_83a7a7bf8b0a473fb92a6e9be389f1c7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 19:54:52,913 - INFO - [SYNTHETIC] GaussianCopula completed: 3539 rows generated.
+2025-04-18 19:54:52,913 - INFO - [SYNTHETIC] Target class distribution for GaussianCopula: {'Graduate': 1816, 'Dropout': 1130, 'Enrolled': 593}
+2025-04-18 19:54:52,915 - INFO - [SYNTHETIC PIPELINE] Synthetic Data Generation Completed.
+2025-04-18 19:54:52,915 - INFO - [SYNTHETIC PIPELINE] Synthesizers used: ['CTGAN', 'TVAE', 'GaussianCopula']
+2025-04-18 19:55:04,769 - INFO -  [SYNTHETIC PIPELINE]  Synthetic Data Evaluation Completed.
+2025-04-18 19:55:04,779 - INFO -  [SYNTHETIC PIPELINE] Synthetic Data Report Generated Successfully.
+2025-04-18 19:55:04,942 - INFO - Synthetic data generated with 3 synthesizer(s).
+2025-04-18 19:55:04,942 - INFO - Running Hybrid Pipeline...
+2025-04-18 19:55:04,942 - INFO -  [HYBRID] Executing run_hybrid …
+2025-04-18 19:55:04,943 - INFO -  [HYBRID] Attempting post-processing of C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv …
+2025-04-18 19:55:04,943 - INFO -  [POSTPROCESSING] Postprocessing anonymized data: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+2025-04-18 19:55:04,952 - INFO -  [POSTPROCESSING] Loaded anonymized data: (3539, 37)
+2025-04-18 19:55:04,962 - INFO -  [POSTPROCESSING] Loaded fallback maps from training data. Categorical cols: 1, Numeric cols: 36
+2025-04-18 19:55:04,963 - INFO -  [POSTPROCESSING] Normalizing anonymized data using ARX artifact cleaning and fallback values.
+2025-04-18 19:55:05,103 - INFO -  [POSTPROCESSING] Normalized anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized_processed.csv
+2025-04-18 19:55:05,103 - INFO -  [POSTPROCESSING] No encoder present. Skipping encoding of anonymized data.Will use processed anonymous data directly
+2025-04-18 19:55:05,134 - INFO -  [HYBRID] Post-processing successful!
+2025-04-18 19:55:05,134 - INFO -  [HYBRID] Encoded anon data saved to C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized_encoded.csv
+2025-04-18 19:55:05,135 - INFO -  [HYBRID] Starting synthetic generation for hybrid pipeline...
+2025-04-18 19:55:05,135 - INFO - Executing run_synthetic.....
+2025-04-18 19:55:05,135 - INFO - [SYNTHETIC PIPELINE] executing run_synthetic for studentPerformance_k5_l2_sup10...
+2025-04-18 19:55:05,136 - INFO - [SYNTHETIC] Processing dataset: studentPerformance_k5_l2_sup10
+2025-04-18 19:55:05,136 - INFO - [SYNTHETIC] Original dataset size: 3539 rows
+2025-04-18 19:55:05,163 - INFO - Detected metadata:
+2025-04-18 19:55:05,163 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "Marital status": {
+            "sdtype": "categorical"
+        },
+        "Application mode": {
+            "sdtype": "categorical"
+        },
+        "Application order": {
+            "sdtype": "categorical"
+        },
+        "Course": {
+            "sdtype": "categorical"
+        },
+        "Daytime/evening attendance": {
+            "sdtype": "categorical"
+        },
+        "Previous qualification": {
+            "sdtype": "categorical"
+        },
+        "Previous qualification (grade)": {
+            "sdtype": "numerical"
+        },
+        "Nacionality": {
+            "sdtype": "categorical"
+        },
+        "Mother's qualification": {
+            "sdtype": "categorical"
+        },
+        "Father's qualification": {
+            "sdtype": "categorical"
+        },
+        "Mother's occupation": {
+            "sdtype": "categorical"
+        },
+        "Father's occupation": {
+            "sdtype": "categorical"
+        },
+        "Admission grade": {
+            "sdtype": "categorical"
+        },
+        "Displaced": {
+            "sdtype": "categorical"
+        },
+        "Educational special needs": {
+            "sdtype": "categorical"
+        },
+        "Debtor": {
+            "sdtype": "categorical"
+        },
+        "Tuition fees up to date": {
+            "sdtype": "categorical"
+        },
+        "Gender": {
+            "sdtype": "categorical"
+        },
+        "Scholarship_holder": {
+            "sdtype": "categorical"
+        },
+        "Age at enrollment": {
+            "sdtype": "categorical"
+        },
+        "International": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (credited)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (enrolled)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (evaluations)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (approved)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (grade)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (without evaluations)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 2nd sem (credited)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 2nd sem (enrolled)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 2nd sem (evaluations)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 2nd sem (approved)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 2nd sem (grade)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (without evaluations)": {
+            "sdtype": "categorical"
+        },
+        "Unemployment rate": {
+            "sdtype": "numerical"
+        },
+        "Inflation rate": {
+            "sdtype": "numerical"
+        },
+        "GDP": {
+            "sdtype": "numerical"
+        },
+        "Target": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-18 19:55:05,165 - INFO - [SYNTHETIC] Preparing synthesizer: CTGAN
+2025-04-18 19:55:05,165 - INFO - [SYNTHETIC] Params from config: {}
+2025-04-18 19:55:05,165 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-18 19:55:05,165 - INFO - [SYNTHETIC] Training new CTGAN synthesizer from scratch...
+2025-04-18 19:55:05,165 - WARNING - [UserWarning] We strongly recommend saving the metadata using 'save_to_json' for replicability in future SDV versions. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sdv\single_table\base.py:97)
+2025-04-18 19:55:05,167 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 55, 5, 167900), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_6afa5ea935f841f5b4bb89a9a9bbcf6c'}
+2025-04-18 19:55:05,167 - INFO - [SYNTHETIC] fitting CTGAN 
+2025-04-18 19:55:05,168 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 55, 5, 168875), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_6afa5ea935f841f5b4bb89a9a9bbcf6c', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 19:55:05,175 - INFO - Fitting table  metadata
+2025-04-18 19:55:05,177 - INFO - Fitting formatters for table 
+2025-04-18 19:55:05,181 - INFO - Fitting constraints for table 
+2025-04-18 19:55:05,181 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-18 19:55:05,183 - INFO - Fitting HyperTransformer for table 
+2025-04-18 19:55:05,226 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 19, 55, 5, 226470), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_6afa5ea935f841f5b4bb89a9a9bbcf6c', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 19:55:05,235 - INFO - Guidance: There are no missing values in column Previous qualification (grade). Extra column not created.
+2025-04-18 19:55:05,291 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (grade). Extra column not created.
+2025-04-18 19:55:05,323 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (grade). Extra column not created.
+2025-04-18 19:55:05,349 - INFO - Guidance: There are no missing values in column Unemployment rate. Extra column not created.
+2025-04-18 19:55:05,370 - INFO - Guidance: There are no missing values in column Inflation rate. Extra column not created.
+2025-04-18 19:55:05,396 - INFO - Guidance: There are no missing values in column GDP. Extra column not created.
