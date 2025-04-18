@@ -46,8 +46,8 @@ def run_preprocessing(dataset_path, separator, target_column,  config_path="conf
         print(f"✅ Preprocessed files found. Skipping preprocessing.")
         if logger:
             logger.info(" [PREPROCESSING] Preprocessed files found. Skipping preprocessing.")
-        cleaned_train = pd.read_csv(cleaned_train_path)
-        cleaned_test = pd.read_csv(cleaned_test_path)
+        cleaned_train = pd.read_csv(cleaned_train_path, sep=separator)
+        cleaned_test = pd.read_csv(cleaned_test_path, sep=separator)
         original_data, _ = load_dataset(dataset_path, separator)
         encoder = joblib.load(encoder_path) #will be used in postprocessing
         # Encoding map will not be available if skipped (you can return None or reload if needed)

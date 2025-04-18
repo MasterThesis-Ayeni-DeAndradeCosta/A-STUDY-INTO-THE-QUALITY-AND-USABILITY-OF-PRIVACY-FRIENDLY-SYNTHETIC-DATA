@@ -106,6 +106,9 @@ def load_or_train_synthesizers(preprocessed_data, dataset_name, config, logger=N
                     logger.info(f"[SYNTHETIC] Found existing {synth_name} synthesizer: {synthesizer_path}")
                 if hasattr(synthesizer_class, "load"):
                     synthesizer = synthesizer_class.load(synthesizer_path)
+                    if hasattr(synthesizer, "metadata"):
+                        synthesizer.metadata = metadata
+                        metadata = synthesizer.metadata 
                 else: 
                     print(f"⚠️ Warning: {synth_name} does not support loading. Training a new one...")
                     if logger:
@@ -227,12 +230,7 @@ def generate_synthetic_datasets(preprocessed_data, dataset_name, config, logger=
         if logger:
             logger.info(f"[SYNTHETIC] {synth_name} completed: {len(synthetic_data)} rows generated.")
 
-        # Save synthetic data
-        #synthetic_data_filename = f"{dataset_name}_{synth_name}_synthetic.csv"
-        #synthetic_data_path = os.path.join(SYNTHETIC_DATA_DIR, synthetic_data_filename)  # Save to datasets/synthetic
-        #synthetic_data.to_csv(synthetic_data_path, index=False)
-        #print(f" Synthetic data saved to {synthetic_data_path}")
-        # NEW: Log class distribution of target column
+        
         target_col = config["dataset"]["target_column"]  # NEW
         if target_col in synthetic_data.columns:  # NEW
             counts = synthetic_data[target_col].value_counts().to_dict()  # NEW
@@ -274,32 +272,5 @@ def generate_synthesizer_filename(dataset_name, synth_name, params):
     return f"{dataset_name}_{suffix}_synthesizer.pkl"
 
 
-# def generate_synthesizer_filename(dataset_name, synth_name, params):
-#     """
-#     Generate a synthesizer filename dynamically based on dataset, synthesizer type, and key params.
 
-#     Args:
-#         dataset_name (str): Name of the dataset.
-#         synth_name (str): Name of the synthesizer (e.g., CTGAN, TVAE).
-#         params (dict): Parameters used for training (e.g., epochs, noise_factor).
-
-#     Returns:
-#         str: Filename like 'bankMarketing_CTGAN_epochs50_synthesizer.pkl'
-#     """
-#     suffix_parts = []
-
-#     # Get param keys to include in filename for this synthesizer
-#     keys_to_include = FILENAME_PARAM_MAP.get(synth_name, [])
-
-#     for key in keys_to_include:
-#         if key in params:
-#             value = params[key]
-#             # Replace '.' with 'p' in float values for safe filenames (e.g., 0.2 → 0p2)
-#             if isinstance(value, float):
-#                 value = str(value).replace('.', 'p')
-#             suffix_parts.append(f"{key}{value}")
-
-#     # Combine suffixes
-#     suffix_str = "_" + "_".join(suffix_parts) if suffix_parts else ""
-#     return f"{dataset_name}_{synth_name}{suffix_str}_synthesizer.pkl"
 

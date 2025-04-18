@@ -1,0 +1,279 @@
+2025-04-18 22:36:07,250 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-04-18 22:36:07,251 - INFO -  Benchmarking started for dataset: crimeData
+2025-04-18 22:36:07,251 - INFO - Using dataset path: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\original\crimeData.csv
+2025-04-18 22:36:07,251 - INFO - Target column: Status, separator: ','
+2025-04-18 22:36:07,251 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = True, enable_hybrid = True, enable_utility = True, delete_after_evaluation = True
+2025-04-18 22:36:07,251 - INFO - Running preprocessing...
+2025-04-18 22:36:07,259 - INFO - [PREPROCESSING] No preprocessed files found. Starting full preprocessing pipeline...
+2025-04-18 22:36:08,344 - INFO - [PREPROCESSING] Missing value handling strategy: 'drop' applied.
+2025-04-18 22:36:08,540 - INFO - [PREPROCESSING] Split data into train (260402 rows) and test (65101 rows). Test size: 0.2
+2025-04-18 22:36:12,528 - INFO -  [PREPROCESSING] Saved raw train set to: datasets/train/crimeData_train_raw.csv
+2025-04-18 22:36:12,528 - INFO -  [PREPROCESSING] Saved encoder to: artifacts/crimeData_binary_encoder.pkl
+2025-04-18 22:36:12,528 - INFO -  [PREPROCESSING]Saved encoded train set to: datasets/cleaned/crimeData_cleaned.csv
+2025-04-18 22:36:12,528 - INFO -  [PREPROCESSING] Saved encoded test set to: datasets/test/crimeData_test_set.csv
+2025-04-18 22:36:12,529 - INFO - [PREPROCESSING] run_preprocessing finished executing.
+2025-04-18 22:36:12,828 - INFO - Preprocessing completed. Rows before: 974477, after: 260402
+2025-04-18 22:36:12,828 - INFO - Preprocessed data saved to: outputs\singular\crimeData_2025-04-18_22-36-07\preprocessing_report.txt
+2025-04-18 22:36:12,829 - INFO - enable_anonymization = True
+2025-04-18 22:36:12,829 - INFO - Starting Anonymization Pipeline with output path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv.......
+2025-04-18 22:36:12,832 - INFO -  [ANONYMIZATION] Executing run_anonymization, config_path : configs/benchmark_config.yaml...........
+2025-04-18 22:36:12,833 - INFO -  [ANONYMIZATION] Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-04-18 22:36:17,790 - INFO -  [ANONYMIZATION] Anonimized file saved to : C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv
+2025-04-18 22:36:17,790 - INFO -  [ANONYMIZATION] Java anonymization completed successfully.
+2025-04-18 22:36:17,790 - INFO -  [ANONYMIZATION] Java STDOUT:
+? Java received config path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+? Loading config from: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+Loading config from: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+? Dataset Path (from args): C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\train\crimeData_train_raw.csv
+? Dataset Separator: ,
+? Suppression Limit: 0.1
+
+? Configured Attributes:
+  ? Quasi-Identifier: Victim_age
+  ? Quasi-Identifier: Victim_sex
+  ? Quasi-Identifier: Victim_descent
+  ? Quasi-Identifier: LAT
+  ? Quasi-Identifier: LON
+  ? Sensitive Attribute: Crime_Code
+  ? Insensitive Attribute: DR_NO
+  ? Insensitive Attribute: Time_occured
+  ? Insensitive Attribute: Premis
+  ? Insensitive Attribute: Weapon
+  ? Insensitive Attribute: Status
+
+? Defined Hierarchies:
+  ? Victim_sex -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies\hierarchy_sex.csv
+  ? Victim_descent -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies\hierarchy_descent.csv
+  ? Victim_age -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies\hierarchy_age_4.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies\hierarchy_sex.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies\hierarchy_descent.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies\hierarchy_age_4.csv
+Interval-based hierarchy created for: LAT
+Interval-based hierarchy created for: LON
+? Privacy Models Configured
+? Anonymized Output Path (from args): C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv
+? Anonymized Output Path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv
+? Anonymization completed. Output saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv
+Anonymized Data Quality Metrics:
+ - Ambiguity: 0.99376178384258
+ - AECS: 0.9990542536820255
+ - Discernibility: 0.9883067097776335
+ - Granularity: 0.5831931147420754
+ - MSE: 0.0011622291233436277
+ - Non-Uniform Entropy: 0.2959143704346695
+ - Precision: 0.894421701830247
+ - Record-level SE: 0.7405330751667614
+Equivalence Class Statistics:
+ - Number of Classes: 1046
+ - Average Class Size: 247.40726577437857
+Suppression Statistics:
+ - Suppressed Records: 1614
+ - Suppression Percentage: 0.62%
+2025-04-18 22:36:17,791 - INFO - Anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv
+2025-04-18 22:36:18,740 - INFO - Anonymous data report saved at: outputs\singular\crimeData_2025-04-18_22-36-07\anonymous_data_report.txt
+2025-04-18 22:36:18,740 - INFO -  [POSTPROCESSING] Postprocessing anonymized data: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv
+2025-04-18 22:36:18,989 - INFO -  [POSTPROCESSING] Loaded anonymized data: (260402, 12)
+2025-04-18 22:36:19,484 - INFO -  [POSTPROCESSING] Loaded fallback maps from training data. Categorical cols: 7, Numeric cols: 5
+2025-04-18 22:36:19,484 - INFO -  [POSTPROCESSING] Normalizing anonymized data using ARX artifact cleaning and fallback values.
+2025-04-18 22:36:23,529 - INFO -  [POSTPROCESSING] Normalized anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized_processed.csv
+2025-04-18 22:36:24,082 - INFO -  [POSTPROCESSING] Binary Encoding applied to anonymized data. Encoded shape: (260402, 47)
+2025-04-18 22:36:25,633 - INFO -  [POSTPROCESSING] Encoded anonymized dataset saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized_encoded.csv
+2025-04-18 22:36:25,633 - INFO -  [POSTPROCESSING] Encoding map generated for anonymized data: 0 original categorical columns.
+2025-04-18 22:36:25,647 - INFO - Postprocessing report saved at: outputs\singular\crimeData_2025-04-18_22-36-07\postprocessing_report.txt
+2025-04-18 22:36:25,648 - INFO - enable_synthetic_generation = True
+2025-04-18 22:36:25,648 - INFO - Starting standard Synthetic Data Generation pipeline...
+2025-04-18 22:36:25,649 - INFO - Executing run_synthetic.....
+2025-04-18 22:36:25,649 - INFO - [SYNTHETIC PIPELINE] executing run_synthetic for crimeData...
+2025-04-18 22:36:25,650 - INFO - [SYNTHETIC] Processing dataset: crimeData
+2025-04-18 22:36:25,650 - INFO - [SYNTHETIC] Original dataset size: 260402 rows
+2025-04-18 22:36:26,135 - INFO - Detected metadata:
+2025-04-18 22:36:26,137 - INFO - {
+    "primary_key": "DR_NO",
+    "columns": {
+        "DR_NO": {
+            "sdtype": "id"
+        },
+        "Date_occured_0": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_1": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_2": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_3": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_4": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_5": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_6": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_7": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_8": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_9": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_10": {
+            "sdtype": "categorical"
+        },
+        "Time_occured": {
+            "sdtype": "numerical"
+        },
+        "Crime_Code_0": {
+            "sdtype": "categorical"
+        },
+        "Crime_Code_1": {
+            "sdtype": "categorical"
+        },
+        "Crime_Code_2": {
+            "sdtype": "categorical"
+        },
+        "Crime_Code_3": {
+            "sdtype": "categorical"
+        },
+        "Crime_Code_4": {
+            "sdtype": "categorical"
+        },
+        "Crime_Code_5": {
+            "sdtype": "categorical"
+        },
+        "Crime_Code_6": {
+            "sdtype": "categorical"
+        },
+        "Victim_age": {
+            "sdtype": "numerical"
+        },
+        "Victim_sex_1": {
+            "sdtype": "categorical"
+        },
+        "Victim_sex_2": {
+            "sdtype": "categorical"
+        },
+        "Victim_descent_0": {
+            "sdtype": "categorical"
+        },
+        "Victim_descent_1": {
+            "sdtype": "categorical"
+        },
+        "Victim_descent_2": {
+            "sdtype": "categorical"
+        },
+        "Victim_descent_3": {
+            "sdtype": "categorical"
+        },
+        "Victim_descent_4": {
+            "sdtype": "categorical"
+        },
+        "Premis_0": {
+            "sdtype": "categorical"
+        },
+        "Premis_1": {
+            "sdtype": "categorical"
+        },
+        "Premis_2": {
+            "sdtype": "categorical"
+        },
+        "Premis_3": {
+            "sdtype": "categorical"
+        },
+        "Premis_4": {
+            "sdtype": "categorical"
+        },
+        "Premis_5": {
+            "sdtype": "categorical"
+        },
+        "Premis_6": {
+            "sdtype": "categorical"
+        },
+        "Premis_7": {
+            "sdtype": "categorical"
+        },
+        "Premis_8": {
+            "sdtype": "categorical"
+        },
+        "Weapon_0": {
+            "sdtype": "categorical"
+        },
+        "Weapon_1": {
+            "sdtype": "categorical"
+        },
+        "Weapon_2": {
+            "sdtype": "categorical"
+        },
+        "Weapon_3": {
+            "sdtype": "categorical"
+        },
+        "Weapon_4": {
+            "sdtype": "categorical"
+        },
+        "Weapon_5": {
+            "sdtype": "categorical"
+        },
+        "Weapon_6": {
+            "sdtype": "categorical"
+        },
+        "Status": {
+            "sdtype": "categorical"
+        },
+        "LAT": {
+            "sdtype": "numerical"
+        },
+        "LON": {
+            "sdtype": "numerical"
+        }
+    },
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1"
+}
+2025-04-18 22:36:26,139 - INFO - [SYNTHETIC] Preparing synthesizer: CTGAN
+2025-04-18 22:36:26,139 - INFO - [SYNTHETIC] Params from config: {'epochs': 5}
+2025-04-18 22:36:26,139 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-18 22:36:26,139 - INFO - [SYNTHETIC] Training new CTGAN synthesizer from scratch...
+2025-04-18 22:36:26,140 - WARNING - [UserWarning] We strongly recommend saving the metadata using 'save_to_json' for replicability in future SDV versions. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sdv\single_table\base.py:97)
+2025-04-18 22:36:26,144 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 22, 36, 26, 144965), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_c8a78c23f5214b6199190c966a0d3f66'}
+2025-04-18 22:36:26,144 - INFO - [SYNTHETIC] CTGAN initialized with epochs: 5
+2025-04-18 22:36:26,145 - INFO - [SYNTHETIC] Training parameters for CTGAN: {}
+2025-04-18 22:36:26,146 - INFO - [SYNTHETIC] fitting CTGAN 
+2025-04-18 22:36:26,146 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 22, 36, 26, 146335), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_c8a78c23f5214b6199190c966a0d3f66', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 47}
+2025-04-18 22:36:26,469 - INFO - Fitting table  metadata
+2025-04-18 22:36:26,497 - INFO - Fitting formatters for table 
+2025-04-18 22:36:26,533 - INFO - Fitting constraints for table 
+2025-04-18 22:36:26,534 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-18 22:36:26,588 - INFO - Fitting HyperTransformer for table 
+2025-04-18 22:36:27,635 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 22, 36, 27, 635662), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_c8a78c23f5214b6199190c966a0d3f66', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 46}
+2025-04-18 22:36:27,713 - INFO - Guidance: There are no missing values in column Time_occured. Extra column not created.
+2025-04-18 22:36:46,676 - INFO - Guidance: There are no missing values in column Victim_age. Extra column not created.
+2025-04-18 22:37:05,766 - INFO - Guidance: There are no missing values in column LAT. Extra column not created.
+2025-04-18 22:37:23,746 - INFO - Guidance: There are no missing values in column LON. Extra column not created.
+2025-04-18 22:44:58,801 - INFO - [SYNTHETIC] Fitting complete for CTGAN. Duration: 512.66 seconds.
+2025-04-18 22:44:58,802 - INFO - [SYNTHETIC] CONFIRMATION CTGAN actually trained with epochs = 5
+2025-04-18 22:44:58,802 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 22, 44, 58, 802740), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_c8a78c23f5214b6199190c966a0d3f66'}
+2025-04-18 22:44:58,878 - INFO - [SYNTHETIC] CTGAN trained and saved.
+2025-04-18 22:44:58,878 - INFO - [SYNTHETIC] Preparing synthesizer: TVAE
+2025-04-18 22:44:58,878 - INFO - [SYNTHETIC] Params from config: {'epochs': 5}
+2025-04-18 22:44:58,878 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-18 22:44:58,879 - INFO - [SYNTHETIC] Training new TVAE synthesizer from scratch...
+2025-04-18 22:44:58,882 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 22, 44, 58, 881997), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_32c43b45d48a4ad88d8382e03cf6266f'}
+2025-04-18 22:44:58,882 - INFO - [SYNTHETIC] TVAE initialized with epochs: 5
+2025-04-18 22:44:58,882 - INFO - [SYNTHETIC] Training parameters for TVAE: {}
+2025-04-18 22:44:58,882 - INFO - [SYNTHETIC] fitting TVAE 
+2025-04-18 22:44:58,882 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 22, 44, 58, 882990), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_32c43b45d48a4ad88d8382e03cf6266f', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 47}
+2025-04-18 22:44:59,219 - INFO - Fitting table  metadata
+2025-04-18 22:44:59,253 - INFO - Fitting formatters for table 
+2025-04-18 22:44:59,290 - INFO - Fitting constraints for table 
+2025-04-18 22:44:59,291 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-18 22:44:59,346 - INFO - Fitting HyperTransformer for table 
+2025-04-18 22:45:00,480 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 22, 45, 0, 480215), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_32c43b45d48a4ad88d8382e03cf6266f', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 46}
+2025-04-18 22:45:00,570 - INFO - Guidance: There are no missing values in column Time_occured. Extra column not created.
+2025-04-18 22:45:20,483 - INFO - Guidance: There are no missing values in column Victim_age. Extra column not created.
+2025-04-18 22:45:41,087 - INFO - Guidance: There are no missing values in column LAT. Extra column not created.
+2025-04-18 22:46:01,184 - INFO - Guidance: There are no missing values in column LON. Extra column not created.
