@@ -1,0 +1,40 @@
+2025-04-17 21:24:35,822 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-04-17 21:24:35,822 - INFO -  Benchmarking started for dataset: crimeData
+2025-04-17 21:24:35,822 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False, enable_hybrid = False, enable_utility = True
+2025-04-17 21:24:35,822 - INFO - Running preprocessing...
+2025-04-17 21:24:35,828 - INFO - Preprocessed files found. Skipping preprocessing.
+2025-04-17 21:24:37,580 - INFO - Preprocessing completed. Rows before: 974477, after: 260402
+2025-04-17 21:24:37,580 - INFO - enable_anonymization = True
+2025-04-17 21:24:37,586 - INFO - Running Java Anonymization Program...........
+2025-04-17 21:24:37,587 - INFO - Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-04-17 21:24:42,083 - INFO - Anonimized file saved to : C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv
+2025-04-17 21:24:42,083 - INFO - Java anonymization completed successfully.
+2025-04-17 21:24:42,083 - INFO - Anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv
+2025-04-17 21:24:43,325 - INFO - Loaded anonymized data: (260402, 12)
+2025-04-17 21:24:47,516 - INFO -  Binary Encoding applied to anonymized data. Encoded shape: (260402, 47)
+2025-04-17 21:24:49,150 - INFO - Encoded anonymized dataset saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized_encoded.csv
+2025-04-17 21:24:49,162 - WARNING - Anonymized file not found: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv
+2025-04-17 21:24:49,163 - INFO - enable_synthetic_generation = False
+2025-04-17 21:24:49,163 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-04-17 21:24:49,163 - INFO - Hybrid pipeline skipped (disabled in configuration).
+2025-04-17 21:24:49,165 - INFO - Preparing datasets for machine learning...
+2025-04-17 21:24:49,195 - INFO - Original Data - Training Size: 260402, Testing Size: 65101
+2025-04-17 21:24:49,203 - INFO - Processing anonymized dataset...
+2025-04-17 21:24:49,231 - INFO - Anonymized Data - Training Size: 260402
+2025-04-17 21:24:49,232 - INFO - Training models on all datasets...
+2025-04-17 21:26:12,458 - INFO - Model Training Completed.
+2025-04-17 21:26:12,458 - INFO - Evaluating models...
+2025-04-17 21:26:12,458 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-04-17 21:26:12,458 - INFO - Evaluating RandomForest on Original...
+2025-04-17 21:26:14,468 - INFO - Predictions completed for RandomForest on Original
+2025-04-17 21:26:15,015 - INFO - Evaluating RandomForest on Anonymous...
+2025-04-17 21:26:16,644 - INFO - Predictions completed for RandomForest on Anonymous
+2025-04-17 21:26:17,183 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-04-17 21:26:17,184 - INFO - Evaluating DecisionTree on Original...
+2025-04-17 21:26:17,230 - INFO - Predictions completed for DecisionTree on Original
+2025-04-17 21:26:17,786 - INFO - Evaluating DecisionTree on Anonymous...
+2025-04-17 21:26:17,832 - INFO - Predictions completed for DecisionTree on Anonymous
+2025-04-17 21:26:18,395 - INFO - Evaluation completed for all models.
+2025-04-17 21:26:18,399 - INFO - Model Training and Evaluation completed.
+2025-04-17 21:26:18,947 - INFO -  Visualizations saved.
+2025-04-17 21:26:18,952 - INFO -  Benchmarking Completed. Results saved in output folder.

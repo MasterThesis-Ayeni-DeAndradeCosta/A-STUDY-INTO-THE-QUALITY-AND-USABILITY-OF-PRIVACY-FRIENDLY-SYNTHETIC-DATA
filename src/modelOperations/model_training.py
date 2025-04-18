@@ -71,8 +71,10 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 
 #     return trained_models
 
-def train_models(datasets, config):
+def train_models(datasets, config, logger=None):
     print("\nTraining models from scratch...")
+    if logger:
+        logger.info("Training models from scratch...")
     selected_models = config["utility"]["models"]
     trained_models = {}
 
@@ -82,11 +84,25 @@ def train_models(datasets, config):
         for model_name, is_enabled in selected_models.items():
             if is_enabled and model_name in MODEL_REGISTRY:
                 print(f"\nTraining {model_name} on {dataset_name}...")
+                if logger:
+                    logger.info(f"Training {model_name} on {dataset_name}...")
 
                 # Always create a fresh model instance (no loading from file)
-                model_instance = MODEL_REGISTRY[model_name]()
-                model_instance.train(X_train, y_train)
+                #model_instance = MODEL_REGISTRY[model_name]()
+                #model_instance.train(X_train, y_train)
+                #trained_models[dataset_name][model_name] = model_instance
+                try:
+                    model_instance = MODEL_REGISTRY[model_name]()  # Fresh instance
+                    model_instance.train(X_train, y_train)
+                    trained_models[dataset_name][model_name] = model_instance
+                    print(f"{model_name} trained successfully on {dataset_name}.")
+                    if logger:
+                        logger.info(f"{model_name} trained successfully on {dataset_name}.")
 
-                trained_models[dataset_name][model_name] = model_instance
+                except Exception as e:
+                    msg = f" Training failed for {model_name} on {dataset_name}: {e}"
+                    print(msg)
+                    if logger:
+                        logger.exception(msg)
 
     return trained_models

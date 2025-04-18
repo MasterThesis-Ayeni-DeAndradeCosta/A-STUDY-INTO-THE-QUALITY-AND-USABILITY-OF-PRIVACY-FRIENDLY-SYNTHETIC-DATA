@@ -89,7 +89,18 @@ def run_utility(cleaned_data, test_set, target_column, enable_synthetic, config,
     print("\nTraining models on all datasets...")
     if logger:
         logger.info("Training models on all datasets...")
-    trained_models = train_models(datasets, config)
+
+
+    #trained_models = train_models(datasets, config)
+    #safe version:
+    try:
+        trained_models = train_models(datasets, config)
+    except Exception as e:
+        print(f"❌ Model training failed: {e}")
+        if logger:
+            logger.exception("Model training failed due to an error.")
+        raise
+
 
     print("\nModel Training Completed.")
     if logger:

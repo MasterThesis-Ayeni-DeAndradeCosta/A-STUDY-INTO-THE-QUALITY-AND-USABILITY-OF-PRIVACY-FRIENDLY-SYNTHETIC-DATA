@@ -1,0 +1,64 @@
+2025-04-17 21:39:12,685 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-04-17 21:39:12,685 - INFO -  Benchmarking started for dataset: crimeData
+2025-04-17 21:39:12,685 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False, enable_hybrid = False, enable_utility = True
+2025-04-17 21:39:12,685 - INFO - Running preprocessing...
+2025-04-17 21:39:12,692 - INFO - Preprocessed files found. Skipping preprocessing.
+2025-04-17 21:39:14,399 - INFO - Preprocessing completed. Rows before: 974477, after: 260402
+2025-04-17 21:39:14,399 - INFO - enable_anonymization = True
+2025-04-17 21:39:14,409 - INFO - Running Java Anonymization Program...........
+2025-04-17 21:39:14,410 - INFO - Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-04-17 21:39:18,826 - INFO - Anonimized file saved to : C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv
+2025-04-17 21:39:18,828 - INFO - Java anonymization completed successfully.
+2025-04-17 21:39:18,828 - INFO - Anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv
+2025-04-17 21:39:20,316 - INFO - Loaded anonymized data: (260402, 12)
+2025-04-17 21:39:24,573 - INFO -  Binary Encoding applied to anonymized data. Encoded shape: (260402, 47)
+2025-04-17 21:39:26,603 - INFO - Encoded anonymized dataset saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized_encoded.csv
+2025-04-17 21:39:26,622 - WARNING - Anonymized file not found: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\crimeData_k5_l2_sup10_anonymized.csv
+2025-04-17 21:39:26,622 - INFO - enable_synthetic_generation = False
+2025-04-17 21:39:26,622 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-04-17 21:39:26,622 - INFO - Hybrid pipeline skipped (disabled in configuration).
+2025-04-17 21:39:26,623 - INFO - Preparing datasets for machine learning...
+2025-04-17 21:39:26,647 - INFO - Original Data - Training Size: 260402, Testing Size: 65101
+2025-04-17 21:39:26,661 - INFO - Processing anonymized dataset...
+2025-04-17 21:39:26,692 - INFO - Anonymized Data - Training Size: 260402
+2025-04-17 21:39:26,693 - INFO - Training models on all datasets...
+2025-04-17 21:41:13,975 - INFO - Model Training Completed.
+2025-04-17 21:41:13,976 - INFO - Evaluating models...
+2025-04-17 21:41:13,976 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-04-17 21:41:13,977 - INFO - Evaluating LogisticRegression on Original...
+2025-04-17 21:41:14,008 - INFO - Predictions completed for LogisticRegression on Original
+2025-04-17 21:41:14,010 - WARNING -  [WARNING] :LogisticRegression on Original predicted only one class: {'Invest Cont'}
+2025-04-17 21:41:14,175 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-17 21:41:14,303 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-17 21:41:14,440 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-17 21:41:14,545 - INFO - Evaluating LogisticRegression on Anonymous...
+2025-04-17 21:41:14,579 - INFO - Predictions completed for LogisticRegression on Anonymous
+2025-04-17 21:41:14,580 - WARNING -  [WARNING] :LogisticRegression on Anonymous predicted only one class: {'Invest Cont'}
+2025-04-17 21:41:14,740 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-17 21:41:14,875 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-17 21:41:15,005 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-17 21:41:15,105 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-04-17 21:41:15,106 - INFO - Evaluating KNN on Original...
+2025-04-17 21:41:37,551 - INFO - Predictions completed for KNN on Original
+2025-04-17 21:41:38,229 - INFO - Evaluating KNN on Anonymous...
+2025-04-17 21:42:03,586 - INFO - Predictions completed for KNN on Anonymous
+2025-04-17 21:42:04,141 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-04-17 21:42:04,141 - INFO - Evaluating RandomForest on Original...
+2025-04-17 21:42:06,231 - INFO - Predictions completed for RandomForest on Original
+2025-04-17 21:42:06,786 - INFO - Evaluating RandomForest on Anonymous...
+2025-04-17 21:42:08,733 - INFO - Predictions completed for RandomForest on Anonymous
+2025-04-17 21:42:09,304 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-04-17 21:42:09,305 - INFO - Evaluating DecisionTree on Original...
+2025-04-17 21:42:09,355 - INFO - Predictions completed for DecisionTree on Original
+2025-04-17 21:42:09,526 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-17 21:42:09,663 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-17 21:42:09,797 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-17 21:42:09,904 - INFO - Evaluating DecisionTree on Anonymous...
+2025-04-17 21:42:09,952 - INFO - Predictions completed for DecisionTree on Anonymous
+2025-04-17 21:42:10,129 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-17 21:42:10,266 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-17 21:42:10,402 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-17 21:42:10,513 - INFO - Evaluation completed for all models.
+2025-04-17 21:42:10,516 - INFO - Model Training and Evaluation completed.
+2025-04-17 21:42:11,069 - INFO -  Visualizations saved.
+2025-04-17 21:42:11,069 - INFO -  Benchmarking Completed. Results saved in output folder.

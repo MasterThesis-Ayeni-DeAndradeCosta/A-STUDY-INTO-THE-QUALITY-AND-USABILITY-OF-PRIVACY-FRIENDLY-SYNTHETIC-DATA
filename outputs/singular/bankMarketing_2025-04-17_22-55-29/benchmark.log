@@ -1,0 +1,263 @@
+2025-04-17 22:55:29,719 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-04-17 22:55:29,719 - INFO -  Benchmarking started for dataset: bankMarketing
+2025-04-17 22:55:29,719 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False, enable_hybrid = True, enable_utility = True
+2025-04-17 22:55:29,720 - INFO - Running preprocessing...
+2025-04-17 22:55:30,162 - INFO - Saved encoder to: artifacts/bankMarketing_binary_encoder.pkl
+2025-04-17 22:55:30,339 - INFO - Saved raw train set to: datasets/train/bankMarketing_train_raw.csv
+2025-04-17 22:55:30,339 - INFO - Saved encoded train set to: datasets/cleaned/bankMarketing_cleaned.csv
+2025-04-17 22:55:30,340 - INFO - Saved encoded test set to: datasets/test/bankMarketing_test_set.csv
+2025-04-17 22:55:30,362 - INFO - Preprocessing completed. Rows before: 45211, after: 36168
+2025-04-17 22:55:30,363 - INFO - enable_anonymization = True
+2025-04-17 22:55:30,367 - INFO - Running Java Anonymization Program...........
+2025-04-17 22:55:30,367 - INFO - Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-04-17 22:55:32,187 - INFO - Anonimized file saved to : C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\bankMarketing_k5_l2_sup10_anonymized.csv
+2025-04-17 22:55:32,188 - INFO - Java anonymization completed successfully.
+2025-04-17 22:55:32,188 - INFO - Anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\bankMarketing_k5_l2_sup10_anonymized.csv
+2025-04-17 22:55:32,363 - INFO - Loaded anonymized data: (36168, 17)
+2025-04-17 22:55:33,040 - INFO -  Binary Encoding applied to anonymized data. Encoded shape: (36168, 32)
+2025-04-17 22:55:33,172 - INFO - Encoded anonymized dataset saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\bankMarketing_k5_l2_sup10_anonymized_encoded.csv
+2025-04-17 22:55:33,174 - INFO - enable_synthetic_generation = False
+2025-04-17 22:55:33,175 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-04-17 22:55:33,175 - INFO - Running hybrid pipeline...
+2025-04-17 22:55:33,175 - INFO - Executing run_hybrid …
+2025-04-17 22:55:33,176 - INFO - Loaded cached encoded anon data to C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\bankMarketing_k5_l2_sup10_anonymized_encoded.csv
+2025-04-17 22:55:33,255 - INFO - [HYBRID] Synthesizing with CTGAN …
+2025-04-17 22:55:33,255 - INFO - Executing run_synthetic...
+2025-04-17 22:55:33,294 - INFO - Detected metadata:
+2025-04-17 22:55:33,294 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "age": {
+            "sdtype": "numerical"
+        },
+        "job_0": {
+            "sdtype": "categorical"
+        },
+        "job_1": {
+            "sdtype": "categorical"
+        },
+        "job_2": {
+            "sdtype": "categorical"
+        },
+        "job_3": {
+            "sdtype": "categorical"
+        },
+        "marital_0": {
+            "sdtype": "categorical"
+        },
+        "marital_1": {
+            "sdtype": "categorical"
+        },
+        "education_0": {
+            "sdtype": "categorical"
+        },
+        "education_1": {
+            "sdtype": "categorical"
+        },
+        "education_2": {
+            "sdtype": "categorical"
+        },
+        "default_0": {
+            "sdtype": "categorical"
+        },
+        "default_1": {
+            "sdtype": "categorical"
+        },
+        "balance": {
+            "sdtype": "numerical"
+        },
+        "housing_0": {
+            "sdtype": "categorical"
+        },
+        "housing_1": {
+            "sdtype": "categorical"
+        },
+        "loan_0": {
+            "sdtype": "categorical"
+        },
+        "loan_1": {
+            "sdtype": "categorical"
+        },
+        "contact_0": {
+            "sdtype": "categorical"
+        },
+        "contact_1": {
+            "sdtype": "categorical"
+        },
+        "day": {
+            "sdtype": "categorical"
+        },
+        "month_0": {
+            "sdtype": "categorical"
+        },
+        "month_1": {
+            "sdtype": "categorical"
+        },
+        "month_2": {
+            "sdtype": "categorical"
+        },
+        "month_3": {
+            "sdtype": "categorical"
+        },
+        "duration": {
+            "sdtype": "categorical"
+        },
+        "campaign": {
+            "sdtype": "categorical"
+        },
+        "pdays": {
+            "sdtype": "numerical"
+        },
+        "previous": {
+            "sdtype": "numerical"
+        },
+        "poutcome_0": {
+            "sdtype": "categorical"
+        },
+        "poutcome_1": {
+            "sdtype": "categorical"
+        },
+        "poutcome_2": {
+            "sdtype": "categorical"
+        },
+        "y": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-17 22:55:33,295 - WARNING - [UserWarning] We strongly recommend saving the metadata using 'save_to_json' for replicability in future SDV versions. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sdv\single_table\base.py:97)
+2025-04-17 22:55:33,299 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 22, 55, 33, 299012), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_62b439a57a31451cad0d76640db7b051'}
+2025-04-17 22:55:33,299 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 22, 55, 33, 299612), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_62b439a57a31451cad0d76640db7b051', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 36168, 'TOTAL NUMBER OF COLUMNS': 32}
+2025-04-17 22:55:33,341 - INFO - Fitting table  metadata
+2025-04-17 22:55:33,344 - INFO - Fitting formatters for table 
+2025-04-17 22:55:33,349 - INFO - Fitting constraints for table 
+2025-04-17 22:55:33,349 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-17 22:55:33,351 - INFO - Fitting HyperTransformer for table 
+2025-04-17 22:55:33,444 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 22, 55, 33, 444053), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_62b439a57a31451cad0d76640db7b051', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 36168, 'TOTAL NUMBER OF COLUMNS': 32}
+2025-04-17 22:55:33,449 - INFO - Guidance: There are no missing values in column age. Extra column not created.
+2025-04-17 22:55:35,652 - INFO - Guidance: There are no missing values in column balance. Extra column not created.
+2025-04-17 22:55:37,753 - INFO - Guidance: There are no missing values in column pdays. Extra column not created.
+2025-04-17 22:55:39,859 - INFO - Guidance: There are no missing values in column previous. Extra column not created.
+2025-04-17 23:43:52,733 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 23, 43, 52, 717049), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_62b439a57a31451cad0d76640db7b051'}
+2025-04-17 23:43:57,955 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 23, 43, 52, 979863), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_62b439a57a31451cad0d76640db7b051', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 36168, 'TOTAL NUMBER OF COLUMNS': 32}
+2025-04-17 23:43:57,963 - INFO - Synthetic Data Generation Completed.
+2025-04-17 23:44:18,143 - INFO - Synthetic Data Evaluation Completed.
+2025-04-17 23:44:18,156 - INFO - Synthetic Data Report Generated Successfully.
+2025-04-17 23:44:18,585 - INFO - Saved hybrid dataset to C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\hybrid\bankMarketing_k5_l2_sup10_CTGAN_HYBRID.csv
+2025-04-17 23:44:18,585 - INFO - [HYBRID] Synthesizing with TVAE …
+2025-04-17 23:44:18,587 - INFO - Executing run_synthetic...
+2025-04-17 23:44:18,665 - INFO - Detected metadata:
+2025-04-17 23:44:18,665 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "age": {
+            "sdtype": "numerical"
+        },
+        "job_0": {
+            "sdtype": "categorical"
+        },
+        "job_1": {
+            "sdtype": "categorical"
+        },
+        "job_2": {
+            "sdtype": "categorical"
+        },
+        "job_3": {
+            "sdtype": "categorical"
+        },
+        "marital_0": {
+            "sdtype": "categorical"
+        },
+        "marital_1": {
+            "sdtype": "categorical"
+        },
+        "education_0": {
+            "sdtype": "categorical"
+        },
+        "education_1": {
+            "sdtype": "categorical"
+        },
+        "education_2": {
+            "sdtype": "categorical"
+        },
+        "default_0": {
+            "sdtype": "categorical"
+        },
+        "default_1": {
+            "sdtype": "categorical"
+        },
+        "balance": {
+            "sdtype": "numerical"
+        },
+        "housing_0": {
+            "sdtype": "categorical"
+        },
+        "housing_1": {
+            "sdtype": "categorical"
+        },
+        "loan_0": {
+            "sdtype": "categorical"
+        },
+        "loan_1": {
+            "sdtype": "categorical"
+        },
+        "contact_0": {
+            "sdtype": "categorical"
+        },
+        "contact_1": {
+            "sdtype": "categorical"
+        },
+        "day": {
+            "sdtype": "categorical"
+        },
+        "month_0": {
+            "sdtype": "categorical"
+        },
+        "month_1": {
+            "sdtype": "categorical"
+        },
+        "month_2": {
+            "sdtype": "categorical"
+        },
+        "month_3": {
+            "sdtype": "categorical"
+        },
+        "duration": {
+            "sdtype": "categorical"
+        },
+        "campaign": {
+            "sdtype": "categorical"
+        },
+        "pdays": {
+            "sdtype": "numerical"
+        },
+        "previous": {
+            "sdtype": "numerical"
+        },
+        "poutcome_0": {
+            "sdtype": "categorical"
+        },
+        "poutcome_1": {
+            "sdtype": "categorical"
+        },
+        "poutcome_2": {
+            "sdtype": "categorical"
+        },
+        "y": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-17 23:44:18,665 - WARNING - [UserWarning] We strongly recommend saving the metadata using 'save_to_json' for replicability in future SDV versions. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sdv\single_table\base.py:97)
+2025-04-17 23:44:18,676 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 23, 44, 18, 676016), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_3c7c53303f0e4ba8adbcef51a9f2e4f6'}
+2025-04-17 23:44:18,676 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 23, 44, 18, 676016), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_3c7c53303f0e4ba8adbcef51a9f2e4f6', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 36168, 'TOTAL NUMBER OF COLUMNS': 32}
+2025-04-17 23:44:18,744 - INFO - Fitting table  metadata
+2025-04-17 23:44:18,752 - INFO - Fitting formatters for table 
+2025-04-17 23:44:18,759 - INFO - Fitting constraints for table 
+2025-04-17 23:44:18,759 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-17 23:44:18,764 - INFO - Fitting HyperTransformer for table 
+2025-04-17 23:44:18,897 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 17, 23, 44, 18, 897823), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_3c7c53303f0e4ba8adbcef51a9f2e4f6', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 36168, 'TOTAL NUMBER OF COLUMNS': 32}
+2025-04-17 23:44:18,911 - INFO - Guidance: There are no missing values in column age. Extra column not created.
+2025-04-17 23:44:22,113 - INFO - Guidance: There are no missing values in column balance. Extra column not created.
+2025-04-17 23:44:25,119 - INFO - Guidance: There are no missing values in column pdays. Extra column not created.
+2025-04-17 23:44:28,261 - INFO - Guidance: There are no missing values in column previous. Extra column not created.

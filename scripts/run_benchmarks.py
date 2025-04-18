@@ -31,6 +31,8 @@ from output_utils.report_generator import (
     save_postprocessing_report,
     save_anonymous_data_report
     )
+import warnings
+import logging
 
 
 def load_config(config_path="configs/benchmark_config.yaml"):
@@ -53,6 +55,11 @@ def generate_anonym_tag(config):
     l = models.get("l_diversity", {}).get("value", "lX")
     sup = config["anonymization"].get("suppression_limit", "supX")
     return f"k{k}_l{l}_sup{int(sup * 100):02d}"  # e.g., k3_l2_sup05
+
+def capture_warnings_in_logger(logger):
+    def warning_to_log(message, category, filename, lineno, file=None, line=None):
+        logger.warning(f"[{category.__name__}] {message} (from {filename}:{lineno})")
+    warnings.showwarning = warning_to_log
 
 
 def run_benchmarks(config_path="configs/benchmark_config.yaml"):
@@ -85,6 +92,8 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
     save_yaml_config(output_dir, config)
     # Setup logging
     logger = setup_logger(output_dir)
+    capture_warnings_in_logger(logger)
+
     logger.info(f"Loaded config file: {config_path}")
     logger.info(f" Benchmarking started for dataset: {dataset_name}")
 
@@ -113,22 +122,13 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
             if os.path.exists(anonymized_output_path):
                 df_anonymized = pd.read_csv(anonymized_output_path, sep=separator)
                 save_anonymous_data_report(output_dir, dataset_name, df_anonymized, original_df=original_data)
-                postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_output_path, separator, target_column, encoder=encoder, logger=logger)
+                postprocessed_data, _, anon_encoding_map = run_postprocessing(anonymized_output_path, separator, target_column, train_raw_path=train_raw_path,encoder=encoder, logger=logger)
 
                 if postprocessed_data is not None and anon_encoding_map:
                     save_postprocessing_report(output_dir, dataset_name, encoding_type, anon_encoding_map)
-                     # Optional cleanup of anonymized CSV file
-                    if config["anonymization"].get("delete_after_evaluation", False):
-                        try:
-                            os.remove(anonymized_output_path)
-                            print(f"🗑️ Deleted anonymized dataset: {anonymized_output_path}")
-                            logger.info(f"Deleted anonymized dataset: {anonymized_output_path}")
-                        except Exception as e:
-                            logger.warning(f"Failed to delete anonymized dataset: {e}")
-
-                else:
-                    print(f"⚠️ Anonymized file not found: {anonymized_output_path}")
-                    logger.warning(f"Anonymized file not found: {anonymized_output_path}")
+            else:
+                print(f"⚠️ Anonymized file not found: {anonymized_output_path}")
+                logger.warning(f"Anonymized file not found: {anonymized_output_path}")
         else:
             print("❌ Anonymization failed.")
             logger.error("Anonymization failed.")
@@ -204,6 +204,15 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
 
         run_analysis(output_dir, analysis_config)
 
+        if config["anonymization"].get("delete_after_evaluation", False):
+            if enable_anonymization and os.path.exists(anonymized_output_path):
+                try:
+                    os.remove(anonymized_output_path)
+                    print(f"🗑️ Deleted anonymized dataset: {anonymized_output_path}")
+                    logger.info(f"Deleted anonymized dataset: {anonymized_output_path}")
+                except Exception as e:
+                    logger.warning(f"Failed to delete anonymized dataset: {e}")
+
         return results_df
     else:
         print("\nUtility Evaluation Skipped (Disabled in Configuration).")
@@ -211,6 +220,15 @@ def run_benchmarks(config_path="configs/benchmark_config.yaml"):
         results_df = None  # Return None to indicate no results were generated
     logger.info("Benchmarking Completed. Results saved in output folder.")
     print("\nBenchmarking Completed.")
+
+    if config["anonymization"].get("delete_after_evaluation", False):
+        if enable_anonymization and os.path.exists(anonymized_output_path):
+            try:
+                os.remove(anonymized_output_path)
+                print(f"🗑️ Deleted anonymized dataset: {anonymized_output_path}")
+                logger.info(f"Deleted anonymized dataset: {anonymized_output_path}")
+            except Exception as e:
+                logger.warning(f"Failed to delete anonymized dataset: {e}")
 
     return results_df
     
