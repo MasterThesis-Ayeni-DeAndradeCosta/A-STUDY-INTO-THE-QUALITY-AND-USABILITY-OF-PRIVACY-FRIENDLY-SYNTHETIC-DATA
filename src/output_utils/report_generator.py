@@ -73,32 +73,69 @@ def save_preprocessing_report(output_dir, dataset_name, original_data, processed
 
     print(f"Preprocessing report saved at {report_path}")
 
-def save_postprocessing_report(output_dir, dataset_name, encoding_type, encoding_map):
+def save_postprocessing_report(
+    output_dir,
+    dataset_name,
+    encoding_type,
+    encoding_map,
+    anonymized_path=None,
+    processed_path=None,
+    encoded_path=None,
+    logger=None
+):
     """
-    Saves a report after postprocessing (e.g., encoding anonymized data).
+    Saves a detailed report after postprocessing (normalization + encoding).
 
     Parameters:
     - output_dir (str): Directory where the report will be saved.
     - dataset_name (str): Name of the dataset.
     - encoding_type (str): Encoding method used (e.g., "binary").
     - encoding_map (dict): Mapping from original categorical columns to encoded columns.
+    - anonymized_path (str): Path to the original ARX-anonymized CSV.
+    - processed_path (str): Path to the normalized (cleaned) CSV.
+    - encoded_path (str): Path to the final encoded CSV.
+    - logger (Logger): Optional logger for logging save message.
     """
     report_path = os.path.join(output_dir, "postprocessing_report.txt")
 
     with open(report_path, "w", encoding="utf-8") as f:
-        f.write("Postprocessing Summary\n")
-        f.write("----------------------\n")
+        f.write("Postprocessing Report\n")
+        f.write("======================\n\n")
+
+        f.write("Dataset Information\n")
+        f.write("-------------------\n")
         f.write(f"Dataset Name            : {dataset_name}\n")
         f.write(f"Encoding Type           : {encoding_type}\n")
+        if anonymized_path:
+            f.write(f"Anonymized Input Path   : {anonymized_path}\n")
+        if processed_path:
+            f.write(f"Processed Output Path   : {processed_path}\n")
+        if encoded_path:
+            f.write(f"Encoded Output Path     : {encoded_path}\n")
+
+        f.write("\nNormalization Summary\n")
+        f.write("---------------------\n")
+        f.write("The following ARX artifacts were cleaned during normalization:\n")
+        f.write("- Ranges like '[20-30]' → midpoint (e.g., 25.0)\n")
+        f.write("- Top-coded values like '>=90' → numeric bound (e.g., 90.0)\n")
+        f.write("- Suppressed values '*' → mode (categorical) or median (numeric)\n")
+        f.write("- Unseen categorical values → replaced with mode from original training set\n")
 
         f.write("\nEncoding Mapping\n")
         f.write("----------------\n")
-        f.write("Below is the mapping of original categorical columns to the new encoded binary columns:\n")
-        for col, new_cols in encoding_map.items():
-            joined = ', '.join(new_cols)
-            f.write(f"- {col} -> {joined}\n")
+        if not encoding_map:
+            f.write("⚠ No categorical columns were encoded.\n")
+        else:
+            f.write("Below is the mapping of original categorical columns to encoded binary columns:\n")
+            for col, new_cols in encoding_map.items():
+                joined = ', '.join(new_cols)
+                f.write(f"- {col} -> {joined}\n")
 
-    print(f"📄 Postprocessing report saved at {report_path}")
+    if logger:
+        logger.info(f"Postprocessing report saved at: {report_path}")
+    else:
+        print(f"📄 Postprocessing report saved at {report_path}")
+
 
 def save_model_performance(output_dir, results_df):
     """

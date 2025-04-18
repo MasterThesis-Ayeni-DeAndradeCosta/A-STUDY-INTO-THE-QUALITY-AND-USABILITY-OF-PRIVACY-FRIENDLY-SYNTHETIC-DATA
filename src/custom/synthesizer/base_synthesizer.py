@@ -11,6 +11,7 @@ class BaseSynthesizer(ABC):
     def __init__(self, metadata, **kwargs):
         self.metadata = metadata
         self.params = kwargs
+        self.epochs = kwargs.get("epochs", None)
 
     @abstractmethod
     def fit(self, data: pd.DataFrame):

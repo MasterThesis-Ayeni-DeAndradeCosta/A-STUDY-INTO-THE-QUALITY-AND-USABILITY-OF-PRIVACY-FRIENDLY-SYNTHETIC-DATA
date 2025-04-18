@@ -1,0 +1,740 @@
+2025-04-18 20:05:29,704 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-04-18 20:05:29,705 - INFO -  Benchmarking started for dataset: studentPerformance
+2025-04-18 20:05:29,705 - INFO - Using dataset path: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\original\studentPerformance.csv
+2025-04-18 20:05:29,705 - INFO - Target column: Target, separator: ';'
+2025-04-18 20:05:29,705 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = True, enable_hybrid = True, enable_utility = True, delete_after_evaluation = False
+2025-04-18 20:05:29,705 - INFO - Running preprocessing...
+2025-04-18 20:05:29,712 - INFO - [PREPROCESSING] No preprocessed files found. Starting full preprocessing pipeline...
+2025-04-18 20:05:29,725 - INFO - [PREPROCESSING] Missing value handling strategy: 'mode' applied.
+2025-04-18 20:05:29,728 - INFO - [PREPROCESSING] Split data into train (3539 rows) and test (885 rows). Test size: 0.2
+2025-04-18 20:05:29,783 - INFO -  [PREPROCESSING] Saved raw train set to: datasets/train/studentPerformance_train_raw.csv
+2025-04-18 20:05:29,783 - INFO -  [PREPROCESSING] Saved encoder to: artifacts/studentPerformance_binary_encoder.pkl
+2025-04-18 20:05:29,783 - INFO -  [PREPROCESSING]Saved encoded train set to: datasets/cleaned/studentPerformance_cleaned.csv
+2025-04-18 20:05:29,784 - INFO -  [PREPROCESSING] Saved encoded test set to: datasets/test/studentPerformance_test_set.csv
+2025-04-18 20:05:29,784 - INFO - [PREPROCESSING] run_preprocessing finished executing.
+2025-04-18 20:05:29,787 - INFO - Preprocessing completed. Rows before: 4424, after: 3539
+2025-04-18 20:05:29,787 - INFO - Preprocessed data saved to: outputs\singular\studentPerformance_2025-04-18_20-05-29\preprocessing_report.txt
+2025-04-18 20:05:29,788 - INFO - enable_anonymization = True
+2025-04-18 20:05:29,788 - INFO - Starting Anonymization Pipeline with output path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv.......
+2025-04-18 20:05:29,792 - INFO -  [ANONYMIZATION] Executing run_anonymization, config_path : configs/benchmark_config.yaml...........
+2025-04-18 20:05:29,793 - INFO -  [ANONYMIZATION] Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-04-18 20:05:31,149 - INFO -  [ANONYMIZATION] Anonimized file saved to : C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+2025-04-18 20:05:31,150 - INFO -  [ANONYMIZATION] Java anonymization completed successfully.
+2025-04-18 20:05:31,150 - INFO -  [ANONYMIZATION] Java STDOUT:
+? Java received config path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+? Loading config from: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+Loading config from: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+? Dataset Path (from args): C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\train\studentPerformance_train_raw.csv
+? Dataset Separator: ;
+? Suppression Limit: 0.1
+
+? Configured Attributes:
+  ? Quasi-Identifier: Age at enrollment
+  ? Quasi-Identifier: Gender
+  ? Quasi-Identifier: Nacionality
+  ? Sensitive Attribute: Scholarship_holder
+  ? Insensitive Attribute: Application mode
+  ? Insensitive Attribute: Application order
+  ? Insensitive Attribute: Curricular units 1st sem (credited)
+  ? Insensitive Attribute: Curricular units 1st sem (enrolled)
+  ? Insensitive Attribute: Curricular units 1st sem (evaluations)
+  ? Insensitive Attribute: Curricular units 1st sem (approved)
+  ? Insensitive Attribute: Curricular units 1st sem (without evaluations)
+  ? Insensitive Attribute: Curricular units 2nd sem (credited)
+  ? Insensitive Attribute: Curricular units 2nd sem (enrolled)
+  ? Insensitive Attribute: Curricular units 2nd sem (evaluations)
+  ? Insensitive Attribute: Curricular units 2nd sem (approved)
+  ? Insensitive Attribute: Curricular units 2nd sem (without evaluations)
+  ? Insensitive Attribute: Course
+  ? Insensitive Attribute: Target
+
+? Defined Hierarchies:
+  ? Age at enrollment -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\age_enrollment.csv
+  ? Gender -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\gender.csv
+  ? Nacionality -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\nacionality.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\age_enrollment.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\gender.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\nacionality.csv
+? Privacy Models Configured
+? Anonymized Output Path (from args): C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+? Anonymized Output Path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+? Anonymization completed. Output saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+Anonymized Data Quality Metrics:
+ - Ambiguity: 0.973952008349468
+ - AECS: 0.9490752824196967
+ - Discernibility: 0.8184090590646209
+ - Granularity: 0.96225865008276
+ - MSE: 0.9786895005106658
+ - Non-Uniform Entropy: 0.6105061091750543
+ - Precision: 0.8928369595931054
+ - Record-level SE: 0.9646446245403221
+Equivalence Class Statistics:
+ - Number of Classes: 17
+ - Average Class Size: 202.76470588235293
+Suppression Statistics:
+ - Suppressed Records: 92
+ - Suppression Percentage: 2.60%
+2025-04-18 20:05:31,151 - INFO - Anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+2025-04-18 20:05:31,196 - INFO - Anonymous data report saved at: outputs\singular\studentPerformance_2025-04-18_20-05-29\anonymous_data_report.txt
+2025-04-18 20:05:31,197 - INFO -  [POSTPROCESSING] Postprocessing anonymized data: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+2025-04-18 20:05:31,204 - INFO -  [POSTPROCESSING] Loaded anonymized data: (3539, 37)
+2025-04-18 20:05:31,240 - INFO -  [POSTPROCESSING] Loaded fallback maps from training data. Categorical cols: 1, Numeric cols: 36
+2025-04-18 20:05:31,240 - INFO -  [POSTPROCESSING] Normalizing anonymized data using ARX artifact cleaning and fallback values.
+2025-04-18 20:05:31,374 - INFO -  [POSTPROCESSING] Normalized anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized_processed.csv
+2025-04-18 20:05:31,374 - INFO -  [POSTPROCESSING] No encoder present. Skipping encoding of anonymized data.Will use processed anonymous data directly
+2025-04-18 20:05:31,375 - INFO - Postprocessing report saved at: outputs\singular\studentPerformance_2025-04-18_20-05-29\postprocessing_report.txt
+2025-04-18 20:05:31,376 - INFO - enable_synthetic_generation = True
+2025-04-18 20:05:31,376 - INFO - Starting standard Synthetic Data Generation pipeline...
+2025-04-18 20:05:31,376 - INFO - Executing run_synthetic.....
+2025-04-18 20:05:31,376 - INFO - [SYNTHETIC PIPELINE] executing run_synthetic for studentPerformance...
+2025-04-18 20:05:31,376 - INFO - [SYNTHETIC] Processing dataset: studentPerformance
+2025-04-18 20:05:31,377 - INFO - [SYNTHETIC] Original dataset size: 3539 rows
+2025-04-18 20:05:31,395 - INFO - Detected metadata:
+2025-04-18 20:05:31,395 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "Marital status": {
+            "sdtype": "categorical"
+        },
+        "Application mode": {
+            "sdtype": "numerical"
+        },
+        "Application order": {
+            "sdtype": "categorical"
+        },
+        "Course": {
+            "sdtype": "numerical"
+        },
+        "Daytime/evening attendance": {
+            "sdtype": "categorical"
+        },
+        "Previous qualification": {
+            "sdtype": "numerical"
+        },
+        "Previous qualification (grade)": {
+            "sdtype": "numerical"
+        },
+        "Nacionality": {
+            "sdtype": "numerical"
+        },
+        "Mother's qualification": {
+            "sdtype": "numerical"
+        },
+        "Father's qualification": {
+            "sdtype": "numerical"
+        },
+        "Mother's occupation": {
+            "sdtype": "numerical"
+        },
+        "Father's occupation": {
+            "sdtype": "numerical"
+        },
+        "Admission grade": {
+            "sdtype": "numerical"
+        },
+        "Displaced": {
+            "sdtype": "categorical"
+        },
+        "Educational special needs": {
+            "sdtype": "categorical"
+        },
+        "Debtor": {
+            "sdtype": "categorical"
+        },
+        "Tuition fees up to date": {
+            "sdtype": "categorical"
+        },
+        "Gender": {
+            "sdtype": "categorical"
+        },
+        "Scholarship_holder": {
+            "sdtype": "categorical"
+        },
+        "Age at enrollment": {
+            "sdtype": "numerical"
+        },
+        "International": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (credited)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (enrolled)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (evaluations)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (approved)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (grade)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (without evaluations)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (credited)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (enrolled)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (evaluations)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (approved)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (grade)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (without evaluations)": {
+            "sdtype": "categorical"
+        },
+        "Unemployment rate": {
+            "sdtype": "numerical"
+        },
+        "Inflation rate": {
+            "sdtype": "numerical"
+        },
+        "GDP": {
+            "sdtype": "numerical"
+        },
+        "Target": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-18 20:05:31,396 - INFO - [SYNTHETIC] Preparing synthesizer: CTGAN
+2025-04-18 20:05:31,396 - INFO - [SYNTHETIC] Params from config: {'epochs': 50}
+2025-04-18 20:05:31,396 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-18 20:05:31,396 - INFO - [SYNTHETIC] Training new CTGAN synthesizer from scratch...
+2025-04-18 20:05:31,397 - WARNING - [UserWarning] We strongly recommend saving the metadata using 'save_to_json' for replicability in future SDV versions. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sdv\single_table\base.py:97)
+2025-04-18 20:05:31,400 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 5, 31, 400071), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_dff60edcee434480b3e88bfc63100e08'}
+2025-04-18 20:05:31,400 - INFO - [SYNTHETIC] CTGAN initialized with epochs: 50
+2025-04-18 20:05:31,401 - INFO - [SYNTHETIC] Training parameters for CTGAN: {}
+2025-04-18 20:05:31,401 - INFO - [SYNTHETIC] fitting CTGAN 
+2025-04-18 20:05:31,401 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 5, 31, 401054), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_dff60edcee434480b3e88bfc63100e08', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:05:31,430 - INFO - Fitting table  metadata
+2025-04-18 20:05:31,431 - INFO - Fitting formatters for table 
+2025-04-18 20:05:31,437 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-04-18 20:05:31,438 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-04-18 20:05:31,440 - INFO - Fitting constraints for table 
+2025-04-18 20:05:31,440 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-18 20:05:31,448 - INFO - Fitting HyperTransformer for table 
+2025-04-18 20:05:31,487 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-04-18 20:05:31,503 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-04-18 20:05:31,556 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 5, 31, 556030), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_dff60edcee434480b3e88bfc63100e08', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:05:31,558 - INFO - Guidance: There are no missing values in column Application mode. Extra column not created.
+2025-04-18 20:05:31,793 - INFO - Guidance: There are no missing values in column Course. Extra column not created.
+2025-04-18 20:05:32,025 - INFO - Guidance: There are no missing values in column Previous qualification. Extra column not created.
+2025-04-18 20:05:32,066 - INFO - Guidance: There are no missing values in column Previous qualification (grade). Extra column not created.
+2025-04-18 20:05:32,273 - INFO - Guidance: There are no missing values in column Nacionality. Extra column not created.
+2025-04-18 20:05:32,335 - INFO - Guidance: There are no missing values in column Mother's qualification. Extra column not created.
+2025-04-18 20:05:32,455 - INFO - Guidance: There are no missing values in column Father's qualification. Extra column not created.
+2025-04-18 20:05:32,613 - INFO - Guidance: There are no missing values in column Mother's occupation. Extra column not created.
+2025-04-18 20:05:32,731 - INFO - Guidance: There are no missing values in column Father's occupation. Extra column not created.
+2025-04-18 20:05:32,925 - INFO - Guidance: There are no missing values in column Admission grade. Extra column not created.
+2025-04-18 20:05:33,166 - INFO - Guidance: There are no missing values in column Age at enrollment. Extra column not created.
+2025-04-18 20:05:33,395 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (credited). Extra column not created.
+2025-04-18 20:05:33,629 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (enrolled). Extra column not created.
+2025-04-18 20:05:34,025 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (evaluations). Extra column not created.
+2025-04-18 20:05:34,243 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (approved). Extra column not created.
+2025-04-18 20:05:34,407 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (grade). Extra column not created.
+2025-04-18 20:05:34,666 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (without evaluations). Extra column not created.
+2025-04-18 20:05:34,792 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (credited). Extra column not created.
+2025-04-18 20:05:35,009 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (enrolled). Extra column not created.
+2025-04-18 20:05:35,163 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (evaluations). Extra column not created.
+2025-04-18 20:05:35,390 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (approved). Extra column not created.
+2025-04-18 20:05:35,488 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (grade). Extra column not created.
+2025-04-18 20:05:35,723 - INFO - Guidance: There are no missing values in column Unemployment rate. Extra column not created.
+2025-04-18 20:05:35,964 - INFO - Guidance: There are no missing values in column Inflation rate. Extra column not created.
+2025-04-18 20:05:36,112 - INFO - Guidance: There are no missing values in column GDP. Extra column not created.
+2025-04-18 20:06:50,593 - INFO - [SYNTHETIC] Fitting complete for CTGAN. Duration: 79.19 seconds.
+2025-04-18 20:06:50,594 - INFO - [SYNTHETIC] CONFIRMATION CTGAN actually trained with epochs = 50
+2025-04-18 20:06:50,594 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 6, 50, 594559), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_dff60edcee434480b3e88bfc63100e08'}
+2025-04-18 20:06:50,631 - INFO - [SYNTHETIC] CTGAN trained and saved.
+2025-04-18 20:06:50,632 - INFO - [SYNTHETIC] Preparing synthesizer: TVAE
+2025-04-18 20:06:50,632 - INFO - [SYNTHETIC] Params from config: {'epochs': 50}
+2025-04-18 20:06:50,632 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-18 20:06:50,633 - INFO - [SYNTHETIC] Training new TVAE synthesizer from scratch...
+2025-04-18 20:06:50,636 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 6, 50, 636118), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_b334fbf120804cc48631d01402af77b7'}
+2025-04-18 20:06:50,636 - INFO - [SYNTHETIC] TVAE initialized with epochs: 50
+2025-04-18 20:06:50,637 - INFO - [SYNTHETIC] Training parameters for TVAE: {}
+2025-04-18 20:06:50,637 - INFO - [SYNTHETIC] fitting TVAE 
+2025-04-18 20:06:50,637 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 6, 50, 637118), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_b334fbf120804cc48631d01402af77b7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:06:50,677 - INFO - Fitting table  metadata
+2025-04-18 20:06:50,678 - INFO - Fitting formatters for table 
+2025-04-18 20:06:50,688 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-04-18 20:06:50,691 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-04-18 20:06:50,694 - INFO - Fitting constraints for table 
+2025-04-18 20:06:50,694 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-18 20:06:50,704 - INFO - Fitting HyperTransformer for table 
+2025-04-18 20:06:50,761 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-04-18 20:06:50,786 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-04-18 20:06:50,855 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 6, 50, 855394), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_b334fbf120804cc48631d01402af77b7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:06:50,859 - INFO - Guidance: There are no missing values in column Application mode. Extra column not created.
+2025-04-18 20:06:51,000 - INFO - Guidance: There are no missing values in column Course. Extra column not created.
+2025-04-18 20:06:51,301 - INFO - Guidance: There are no missing values in column Previous qualification. Extra column not created.
+2025-04-18 20:06:51,359 - INFO - Guidance: There are no missing values in column Previous qualification (grade). Extra column not created.
+2025-04-18 20:06:51,647 - INFO - Guidance: There are no missing values in column Nacionality. Extra column not created.
+2025-04-18 20:06:51,725 - INFO - Guidance: There are no missing values in column Mother's qualification. Extra column not created.
+2025-04-18 20:06:51,886 - INFO - Guidance: There are no missing values in column Father's qualification. Extra column not created.
+2025-04-18 20:06:52,136 - INFO - Guidance: There are no missing values in column Mother's occupation. Extra column not created.
+2025-04-18 20:06:52,284 - INFO - Guidance: There are no missing values in column Father's occupation. Extra column not created.
+2025-04-18 20:06:52,536 - INFO - Guidance: There are no missing values in column Admission grade. Extra column not created.
+2025-04-18 20:06:52,806 - INFO - Guidance: There are no missing values in column Age at enrollment. Extra column not created.
+2025-04-18 20:06:53,090 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (credited). Extra column not created.
+2025-04-18 20:06:53,392 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (enrolled). Extra column not created.
+2025-04-18 20:06:53,677 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (evaluations). Extra column not created.
+2025-04-18 20:06:53,952 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (approved). Extra column not created.
+2025-04-18 20:06:54,154 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (grade). Extra column not created.
+2025-04-18 20:06:54,416 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (without evaluations). Extra column not created.
+2025-04-18 20:06:54,546 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (credited). Extra column not created.
+2025-04-18 20:06:54,763 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (enrolled). Extra column not created.
+2025-04-18 20:06:54,976 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (evaluations). Extra column not created.
+2025-04-18 20:06:55,276 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (approved). Extra column not created.
+2025-04-18 20:06:55,384 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (grade). Extra column not created.
+2025-04-18 20:06:55,687 - INFO - Guidance: There are no missing values in column Unemployment rate. Extra column not created.
+2025-04-18 20:06:55,981 - INFO - Guidance: There are no missing values in column Inflation rate. Extra column not created.
+2025-04-18 20:06:56,146 - INFO - Guidance: There are no missing values in column GDP. Extra column not created.
+2025-04-18 20:07:13,038 - INFO - [SYNTHETIC] Fitting complete for TVAE. Duration: 22.40 seconds.
+2025-04-18 20:07:13,038 - INFO - [SYNTHETIC] CONFIRMATION TVAE actually trained with epochs = 50
+2025-04-18 20:07:13,038 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 7, 13, 38802), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_b334fbf120804cc48631d01402af77b7'}
+2025-04-18 20:07:13,071 - INFO - [SYNTHETIC] TVAE trained and saved.
+2025-04-18 20:07:13,071 - INFO - [SYNTHETIC] Preparing synthesizer: GaussianCopula
+2025-04-18 20:07:13,071 - INFO - [SYNTHETIC] Params from config: {}
+2025-04-18 20:07:13,072 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-18 20:07:13,072 - INFO - [SYNTHETIC] Training new GaussianCopula synthesizer from scratch...
+2025-04-18 20:07:13,075 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 7, 13, 75923), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_d0de6a0a3c0444ecb0303b8dbe162c95'}
+2025-04-18 20:07:13,075 - INFO - [SYNTHETIC] fitting GaussianCopula 
+2025-04-18 20:07:13,076 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 7, 13, 76867), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_d0de6a0a3c0444ecb0303b8dbe162c95', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:07:13,109 - INFO - Fitting table  metadata
+2025-04-18 20:07:13,110 - INFO - Fitting formatters for table 
+2025-04-18 20:07:13,118 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-04-18 20:07:13,121 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-04-18 20:07:13,123 - INFO - Fitting constraints for table 
+2025-04-18 20:07:13,124 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-18 20:07:13,140 - INFO - Fitting HyperTransformer for table 
+2025-04-18 20:07:13,282 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-04-18 20:07:13,303 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-04-18 20:07:13,481 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 7, 13, 481227), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_d0de6a0a3c0444ecb0303b8dbe162c95', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:07:13,482 - INFO - Fitting GaussianMultivariate(distribution="{'Marital status': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Application mode': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Application order': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Course': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Daytime/evening attendance': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Previous qualification': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Previous qualification (grade)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Nacionality': <class 'copulas.univariate.beta.BetaUnivariate'>, "Mother's qualification": <class 'copulas.univariate.beta.BetaUnivariate'>, "Father's qualification": <class 'copulas.univariate.beta.BetaUnivariate'>, "Mother's occupation": <class 'copulas.univariate.beta.BetaUnivariate'>, "Father's occupation": <class 'copulas.univariate.beta.BetaUnivariate'>, 'Admission grade': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Displaced': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Educational special needs': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Debtor': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Tuition fees up to date': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Gender': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Scholarship_holder': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Age at enrollment': <class 'copulas.univariate.beta.BetaUnivariate'>, 'International': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (credited)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (enrolled)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (evaluations)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (approved)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (grade)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (without evaluations)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (credited)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (enrolled)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (evaluations)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (approved)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (grade)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (without evaluations)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Unemployment rate': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Inflation rate': <class 'copulas.univariate.beta.BetaUnivariate'>, 'GDP': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Target': <class 'copulas.univariate.beta.BetaUnivariate'>}")
+2025-04-18 20:07:17,014 - INFO - [SYNTHETIC] Fitting complete for GaussianCopula. Duration: 3.94 seconds.
+2025-04-18 20:07:17,014 - WARNING - [SYNTHETIC] WARNING Could not determine actual epochs used for GaussianCopula
+2025-04-18 20:07:17,014 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 7, 17, 14586), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_d0de6a0a3c0444ecb0303b8dbe162c95'}
+2025-04-18 20:07:17,030 - INFO - [SYNTHETIC] GaussianCopula trained and saved.
+2025-04-18 20:07:17,031 - INFO - [SYNTHETIC] Using CTGAN to generate 3539 rows...
+2025-04-18 20:07:17,423 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 7, 17, 32146), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_dff60edcee434480b3e88bfc63100e08', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:07:17,425 - INFO - [SYNTHETIC] CTGAN completed: 3539 rows generated.
+2025-04-18 20:07:17,425 - INFO - [SYNTHETIC] Target class distribution for CTGAN: {'Graduate': 1590, 'Dropout': 1316, 'Enrolled': 633}
+2025-04-18 20:07:17,425 - INFO - [SYNTHETIC] Using TVAE to generate 3539 rows...
+2025-04-18 20:07:17,721 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 7, 17, 425243), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_b334fbf120804cc48631d01402af77b7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:07:17,722 - INFO - [SYNTHETIC] TVAE completed: 3539 rows generated.
+2025-04-18 20:07:17,722 - INFO - [SYNTHETIC] Target class distribution for TVAE: {'Graduate': 2358, 'Dropout': 1180, 'Enrolled': 1}
+2025-04-18 20:07:17,722 - INFO - [SYNTHETIC] Using GaussianCopula to generate 3539 rows...
+2025-04-18 20:07:18,505 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 7, 17, 722684), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_d0de6a0a3c0444ecb0303b8dbe162c95', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:07:18,505 - INFO - [SYNTHETIC] GaussianCopula completed: 3539 rows generated.
+2025-04-18 20:07:18,506 - INFO - [SYNTHETIC] Target class distribution for GaussianCopula: {'Graduate': 1816, 'Dropout': 1130, 'Enrolled': 593}
+2025-04-18 20:07:18,508 - INFO - [SYNTHETIC PIPELINE] Synthetic Data Generation Completed.
+2025-04-18 20:07:18,509 - INFO - [SYNTHETIC PIPELINE] Synthesizers used: ['CTGAN', 'TVAE', 'GaussianCopula']
+2025-04-18 20:07:32,556 - INFO -  [SYNTHETIC PIPELINE]  Synthetic Data Evaluation Completed.
+2025-04-18 20:07:32,571 - INFO -  [SYNTHETIC PIPELINE] Synthetic Data Report Generated Successfully.
+2025-04-18 20:07:32,769 - INFO - Synthetic data generated with 3 synthesizer(s).
+2025-04-18 20:07:32,769 - INFO - Running Hybrid Pipeline...
+2025-04-18 20:07:32,769 - INFO -  [HYBRID] Executing run_hybrid …
+2025-04-18 20:07:32,770 - INFO -  [HYBRID] Attempting post-processing of C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv …
+2025-04-18 20:07:32,770 - INFO -  [POSTPROCESSING] Postprocessing anonymized data: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized.csv
+2025-04-18 20:07:32,778 - INFO -  [POSTPROCESSING] Loaded anonymized data: (3539, 37)
+2025-04-18 20:07:32,790 - INFO -  [POSTPROCESSING] Loaded fallback maps from training data. Categorical cols: 1, Numeric cols: 36
+2025-04-18 20:07:32,790 - INFO -  [POSTPROCESSING] Normalizing anonymized data using ARX artifact cleaning and fallback values.
+2025-04-18 20:07:32,947 - INFO -  [POSTPROCESSING] Normalized anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized_processed.csv
+2025-04-18 20:07:32,947 - INFO -  [POSTPROCESSING] No encoder present. Skipping encoding of anonymized data.Will use processed anonymous data directly
+2025-04-18 20:07:32,981 - INFO -  [HYBRID] Post-processing successful!
+2025-04-18 20:07:32,982 - INFO -  [HYBRID] Encoded anon data saved to C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k5_l2_sup10_anonymized_encoded.csv
+2025-04-18 20:07:32,982 - INFO -  [HYBRID] Starting synthetic generation for hybrid pipeline...
+2025-04-18 20:07:32,982 - INFO - Executing run_synthetic.....
+2025-04-18 20:07:32,982 - INFO - [SYNTHETIC PIPELINE] executing run_synthetic for studentPerformance_k5_l2_sup10...
+2025-04-18 20:07:32,983 - INFO - [SYNTHETIC] Processing dataset: studentPerformance_k5_l2_sup10
+2025-04-18 20:07:32,983 - INFO - [SYNTHETIC] Original dataset size: 3539 rows
+2025-04-18 20:07:33,013 - INFO - Detected metadata:
+2025-04-18 20:07:33,014 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "Marital status": {
+            "sdtype": "categorical"
+        },
+        "Application mode": {
+            "sdtype": "categorical"
+        },
+        "Application order": {
+            "sdtype": "categorical"
+        },
+        "Course": {
+            "sdtype": "categorical"
+        },
+        "Daytime/evening attendance": {
+            "sdtype": "categorical"
+        },
+        "Previous qualification": {
+            "sdtype": "categorical"
+        },
+        "Previous qualification (grade)": {
+            "sdtype": "numerical"
+        },
+        "Nacionality": {
+            "sdtype": "categorical"
+        },
+        "Mother's qualification": {
+            "sdtype": "categorical"
+        },
+        "Father's qualification": {
+            "sdtype": "categorical"
+        },
+        "Mother's occupation": {
+            "sdtype": "categorical"
+        },
+        "Father's occupation": {
+            "sdtype": "categorical"
+        },
+        "Admission grade": {
+            "sdtype": "categorical"
+        },
+        "Displaced": {
+            "sdtype": "categorical"
+        },
+        "Educational special needs": {
+            "sdtype": "categorical"
+        },
+        "Debtor": {
+            "sdtype": "categorical"
+        },
+        "Tuition fees up to date": {
+            "sdtype": "categorical"
+        },
+        "Gender": {
+            "sdtype": "categorical"
+        },
+        "Scholarship_holder": {
+            "sdtype": "categorical"
+        },
+        "Age at enrollment": {
+            "sdtype": "categorical"
+        },
+        "International": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (credited)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (enrolled)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (evaluations)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (approved)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (grade)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (without evaluations)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 2nd sem (credited)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 2nd sem (enrolled)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 2nd sem (evaluations)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 2nd sem (approved)": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 2nd sem (grade)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (without evaluations)": {
+            "sdtype": "categorical"
+        },
+        "Unemployment rate": {
+            "sdtype": "numerical"
+        },
+        "Inflation rate": {
+            "sdtype": "numerical"
+        },
+        "GDP": {
+            "sdtype": "numerical"
+        },
+        "Target": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-04-18 20:07:33,016 - INFO - [SYNTHETIC] Preparing synthesizer: CTGAN
+2025-04-18 20:07:33,016 - INFO - [SYNTHETIC] Params from config: {'epochs': 50}
+2025-04-18 20:07:33,016 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-18 20:07:33,016 - INFO - [SYNTHETIC] Training new CTGAN synthesizer from scratch...
+2025-04-18 20:07:33,016 - WARNING - [UserWarning] We strongly recommend saving the metadata using 'save_to_json' for replicability in future SDV versions. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sdv\single_table\base.py:97)
+2025-04-18 20:07:33,019 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 7, 33, 19578), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_46b71124f6104588b925b84fb7dea390'}
+2025-04-18 20:07:33,019 - INFO - [SYNTHETIC] CTGAN initialized with epochs: 50
+2025-04-18 20:07:33,019 - INFO - [SYNTHETIC] Training parameters for CTGAN: {}
+2025-04-18 20:07:33,019 - INFO - [SYNTHETIC] fitting CTGAN 
+2025-04-18 20:07:33,019 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 7, 33, 19578), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_46b71124f6104588b925b84fb7dea390', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:07:33,027 - INFO - Fitting table  metadata
+2025-04-18 20:07:33,029 - INFO - Fitting formatters for table 
+2025-04-18 20:07:33,033 - INFO - Fitting constraints for table 
+2025-04-18 20:07:33,034 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-18 20:07:33,037 - INFO - Fitting HyperTransformer for table 
+2025-04-18 20:07:33,086 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 7, 33, 86979), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_46b71124f6104588b925b84fb7dea390', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:07:33,097 - INFO - Guidance: There are no missing values in column Previous qualification (grade). Extra column not created.
+2025-04-18 20:07:33,160 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (grade). Extra column not created.
+2025-04-18 20:07:33,195 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (grade). Extra column not created.
+2025-04-18 20:07:33,227 - INFO - Guidance: There are no missing values in column Unemployment rate. Extra column not created.
+2025-04-18 20:07:33,258 - INFO - Guidance: There are no missing values in column Inflation rate. Extra column not created.
+2025-04-18 20:07:33,284 - INFO - Guidance: There are no missing values in column GDP. Extra column not created.
+2025-04-18 20:08:41,453 - INFO - [SYNTHETIC] Fitting complete for CTGAN. Duration: 68.43 seconds.
+2025-04-18 20:08:41,454 - INFO - [SYNTHETIC] CONFIRMATION CTGAN actually trained with epochs = 50
+2025-04-18 20:08:41,454 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 8, 41, 454304), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_46b71124f6104588b925b84fb7dea390'}
+2025-04-18 20:08:41,483 - INFO - [SYNTHETIC] CTGAN trained and saved.
+2025-04-18 20:08:41,484 - INFO - [SYNTHETIC] Preparing synthesizer: TVAE
+2025-04-18 20:08:41,484 - INFO - [SYNTHETIC] Params from config: {'epochs': 50}
+2025-04-18 20:08:41,485 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-18 20:08:41,485 - INFO - [SYNTHETIC] Training new TVAE synthesizer from scratch...
+2025-04-18 20:08:41,489 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 8, 41, 489994), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_2927c398b1f249e2a8a66c198959c0f7'}
+2025-04-18 20:08:41,489 - INFO - [SYNTHETIC] TVAE initialized with epochs: 50
+2025-04-18 20:08:41,489 - INFO - [SYNTHETIC] Training parameters for TVAE: {}
+2025-04-18 20:08:41,489 - INFO - [SYNTHETIC] fitting TVAE 
+2025-04-18 20:08:41,490 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 8, 41, 490969), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_2927c398b1f249e2a8a66c198959c0f7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:08:41,498 - INFO - Fitting table  metadata
+2025-04-18 20:08:41,501 - INFO - Fitting formatters for table 
+2025-04-18 20:08:41,506 - INFO - Fitting constraints for table 
+2025-04-18 20:08:41,507 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-18 20:08:41,509 - INFO - Fitting HyperTransformer for table 
+2025-04-18 20:08:41,580 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 8, 41, 580007), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_2927c398b1f249e2a8a66c198959c0f7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:08:41,594 - INFO - Guidance: There are no missing values in column Previous qualification (grade). Extra column not created.
+2025-04-18 20:08:41,663 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (grade). Extra column not created.
+2025-04-18 20:08:41,706 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (grade). Extra column not created.
+2025-04-18 20:08:41,740 - INFO - Guidance: There are no missing values in column Unemployment rate. Extra column not created.
+2025-04-18 20:08:41,772 - INFO - Guidance: There are no missing values in column Inflation rate. Extra column not created.
+2025-04-18 20:08:41,804 - INFO - Guidance: There are no missing values in column GDP. Extra column not created.
+2025-04-18 20:08:59,989 - INFO - [SYNTHETIC] Fitting complete for TVAE. Duration: 18.50 seconds.
+2025-04-18 20:08:59,989 - INFO - [SYNTHETIC] CONFIRMATION TVAE actually trained with epochs = 50
+2025-04-18 20:08:59,989 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 8, 59, 989299), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_2927c398b1f249e2a8a66c198959c0f7'}
+2025-04-18 20:09:00,014 - INFO - [SYNTHETIC] TVAE trained and saved.
+2025-04-18 20:09:00,015 - INFO - [SYNTHETIC] Preparing synthesizer: GaussianCopula
+2025-04-18 20:09:00,016 - INFO - [SYNTHETIC] Params from config: {}
+2025-04-18 20:09:00,017 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-18 20:09:00,017 - INFO - [SYNTHETIC] Training new GaussianCopula synthesizer from scratch...
+2025-04-18 20:09:00,021 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 9, 0, 21006), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_6301d120a96c4e3a8adbbb8306575fc6'}
+2025-04-18 20:09:00,021 - INFO - [SYNTHETIC] fitting GaussianCopula 
+2025-04-18 20:09:00,022 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 9, 0, 22002), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_6301d120a96c4e3a8adbbb8306575fc6', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:09:00,030 - INFO - Fitting table  metadata
+2025-04-18 20:09:00,033 - INFO - Fitting formatters for table 
+2025-04-18 20:09:00,042 - INFO - Fitting constraints for table 
+2025-04-18 20:09:00,042 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-18 20:09:00,059 - INFO - Fitting HyperTransformer for table 
+2025-04-18 20:09:00,658 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 9, 0, 658991), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_6301d120a96c4e3a8adbbb8306575fc6', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:09:00,659 - INFO - Fitting GaussianMultivariate(distribution="{'Marital status': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Application mode': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Application order': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Course': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Daytime/evening attendance': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Previous qualification': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Previous qualification (grade)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Nacionality': <class 'copulas.univariate.beta.BetaUnivariate'>, "Mother's qualification": <class 'copulas.univariate.beta.BetaUnivariate'>, "Father's qualification": <class 'copulas.univariate.beta.BetaUnivariate'>, "Mother's occupation": <class 'copulas.univariate.beta.BetaUnivariate'>, "Father's occupation": <class 'copulas.univariate.beta.BetaUnivariate'>, 'Admission grade': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Displaced': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Educational special needs': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Debtor': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Tuition fees up to date': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Gender': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Scholarship_holder': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Age at enrollment': <class 'copulas.univariate.beta.BetaUnivariate'>, 'International': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (credited)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (enrolled)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (evaluations)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (approved)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (grade)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 1st sem (without evaluations)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (credited)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (enrolled)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (evaluations)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (approved)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (grade)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Curricular units 2nd sem (without evaluations)': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Unemployment rate': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Inflation rate': <class 'copulas.univariate.beta.BetaUnivariate'>, 'GDP': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Target': <class 'copulas.univariate.beta.BetaUnivariate'>}")
+2025-04-18 20:09:02,737 - INFO - [SYNTHETIC] Fitting complete for GaussianCopula. Duration: 2.72 seconds.
+2025-04-18 20:09:02,738 - WARNING - [SYNTHETIC] WARNING Could not determine actual epochs used for GaussianCopula
+2025-04-18 20:09:02,738 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 9, 2, 738841), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_6301d120a96c4e3a8adbbb8306575fc6'}
+2025-04-18 20:09:02,756 - INFO - [SYNTHETIC] GaussianCopula trained and saved.
+2025-04-18 20:09:02,757 - INFO - [SYNTHETIC] Using CTGAN to generate 3539 rows...
+2025-04-18 20:09:02,987 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 9, 2, 757600), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.16.1_46b71124f6104588b925b84fb7dea390', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:09:02,989 - INFO - [SYNTHETIC] CTGAN completed: 3539 rows generated.
+2025-04-18 20:09:02,989 - INFO - [SYNTHETIC] Target class distribution for CTGAN: {'Graduate': 1452, 'Dropout': 1175, 'Enrolled': 912}
+2025-04-18 20:09:02,990 - INFO - [SYNTHETIC] Using TVAE to generate 3539 rows...
+2025-04-18 20:09:03,115 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 9, 2, 990246), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.16.1_2927c398b1f249e2a8a66c198959c0f7', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:09:03,115 - INFO - [SYNTHETIC] TVAE completed: 3539 rows generated.
+2025-04-18 20:09:03,116 - INFO - [SYNTHETIC] Target class distribution for TVAE: {'Graduate': 2329, 'Dropout': 1210}
+2025-04-18 20:09:03,116 - INFO - [SYNTHETIC] Using GaussianCopula to generate 3539 rows...
+2025-04-18 20:09:03,664 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 18, 20, 9, 3, 117738), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.16.1_6301d120a96c4e3a8adbbb8306575fc6', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3539, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-04-18 20:09:03,665 - INFO - [SYNTHETIC] GaussianCopula completed: 3539 rows generated.
+2025-04-18 20:09:03,666 - INFO - [SYNTHETIC] Target class distribution for GaussianCopula: {'Graduate': 1775, 'Dropout': 1147, 'Enrolled': 617}
+2025-04-18 20:09:03,668 - INFO - [SYNTHETIC PIPELINE] Synthetic Data Generation Completed.
+2025-04-18 20:09:03,668 - INFO - [SYNTHETIC PIPELINE] Synthesizers used: ['CTGAN', 'TVAE', 'GaussianCopula']
+2025-04-18 20:09:23,580 - INFO -  [SYNTHETIC PIPELINE]  Synthetic Data Evaluation Completed.
+2025-04-18 20:09:23,599 - INFO -  [SYNTHETIC PIPELINE] Synthetic Data Report Generated Successfully.
+2025-04-18 20:09:23,659 - ERROR - [HYBRID] run_synthetic failed: Could not convert ['53171395339153917181443939391711117394417173911391611011613942174239143393939181739173953177511751174343395343139393944144441243174444177121515339394439431113944391711117431715114217717171717743771751421181143173943391391717434374417441518174242395143433913917171431139739171391151171751183939173913942435318111718394342143171717431739394239171111739171813917114311434311739173939433911771811711817171433973943393917431717139184317114339174211394311717115344391143434353393939142421817184339171393917391531393951181717144441434339173939433943171173913939421391184214414417139139171139394217177391743171715117441171391642153174339424251181743431717391391839139173943113917431717391753117743391175317391713917513942171393943113913917117513971717143397744114339171174317393917151717171743717174317393911817573917143717544441391717143391743394314339391717174239391744394339434351144117441393939391394415171644393911171717173944739113911743531139143151711771171839117174317391842395311817391113913917393939718391714318171039391713917171743393939184343424214217111717393939393944174413939443914417171721395153171391711421743113939444317171639174311739117174311139433939117393944397113943143173944445117117142173939184243391715117391744392431711111743718431171511391534439175139171171431873914311814351744143393914239114344433971717394243171739433939445342394317424339391713917397391391717444239739435142441139535339391174411717113973913942434343139394239393944393911713917171743177113951773913911397117531143183914317177171444315714339391742393943431171739431713939117711144443939183943393914317173939171113911753717391717171844391711444339174218441739174317113911717139391744173913911391117434417441394439181717139431714239533911171433971811711424313917139181713911445431163943171434317431718139391171739177111713943393914343143139394417173939117161174444171711393914439171174343171544117394413939434311437444339393939391395139431739743171739394339142171543111811742393914218174443114214314342111711717393951139391183953393971441144117171174317117444317391117391739117171743171184317174315117113939391243118391143434339711743433939117394411714343171713971743174317393913917431717153939171391713943431117441139391743117181743171811392639181711139391174217114218117174339517391777394344393910394439433913944111393911744711111739443917397393917184317393951139394414439173939173943394417391717434344171139391711441844421717139173939173943534439394217171753183917441742173971393918173917181423917444339117143173944113917171213939171183939173939394239421713917171173939739393918174311717144441715431717394217394373927393911813943171173911639139174239435111717433915171391711744144171811117394314439444217393916431518139171717391739174343117143441739171711744444311711181744435144184473939391717739742173939142391443943431139393916391111431174313917421743139177394343391743183939117117394243431434217394444391184318391391171743391817174314343739443915317433918174443393944139393943395339184251117171713917139393913943171742444313914251171739433939443943117714444161742171431613917173913939139174317174243139173918171743443914473913917421111777171716393944393917181839717511139174339394417139391717391817441531742391139183974371391171711839391739143143441394417171711744424310431391511391744421441173913913917114217118143115343391743444417511739173939111713911175339174339433939443939139391714211444317171710177139393917174417171393914211743424442115391711744431511711743163953971717117394214253433944117177174339443971711711717153171617117111717171743431743433915739181814343395171751394317443939175142173918139163943117117391517171739143394343173913915317117433917185151139391394239717139181434339397394439117393944171539391431711739391743391173917143434343391421739431717161117431151739174339424339511171513939173939174317117184317184311711717171839391842431433944421617139113917171511843391393915139511717537391184339144424344443917391391391433911714343143173914218181739117173917431443911743391743173939431391711391391391393913911739151394339513942174451433953394317139143171739421739391394413939117174343395339174317391753443939151744171173973917171144171739393943393917433943173944394314339173939171171395139183943393939391117391611717717433917181391171431441717543144117742139391718395139394339393917391839433971843393939424317151423944118161173916173939171715171437717173917393944153917173939397139139431171714211139441144171751739514317171118165113917151171717118165339431717171743171177139431394411171743111711718117397144139391739391739174443391393943174439174317114414411711393974417171431739445317391171431161751139393911717441421739151394411393924339114439171743537113939393939175311711434239443917431111717421173917394315111394317111717174311813939431437181144117153911839173917434344391433913939391444339139174417533973939423917143113943394317111431714411817441424313917117118174443111139181433917113944391715111714244441117171531717431139117397441739444317171445311717173951173911181715171717393943395339117171391739171739171433943391717173917173944171744391171813913942181739431713951391424343171393917139173917394444434371714417433917431433953435311175144118171431113953421744174439391742181717174217117727142171434443434215113911517393917441711739433943433911744447139391717144394311443917424343391517151742391639151739113914339177739114313911743139391437139139173917139391753718393943171424473939393939113939117171717154239171811711743113939153144431117739511711711173939163914314439173943444417139743151423913917153421173917431394444391184339393913939143424439393943117117391539173939117157139171391717175139175171431394417117163943743101543394439395111811739713951175115391515313939113917153939433917143139391174339173913939511739139391717171517173911154321711391739111815444317171813911391711139511739434317173939421739139171391817117434313939174239394311717444442171391518391753391423917171713939139173917437435142139431743391171434317434339175139117394217443913913913944139173911142394311771539391713942393911744431391531431431739393914317434343394344111743143395511397171139139513915117151771173917117393918'] to numeric
+2025-04-18 20:09:23,660 - INFO - Hybrid pipeline completed successfully.
+2025-04-18 20:09:23,660 - INFO - Hybrid pipeline duration: 110.89 seconds
+2025-04-18 20:09:23,661 - INFO - Starting Utility...
+2025-04-18 20:09:23,661 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-04-18 20:09:23,663 - INFO - [UTILITY] Original Data - Training Size: 3539, Testing Size: 885
+2025-04-18 20:09:23,663 - INFO - [UTILITY] Target class distribution (Original): {'Graduate': 1767, 'Dropout': 1137, 'Enrolled': 635}
+2025-04-18 20:09:23,664 - INFO - [UTILITY] Processing synthetic dataset generated by CTGAN...
+2025-04-18 20:09:23,666 - INFO - [UTILITY] Synthetic Data (CTGAN) - Training Size: 3539
+2025-04-18 20:09:23,667 - INFO - [UTILITY] Target class distribution (CTGAN): {'Graduate': 1590, 'Dropout': 1316, 'Enrolled': 633}
+2025-04-18 20:09:23,668 - INFO - [UTILITY] Processing synthetic dataset generated by TVAE...
+2025-04-18 20:09:23,669 - INFO - [UTILITY] Synthetic Data (TVAE) - Training Size: 3539
+2025-04-18 20:09:23,670 - INFO - [UTILITY] Target class distribution (TVAE): {'Graduate': 2358, 'Dropout': 1180, 'Enrolled': 1}
+2025-04-18 20:09:23,671 - INFO - [UTILITY] Processing synthetic dataset generated by GaussianCopula...
+2025-04-18 20:09:23,673 - INFO - [UTILITY] Synthetic Data (GaussianCopula) - Training Size: 3539
+2025-04-18 20:09:23,673 - INFO - [UTILITY] Target class distribution (GaussianCopula): {'Graduate': 1816, 'Dropout': 1130, 'Enrolled': 593}
+2025-04-18 20:09:23,674 - INFO - [UTILITY] Processing anonymized dataset...
+2025-04-18 20:09:23,675 - INFO - [UTILITY] Anonymized Data - Training Size: 3539
+2025-04-18 20:09:23,676 - INFO - [UTILITY] Target class distribution (Anonymous): {'Graduate': 1767, 'Dropout': 1137, 'Enrolled': 635}
+2025-04-18 20:09:23,676 - INFO - [UTILITY] Training models on all datasets...
+2025-04-18 20:09:23,677 - INFO - [UTILITY] Total datasets used for training: 5
+2025-04-18 20:09:23,677 - INFO - [TRAINING] Training models from scratch...
+2025-04-18 20:09:23,677 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 3539, Features: 36
+2025-04-18 20:09:23,677 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-04-18 20:09:23,740 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 0.06 sec
+2025-04-18 20:09:23,740 - INFO - [TRAINING] Training KNN on Original...
+2025-04-18 20:09:23,743 - INFO - [TRAINING] KNN trained successfully on Original in 0.00 sec
+2025-04-18 20:09:23,743 - INFO - [TRAINING] Training RandomForest on Original...
+2025-04-18 20:09:24,206 - INFO - [TRAINING] RandomForest trained successfully on Original in 0.46 sec
+2025-04-18 20:09:24,206 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-04-18 20:09:24,237 - INFO - [TRAINING] DecisionTree trained successfully on Original in 0.03 sec
+2025-04-18 20:09:24,237 - INFO - [TRAINING] Finished training 4 model(s) for dataset: Original
+2025-04-18 20:09:24,239 - INFO - [TRAINING] Starting training for dataset: CTGAN — Rows: 3539, Features: 36
+2025-04-18 20:09:24,239 - INFO - [TRAINING] Training LogisticRegression on CTGAN...
+2025-04-18 20:09:24,256 - INFO - [TRAINING] LogisticRegression trained successfully on CTGAN in 0.02 sec
+2025-04-18 20:09:24,256 - INFO - [TRAINING] Training KNN on CTGAN...
+2025-04-18 20:09:24,259 - INFO - [TRAINING] KNN trained successfully on CTGAN in 0.00 sec
+2025-04-18 20:09:24,259 - INFO - [TRAINING] Training RandomForest on CTGAN...
+2025-04-18 20:09:24,990 - INFO - [TRAINING] RandomForest trained successfully on CTGAN in 0.73 sec
+2025-04-18 20:09:24,990 - INFO - [TRAINING] Training DecisionTree on CTGAN...
+2025-04-18 20:09:25,059 - INFO - [TRAINING] DecisionTree trained successfully on CTGAN in 0.07 sec
+2025-04-18 20:09:25,059 - INFO - [TRAINING] Finished training 4 model(s) for dataset: CTGAN
+2025-04-18 20:09:25,059 - INFO - [TRAINING] Starting training for dataset: TVAE — Rows: 3539, Features: 36
+2025-04-18 20:09:25,059 - INFO - [TRAINING] Training LogisticRegression on TVAE...
+2025-04-18 20:09:25,127 - INFO - [TRAINING] LogisticRegression trained successfully on TVAE in 0.07 sec
+2025-04-18 20:09:25,127 - INFO - [TRAINING] Training KNN on TVAE...
+2025-04-18 20:09:25,132 - INFO - [TRAINING] KNN trained successfully on TVAE in 0.00 sec
+2025-04-18 20:09:25,133 - INFO - [TRAINING] Training RandomForest on TVAE...
+2025-04-18 20:09:25,437 - INFO - [TRAINING] RandomForest trained successfully on TVAE in 0.30 sec
+2025-04-18 20:09:25,437 - INFO - [TRAINING] Training DecisionTree on TVAE...
+2025-04-18 20:09:25,454 - INFO - [TRAINING] DecisionTree trained successfully on TVAE in 0.02 sec
+2025-04-18 20:09:25,454 - INFO - [TRAINING] Finished training 4 model(s) for dataset: TVAE
+2025-04-18 20:09:25,455 - INFO - [TRAINING] Starting training for dataset: GaussianCopula — Rows: 3539, Features: 36
+2025-04-18 20:09:25,455 - INFO - [TRAINING] Training LogisticRegression on GaussianCopula...
+2025-04-18 20:09:25,510 - INFO - [TRAINING] LogisticRegression trained successfully on GaussianCopula in 0.05 sec
+2025-04-18 20:09:25,510 - INFO - [TRAINING] Training KNN on GaussianCopula...
+2025-04-18 20:09:25,513 - INFO - [TRAINING] KNN trained successfully on GaussianCopula in 0.00 sec
+2025-04-18 20:09:25,513 - INFO - [TRAINING] Training RandomForest on GaussianCopula...
+2025-04-18 20:09:26,269 - INFO - [TRAINING] RandomForest trained successfully on GaussianCopula in 0.75 sec
+2025-04-18 20:09:26,269 - INFO - [TRAINING] Training DecisionTree on GaussianCopula...
+2025-04-18 20:09:26,336 - INFO - [TRAINING] DecisionTree trained successfully on GaussianCopula in 0.07 sec
+2025-04-18 20:09:26,336 - INFO - [TRAINING] Finished training 4 model(s) for dataset: GaussianCopula
+2025-04-18 20:09:26,336 - INFO - [TRAINING] Starting training for dataset: Anonymous — Rows: 3539, Features: 36
+2025-04-18 20:09:26,336 - INFO - [TRAINING] Training LogisticRegression on Anonymous...
+2025-04-18 20:09:26,418 - INFO - [TRAINING] LogisticRegression trained successfully on Anonymous in 0.08 sec
+2025-04-18 20:09:26,419 - INFO - [TRAINING] Training KNN on Anonymous...
+2025-04-18 20:09:26,434 - INFO - [TRAINING] KNN trained successfully on Anonymous in 0.01 sec
+2025-04-18 20:09:26,434 - INFO - [TRAINING] Training RandomForest on Anonymous...
+2025-04-18 20:09:26,753 - INFO - [TRAINING] RandomForest trained successfully on Anonymous in 0.32 sec
+2025-04-18 20:09:26,754 - INFO - [TRAINING] Training DecisionTree on Anonymous...
+2025-04-18 20:09:26,772 - INFO - [TRAINING] DecisionTree trained successfully on Anonymous in 0.02 sec
+2025-04-18 20:09:26,772 - INFO - [TRAINING] Finished training 4 model(s) for dataset: Anonymous
+2025-04-18 20:09:26,773 - INFO - [TRAINING] Total models trained across all datasets: 20
+2025-04-18 20:09:26,773 - INFO - [UTILITY] Trained model names: ['Original', 'CTGAN', 'TVAE', 'GaussianCopula', 'Anonymous']
+2025-04-18 20:09:26,773 - INFO - [UTILITY] Model Training Completed.
+2025-04-18 20:09:26,773 - INFO - Starting the Evaluating of models...
+2025-04-18 20:09:26,773 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-04-18 20:09:26,775 - INFO - Evaluating LogisticRegression on Original...
+2025-04-18 20:09:26,778 - INFO - Predictions completed for LogisticRegression on Original
+2025-04-18 20:09:26,779 - INFO - Prediction distribution for LogisticRegression on Original: {'Graduate': 509, 'Dropout': 275, 'Enrolled': 101}
+2025-04-18 20:09:26,801 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-04-18 20:09:26,802 - INFO - Evaluating LogisticRegression on CTGAN...
+2025-04-18 20:09:26,804 - INFO - Predictions completed for LogisticRegression on CTGAN
+2025-04-18 20:09:26,805 - INFO - Prediction distribution for LogisticRegression on CTGAN: {'Graduate': 652, 'Dropout': 224, 'Enrolled': 9}
+2025-04-18 20:09:26,825 - INFO - Computed 8 metric(s) for LogisticRegression on CTGAN
+2025-04-18 20:09:26,826 - INFO - Evaluating LogisticRegression on TVAE...
+2025-04-18 20:09:26,828 - INFO - Predictions completed for LogisticRegression on TVAE
+2025-04-18 20:09:26,828 - INFO - Prediction distribution for LogisticRegression on TVAE: {'Graduate': 547, 'Dropout': 322, 'Enrolled': 16}
+2025-04-18 20:09:26,848 - INFO - Computed 8 metric(s) for LogisticRegression on TVAE
+2025-04-18 20:09:26,848 - INFO - Evaluating LogisticRegression on GaussianCopula...
+2025-04-18 20:09:26,852 - INFO - Predictions completed for LogisticRegression on GaussianCopula
+2025-04-18 20:09:26,853 - INFO - Prediction distribution for LogisticRegression on GaussianCopula: {'Graduate': 413, 'Enrolled': 282, 'Dropout': 190}
+2025-04-18 20:09:26,873 - INFO - Computed 8 metric(s) for LogisticRegression on GaussianCopula
+2025-04-18 20:09:26,873 - INFO - Evaluating LogisticRegression on Anonymous...
+2025-04-18 20:09:26,876 - INFO - Predictions completed for LogisticRegression on Anonymous
+2025-04-18 20:09:26,876 - INFO - Prediction distribution for LogisticRegression on Anonymous: {'Graduate': 514, 'Dropout': 297, 'Enrolled': 74}
+2025-04-18 20:09:26,896 - INFO - Computed 8 metric(s) for LogisticRegression on Anonymous
+2025-04-18 20:09:26,896 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-04-18 20:09:26,896 - INFO - Evaluating KNN on Original...
+2025-04-18 20:09:26,958 - INFO - Predictions completed for KNN on Original
+2025-04-18 20:09:26,959 - INFO - Prediction distribution for KNN on Original: {'Graduate': 479, 'Dropout': 273, 'Enrolled': 133}
+2025-04-18 20:09:27,009 - INFO - Computed 8 metric(s) for KNN on Original
+2025-04-18 20:09:27,010 - INFO - Evaluating KNN on CTGAN...
+2025-04-18 20:09:27,079 - INFO - Predictions completed for KNN on CTGAN
+2025-04-18 20:09:27,080 - INFO - Prediction distribution for KNN on CTGAN: {'Dropout': 512, 'Graduate': 258, 'Enrolled': 115}
+2025-04-18 20:09:27,136 - INFO - Computed 8 metric(s) for KNN on CTGAN
+2025-04-18 20:09:27,136 - INFO - Evaluating KNN on TVAE...
+2025-04-18 20:09:27,212 - INFO - Predictions completed for KNN on TVAE
+2025-04-18 20:09:27,213 - INFO - Prediction distribution for KNN on TVAE: {'Graduate': 617, 'Dropout': 268}
+2025-04-18 20:09:27,221 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 20:09:27,227 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 20:09:27,233 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 20:09:27,277 - INFO - Computed 8 metric(s) for KNN on TVAE
+2025-04-18 20:09:27,278 - INFO - Evaluating KNN on GaussianCopula...
+2025-04-18 20:09:27,346 - INFO - Predictions completed for KNN on GaussianCopula
+2025-04-18 20:09:27,348 - INFO - Prediction distribution for KNN on GaussianCopula: {'Graduate': 476, 'Dropout': 348, 'Enrolled': 61}
+2025-04-18 20:09:27,414 - INFO - Computed 8 metric(s) for KNN on GaussianCopula
+2025-04-18 20:09:27,415 - INFO - Evaluating KNN on Anonymous...
+2025-04-18 20:09:27,481 - INFO - Predictions completed for KNN on Anonymous
+2025-04-18 20:09:27,482 - INFO - Prediction distribution for KNN on Anonymous: {'Graduate': 501, 'Dropout': 270, 'Enrolled': 114}
+2025-04-18 20:09:27,548 - INFO - Computed 8 metric(s) for KNN on Anonymous
+2025-04-18 20:09:27,548 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-04-18 20:09:27,549 - INFO - Evaluating RandomForest on Original...
+2025-04-18 20:09:27,586 - INFO - Predictions completed for RandomForest on Original
+2025-04-18 20:09:27,587 - INFO - Prediction distribution for RandomForest on Original: {'Graduate': 518, 'Dropout': 262, 'Enrolled': 105}
+2025-04-18 20:09:27,702 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-04-18 20:09:27,703 - INFO - Evaluating RandomForest on CTGAN...
+2025-04-18 20:09:27,737 - INFO - Predictions completed for RandomForest on CTGAN
+2025-04-18 20:09:27,738 - INFO - Prediction distribution for RandomForest on CTGAN: {'Graduate': 559, 'Dropout': 326}
+2025-04-18 20:09:27,744 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 20:09:27,750 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 20:09:27,757 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 20:09:27,817 - INFO - Computed 8 metric(s) for RandomForest on CTGAN
+2025-04-18 20:09:27,817 - INFO - Evaluating RandomForest on TVAE...
+2025-04-18 20:09:27,829 - INFO - Predictions completed for RandomForest on TVAE
+2025-04-18 20:09:27,830 - INFO - Prediction distribution for RandomForest on TVAE: {'Graduate': 508, 'Dropout': 377}
+2025-04-18 20:09:27,836 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 20:09:27,842 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 20:09:27,849 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 20:09:27,893 - INFO - Computed 8 metric(s) for RandomForest on TVAE
+2025-04-18 20:09:27,894 - INFO - Evaluating RandomForest on GaussianCopula...
+2025-04-18 20:09:27,919 - INFO - Predictions completed for RandomForest on GaussianCopula
+2025-04-18 20:09:27,920 - INFO - Prediction distribution for RandomForest on GaussianCopula: {'Graduate': 541, 'Dropout': 310, 'Enrolled': 34}
+2025-04-18 20:09:28,011 - INFO - Computed 8 metric(s) for RandomForest on GaussianCopula
+2025-04-18 20:09:28,012 - INFO - Evaluating RandomForest on Anonymous...
+2025-04-18 20:09:28,047 - INFO - Predictions completed for RandomForest on Anonymous
+2025-04-18 20:09:28,048 - INFO - Prediction distribution for RandomForest on Anonymous: {'Graduate': 508, 'Dropout': 273, 'Enrolled': 104}
+2025-04-18 20:09:28,143 - INFO - Computed 8 metric(s) for RandomForest on Anonymous
+2025-04-18 20:09:28,143 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-04-18 20:09:28,144 - INFO - Evaluating DecisionTree on Original...
+2025-04-18 20:09:28,147 - INFO - Predictions completed for DecisionTree on Original
+2025-04-18 20:09:28,149 - INFO - Prediction distribution for DecisionTree on Original: {'Graduate': 443, 'Dropout': 280, 'Enrolled': 162}
+2025-04-18 20:09:28,177 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-04-18 20:09:28,177 - INFO - Evaluating DecisionTree on CTGAN...
+2025-04-18 20:09:28,181 - INFO - Predictions completed for DecisionTree on CTGAN
+2025-04-18 20:09:28,182 - INFO - Prediction distribution for DecisionTree on CTGAN: {'Graduate': 381, 'Dropout': 359, 'Enrolled': 145}
+2025-04-18 20:09:28,213 - INFO - Computed 8 metric(s) for DecisionTree on CTGAN
+2025-04-18 20:09:28,213 - INFO - Evaluating DecisionTree on TVAE...
+2025-04-18 20:09:28,216 - INFO - Predictions completed for DecisionTree on TVAE
+2025-04-18 20:09:28,217 - INFO - Prediction distribution for DecisionTree on TVAE: {'Graduate': 488, 'Dropout': 397}
+2025-04-18 20:09:28,222 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 20:09:28,228 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 20:09:28,233 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-04-18 20:09:28,245 - INFO - Computed 8 metric(s) for DecisionTree on TVAE
+2025-04-18 20:09:28,246 - INFO - Evaluating DecisionTree on GaussianCopula...
+2025-04-18 20:09:28,249 - INFO - Predictions completed for DecisionTree on GaussianCopula
+2025-04-18 20:09:28,251 - INFO - Prediction distribution for DecisionTree on GaussianCopula: {'Dropout': 419, 'Graduate': 339, 'Enrolled': 127}
+2025-04-18 20:09:28,276 - INFO - Computed 8 metric(s) for DecisionTree on GaussianCopula
+2025-04-18 20:09:28,276 - INFO - Evaluating DecisionTree on Anonymous...
+2025-04-18 20:09:28,280 - INFO - Predictions completed for DecisionTree on Anonymous
+2025-04-18 20:09:28,280 - INFO - Prediction distribution for DecisionTree on Anonymous: {'Graduate': 441, 'Dropout': 293, 'Enrolled': 151}
+2025-04-18 20:09:28,313 - INFO - Computed 8 metric(s) for DecisionTree on Anonymous
+2025-04-18 20:09:28,319 - INFO - Evaluation completed for all models.
+2025-04-18 20:09:28,319 - INFO - Model evaluation completed in 1.55 seconds.
+2025-04-18 20:09:28,325 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest']
+2025-04-18 20:09:28,325 - INFO - Model Training and Evaluation completed.
+2025-04-18 20:09:29,034 - INFO -  Visualizations saved.
+2025-04-18 20:09:29,035 - INFO -  Benchmarking Completed. Results saved in output folder.

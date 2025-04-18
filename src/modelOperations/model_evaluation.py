@@ -69,6 +69,7 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets, 
 
                 if logger and X_test_aligned.isnull().values.any():
                     logger.warning(f" [WARNING] NaNs found in X_test_aligned for model {model_name} on {dataset_name}")
+                    
 
                 # Predict using aligned test set
                 #y_pred = model.predict(X_test_aligned)
@@ -76,6 +77,7 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets, 
                     y_pred = model.predict(X_test_aligned)
                     if logger:
                         logger.info(f"Predictions completed for {model_name} on {dataset_name}")
+                        logger.info(f"Prediction distribution for {model_name} on {dataset_name}: {pd.Series(y_pred).value_counts().to_dict()}") 
                     if len(set(y_pred)) < 2 and logger:
                         logger.warning(f" [WARNING] :{model_name} on {dataset_name} predicted only one class: {set(y_pred)}")
                 except Exception as e:
@@ -95,7 +97,9 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets, 
                         if logger:
                             logger.warning(f" Failed to compute {metric_name} for {model_name} on {dataset_name}: {e}")
 
-
+                if logger:
+                    logger.info(f"Computed {len(metric_values)} metric(s) for {model_name} on {dataset_name}") 
+                    
                 # Store results
                 model_results.append({
                     'Model': model_name,
@@ -104,6 +108,7 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets, 
                 })
 
     results_df = pd.DataFrame(model_results).sort_values(by=["Model", "Dataset"])
+    
 
     # Print results
     print("\nModel Performance Comparison:")
@@ -112,4 +117,3 @@ def evaluate_models(trained_models, X_test_original, y_test_original, datasets, 
         logger.info("Evaluation completed for all models.")
 
     return results_df
-
