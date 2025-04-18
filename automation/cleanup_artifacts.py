@@ -9,6 +9,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, "automation"))
 from delete_remnant_synthesizers import delete_synthesizers
 from delete_all_remnant_datasets import delete_csv_files_in_folders
 from delete_all_pycache import delete_pycache_and_pyc_files
+from delete_remnant_encoders import delete_encoders
 
 def run_cleanup():
     print("Starting full cleanup of artifacts and datasets...\n")
@@ -16,6 +17,7 @@ def run_cleanup():
     delete_csv_files_in_folders()
     delete_synthesizers()
     delete_pycache_and_pyc_files()
+    delete_encoders()
     
     print("\n Full cleanup completed.")
 
