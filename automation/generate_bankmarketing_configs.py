@@ -1,26 +1,19 @@
 # -*- coding: utf-8 -*-
 """
-Auto- generate 47 YAML benchmark configurations for the **bankMarketing**
-dataset (45 211 rows, 17 columns) according to the April 17 2025 plan:
+Auto-generate benchmark configurations for the **bankMarketing** dataset.
 
-1. **Anonymization + Hybrid** (21 cfgs)
+1. Anonymization + Hybrid:
    * suppression_limit ∈ [0.01, 0.03, 0.05, 0.08, 0.10, 0.25, 0.50]
-   * k_anonymity     ∈ [5, 10, 20]   (l_diversity = 2)
-   * Hybrid enabled with **all 3 synthesizers**:
-     - TVAE (100 epochs)
-     - CTGAN (100 epochs)
-     - GaussianCopula (no epochs)
+   * k_anonymity ∈ [5, 10, 20] (l_diversity = 2)
+   * Hybrid enabled with CTGAN, TVAE (epochs = 300), GaussianCopula
 
-2. **Synthetic - only** (25 cfgs)
-   * epochs ∈ [20, 40, 60, 80, 100]
-   * row_multipliers ∈ [1, 2, 3, 5, 10]  → custom_generated_rows.
-   * Only CTGAN & TVAE enabled (GaussianCopula skipped)
+2. Synthetic-only:
+   * epochs ∈ [50,100,200,300,500,750,1000]
+   * row_multiplier ∈ [1, 2, 3, 5, 10]
+   * GaussianCopula also tested at epoch == 300 using same multiplier
 
-3. **Evaluation baseline** (1 cfg)
-   * Fixed test_size = 0.20 with both anonymization & synthesis enabled.
-
-Outputs land in `configs/generated_configs/bankMarketing/` plus
-`variation_info.yaml`.
+3. Evaluation baseline:
+   * Fixed test_size = 0.20 with both anonymization & synthesis enabled
 """
 
 import itertools
@@ -40,9 +33,9 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 SUPPRESSION = [0.01, 0.03, 0.05, 0.08, 0.10, 0.25, 0.50]
 K_ANON = [5, 10, 20]
 L_DIV = 2
-HYBRID_EPOCHS = 100  # Epochs for CTGAN and TVAE in hybrid
+HYBRID_EPOCHS = 300
 
-EPOCHS = [20, 40, 60, 80, 100]
+EPOCHS = [50, 100, 200, 300, 500, 750, 1000]
 MULTIPLIERS = [1, 2, 3, 5, 10]
 TEST_SIZE_FIXED = 0.20
 
@@ -75,32 +68,44 @@ def generate():
         cfg["hybrid"].update({"enable_hybrid": True, "synthesizer": "TVAE"})
         cfg["synthesis"]["enable_synthetic_generation"] = False
 
-        # Enable all 3 synthesizers for hybrid reuse
         for name, s in cfg["synthesis"]["synthesizers"].items():
             s["enabled"] = name in {"TVAE", "CTGAN", "GaussianCopula"}
             if name in {"TVAE", "CTGAN"}:
                 s.setdefault("params", {})["epochs"] = HYBRID_EPOCHS
+            elif name == "GaussianCopula" and "params" in s:
+                s["params"].pop("epochs", None)  # ✅ Only remove epochs
 
         fname = f"{DATASET}_anon_k{k}_sl{str(sl).replace('.', 'p')}_l2"
         save(cfg, fname)
         total += 1
 
-    # ---- 2) Synthetic-only ------------------------------------------------
+    # ---- 2) Synthetic-only -----------------------------------------------
     for ep, mult in itertools.product(EPOCHS, MULTIPLIERS):
         cfg = load(BASE_CFG)
         cfg["dataset"]["test_size"] = TEST_SIZE_FIXED
         cfg["anonymization"]["enable_anonymization"] = False
         cfg["synthesis"]["enable_synthetic_generation"] = True
 
-        gen_rows = int(rows * mult)
         for name, s in cfg["synthesis"]["synthesizers"].items():
             if name in {"CTGAN", "TVAE"}:
                 s["enabled"] = True
                 s.setdefault("params", {})["epochs"] = ep
-                s["num_generated_rows"] = "custom"
-                s["custom_generated_rows"] = gen_rows
+                s["num_generated_rows"] = "multiple"
+                s["row_multiplier"] = mult
+                s.pop("custom_generated_rows", None)
+
+            elif name == "GaussianCopula":
+                if ep == 300:
+                    s["enabled"] = True
+                    s["num_generated_rows"] = "multiple"
+                    s["row_multiplier"] = mult
+                    if "params" in s:
+                        s["params"].pop("epochs", None)
+                    s.pop("custom_generated_rows", None)
+                else:
+                    s["enabled"] = False
             else:
-                s["enabled"] = False  # Skip GaussianCopula
+                s["enabled"] = False
 
         fname = f"{DATASET}_synth_ep{ep}_rows{mult}x"
         save(cfg, fname)
@@ -118,12 +123,12 @@ def generate():
     # ---- variation_info ---------------------------------------------------
     info = {
         "dataset": DATASET,
-        "varied_parameters": ["suppression_limit", "k_anonymity", "epochs", "custom_generated_rows"],
+        "varied_parameters": ["suppression_limit", "k_anonymity", "epochs", "row_multiplier"],
         "values": {
             "suppression_limit": SUPPRESSION,
             "k_anonymity": K_ANON,
             "epochs": EPOCHS,
-            "custom_generated_rows": MULTIPLIERS,
+            "row_multiplier": MULTIPLIERS,
         },
     }
     with open(OUT_DIR / "variation_info.yaml", "w", encoding="utf-8") as f:

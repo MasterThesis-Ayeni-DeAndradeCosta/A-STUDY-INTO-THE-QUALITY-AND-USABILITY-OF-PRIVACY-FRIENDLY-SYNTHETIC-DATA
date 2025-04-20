@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Auto-generate 47 YAML benchmark configurations for the **bankMarketing**
+Auto-generate 47 YAML benchmark configurations for the **crimeData**
 dataset (45 211 rows, 17 columns) according to the April 17 2025 plan:
 
 1. **Anonymization + Hybrid** (21 cfgs)
@@ -16,7 +16,7 @@ dataset (45 211 rows, 17 columns) according to the April 17 2025 plan:
 3. **Evaluation baseline** (1 cfg)
    * Fixed test_size = 0.20 with both anonymization & synthesis enabled.
 
-Outputs land in `configs/generated_configs/bankMarketing/` plus
+Outputs land in `configs/generated_configs/crimeData/` plus
 `variation_info.yaml`.
 """
 
@@ -25,7 +25,7 @@ from pathlib import Path
 import yaml
 import pandas as pd
 
-DATASET = "bankMarketing"
+DATASET = "crimeData"
 BASE_CFG = f"configs/base/{DATASET}_config.yaml"
 if not Path(BASE_CFG).is_file():
     BASE_CFG = "configs/benchmark_config.yaml"
@@ -34,13 +34,13 @@ ORIG_DATA = f"datasets/original/{DATASET}.csv"
 OUT_DIR = Path(f"configs/generated_configs/{DATASET}")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-SUPPRESSION = [0.01, 0.03, 0.05, 0.08, 0.10, 0.25, 0.50]
+SUPPRESSION = [0.01, 0.1, 0.2, 0.3, 0.5]
 K_ANON = [5, 10, 20]
 L_DIV = 2
-HYBRID_EPOCHS = 100
+HYBRID_EPOCHS = 300
 
-EPOCHS = [20, 40, 60, 80, 100]
-MULTIPLIERS = [1, 2, 3, 5, 10]
+EPOCHS = [100, 300, 500, 1000]
+MULTIPLIERS = []  # unused
 TEST_SIZE_FIXED = 0.20
 
 def load(path):
@@ -77,29 +77,38 @@ def generate():
             s["enabled"] = name in {"TVAE", "CTGAN", "GaussianCopula"}
             if name in {"TVAE", "CTGAN"}:
                 s.setdefault("params", {})["epochs"] = HYBRID_EPOCHS
+            elif name == "GaussianCopula" and "params" in s:
+                s["params"].pop("epochs", None)
 
         fname = f"{DATASET}_anon_k{k}_sl{str(sl).replace('.', 'p')}_l2"
         save(cfg, fname)
         total += 1
 
+    
     # ---- 2) Synthetic-only --------------------------------------------
-    for ep, mult in itertools.product(EPOCHS, MULTIPLIERS):
+    for ep in EPOCHS:
         cfg = load(BASE_CFG)
         cfg["dataset"]["test_size"] = TEST_SIZE_FIXED
         cfg["anonymization"]["enable_anonymization"] = False
         cfg["synthesis"]["enable_synthetic_generation"] = True
 
-        gen_rows = int(rows * mult)
+        gen_rows = rows  # Use full dataset size
+
         for name, s in cfg["synthesis"]["synthesizers"].items():
             if name in {"CTGAN", "TVAE"}:
                 s["enabled"] = True
-                s.setdefault("params", {})["epochs"] = ep
-                s["num_generated_rows"] = "custom"
+                if name != "GaussianCopula":
+                    s.setdefault("params", {})["epochs"] = ep
+                s["num_generated_rows"] = "same_as_original"
+                s["custom_generated_rows"] = gen_rows
+            elif name == "GaussianCopula" and ep == 300:
+                s["enabled"] = True
+                s["num_generated_rows"] = "same_as_original"
                 s["custom_generated_rows"] = gen_rows
             else:
-                s["enabled"] = False  # GaussianCopula excluded
+                s["enabled"] = False
 
-        fname = f"{DATASET}_synth_ep{ep}_rows{mult}x"
+        fname = f"{DATASET}_synth_ep{ep}"
         save(cfg, fname)
         total += 1
 
@@ -108,7 +117,7 @@ def generate():
     base_cfg["dataset"]["test_size"] = TEST_SIZE_FIXED
     base_cfg["anonymization"]["enable_anonymization"] = True
     base_cfg["synthesis"]["enable_synthetic_generation"] = True
-    fname = f"{DATASET}_testsize_02"
+    fname = f"{DATASET}_testsize_04"
     save(base_cfg, fname)
     total += 1
 

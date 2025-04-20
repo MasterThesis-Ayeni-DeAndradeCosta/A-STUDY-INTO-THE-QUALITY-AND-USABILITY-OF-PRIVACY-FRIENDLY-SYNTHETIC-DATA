@@ -9,14 +9,14 @@ preprocessing:
   encoding_type: "binary" # Type of encoding, currently only "binary" is supported
 
 synthesis:
-  enable_synthetic_generation: false # Set to false to skip # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
+  enable_synthetic_generation: true # Set to false to skip # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
   synthesizers:
     CTGAN:
       enabled: true
       import_path: "sdv.single_table"
       class_name: "CTGANSynthesizer"
       params:
-        epochs: 50
+        epochs: 300
       num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
       custom_generated_rows: 10000 # Only used if num_generated_rows is "custom"
       row_multiplier: 8
@@ -25,7 +25,7 @@ synthesis:
       import_path: "sdv.single_table"
       class_name: "TVAESynthesizer"
       params:
-        epochs: 50
+        epochs: 300
       num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
       custom_generated_rows: 5000 # TVAE will generate 5000 rows
       row_multiplier: 8
@@ -71,7 +71,7 @@ anonymization:
 
   hierarchy_config: {}
   models:
-    k_anonymity: 5
+    k_anonymity: 10
     l_diversity:
       attribute: "balance"
       value: 2
