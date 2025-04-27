@@ -1,0 +1,61 @@
+Synthetic Data Generation Report
+==================================================
+
+Synthesizer: CTGAN
+Generated Rows: 72336
+Columns: 17
+Sample (First 5 Rows):
+ age         job marital education default  balance housing loan  contact  day month  duration  campaign  pdays  previous poutcome  y
+27.0 blue-collar  single  tertiary      no      181     yes   no  unknown 16.0   may     180.0       2.0     -1         0  unknown no
+32.0 blue-collar married  tertiary      no      207     yes   no cellular 16.0   may     180.0       2.0     -1         0  unknown no
+37.0 blue-collar married secondary      no      773     yes   no  unknown 16.0   may     180.0       2.0     -1         0  unknown no
+37.0 blue-collar  single secondary      no     1486     yes   no cellular 16.0   may     180.0       2.0    130         3  unknown no
+32.0 blue-collar married secondary      no     1250     yes   no cellular 16.0   may     180.0       2.0     -1         0  unknown no
+
+Quality Metrics for CTGAN:
+- Overall Quality Score: 0.9295
+
+==================================================
+
+Synthesizer: TVAE
+Generated Rows: 72336
+Columns: 17
+Sample (First 5 Rows):
+ age         job marital education default  balance housing loan  contact  day month  duration  campaign  pdays  previous poutcome   y
+47.0 blue-collar married secondary      no       53     yes   no cellular 16.0   may     180.0       2.0     -1         0  unknown  no
+37.0 blue-collar married secondary      no      952     yes   no cellular 16.0   may     180.0       2.0    155         1  unknown yes
+32.0 blue-collar married  tertiary      no     1947     yes   no cellular 16.0   may     180.0       2.0     -1         0  unknown  no
+47.0 blue-collar married secondary      no      698     yes   no cellular 16.0   may     180.0       2.0    179         3  unknown yes
+42.0 blue-collar  single secondary      no     2770     yes   no cellular 16.0   may     180.0       2.0     -1         0  unknown  no
+
+Quality Metrics for TVAE:
+- Overall Quality Score: 0.9501
+
+==================================================
+
+
+🔍 Data Distribution Comparison
+==================================================
+
+📌 Original Data Summary:
+                age       balance      day  duration  campaign         pdays      previous
+count  36168.000000   36168.00000  36168.0   36168.0   36168.0  36168.000000  36168.000000
+mean      39.800957    1365.49342     16.0     180.0       2.0     40.157238      0.581730
+std       10.499174    3068.54350      0.0       0.0       0.0    100.162614      2.408766
+min       17.000000   -8019.00000     16.0     180.0       2.0     -1.000000      0.000000
+25%       32.000000      74.00000     16.0     180.0       2.0     -1.000000      0.000000
+50%       37.000000     451.00000     16.0     180.0       2.0     -1.000000      0.000000
+75%       47.000000    1430.25000     16.0     180.0       2.0     -1.000000      0.000000
+max       82.000000  102127.00000     16.0     180.0       2.0    871.000000    275.000000
+
+📌 Synthetic Data (CTGAN) Summary:
+                age       balance      day  duration  campaign         pdays      previous
+count  72336.000000  72336.000000  72336.0   72336.0   72336.0  72336.000000  72336.000000
+mean      40.252806   1243.759926     16.0     180.0       2.0     38.913846      0.426828
+std       10.403707   2299.401444      0.0       0.0       0.0     94.591163      1.213486
+min       22.000000  -2832.000000     16.0     180.0       2.0     -1.000000      0.000000
+25%       32.000000     56.000000     16.0     180.0       2.0     -1.000000      0.000000
+50%       37.000000    348.000000     16.0     180.0       2.0     -1.000000      0.000000
+75%       47.000000   1524.000000     16.0     180.0       2.0     -1.000000      0.000000
+max       71.000000  29657.000000     16.0     180.0       2.0    494.000000     11.000000
+

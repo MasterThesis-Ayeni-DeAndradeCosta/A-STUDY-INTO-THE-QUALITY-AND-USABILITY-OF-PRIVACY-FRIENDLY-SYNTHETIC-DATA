@@ -1,31 +1,32 @@
-import yaml
+import os
 
-def extract_config_metadata(config_path, dataset_type):
-    with open(config_path, "r") as f:
-        config = yaml.safe_load(f)
+def parse_rows_generated_from_log(log_path):
+    """
+    Parses the benchmark.log file and returns the true number of rows generated,
+    either for pure synthetic models or for hybrid models.
+    """
+    rows_generated = None
 
-    meta = {}
-    meta["test_size"] = config.get("dataset", {}).get("test_size")
+    try:
+        if os.path.exists(log_path):
+            with open(log_path, "r") as f:
+                for line in f:
+                    # Pure synthetic models (CTGAN, TVAE, GaussianCopula)
+                    if "completed:" in line and any(synth in line for synth in ["CTGAN", "TVAE", "GaussianCopula"]):
+                        parts = line.strip().split()
+                        for i, word in enumerate(parts):
+                            if word == "completed:":
+                                rows_generated = int(parts[i + 1])
+                                break
+                    # Hybrid models (CTGAN_HYBRID, TVAE_HYBRID, GaussianCopula_HYBRID)
+                    elif "Generated hybrid dataset shape" in line:
+                        parts = line.strip().split()
+                        for p in parts:
+                            if p.startswith("(") and "," in p:
+                                rows_generated = int(p.split(",")[0].replace("(", ""))
+                                break
+    except Exception as e:
+        print(f"⚠️ Failed to parse {log_path}: {e}")
+        rows_generated = None
 
-    if dataset_type == "Anonymous":
-        anon = config.get("anonymization", {})
-        meta["k_anonymity"] = anon.get("models", {}).get("k_anonymity")
-        meta["l_diversity"] = anon.get("models", {}).get("l_diversity", {}).get("value")
-        meta["suppression_limit"] = anon.get("suppression_limit")
-        meta["epochs"] = None
-        meta["custom_generated_rows"] = None
-
-    elif dataset_type in ["CTGAN", "TVAE", "GaussianCopula", "Hybrid"]:
-        meta["k_anonymity"] = meta["l_diversity"] = meta["suppression_limit"] = None
-        for synth_name, synth_conf in config.get("synthesis", {}).get("synthesizers", {}).items():
-            if synth_conf.get("enabled"):
-                meta["epochs"] = synth_conf.get("params", {}).get("epochs")
-                meta["custom_generated_rows"] = synth_conf.get("custom_generated_rows")
-                break
-        else:
-            meta["epochs"] = meta["custom_generated_rows"] = None
-    else:
-        meta["k_anonymity"] = meta["l_diversity"] = meta["suppression_limit"] = None
-        meta["epochs"] = meta["custom_generated_rows"] = None
-
-    return meta
+    return rows_generated

@@ -1,6 +1,7 @@
 import os
 import yaml
 import pandas as pd
+from analysis.metadata_utils import parse_rows_generated_from_log
 
 def extract_config_metadata(config_path, dataset_type):
     with open(config_path, "r") as f:
@@ -17,7 +18,7 @@ def extract_config_metadata(config_path, dataset_type):
         meta["epochs"] = None
         meta["custom_generated_rows"] = None
 
-    elif dataset_type in ["CTGAN", "TVAE", "GaussianCopula", "Hybrid"]:
+    elif dataset_type in ["CTGAN", "TVAE", "GaussianCopula"]:
         meta["k_anonymity"] = None
         meta["l_diversity"] = None
         meta["suppression_limit"] = None
@@ -30,6 +31,23 @@ def extract_config_metadata(config_path, dataset_type):
         else:
             meta["epochs"] = None
             meta["custom_generated_rows"] = None
+
+    elif dataset_type == "Hybrid":  # NEW separated Hybrid block
+        # Fetch both anonymization and synthesis
+        anon = config.get("anonymization", {})
+        meta["k_anonymity"] = anon.get("models", {}).get("k_anonymity")
+        meta["l_diversity"] = anon.get("models", {}).get("l_diversity", {}).get("value")
+        meta["suppression_limit"] = anon.get("suppression_limit")
+
+        for synth_name, synth_conf in config.get("synthesis", {}).get("synthesizers", {}).items():
+            if synth_conf.get("enabled"):
+                meta["epochs"] = synth_conf.get("params", {}).get("epochs")
+                meta["custom_generated_rows"] = synth_conf.get("custom_generated_rows")
+                break
+        else:
+            meta["epochs"] = None
+            meta["custom_generated_rows"] = None
+
 
     else:
         meta["k_anonymity"] = None
@@ -74,12 +92,34 @@ def generate_combined_df(batch_folder):
             print(f"⚠️ Empty results for {run_name}")
             continue
 
+         # --- NEW: Parse real rows generated ---
+        log_path = os.path.join(run_path, "benchmark.log")
+        rows_generated = parse_rows_generated_from_log(log_path)
+
+        # First set rows_generated_at_runtime to None
+        df_part["rows_generated_at_runtime"] = None
+
+        # Only assign rows_generated for non-Anonymous datasets
+        if rows_generated:
+            for ds_type in df_part["Dataset"].unique():
+                if ds_type != "Anonymous":
+                    df_part.loc[df_part["Dataset"] == ds_type, "rows_generated_at_runtime"] = rows_generated
+        # --- END NEW ---
+
         # Attach metadata per dataset
         for ds_type in df_part["Dataset"].unique():
-            meta = extract_config_metadata(config_path, ds_type)
+            # --- Recognice Hybrida ---
+            if ds_type.endswith("_HYBRID"):
+                dataset_type = "Hybrid"  # treat any *_HYBRID as "Hybrid"
+            else:
+                dataset_type = ds_type
+            # ------------
+
+            meta = extract_config_metadata(config_path, dataset_type)
             for k,v in meta.items():
                 df_part.loc[df_part["Dataset"]==ds_type, k] = v
 
+        
         all_dfs.append(df_part)
 
     if not all_dfs:
@@ -88,6 +128,11 @@ def generate_combined_df(batch_folder):
 
     combined_df = pd.concat(all_dfs, ignore_index=True)
     print(f"✅ Combined {len(all_dfs)} runs.")
+     # --- NEW: Move rows_generated_at_runtime to the last column ---
+    cols = [col for col in combined_df.columns if col != "rows_generated_at_runtime"] + ["rows_generated_at_runtime"]
+    combined_df = combined_df[cols]
+    # --- END NEW ---
+
     return combined_df
 
 

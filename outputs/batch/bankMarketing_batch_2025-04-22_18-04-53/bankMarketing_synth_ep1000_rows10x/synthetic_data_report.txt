@@ -1,0 +1,215 @@
+Synthetic Data Generation Report
+==================================================
+
+Synthesizer: CTGAN
+Generated Rows: 361680
+Columns: 32
+Sample (First 5 Rows):
+ age  job_0  job_1  job_2  job_3  marital_0  marital_1  education_0  education_1  education_2  default_0  default_1  balance  housing_0  housing_1  loan_0  loan_1  contact_0  contact_1  day  month_0  month_1  month_2  month_3  duration  campaign  pdays  previous  poutcome_0  poutcome_1  poutcome_2   y
+27.0      0      1      0      0          1          0            0            0            1          0          1      285          1          0       0       1          1          1 16.0        0        1        1        0     180.0       2.0     -1         0           0           0           1  no
+22.0      0      1      0      0          1          1            0            0            1          0          1      928          1          0       0       1          1          0 16.0        0        1        1        0     180.0       2.0     92        10           0           0           1  no
+32.0      0      1      0      0          1          0            0            1            0          0          1      418          1          0       0       1          1          0 16.0        0        1        1        0     180.0       2.0     -1         0           0           0           1 yes
+42.0      0      1      0      0          1          1            0            1            0          0          1      163          1          0       0       1          1          0 16.0        0        1        1        0     180.0       2.0     -1         0           0           0           1  no
+47.0      0      1      0      0          1          1            0            0            0          0          1      290          1          0       0       1          1          0 16.0        0        1        1        0     180.0       2.0     -1         0           0           0           1  no
+
+Quality Metrics for CTGAN:
+- Overall Quality Score: 0.9612
+
+==================================================
+
+Synthesizer: TVAE
+Generated Rows: 361680
+Columns: 32
+Sample (First 5 Rows):
+ age  job_0  job_1  job_2  job_3  marital_0  marital_1  education_0  education_1  education_2  default_0  default_1  balance  housing_0  housing_1  loan_0  loan_1  contact_0  contact_1  day  month_0  month_1  month_2  month_3  duration  campaign  pdays  previous  poutcome_0  poutcome_1  poutcome_2  y
+47.0      0      1      0      0          1          1            0            0            1          0          1        4          1          0       0       1          1          1 16.0        0        1        1        0     180.0       2.0     -1         0           0           0           1 no
+57.0      0      1      0      0          0          1            1            0            0          0          1     4395          1          0       0       1          1          0 16.0        0        1        1        0     180.0       2.0     -1         0           0           0           1 no
+57.0      0      1      0      0          1          0            0            1            1          0          1       86          1          0       0       1          1          1 16.0        0        1        1        0     180.0       2.0     -1         0           0           0           1 no
+37.0      0      1      0      0          1          1            0            0            1          0          1     2707          1          0       0       1          1          0 16.0        0        1        1        0     180.0       2.0     25         3           0           0           1 no
+37.0      0      1      0      0          1          1            0            0            1          0          1     -109          1          0       0       1          1          0 16.0        0        1        1        0     180.0       2.0     -1         0           0           0           1 no
+
+Quality Metrics for TVAE:
+- Overall Quality Score: 0.9749
+
+==================================================
+
+
+🔍 Data Distribution Comparison
+==================================================
+
+📌 Original Data Summary:
+                age    job_0    job_1    job_2    job_3     marital_0     marital_1  ...  duration  campaign         pdays      previous  poutcome_0  poutcome_1  poutcome_2
+count  36168.000000  36168.0  36168.0  36168.0  36168.0  36168.000000  36168.000000  ...   36168.0   36168.0  36168.000000  36168.000000     36168.0     36168.0     36168.0
+mean      39.800957      0.0      1.0      0.0      0.0      0.886253      0.718121  ...     180.0       2.0     40.157238      0.581730         0.0         0.0         1.0
+std       10.499174      0.0      0.0      0.0      0.0      0.317508      0.449921  ...       0.0       0.0    100.162614      2.408766         0.0         0.0         0.0
+min       17.000000      0.0      1.0      0.0      0.0      0.000000      0.000000  ...     180.0       2.0     -1.000000      0.000000         0.0         0.0         1.0
+25%       32.000000      0.0      1.0      0.0      0.0      1.000000      0.000000  ...     180.0       2.0     -1.000000      0.000000         0.0         0.0         1.0
+50%       37.000000      0.0      1.0      0.0      0.0      1.000000      1.000000  ...     180.0       2.0     -1.000000      0.000000         0.0         0.0         1.0
+75%       47.000000      0.0      1.0      0.0      0.0      1.000000      1.000000  ...     180.0       2.0     -1.000000      0.000000         0.0         0.0         1.0
+max       82.000000      0.0      1.0      0.0      0.0      1.000000      1.000000  ...     180.0       2.0    871.000000    275.000000         0.0         0.0         1.0
+
+[8 rows x 31 columns]
+
+📌 Synthetic Data (CTGAN) Summary:
+                 age     job_0     job_1     job_2     job_3      marital_0      marital_1  ...  duration  campaign          pdays       previous  poutcome_0  poutcome_1  poutcome_2
+count  361680.000000  361680.0  361680.0  361680.0  361680.0  361680.000000  361680.000000  ...  361680.0  361680.0  361680.000000  361680.000000    361680.0    361680.0    361680.0
+mean       39.856741       0.0       1.0       0.0       0.0       0.948452       0.750141  ...     180.0       2.0      28.288794       0.580425         0.0         0.0         1.0
+std        10.157253       0.0       0.0       0.0       0.0       0.221114       0.432932  ...       0.0       0.0      75.084625       1.653321         0.0         0.0         0.0
+min        21.000000       0.0       1.0       0.0       0.0       0.000000       0.000000  ...     180.0       2.0      -1.000000       0.000000         0.0         0.0         1.0
+25%        32.000000       0.0       1.0       0.0       0.0       1.000000       1.000000  ...     180.0       2.0      -1.000000       0.000000         0.0         0.0         1.0
+50%        37.000000       0.0       1.0       0.0       0.0       1.000000       1.000000  ...     180.0       2.0      -1.000000       0.000000         0.0         0.0         1.0
+75%        47.000000       0.0       1.0       0.0       0.0       1.000000       1.000000  ...     180.0       2.0      -1.000000       0.000000         0.0         0.0         1.0
+max        72.000000       0.0       1.0       0.0       0.0       1.000000       1.000000  ...     180.0       2.0     503.000000      15.000000         0.0         0.0         1.0
+
+[8 rows x 31 columns]
+
+⚠ Mean Differences (Synthetic - Original):
+age              0.055784
+job_0            0.000000
+job_1            0.000000
+job_2            0.000000
+job_3            0.000000
+marital_0        0.062199
+marital_1        0.032020
+education_0      0.012901
+education_1     -0.037024
+education_2     -0.060352
+default_0        0.000000
+default_1        0.000000
+balance       -345.128470
+housing_0        0.000000
+housing_1        0.000000
+loan_0           0.000000
+loan_1           0.000000
+contact_0       -0.024320
+contact_1        0.014322
+day              0.000000
+month_0          0.000000
+month_1          0.000000
+month_2          0.000000
+month_3          0.000000
+duration         0.000000
+campaign         0.000000
+pdays          -11.868444
+previous        -0.001305
+poutcome_0       0.000000
+poutcome_1       0.000000
+poutcome_2       0.000000
+dtype: float64
+
+⚠ Standard Deviation Differences (Synthetic - Original):
+age              -0.341920
+job_0             0.000000
+job_1             0.000000
+job_2             0.000000
+job_3             0.000000
+marital_0        -0.096394
+marital_1        -0.016989
+education_0       0.027823
+education_1      -0.005585
+education_2       0.017333
+default_0         0.000000
+default_1         0.000000
+balance       -1043.775228
+housing_0         0.000000
+housing_1         0.000000
+loan_0            0.000000
+loan_1            0.000000
+contact_0         0.038983
+contact_1         0.004224
+day               0.000000
+month_0           0.000000
+month_1           0.000000
+month_2           0.000000
+month_3           0.000000
+duration          0.000000
+campaign          0.000000
+pdays           -25.077989
+previous         -0.755445
+poutcome_0        0.000000
+poutcome_1        0.000000
+poutcome_2        0.000000
+dtype: float64
+
+📌 Synthetic Data (TVAE) Summary:
+                 age     job_0     job_1     job_2     job_3      marital_0      marital_1  ...  duration  campaign          pdays       previous  poutcome_0  poutcome_1  poutcome_2
+count  361680.000000  361680.0  361680.0  361680.0  361680.0  361680.000000  361680.000000  ...  361680.0  361680.0  361680.000000  361680.000000    361680.0    361680.0    361680.0
+mean       39.370778       0.0       1.0       0.0       0.0       0.875116       0.717347  ...     180.0       2.0      36.156434       0.469487         0.0         0.0         1.0
+std         9.732888       0.0       0.0       0.0       0.0       0.330588       0.450290  ...       0.0       0.0      91.185793       1.463369         0.0         0.0         0.0
+min        17.000000       0.0       1.0       0.0       0.0       0.000000       0.000000  ...     180.0       2.0      -1.000000       0.000000         0.0         0.0         1.0
+25%        32.000000       0.0       1.0       0.0       0.0       1.000000       0.000000  ...     180.0       2.0      -1.000000       0.000000         0.0         0.0         1.0
+50%        37.000000       0.0       1.0       0.0       0.0       1.000000       1.000000  ...     180.0       2.0      -1.000000       0.000000         0.0         0.0         1.0
+75%        47.000000       0.0       1.0       0.0       0.0       1.000000       1.000000  ...     180.0       2.0      -1.000000       0.000000         0.0         0.0         1.0
+max        79.000000       0.0       1.0       0.0       0.0       1.000000       1.000000  ...     180.0       2.0     763.000000      18.000000         0.0         0.0         1.0
+
+[8 rows x 31 columns]
+
+⚠ Mean Differences (Synthetic - Original):
+age             -0.430179
+job_0            0.000000
+job_1            0.000000
+job_2            0.000000
+job_3            0.000000
+marital_0       -0.011137
+marital_1       -0.000774
+education_0      0.003282
+education_1      0.010266
+education_2      0.003940
+default_0        0.000000
+default_1        0.000000
+balance       -151.887508
+housing_0        0.000000
+housing_1        0.000000
+loan_0           0.000000
+loan_1           0.000000
+contact_0        0.010648
+contact_1       -0.009785
+day              0.000000
+month_0          0.000000
+month_1          0.000000
+month_2          0.000000
+month_3          0.000000
+duration         0.000000
+campaign         0.000000
+pdays           -4.000805
+previous        -0.112243
+poutcome_0       0.000000
+poutcome_1       0.000000
+poutcome_2       0.000000
+dtype: float64
+
+⚠ Standard Deviation Differences (Synthetic - Original):
+age             -0.766286
+job_0            0.000000
+job_1            0.000000
+job_2            0.000000
+job_3            0.000000
+marital_0        0.013080
+marital_1        0.000369
+education_0      0.007514
+education_1      0.001042
+education_2     -0.001430
+default_0        0.000000
+default_1        0.000000
+balance       -966.707980
+housing_0        0.000000
+housing_1        0.000000
+loan_0           0.000000
+loan_1           0.000000
+contact_0       -0.020008
+contact_1       -0.003166
+day              0.000000
+month_0          0.000000
+month_1          0.000000
+month_2          0.000000
+month_3          0.000000
+duration         0.000000
+campaign         0.000000
+pdays           -8.976821
+previous        -0.945396
+poutcome_0       0.000000
+poutcome_1       0.000000
+poutcome_2       0.000000
+dtype: float64
+
+==================================================

@@ -1,0 +1,1106 @@
+2025-04-20 21:30:20,156 - INFO - Loaded config file: configs/generated_configs/crimeData/crimeData_anon_k5_sl0p01_l2.yaml
+2025-04-20 21:30:20,156 - INFO -  Benchmarking started for dataset: crimeData
+2025-04-20 21:30:20,156 - INFO - Using dataset path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/original/crimeData.csv
+2025-04-20 21:30:20,156 - INFO - Target column: Status, separator: ','
+2025-04-20 21:30:20,156 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False, enable_hybrid = True, enable_utility = True, delete_after_evaluation = True
+2025-04-20 21:30:20,156 - INFO - Running preprocessing...
+2025-04-20 21:30:20,160 - INFO - [PREPROCESSING] No preprocessed files found. Starting full preprocessing pipeline...
+2025-04-20 21:30:22,130 - INFO - [PREPROCESSING] Missing value handling strategy: 'drop' applied.
+2025-04-20 21:30:22,372 - INFO - [PREPROCESSING] Split data into train (260402 rows) and test (65101 rows). Test size: 0.2
+2025-04-20 21:30:29,198 - INFO -  [PREPROCESSING] Saved raw train set to: datasets/train/crimeData_train_raw.csv
+2025-04-20 21:30:29,199 - INFO -  [PREPROCESSING] Saved encoder to: artifacts/crimeData_binary_encoder.pkl
+2025-04-20 21:30:29,199 - INFO -  [PREPROCESSING]Saved encoded train set to: datasets/cleaned/crimeData_cleaned.csv
+2025-04-20 21:30:29,199 - INFO -  [PREPROCESSING] Saved encoded test set to: datasets/test/crimeData_test_set.csv
+2025-04-20 21:30:29,199 - INFO - [PREPROCESSING] run_preprocessing finished executing.
+2025-04-20 21:30:29,602 - INFO - Preprocessing completed. Rows before: 974477, after: 260402
+2025-04-20 21:30:29,602 - INFO - Preprocessed data saved to: outputs/batch/crimeData_batch_2025-04-20_21-30-12/crimeData_anon_k5_sl0p01_l2/preprocessing_report.txt
+2025-04-20 21:30:29,602 - INFO - enable_anonymization = True
+2025-04-20 21:30:29,603 - INFO - Starting Anonymization Pipeline with output path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k5_l2_sup01_anonymized.csv.......
+2025-04-20 21:30:29,609 - INFO -  [ANONYMIZATION] Executing run_anonymization, config_path : configs/generated_configs/crimeData/crimeData_anon_k5_sl0p01_l2.yaml...........
+2025-04-20 21:30:29,609 - INFO -  [ANONYMIZATION] Using JAR file at /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/bin/anonymARXij.jar to anonymize the dataset.
+2025-04-20 21:30:46,945 - INFO -  [ANONYMIZATION] Anonimized file saved to : /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k5_l2_sup01_anonymized.csv
+2025-04-20 21:30:46,945 - INFO -  [ANONYMIZATION] Java anonymization completed successfully.
+2025-04-20 21:30:46,945 - INFO -  [ANONYMIZATION] Java STDOUT:
+📄 Java received config path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/configs/generated_configs/crimeData/crimeData_anon_k5_sl0p01_l2.yaml
+🔹 Loading config from: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/configs/generated_configs/crimeData/crimeData_anon_k5_sl0p01_l2.yaml
+Loading config from: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/configs/generated_configs/crimeData/crimeData_anon_k5_sl0p01_l2.yaml
+📂 Dataset Path (from args): /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/train/crimeData_train_raw.csv
+🔹 Dataset Separator: ,
+🔹 Suppression Limit: 0.01
+
+🔹 Configured Attributes:
+  ✅ Quasi-Identifier: Victim_age
+  ✅ Quasi-Identifier: Victim_sex
+  ✅ Quasi-Identifier: Victim_descent
+  ✅ Quasi-Identifier: LAT
+  ✅ Quasi-Identifier: LON
+  ✅ Sensitive Attribute: Crime_Code
+  ✅ Insensitive Attribute: DR_NO
+  ✅ Insensitive Attribute: Time_occured
+  ✅ Insensitive Attribute: Premis
+  ✅ Insensitive Attribute: Weapon
+  ✅ Insensitive Attribute: Status
+
+🔹 Defined Hierarchies:
+  ✅ Victim_sex -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies/hierarchy_sex.csv
+  ✅ Victim_descent -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies/hierarchy_descent.csv
+  ✅ Victim_age -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies/hierarchy_age_4.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies/hierarchy_sex.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies/hierarchy_descent.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies/hierarchy_age_4.csv
+Interval-based hierarchy created for: LAT
+Interval-based hierarchy created for: LON
+🔹 Privacy Models Configured
+📂 Anonymized Output Path (from args): /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k5_l2_sup01_anonymized.csv
+📂 Anonymized Output Path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k5_l2_sup01_anonymized.csv
+✅ Anonymization completed. Output saved to: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k5_l2_sup01_anonymized.csv
+Anonymized Data Quality Metrics:
+ - Ambiguity: 0.99376178384258
+ - AECS: 0.9990542536820255
+ - Discernibility: 0.9883067097776335
+ - Granularity: 0.5831931147420754
+ - MSE: 0.0011622291233436277
+ - Non-Uniform Entropy: 0.2959143704346695
+ - Precision: 0.894421701830247
+ - Record-level SE: 0.7405330751667614
+Equivalence Class Statistics:
+ - Number of Classes: 1046
+ - Average Class Size: 247.40726577437857
+Suppression Statistics:
+ - Suppressed Records: 1614
+ - Suppression Percentage: 0.62%
+2025-04-20 21:30:46,945 - INFO - Anonymized data saved to: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k5_l2_sup01_anonymized.csv
+2025-04-20 21:30:50,775 - INFO - Anonymous data report saved at: outputs/batch/crimeData_batch_2025-04-20_21-30-12/crimeData_anon_k5_sl0p01_l2/anonymous_data_report.txt
+2025-04-20 21:30:50,775 - INFO -  [POSTPROCESSING] Postprocessing anonymized data: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k5_l2_sup01_anonymized.csv
+2025-04-20 21:30:52,040 - INFO -  [POSTPROCESSING] Loaded anonymized data: (260402, 12)
+2025-04-20 21:30:54,728 - INFO -  [POSTPROCESSING] Loaded fallback maps from training data. Categorical cols: 7, Numeric cols: 5
+2025-04-20 21:30:54,729 - INFO -  [POSTPROCESSING] Normalizing anonymized data using ARX artifact cleaning and fallback values.
+2025-04-20 21:31:05,456 - INFO -  [POSTPROCESSING] Normalized anonymized data saved to: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k5_l2_sup01_anonymized_processed.csv
+2025-04-20 21:31:06,232 - INFO -  [POSTPROCESSING] Binary Encoding applied to anonymized data. Encoded shape: (260402, 47)
+2025-04-20 21:31:10,898 - INFO -  [POSTPROCESSING] Encoded anonymized dataset saved to: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k5_l2_sup01_anonymized_encoded.csv
+2025-04-20 21:31:10,898 - INFO -  [POSTPROCESSING] Encoding map generated for anonymized data: 0 original categorical columns.
+2025-04-20 21:31:10,909 - INFO - Postprocessing report saved at: outputs/batch/crimeData_batch_2025-04-20_21-30-12/crimeData_anon_k5_sl0p01_l2/postprocessing_report.txt
+2025-04-20 21:31:10,910 - INFO - enable_synthetic_generation = False
+2025-04-20 21:31:10,910 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-04-20 21:31:10,910 - INFO - Running Hybrid Pipeline...
+2025-04-20 21:31:10,910 - INFO -  [HYBRID] Executing run_hybrid...
+2025-04-20 21:31:10,911 - INFO -  [HYBRID] Looking for encoded anonymized data in /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k5_l2_sup01_anonymized_encoded.csv
+2025-04-20 21:31:10,911 - INFO -  [HYBRID ] Loaded cached encoded anonymous data from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k5_l2_sup01_anonymized_encoded.csv
+2025-04-20 21:31:11,904 - INFO -  [HYBRID] Starting synthetic generation for hybrid pipeline...
+2025-04-20 21:31:11,904 - INFO - Executing run_synthetic.....
+2025-04-20 21:31:11,904 - INFO - [SYNTHETIC PIPELINE] executing run_synthetic for crimeData_k5_l2_sup01...
+2025-04-20 21:31:11,905 - INFO - [SYNTHETIC] Processing dataset: crimeData_k5_l2_sup01
+2025-04-20 21:31:11,905 - INFO - [SYNTHETIC] Original dataset size: 260402 rows
+2025-04-20 21:31:13,078 - INFO - Detected metadata:
+2025-04-20 21:31:13,079 - INFO - {
+    "primary_key": "DR_NO",
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "DR_NO": {
+            "sdtype": "id"
+        },
+        "Date_occured_0": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_1": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_2": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_3": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_4": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_5": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_6": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_7": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_8": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_9": {
+            "sdtype": "categorical"
+        },
+        "Date_occured_10": {
+            "sdtype": "categorical"
+        },
+        "Time_occured": {
+            "sdtype": "numerical"
+        },
+        "Crime_Code_0": {
+            "sdtype": "categorical"
+        },
+        "Crime_Code_1": {
+            "sdtype": "categorical"
+        },
+        "Crime_Code_2": {
+            "sdtype": "categorical"
+        },
+        "Crime_Code_3": {
+            "sdtype": "categorical"
+        },
+        "Crime_Code_4": {
+            "sdtype": "categorical"
+        },
+        "Crime_Code_5": {
+            "sdtype": "categorical"
+        },
+        "Crime_Code_6": {
+            "sdtype": "categorical"
+        },
+        "Victim_age": {
+            "sdtype": "numerical"
+        },
+        "Victim_sex_1": {
+            "sdtype": "categorical"
+        },
+        "Victim_sex_2": {
+            "sdtype": "categorical"
+        },
+        "Victim_descent_0": {
+            "sdtype": "categorical"
+        },
+        "Victim_descent_1": {
+            "sdtype": "categorical"
+        },
+        "Victim_descent_2": {
+            "sdtype": "categorical"
+        },
+        "Victim_descent_3": {
+            "sdtype": "categorical"
+        },
+        "Victim_descent_4": {
+            "sdtype": "categorical"
+        },
+        "Premis_0": {
+            "sdtype": "categorical"
+        },
+        "Premis_1": {
+            "sdtype": "categorical"
+        },
+        "Premis_2": {
+            "sdtype": "categorical"
+        },
+        "Premis_3": {
+            "sdtype": "categorical"
+        },
+        "Premis_4": {
+            "sdtype": "categorical"
+        },
+        "Premis_5": {
+            "sdtype": "categorical"
+        },
+        "Premis_6": {
+            "sdtype": "categorical"
+        },
+        "Premis_7": {
+            "sdtype": "categorical"
+        },
+        "Premis_8": {
+            "sdtype": "categorical"
+        },
+        "Weapon_0": {
+            "sdtype": "categorical"
+        },
+        "Weapon_1": {
+            "sdtype": "categorical"
+        },
+        "Weapon_2": {
+            "sdtype": "categorical"
+        },
+        "Weapon_3": {
+            "sdtype": "categorical"
+        },
+        "Weapon_4": {
+            "sdtype": "categorical"
+        },
+        "Weapon_5": {
+            "sdtype": "categorical"
+        },
+        "Weapon_6": {
+            "sdtype": "categorical"
+        },
+        "Status": {
+            "sdtype": "categorical"
+        },
+        "LAT": {
+            "sdtype": "numerical"
+        },
+        "LON": {
+            "sdtype": "numerical"
+        }
+    }
+}
+2025-04-20 21:31:13,084 - INFO - [SYNTHETIC] Preparing synthesizer: CTGAN
+2025-04-20 21:31:13,084 - INFO - [SYNTHETIC] Params from config: {'epochs': 300}
+2025-04-20 21:31:13,088 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-20 21:31:13,088 - INFO - [SYNTHETIC] Training new CTGAN synthesizer from scratch...
+2025-04-20 21:31:13,088 - WARNING - [FutureWarning] The 'SingleTableMetadata' is deprecated. Please use the new 'Metadata' class for synthesizers. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sdv/single_table/base.py:119)
+2025-04-20 21:31:13,089 - WARNING - [UserWarning] We strongly recommend saving the metadata using 'save_to_json' for replicability in future SDV versions. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sdv/single_table/base.py:104)
+2025-04-20 21:31:13,099 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 20, 21, 31, 13, 99831), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_1a5429047ea34aaa8a5afe56e1d38361'}
+2025-04-20 21:31:13,100 - INFO - [SYNTHETIC] CTGAN initialized with epochs: 300
+2025-04-20 21:31:13,100 - INFO - [SYNTHETIC] Training parameters for CTGAN: {}
+2025-04-20 21:31:13,100 - INFO - [SYNTHETIC] fitting CTGAN 
+2025-04-20 21:31:13,100 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 20, 21, 31, 13, 100324), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_1a5429047ea34aaa8a5afe56e1d38361', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 47}
+2025-04-20 21:31:13,980 - INFO - Fitting table  metadata
+2025-04-20 21:31:14,021 - INFO - Fitting formatters for table 
+2025-04-20 21:31:14,037 - INFO - No rounding scheme detected for column 'LAT'. Data will not be rounded.
+2025-04-20 21:31:14,039 - INFO - No rounding scheme detected for column 'LON'. Data will not be rounded.
+2025-04-20 21:31:14,040 - INFO - Fitting constraints for table 
+2025-04-20 21:31:14,040 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-20 21:31:14,044 - INFO - Fitting HyperTransformer for table 
+2025-04-20 21:31:14,315 - INFO - No rounding scheme detected for column 'LAT'. Data will not be rounded.
+2025-04-20 21:31:14,550 - INFO - No rounding scheme detected for column 'LON'. Data will not be rounded.
+2025-04-20 21:31:15,409 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 20, 21, 31, 15, 409020), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_1a5429047ea34aaa8a5afe56e1d38361', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 46}
+2025-04-20 21:31:15,826 - INFO - Guidance: There are no missing values in column Time_occured. Extra column not created.
+2025-04-20 21:35:45,320 - INFO - Guidance: There are no missing values in column Victim_age. Extra column not created.
+2025-04-20 21:39:05,163 - INFO - Guidance: There are no missing values in column LAT. Extra column not created.
+2025-04-20 21:39:11,980 - INFO - Guidance: There are no missing values in column LON. Extra column not created.
+2025-04-21 05:06:38,641 - INFO - [SYNTHETIC] Fitting complete for CTGAN. Duration: 27325.54 seconds.
+2025-04-21 05:06:38,642 - INFO - [SYNTHETIC] CONFIRMATION CTGAN actually trained with epochs = 300
+2025-04-21 05:06:38,643 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 21, 5, 6, 38, 643013), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_1a5429047ea34aaa8a5afe56e1d38361'}
+2025-04-21 05:06:38,721 - INFO - [SYNTHETIC] CTGAN trained and saved.
+2025-04-21 05:06:38,722 - INFO - [SYNTHETIC] Preparing synthesizer: GaussianCopula
+2025-04-21 05:06:38,722 - INFO - [SYNTHETIC] Params from config: {}
+2025-04-21 05:06:38,722 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-21 05:06:38,722 - INFO - [SYNTHETIC] Training new GaussianCopula synthesizer from scratch...
+2025-04-21 05:06:38,723 - WARNING - [FutureWarning] The 'SingleTableMetadata' is deprecated. Please use the new 'Metadata' class for synthesizers. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sdv/single_table/base.py:119)
+2025-04-21 05:06:38,727 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 21, 5, 6, 38, 727582), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.18.0_401e1ce829ad415da3f18933a6ac5855'}
+2025-04-21 05:06:38,727 - INFO - [SYNTHETIC] fitting GaussianCopula 
+2025-04-21 05:06:38,727 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 21, 5, 6, 38, 727777), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.18.0_401e1ce829ad415da3f18933a6ac5855', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 47}
+2025-04-21 05:06:39,060 - INFO - Fitting table  metadata
+2025-04-21 05:06:39,178 - INFO - Fitting formatters for table 
+2025-04-21 05:06:39,189 - INFO - No rounding scheme detected for column 'LAT'. Data will not be rounded.
+2025-04-21 05:06:39,191 - INFO - No rounding scheme detected for column 'LON'. Data will not be rounded.
+2025-04-21 05:06:39,191 - INFO - Fitting constraints for table 
+2025-04-21 05:06:39,191 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-21 05:06:39,208 - INFO - Fitting HyperTransformer for table 
+2025-04-21 05:07:01,282 - INFO - No rounding scheme detected for column 'LAT'. Data will not be rounded.
+2025-04-21 05:07:01,400 - INFO - No rounding scheme detected for column 'LON'. Data will not be rounded.
+2025-04-21 05:07:24,320 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 21, 5, 7, 24, 320497), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.18.0_401e1ce829ad415da3f18933a6ac5855', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 46}
+2025-04-21 05:07:24,334 - INFO - Fitting GaussianMultivariate(distribution="{'Date_occured_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Date_occured_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Date_occured_2': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Date_occured_3': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Date_occured_4': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Date_occured_5': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Date_occured_6': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Date_occured_7': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Date_occured_8': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Date_occured_9': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Date_occured_10': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Time_occured': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Crime_Code_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Crime_Code_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Crime_Code_2': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Crime_Code_3': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Crime_Code_4': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Crime_Code_5': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Crime_Code_6': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Victim_age': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Victim_sex_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Victim_sex_2': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Victim_descent_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Victim_descent_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Victim_descent_2': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Victim_descent_3': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Victim_descent_4': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Premis_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Premis_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Premis_2': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Premis_3': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Premis_4': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Premis_5': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Premis_6': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Premis_7': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Premis_8': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Weapon_0': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Weapon_1': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Weapon_2': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Weapon_3': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Weapon_4': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Weapon_5': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Weapon_6': <class 'copulas.univariate.beta.BetaUnivariate'>, 'Status': <class 'copulas.univariate.beta.BetaUnivariate'>, 'LAT': <class 'copulas.univariate.beta.BetaUnivariate'>, 'LON': <class 'copulas.univariate.beta.BetaUnivariate'>}")
+2025-04-21 05:09:30,972 - INFO - [SYNTHETIC] Fitting complete for GaussianCopula. Duration: 172.24 seconds.
+2025-04-21 05:09:30,972 - WARNING - [SYNTHETIC] WARNING Could not determine actual epochs used for GaussianCopula
+2025-04-21 05:09:30,973 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 21, 5, 9, 30, 972998), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.18.0_401e1ce829ad415da3f18933a6ac5855'}
+2025-04-21 05:09:31,005 - INFO - [SYNTHETIC] GaussianCopula trained and saved.
+2025-04-21 05:09:31,005 - INFO - [SYNTHETIC] Preparing synthesizer: TVAE
+2025-04-21 05:09:31,005 - INFO - [SYNTHETIC] Params from config: {'epochs': 300}
+2025-04-21 05:09:31,006 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-04-21 05:09:31,006 - INFO - [SYNTHETIC] Training new TVAE synthesizer from scratch...
+2025-04-21 05:09:31,007 - WARNING - [FutureWarning] The 'SingleTableMetadata' is deprecated. Please use the new 'Metadata' class for synthesizers. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sdv/single_table/base.py:119)
+2025-04-21 05:09:31,011 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 4, 21, 5, 9, 31, 11466), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_7e6002113aed450bac14d0e0cd2665f8'}
+2025-04-21 05:09:31,011 - INFO - [SYNTHETIC] TVAE initialized with epochs: 300
+2025-04-21 05:09:31,012 - INFO - [SYNTHETIC] Training parameters for TVAE: {}
+2025-04-21 05:09:31,012 - INFO - [SYNTHETIC] fitting TVAE 
+2025-04-21 05:09:31,012 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 4, 21, 5, 9, 31, 12737), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_7e6002113aed450bac14d0e0cd2665f8', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 47}
+2025-04-21 05:09:31,597 - INFO - Fitting table  metadata
+2025-04-21 05:09:31,617 - INFO - Fitting formatters for table 
+2025-04-21 05:09:31,625 - INFO - No rounding scheme detected for column 'LAT'. Data will not be rounded.
+2025-04-21 05:09:31,628 - INFO - No rounding scheme detected for column 'LON'. Data will not be rounded.
+2025-04-21 05:09:31,629 - INFO - Fitting constraints for table 
+2025-04-21 05:09:31,629 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-04-21 05:09:31,634 - INFO - Fitting HyperTransformer for table 
+2025-04-21 05:09:31,820 - INFO - No rounding scheme detected for column 'LAT'. Data will not be rounded.
+2025-04-21 05:09:31,883 - INFO - No rounding scheme detected for column 'LON'. Data will not be rounded.
+2025-04-21 05:09:32,338 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 4, 21, 5, 9, 32, 338257), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_7e6002113aed450bac14d0e0cd2665f8', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 46}
+2025-04-21 05:09:32,425 - INFO - Guidance: There are no missing values in column Time_occured. Extra column not created.
+2025-04-21 05:11:32,641 - INFO - Guidance: There are no missing values in column Victim_age. Extra column not created.
+2025-04-21 05:14:15,225 - INFO - Guidance: There are no missing values in column LAT. Extra column not created.
+2025-04-21 05:14:20,666 - INFO - Guidance: There are no missing values in column LON. Extra column not created.
+2025-04-21 06:03:21,254 - INFO - [SYNTHETIC] Fitting complete for TVAE. Duration: 3230.24 seconds.
+2025-04-21 06:03:21,254 - INFO - [SYNTHETIC] CONFIRMATION TVAE actually trained with epochs = 300
+2025-04-21 06:03:21,254 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 4, 21, 6, 3, 21, 254877), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_7e6002113aed450bac14d0e0cd2665f8'}
+2025-04-21 06:03:21,322 - INFO - [SYNTHETIC] TVAE trained and saved.
+2025-04-21 06:03:21,322 - INFO - [SYNTHETIC] Using CTGAN to generate 260402 rows...
+2025-04-21 06:04:27,498 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 21, 6, 3, 21, 322920), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_1a5429047ea34aaa8a5afe56e1d38361', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 47}
+2025-04-21 06:04:27,499 - INFO - [SYNTHETIC] CTGAN completed: 260402 rows generated.
+2025-04-21 06:04:27,508 - INFO - [SYNTHETIC] Target class distribution for CTGAN: {'Invest Cont': 148537, 'Adult Other': 65309, 'Adult Arrest': 43137, 'Juv Arrest': 2052, 'Juv Other': 1239, 'UNK': 128}
+2025-04-21 06:04:27,508 - INFO - [SYNTHETIC] Using GaussianCopula to generate 260402 rows...
+2025-04-21 06:04:41,646 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 21, 6, 4, 27, 508648), 'SYNTHESIZER CLASS NAME': 'GaussianCopulaSynthesizer', 'SYNTHESIZER ID': 'GaussianCopulaSynthesizer_1.18.0_401e1ce829ad415da3f18933a6ac5855', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 47}
+2025-04-21 06:04:41,646 - INFO - [SYNTHETIC] GaussianCopula completed: 260402 rows generated.
+2025-04-21 06:04:41,656 - INFO - [SYNTHETIC] Target class distribution for GaussianCopula: {'Invest Cont': 153060, 'Adult Other': 61914, 'Adult Arrest': 42474, 'Juv Arrest': 1933, 'Juv Other': 1018, 'UNK': 3}
+2025-04-21 06:04:41,656 - INFO - [SYNTHETIC] Using TVAE to generate 260402 rows...
+2025-04-21 06:04:48,219 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 4, 21, 6, 4, 41, 656821), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_7e6002113aed450bac14d0e0cd2665f8', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 260402, 'TOTAL NUMBER OF COLUMNS': 47}
+2025-04-21 06:04:48,219 - INFO - [SYNTHETIC] TVAE completed: 260402 rows generated.
+2025-04-21 06:04:48,227 - INFO - [SYNTHETIC] Target class distribution for TVAE: {'Invest Cont': 138180, 'Adult Other': 67022, 'Adult Arrest': 54706, 'Juv Arrest': 354, 'Juv Other': 140}
+2025-04-21 06:04:48,230 - INFO - [SYNTHETIC PIPELINE] Synthetic Data Generation Completed.
+2025-04-21 06:04:48,230 - INFO - [SYNTHETIC PIPELINE] Synthesizers used: ['CTGAN', 'GaussianCopula', 'TVAE']
+2025-04-21 06:04:48,230 - INFO - [SYNTHETIC PIPELINE] Evaluating synthetic dataset generated by CTGAN...
+2025-04-21 06:04:48,230 - INFO - [SYNTHETIC EVAL] Real data columns     (47): ['DR_NO', 'Date_occured_0', 'Date_occured_1', 'Date_occured_2', 'Date_occured_3', 'Date_occured_4', 'Date_occured_5', 'Date_occured_6', 'Date_occured_7', 'Date_occured_8', 'Date_occured_9', 'Date_occured_10', 'Time_occured', 'Crime_Code_0', 'Crime_Code_1', 'Crime_Code_2', 'Crime_Code_3', 'Crime_Code_4', 'Crime_Code_5', 'Crime_Code_6', 'Victim_age', 'Victim_sex_1', 'Victim_sex_2', 'Victim_descent_0', 'Victim_descent_1', 'Victim_descent_2', 'Victim_descent_3', 'Victim_descent_4', 'Premis_0', 'Premis_1', 'Premis_2', 'Premis_3', 'Premis_4', 'Premis_5', 'Premis_6', 'Premis_7', 'Premis_8', 'Weapon_0', 'Weapon_1', 'Weapon_2', 'Weapon_3', 'Weapon_4', 'Weapon_5', 'Weapon_6', 'Status', 'LAT', 'LON']
+2025-04-21 06:04:48,231 - INFO - [SYNTHETIC EVAL] Synthetic data columns (47): ['DR_NO', 'Date_occured_0', 'Date_occured_1', 'Date_occured_2', 'Date_occured_3', 'Date_occured_4', 'Date_occured_5', 'Date_occured_6', 'Date_occured_7', 'Date_occured_8', 'Date_occured_9', 'Date_occured_10', 'Time_occured', 'Crime_Code_0', 'Crime_Code_1', 'Crime_Code_2', 'Crime_Code_3', 'Crime_Code_4', 'Crime_Code_5', 'Crime_Code_6', 'Victim_age', 'Victim_sex_1', 'Victim_sex_2', 'Victim_descent_0', 'Victim_descent_1', 'Victim_descent_2', 'Victim_descent_3', 'Victim_descent_4', 'Premis_0', 'Premis_1', 'Premis_2', 'Premis_3', 'Premis_4', 'Premis_5', 'Premis_6', 'Premis_7', 'Premis_8', 'Weapon_0', 'Weapon_1', 'Weapon_2', 'Weapon_3', 'Weapon_4', 'Weapon_5', 'Weapon_6', 'Status', 'LAT', 'LON']
+2025-04-21 06:04:48,231 - INFO - [SYNTHETIC EVAL] Metadata columns      (47): ['DR_NO', 'Date_occured_0', 'Date_occured_1', 'Date_occured_2', 'Date_occured_3', 'Date_occured_4', 'Date_occured_5', 'Date_occured_6', 'Date_occured_7', 'Date_occured_8', 'Date_occured_9', 'Date_occured_10', 'Time_occured', 'Crime_Code_0', 'Crime_Code_1', 'Crime_Code_2', 'Crime_Code_3', 'Crime_Code_4', 'Crime_Code_5', 'Crime_Code_6', 'Victim_age', 'Victim_sex_1', 'Victim_sex_2', 'Victim_descent_0', 'Victim_descent_1', 'Victim_descent_2', 'Victim_descent_3', 'Victim_descent_4', 'Premis_0', 'Premis_1', 'Premis_2', 'Premis_3', 'Premis_4', 'Premis_5', 'Premis_6', 'Premis_7', 'Premis_8', 'Weapon_0', 'Weapon_1', 'Weapon_2', 'Weapon_3', 'Weapon_4', 'Weapon_5', 'Weapon_6', 'Status', 'LAT', 'LON']
+2025-04-21 06:04:48,231 - INFO - [SYNTHETIC EVAL] Shape — Real: (260402, 47), Synthetic: (260402, 47)
+2025-04-21 06:04:48,231 - INFO - [SYNTHETIC EVAL] Metadata structure:
+{
+  "primary_key": "DR_NO",
+  "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+  "columns": {
+    "DR_NO": {
+      "sdtype": "id"
+    },
+    "Date_occured_0": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_1": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_2": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_3": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_4": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_5": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_6": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_7": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_8": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_9": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_10": {
+      "sdtype": "categorical"
+    },
+    "Time_occured": {
+      "sdtype": "numerical"
+    },
+    "Crime_Code_0": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_1": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_2": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_3": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_4": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_5": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_6": {
+      "sdtype": "categorical"
+    },
+    "Victim_age": {
+      "sdtype": "numerical"
+    },
+    "Victim_sex_1": {
+      "sdtype": "categorical"
+    },
+    "Victim_sex_2": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_0": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_1": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_2": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_3": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_4": {
+      "sdtype": "categorical"
+    },
+    "Premis_0": {
+      "sdtype": "categorical"
+    },
+    "Premis_1": {
+      "sdtype": "categorical"
+    },
+    "Premis_2": {
+      "sdtype": "categorical"
+    },
+    "Premis_3": {
+      "sdtype": "categorical"
+    },
+    "Premis_4": {
+      "sdtype": "categorical"
+    },
+    "Premis_5": {
+      "sdtype": "categorical"
+    },
+    "Premis_6": {
+      "sdtype": "categorical"
+    },
+    "Premis_7": {
+      "sdtype": "categorical"
+    },
+    "Premis_8": {
+      "sdtype": "categorical"
+    },
+    "Weapon_0": {
+      "sdtype": "categorical"
+    },
+    "Weapon_1": {
+      "sdtype": "categorical"
+    },
+    "Weapon_2": {
+      "sdtype": "categorical"
+    },
+    "Weapon_3": {
+      "sdtype": "categorical"
+    },
+    "Weapon_4": {
+      "sdtype": "categorical"
+    },
+    "Weapon_5": {
+      "sdtype": "categorical"
+    },
+    "Weapon_6": {
+      "sdtype": "categorical"
+    },
+    "Status": {
+      "sdtype": "categorical"
+    },
+    "LAT": {
+      "sdtype": "numerical"
+    },
+    "LON": {
+      "sdtype": "numerical"
+    }
+  }
+}
+2025-04-21 06:05:04,181 - INFO - [SYNTHETIC PIPELINE] Evaluating synthetic dataset generated by GaussianCopula...
+2025-04-21 06:05:04,181 - INFO - [SYNTHETIC EVAL] Real data columns     (47): ['DR_NO', 'Date_occured_0', 'Date_occured_1', 'Date_occured_2', 'Date_occured_3', 'Date_occured_4', 'Date_occured_5', 'Date_occured_6', 'Date_occured_7', 'Date_occured_8', 'Date_occured_9', 'Date_occured_10', 'Time_occured', 'Crime_Code_0', 'Crime_Code_1', 'Crime_Code_2', 'Crime_Code_3', 'Crime_Code_4', 'Crime_Code_5', 'Crime_Code_6', 'Victim_age', 'Victim_sex_1', 'Victim_sex_2', 'Victim_descent_0', 'Victim_descent_1', 'Victim_descent_2', 'Victim_descent_3', 'Victim_descent_4', 'Premis_0', 'Premis_1', 'Premis_2', 'Premis_3', 'Premis_4', 'Premis_5', 'Premis_6', 'Premis_7', 'Premis_8', 'Weapon_0', 'Weapon_1', 'Weapon_2', 'Weapon_3', 'Weapon_4', 'Weapon_5', 'Weapon_6', 'Status', 'LAT', 'LON']
+2025-04-21 06:05:04,181 - INFO - [SYNTHETIC EVAL] Synthetic data columns (47): ['DR_NO', 'Date_occured_0', 'Date_occured_1', 'Date_occured_2', 'Date_occured_3', 'Date_occured_4', 'Date_occured_5', 'Date_occured_6', 'Date_occured_7', 'Date_occured_8', 'Date_occured_9', 'Date_occured_10', 'Time_occured', 'Crime_Code_0', 'Crime_Code_1', 'Crime_Code_2', 'Crime_Code_3', 'Crime_Code_4', 'Crime_Code_5', 'Crime_Code_6', 'Victim_age', 'Victim_sex_1', 'Victim_sex_2', 'Victim_descent_0', 'Victim_descent_1', 'Victim_descent_2', 'Victim_descent_3', 'Victim_descent_4', 'Premis_0', 'Premis_1', 'Premis_2', 'Premis_3', 'Premis_4', 'Premis_5', 'Premis_6', 'Premis_7', 'Premis_8', 'Weapon_0', 'Weapon_1', 'Weapon_2', 'Weapon_3', 'Weapon_4', 'Weapon_5', 'Weapon_6', 'Status', 'LAT', 'LON']
+2025-04-21 06:05:04,181 - INFO - [SYNTHETIC EVAL] Metadata columns      (47): ['DR_NO', 'Date_occured_0', 'Date_occured_1', 'Date_occured_2', 'Date_occured_3', 'Date_occured_4', 'Date_occured_5', 'Date_occured_6', 'Date_occured_7', 'Date_occured_8', 'Date_occured_9', 'Date_occured_10', 'Time_occured', 'Crime_Code_0', 'Crime_Code_1', 'Crime_Code_2', 'Crime_Code_3', 'Crime_Code_4', 'Crime_Code_5', 'Crime_Code_6', 'Victim_age', 'Victim_sex_1', 'Victim_sex_2', 'Victim_descent_0', 'Victim_descent_1', 'Victim_descent_2', 'Victim_descent_3', 'Victim_descent_4', 'Premis_0', 'Premis_1', 'Premis_2', 'Premis_3', 'Premis_4', 'Premis_5', 'Premis_6', 'Premis_7', 'Premis_8', 'Weapon_0', 'Weapon_1', 'Weapon_2', 'Weapon_3', 'Weapon_4', 'Weapon_5', 'Weapon_6', 'Status', 'LAT', 'LON']
+2025-04-21 06:05:04,181 - INFO - [SYNTHETIC EVAL] Shape — Real: (260402, 47), Synthetic: (260402, 47)
+2025-04-21 06:05:04,182 - INFO - [SYNTHETIC EVAL] Metadata structure:
+{
+  "primary_key": "DR_NO",
+  "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+  "columns": {
+    "DR_NO": {
+      "sdtype": "id"
+    },
+    "Date_occured_0": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_1": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_2": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_3": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_4": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_5": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_6": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_7": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_8": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_9": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_10": {
+      "sdtype": "categorical"
+    },
+    "Time_occured": {
+      "sdtype": "numerical"
+    },
+    "Crime_Code_0": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_1": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_2": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_3": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_4": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_5": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_6": {
+      "sdtype": "categorical"
+    },
+    "Victim_age": {
+      "sdtype": "numerical"
+    },
+    "Victim_sex_1": {
+      "sdtype": "categorical"
+    },
+    "Victim_sex_2": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_0": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_1": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_2": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_3": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_4": {
+      "sdtype": "categorical"
+    },
+    "Premis_0": {
+      "sdtype": "categorical"
+    },
+    "Premis_1": {
+      "sdtype": "categorical"
+    },
+    "Premis_2": {
+      "sdtype": "categorical"
+    },
+    "Premis_3": {
+      "sdtype": "categorical"
+    },
+    "Premis_4": {
+      "sdtype": "categorical"
+    },
+    "Premis_5": {
+      "sdtype": "categorical"
+    },
+    "Premis_6": {
+      "sdtype": "categorical"
+    },
+    "Premis_7": {
+      "sdtype": "categorical"
+    },
+    "Premis_8": {
+      "sdtype": "categorical"
+    },
+    "Weapon_0": {
+      "sdtype": "categorical"
+    },
+    "Weapon_1": {
+      "sdtype": "categorical"
+    },
+    "Weapon_2": {
+      "sdtype": "categorical"
+    },
+    "Weapon_3": {
+      "sdtype": "categorical"
+    },
+    "Weapon_4": {
+      "sdtype": "categorical"
+    },
+    "Weapon_5": {
+      "sdtype": "categorical"
+    },
+    "Weapon_6": {
+      "sdtype": "categorical"
+    },
+    "Status": {
+      "sdtype": "categorical"
+    },
+    "LAT": {
+      "sdtype": "numerical"
+    },
+    "LON": {
+      "sdtype": "numerical"
+    }
+  }
+}
+2025-04-21 06:05:27,311 - INFO - [SYNTHETIC PIPELINE] Evaluating synthetic dataset generated by TVAE...
+2025-04-21 06:05:27,312 - INFO - [SYNTHETIC EVAL] Real data columns     (47): ['DR_NO', 'Date_occured_0', 'Date_occured_1', 'Date_occured_2', 'Date_occured_3', 'Date_occured_4', 'Date_occured_5', 'Date_occured_6', 'Date_occured_7', 'Date_occured_8', 'Date_occured_9', 'Date_occured_10', 'Time_occured', 'Crime_Code_0', 'Crime_Code_1', 'Crime_Code_2', 'Crime_Code_3', 'Crime_Code_4', 'Crime_Code_5', 'Crime_Code_6', 'Victim_age', 'Victim_sex_1', 'Victim_sex_2', 'Victim_descent_0', 'Victim_descent_1', 'Victim_descent_2', 'Victim_descent_3', 'Victim_descent_4', 'Premis_0', 'Premis_1', 'Premis_2', 'Premis_3', 'Premis_4', 'Premis_5', 'Premis_6', 'Premis_7', 'Premis_8', 'Weapon_0', 'Weapon_1', 'Weapon_2', 'Weapon_3', 'Weapon_4', 'Weapon_5', 'Weapon_6', 'Status', 'LAT', 'LON']
+2025-04-21 06:05:27,312 - INFO - [SYNTHETIC EVAL] Synthetic data columns (47): ['DR_NO', 'Date_occured_0', 'Date_occured_1', 'Date_occured_2', 'Date_occured_3', 'Date_occured_4', 'Date_occured_5', 'Date_occured_6', 'Date_occured_7', 'Date_occured_8', 'Date_occured_9', 'Date_occured_10', 'Time_occured', 'Crime_Code_0', 'Crime_Code_1', 'Crime_Code_2', 'Crime_Code_3', 'Crime_Code_4', 'Crime_Code_5', 'Crime_Code_6', 'Victim_age', 'Victim_sex_1', 'Victim_sex_2', 'Victim_descent_0', 'Victim_descent_1', 'Victim_descent_2', 'Victim_descent_3', 'Victim_descent_4', 'Premis_0', 'Premis_1', 'Premis_2', 'Premis_3', 'Premis_4', 'Premis_5', 'Premis_6', 'Premis_7', 'Premis_8', 'Weapon_0', 'Weapon_1', 'Weapon_2', 'Weapon_3', 'Weapon_4', 'Weapon_5', 'Weapon_6', 'Status', 'LAT', 'LON']
+2025-04-21 06:05:27,312 - INFO - [SYNTHETIC EVAL] Metadata columns      (47): ['DR_NO', 'Date_occured_0', 'Date_occured_1', 'Date_occured_2', 'Date_occured_3', 'Date_occured_4', 'Date_occured_5', 'Date_occured_6', 'Date_occured_7', 'Date_occured_8', 'Date_occured_9', 'Date_occured_10', 'Time_occured', 'Crime_Code_0', 'Crime_Code_1', 'Crime_Code_2', 'Crime_Code_3', 'Crime_Code_4', 'Crime_Code_5', 'Crime_Code_6', 'Victim_age', 'Victim_sex_1', 'Victim_sex_2', 'Victim_descent_0', 'Victim_descent_1', 'Victim_descent_2', 'Victim_descent_3', 'Victim_descent_4', 'Premis_0', 'Premis_1', 'Premis_2', 'Premis_3', 'Premis_4', 'Premis_5', 'Premis_6', 'Premis_7', 'Premis_8', 'Weapon_0', 'Weapon_1', 'Weapon_2', 'Weapon_3', 'Weapon_4', 'Weapon_5', 'Weapon_6', 'Status', 'LAT', 'LON']
+2025-04-21 06:05:27,312 - INFO - [SYNTHETIC EVAL] Shape — Real: (260402, 47), Synthetic: (260402, 47)
+2025-04-21 06:05:27,312 - INFO - [SYNTHETIC EVAL] Metadata structure:
+{
+  "primary_key": "DR_NO",
+  "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+  "columns": {
+    "DR_NO": {
+      "sdtype": "id"
+    },
+    "Date_occured_0": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_1": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_2": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_3": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_4": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_5": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_6": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_7": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_8": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_9": {
+      "sdtype": "categorical"
+    },
+    "Date_occured_10": {
+      "sdtype": "categorical"
+    },
+    "Time_occured": {
+      "sdtype": "numerical"
+    },
+    "Crime_Code_0": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_1": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_2": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_3": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_4": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_5": {
+      "sdtype": "categorical"
+    },
+    "Crime_Code_6": {
+      "sdtype": "categorical"
+    },
+    "Victim_age": {
+      "sdtype": "numerical"
+    },
+    "Victim_sex_1": {
+      "sdtype": "categorical"
+    },
+    "Victim_sex_2": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_0": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_1": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_2": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_3": {
+      "sdtype": "categorical"
+    },
+    "Victim_descent_4": {
+      "sdtype": "categorical"
+    },
+    "Premis_0": {
+      "sdtype": "categorical"
+    },
+    "Premis_1": {
+      "sdtype": "categorical"
+    },
+    "Premis_2": {
+      "sdtype": "categorical"
+    },
+    "Premis_3": {
+      "sdtype": "categorical"
+    },
+    "Premis_4": {
+      "sdtype": "categorical"
+    },
+    "Premis_5": {
+      "sdtype": "categorical"
+    },
+    "Premis_6": {
+      "sdtype": "categorical"
+    },
+    "Premis_7": {
+      "sdtype": "categorical"
+    },
+    "Premis_8": {
+      "sdtype": "categorical"
+    },
+    "Weapon_0": {
+      "sdtype": "categorical"
+    },
+    "Weapon_1": {
+      "sdtype": "categorical"
+    },
+    "Weapon_2": {
+      "sdtype": "categorical"
+    },
+    "Weapon_3": {
+      "sdtype": "categorical"
+    },
+    "Weapon_4": {
+      "sdtype": "categorical"
+    },
+    "Weapon_5": {
+      "sdtype": "categorical"
+    },
+    "Weapon_6": {
+      "sdtype": "categorical"
+    },
+    "Status": {
+      "sdtype": "categorical"
+    },
+    "LAT": {
+      "sdtype": "numerical"
+    },
+    "LON": {
+      "sdtype": "numerical"
+    }
+  }
+}
+2025-04-21 06:05:55,351 - INFO -  [SYNTHETIC PIPELINE]  Synthetic Data Evaluation Completed.
+2025-04-21 06:05:55,374 - INFO -  [SYNTHETIC PIPELINE] Synthetic Data Report Generated Successfully.
+2025-04-21 06:05:57,600 - INFO - [HYBRID] Generated hybrid dataset shape for CTGAN: (260402, 47)
+2025-04-21 06:05:57,615 - INFO - [HYBRID] Target distribution for CTGAN: {'Invest Cont': 148537, 'Adult Other': 65309, 'Adult Arrest': 43137, 'Juv Arrest': 2052, 'Juv Other': 1239, 'UNK': 128}
+2025-04-21 06:06:01,221 - INFO -  [HYBRID] Saved hybrid dataset to /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/hybrid/crimeData_k5_l2_sup01_CTGAN_HYBRID.csv
+2025-04-21 06:06:01,221 - INFO - [HYBRID] Generated hybrid dataset shape for GaussianCopula: (260402, 47)
+2025-04-21 06:06:01,233 - INFO - [HYBRID] Target distribution for GaussianCopula: {'Invest Cont': 153060, 'Adult Other': 61914, 'Adult Arrest': 42474, 'Juv Arrest': 1933, 'Juv Other': 1018, 'UNK': 3}
+2025-04-21 06:06:05,128 - INFO -  [HYBRID] Saved hybrid dataset to /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/hybrid/crimeData_k5_l2_sup01_GaussianCopula_HYBRID.csv
+2025-04-21 06:06:05,128 - INFO - [HYBRID] Generated hybrid dataset shape for TVAE: (260402, 47)
+2025-04-21 06:06:05,142 - INFO - [HYBRID] Target distribution for TVAE: {'Invest Cont': 138180, 'Adult Other': 67022, 'Adult Arrest': 54706, 'Juv Arrest': 354, 'Juv Other': 140}
+2025-04-21 06:06:08,821 - INFO -  [HYBRID] Saved hybrid dataset to /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/hybrid/crimeData_k5_l2_sup01_TVAE_HYBRID.csv
+2025-04-21 06:06:08,821 - INFO -  [HYBRID] Hybrid pipeline complete — 3 dataset(s) ready.
+2025-04-21 06:06:08,822 - INFO - [HYBRID] Total rows across all hybrid datasets: 781206
+2025-04-21 06:06:08,832 - INFO - Hybrid pipeline completed successfully.
+2025-04-21 06:06:08,832 - INFO - Hybrid pipeline duration: 30897.92 seconds
+2025-04-21 06:06:08,832 - INFO - Starting Utility...
+2025-04-21 06:06:08,833 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-04-21 06:06:09,040 - INFO - [UTILITY] Original Data - Training Size: 260402, Testing Size: 65101
+2025-04-21 06:06:09,073 - INFO - [UTILITY] Target class distribution (Original): {'Invest Cont': 153331, 'Adult Other': 61489, 'Adult Arrest': 42625, 'Juv Arrest': 1937, 'Juv Other': 1018, 'UNK': 2}
+2025-04-21 06:06:09,090 - INFO - [UTILITY] Processing anonymized dataset...
+2025-04-21 06:06:09,354 - INFO - [UTILITY] Anonymized Data - Training Size: 260402
+2025-04-21 06:06:09,370 - INFO - [UTILITY] Target class distribution (Anonymous): {'Invest Cont': 153331, 'Adult Other': 61489, 'Adult Arrest': 42625, 'Juv Arrest': 1937, 'Juv Other': 1018, 'UNK': 2}
+2025-04-21 06:06:09,380 - INFO - [UTILITY] Processing hybrid dataset generated by CTGAN...
+2025-04-21 06:06:09,406 - INFO - [UTILITY] Hybrid Data (CTGAN_HYBRID) - Training Size: 260402
+2025-04-21 06:06:09,414 - INFO - [UTILITY] Target class distribution (CTGAN_HYBRID): {'Invest Cont': 148537, 'Adult Other': 65309, 'Adult Arrest': 43137, 'Juv Arrest': 2052, 'Juv Other': 1239, 'UNK': 128}
+2025-04-21 06:06:09,424 - INFO - [UTILITY] Processing hybrid dataset generated by GaussianCopula...
+2025-04-21 06:06:09,468 - INFO - [UTILITY] Hybrid Data (GaussianCopula_HYBRID) - Training Size: 260402
+2025-04-21 06:06:09,482 - INFO - [UTILITY] Target class distribution (GaussianCopula_HYBRID): {'Invest Cont': 153060, 'Adult Other': 61914, 'Adult Arrest': 42474, 'Juv Arrest': 1933, 'Juv Other': 1018, 'UNK': 3}
+2025-04-21 06:06:09,493 - INFO - [UTILITY] Processing hybrid dataset generated by TVAE...
+2025-04-21 06:06:09,568 - INFO - [UTILITY] Hybrid Data (TVAE_HYBRID) - Training Size: 260402
+2025-04-21 06:06:09,581 - INFO - [UTILITY] Target class distribution (TVAE_HYBRID): {'Invest Cont': 138180, 'Adult Other': 67022, 'Adult Arrest': 54706, 'Juv Arrest': 354, 'Juv Other': 140}
+2025-04-21 06:06:09,582 - INFO - [UTILITY] Training models on all datasets...
+2025-04-21 06:06:09,582 - INFO - [UTILITY] Total datasets used for training: 5
+2025-04-21 06:06:09,582 - INFO - [TRAINING] Training models from scratch...
+2025-04-21 06:06:09,583 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 260402, Features: 46
+2025-04-21 06:06:09,583 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-04-21 06:06:15,934 - INFO - [TRAINING] DecisionTree trained successfully on Original in 6.35 sec
+2025-04-21 06:06:15,935 - INFO - [TRAINING] Training KNN on Original...
+2025-04-21 06:06:16,311 - INFO - [TRAINING] KNN trained successfully on Original in 0.38 sec
+2025-04-21 06:06:16,311 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-04-21 06:06:34,834 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 18.52 sec
+2025-04-21 06:06:34,834 - INFO - [TRAINING] Training RandomForest on Original...
+2025-04-21 06:07:22,739 - INFO - [TRAINING] RandomForest trained successfully on Original in 47.90 sec
+2025-04-21 06:07:22,739 - INFO - [TRAINING] Training SVM on Original...
+2025-04-21 08:47:43,544 - INFO - [TRAINING] SVM trained successfully on Original in 9620.81 sec
+2025-04-21 08:47:43,545 - INFO - [TRAINING] Finished training 5 model(s) for dataset: Original
+2025-04-21 08:47:43,545 - INFO - [TRAINING] Starting training for dataset: Anonymous — Rows: 260402, Features: 46
+2025-04-21 08:47:43,545 - INFO - [TRAINING] Training DecisionTree on Anonymous...
+2025-04-21 08:47:46,446 - INFO - [TRAINING] DecisionTree trained successfully on Anonymous in 2.90 sec
+2025-04-21 08:47:46,446 - INFO - [TRAINING] Training KNN on Anonymous...
+2025-04-21 08:47:47,064 - INFO - [TRAINING] KNN trained successfully on Anonymous in 0.62 sec
+2025-04-21 08:47:47,064 - INFO - [TRAINING] Training LogisticRegression on Anonymous...
+2025-04-21 08:48:02,878 - INFO - [TRAINING] LogisticRegression trained successfully on Anonymous in 15.81 sec
+2025-04-21 08:48:02,878 - INFO - [TRAINING] Training RandomForest on Anonymous...
+2025-04-21 08:48:49,527 - INFO - [TRAINING] RandomForest trained successfully on Anonymous in 46.65 sec
+2025-04-21 08:48:49,527 - INFO - [TRAINING] Training SVM on Anonymous...
+2025-04-21 11:39:38,379 - INFO - [TRAINING] SVM trained successfully on Anonymous in 10248.85 sec
+2025-04-21 11:39:38,379 - INFO - [TRAINING] Finished training 5 model(s) for dataset: Anonymous
+2025-04-21 11:39:38,379 - INFO - [TRAINING] Starting training for dataset: CTGAN_HYBRID — Rows: 260402, Features: 46
+2025-04-21 11:39:38,380 - INFO - [TRAINING] Training DecisionTree on CTGAN_HYBRID...
+2025-04-21 11:39:42,162 - INFO - [TRAINING] DecisionTree trained successfully on CTGAN_HYBRID in 3.78 sec
+2025-04-21 11:39:42,163 - INFO - [TRAINING] Training KNN on CTGAN_HYBRID...
+2025-04-21 11:39:42,382 - INFO - [TRAINING] KNN trained successfully on CTGAN_HYBRID in 0.22 sec
+2025-04-21 11:39:42,382 - INFO - [TRAINING] Training LogisticRegression on CTGAN_HYBRID...
+2025-04-21 11:39:57,460 - INFO - [TRAINING] LogisticRegression trained successfully on CTGAN_HYBRID in 15.08 sec
+2025-04-21 11:39:57,461 - INFO - [TRAINING] Training RandomForest on CTGAN_HYBRID...
+2025-04-21 11:40:59,954 - INFO - [TRAINING] RandomForest trained successfully on CTGAN_HYBRID in 62.49 sec
+2025-04-21 11:40:59,955 - INFO - [TRAINING] Training SVM on CTGAN_HYBRID...
+2025-04-21 15:29:25,524 - INFO - [TRAINING] SVM trained successfully on CTGAN_HYBRID in 13705.57 sec
+2025-04-21 15:29:25,524 - INFO - [TRAINING] Finished training 5 model(s) for dataset: CTGAN_HYBRID
+2025-04-21 15:29:25,525 - INFO - [TRAINING] Starting training for dataset: GaussianCopula_HYBRID — Rows: 260402, Features: 46
+2025-04-21 15:29:25,525 - INFO - [TRAINING] Training DecisionTree on GaussianCopula_HYBRID...
+2025-04-21 15:29:30,868 - INFO - [TRAINING] DecisionTree trained successfully on GaussianCopula_HYBRID in 5.34 sec
+2025-04-21 15:29:30,868 - INFO - [TRAINING] Training KNN on GaussianCopula_HYBRID...
+2025-04-21 15:29:32,157 - INFO - [TRAINING] KNN trained successfully on GaussianCopula_HYBRID in 1.29 sec
+2025-04-21 15:29:32,158 - INFO - [TRAINING] Training LogisticRegression on GaussianCopula_HYBRID...
+2025-04-21 15:29:42,426 - INFO - [TRAINING] LogisticRegression trained successfully on GaussianCopula_HYBRID in 10.27 sec
+2025-04-21 15:29:42,427 - INFO - [TRAINING] Training RandomForest on GaussianCopula_HYBRID...
+2025-04-21 15:30:48,996 - INFO - [TRAINING] RandomForest trained successfully on GaussianCopula_HYBRID in 66.57 sec
+2025-04-21 15:30:48,996 - INFO - [TRAINING] Training SVM on GaussianCopula_HYBRID...
+2025-04-21 18:22:02,488 - INFO - [TRAINING] SVM trained successfully on GaussianCopula_HYBRID in 10273.49 sec
+2025-04-21 18:22:02,489 - INFO - [TRAINING] Finished training 5 model(s) for dataset: GaussianCopula_HYBRID
+2025-04-21 18:22:02,489 - INFO - [TRAINING] Starting training for dataset: TVAE_HYBRID — Rows: 260402, Features: 46
+2025-04-21 18:22:02,489 - INFO - [TRAINING] Training DecisionTree on TVAE_HYBRID...
+2025-04-21 18:22:06,710 - INFO - [TRAINING] DecisionTree trained successfully on TVAE_HYBRID in 4.22 sec
+2025-04-21 18:22:06,711 - INFO - [TRAINING] Training KNN on TVAE_HYBRID...
+2025-04-21 18:22:07,873 - INFO - [TRAINING] KNN trained successfully on TVAE_HYBRID in 1.16 sec
+2025-04-21 18:22:07,874 - INFO - [TRAINING] Training LogisticRegression on TVAE_HYBRID...
+2025-04-21 18:22:21,834 - INFO - [TRAINING] LogisticRegression trained successfully on TVAE_HYBRID in 13.96 sec
+2025-04-21 18:22:21,834 - INFO - [TRAINING] Training RandomForest on TVAE_HYBRID...
+2025-04-21 18:23:15,866 - INFO - [TRAINING] RandomForest trained successfully on TVAE_HYBRID in 54.03 sec
+2025-04-21 18:23:15,867 - INFO - [TRAINING] Training SVM on TVAE_HYBRID...
+2025-04-21 22:14:24,990 - INFO - [TRAINING] SVM trained successfully on TVAE_HYBRID in 13869.12 sec
+2025-04-21 22:14:24,991 - INFO - [TRAINING] Finished training 5 model(s) for dataset: TVAE_HYBRID
+2025-04-21 22:14:24,991 - INFO - [TRAINING] Total models trained across all datasets: 25
+2025-04-21 22:14:24,991 - INFO - [UTILITY] Trained model names: ['Original', 'Anonymous', 'CTGAN_HYBRID', 'GaussianCopula_HYBRID', 'TVAE_HYBRID']
+2025-04-21 22:14:24,991 - INFO - [UTILITY] Model Training Completed.
+2025-04-21 22:14:24,992 - INFO - Starting the Evaluating of models...
+2025-04-21 22:14:24,992 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-04-21 22:14:24,992 - INFO - Evaluating DecisionTree on Original...
+2025-04-21 22:14:25,111 - INFO - Predictions completed for DecisionTree on Original
+2025-04-21 22:14:25,115 - INFO - Prediction distribution for DecisionTree on Original: {'Invest Cont': 37238, 'Adult Other': 15892, 'Adult Arrest': 11146, 'Juv Arrest': 523, 'Juv Other': 299, 'UNK': 3}
+2025-04-21 22:14:25,312 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:14:25,465 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:14:25,620 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:14:25,684 - WARNING -  Failed to compute AUC-ROC for DecisionTree on Original: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:14:25,841 - WARNING -  Failed to compute LogLoss for DecisionTree on Original: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:14:25,963 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-04-21 22:14:25,964 - INFO - Evaluating DecisionTree on Anonymous...
+2025-04-21 22:14:26,039 - INFO - Predictions completed for DecisionTree on Anonymous
+2025-04-21 22:14:26,042 - INFO - Prediction distribution for DecisionTree on Anonymous: {'Invest Cont': 37115, 'Adult Other': 15748, 'Adult Arrest': 11466, 'Juv Arrest': 493, 'Juv Other': 278, 'UNK': 1}
+2025-04-21 22:14:26,233 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:14:26,386 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:14:26,538 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:14:26,605 - WARNING -  Failed to compute AUC-ROC for DecisionTree on Anonymous: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:14:26,759 - WARNING -  Failed to compute LogLoss for DecisionTree on Anonymous: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:14:26,880 - INFO - Computed 8 metric(s) for DecisionTree on Anonymous
+2025-04-21 22:14:26,880 - INFO - Evaluating DecisionTree on CTGAN_HYBRID...
+2025-04-21 22:14:26,932 - INFO - Predictions completed for DecisionTree on CTGAN_HYBRID
+2025-04-21 22:14:26,935 - INFO - Prediction distribution for DecisionTree on CTGAN_HYBRID: {'Adult Other': 21403, 'Adult Arrest': 20802, 'Invest Cont': 19183, 'Juv Arrest': 2018, 'Juv Other': 1219, 'UNK': 476}
+2025-04-21 22:14:27,128 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:14:27,282 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:14:27,438 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:14:27,482 - WARNING -  Failed to compute AUC-ROC for DecisionTree on CTGAN_HYBRID: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:14:27,618 - WARNING -  Failed to compute LogLoss for DecisionTree on CTGAN_HYBRID: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:14:27,737 - INFO - Computed 8 metric(s) for DecisionTree on CTGAN_HYBRID
+2025-04-21 22:14:27,738 - INFO - Evaluating DecisionTree on GaussianCopula_HYBRID...
+2025-04-21 22:14:27,781 - INFO - Predictions completed for DecisionTree on GaussianCopula_HYBRID
+2025-04-21 22:14:27,785 - INFO - Prediction distribution for DecisionTree on GaussianCopula_HYBRID: {'Adult Arrest': 22568, 'Invest Cont': 21767, 'Adult Other': 18578, 'Juv Other': 1953, 'Juv Arrest': 235}
+2025-04-21 22:14:28,331 - WARNING -  Failed to compute AUC-ROC for DecisionTree on GaussianCopula_HYBRID: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:14:28,471 - WARNING -  Failed to compute LogLoss for DecisionTree on GaussianCopula_HYBRID: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:14:28,591 - INFO - Computed 8 metric(s) for DecisionTree on GaussianCopula_HYBRID
+2025-04-21 22:14:28,592 - INFO - Evaluating DecisionTree on TVAE_HYBRID...
+2025-04-21 22:14:28,638 - INFO - Predictions completed for DecisionTree on TVAE_HYBRID
+2025-04-21 22:14:28,642 - INFO - Prediction distribution for DecisionTree on TVAE_HYBRID: {'Invest Cont': 26108, 'Adult Other': 19902, 'Adult Arrest': 18576, 'Juv Arrest': 452, 'Juv Other': 63}
+2025-04-21 22:14:29,499 - INFO - Computed 8 metric(s) for DecisionTree on TVAE_HYBRID
+2025-04-21 22:14:29,499 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-04-21 22:14:29,499 - INFO - Evaluating KNN on Original...
+2025-04-21 22:14:38,383 - INFO - Predictions completed for KNN on Original
+2025-04-21 22:14:38,387 - INFO - Prediction distribution for KNN on Original: {'Invest Cont': 42030, 'Adult Other': 13073, 'Adult Arrest': 9928, 'Juv Arrest': 51, 'Juv Other': 19}
+2025-04-21 22:14:46,828 - WARNING -  Failed to compute AUC-ROC for KNN on Original: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:14:54,749 - WARNING -  Failed to compute LogLoss for KNN on Original: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:14:54,872 - INFO - Computed 8 metric(s) for KNN on Original
+2025-04-21 22:14:54,873 - INFO - Evaluating KNN on Anonymous...
+2025-04-21 22:15:04,101 - INFO - Predictions completed for KNN on Anonymous
+2025-04-21 22:15:04,104 - INFO - Prediction distribution for KNN on Anonymous: {'Invest Cont': 42082, 'Adult Other': 13047, 'Adult Arrest': 9901, 'Juv Arrest': 51, 'Juv Other': 20}
+2025-04-21 22:15:12,662 - WARNING -  Failed to compute AUC-ROC for KNN on Anonymous: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:15:20,656 - WARNING -  Failed to compute LogLoss for KNN on Anonymous: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:15:20,777 - INFO - Computed 8 metric(s) for KNN on Anonymous
+2025-04-21 22:15:20,778 - INFO - Evaluating KNN on CTGAN_HYBRID...
+2025-04-21 22:15:29,345 - INFO - Predictions completed for KNN on CTGAN_HYBRID
+2025-04-21 22:15:29,348 - INFO - Prediction distribution for KNN on CTGAN_HYBRID: {'Invest Cont': 65101}
+2025-04-21 22:15:29,349 - WARNING -  [WARNING] :KNN on CTGAN_HYBRID predicted only one class: {'Invest Cont'}
+2025-04-21 22:15:29,536 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:15:29,686 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:15:29,835 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:15:37,298 - WARNING -  Failed to compute AUC-ROC for KNN on CTGAN_HYBRID: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:15:44,950 - WARNING -  Failed to compute LogLoss for KNN on CTGAN_HYBRID: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:15:45,069 - INFO - Computed 8 metric(s) for KNN on CTGAN_HYBRID
+2025-04-21 22:15:45,070 - INFO - Evaluating KNN on GaussianCopula_HYBRID...
+2025-04-21 22:15:54,004 - INFO - Predictions completed for KNN on GaussianCopula_HYBRID
+2025-04-21 22:15:54,007 - INFO - Prediction distribution for KNN on GaussianCopula_HYBRID: {'Invest Cont': 65101}
+2025-04-21 22:15:54,009 - WARNING -  [WARNING] :KNN on GaussianCopula_HYBRID predicted only one class: {'Invest Cont'}
+2025-04-21 22:15:54,194 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:15:54,344 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:15:54,495 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:01,800 - WARNING -  Failed to compute AUC-ROC for KNN on GaussianCopula_HYBRID: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:16:09,468 - WARNING -  Failed to compute LogLoss for KNN on GaussianCopula_HYBRID: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:16:09,585 - INFO - Computed 8 metric(s) for KNN on GaussianCopula_HYBRID
+2025-04-21 22:16:09,586 - INFO - Evaluating KNN on TVAE_HYBRID...
+2025-04-21 22:16:18,721 - INFO - Predictions completed for KNN on TVAE_HYBRID
+2025-04-21 22:16:18,724 - INFO - Prediction distribution for KNN on TVAE_HYBRID: {'Invest Cont': 65101}
+2025-04-21 22:16:18,726 - WARNING -  [WARNING] :KNN on TVAE_HYBRID predicted only one class: {'Invest Cont'}
+2025-04-21 22:16:18,912 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:19,059 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:19,206 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:34,463 - INFO - Computed 8 metric(s) for KNN on TVAE_HYBRID
+2025-04-21 22:16:34,463 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-04-21 22:16:34,463 - INFO - Evaluating LogisticRegression on Original...
+2025-04-21 22:16:34,533 - INFO - Predictions completed for LogisticRegression on Original
+2025-04-21 22:16:34,538 - INFO - Prediction distribution for LogisticRegression on Original: {'Invest Cont': 57031, 'Adult Other': 7631, 'Adult Arrest': 439}
+2025-04-21 22:16:34,783 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:34,935 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:35,087 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:35,163 - WARNING -  Failed to compute AUC-ROC for LogisticRegression on Original: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:16:35,342 - WARNING -  Failed to compute LogLoss for LogisticRegression on Original: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:16:35,460 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-04-21 22:16:35,461 - INFO - Evaluating LogisticRegression on Anonymous...
+2025-04-21 22:16:35,512 - INFO - Predictions completed for LogisticRegression on Anonymous
+2025-04-21 22:16:35,517 - INFO - Prediction distribution for LogisticRegression on Anonymous: {'Invest Cont': 60173, 'Adult Other': 4818, 'Adult Arrest': 110}
+2025-04-21 22:16:35,748 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:35,900 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:36,053 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:36,175 - WARNING -  Failed to compute AUC-ROC for LogisticRegression on Anonymous: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:16:36,359 - WARNING -  Failed to compute LogLoss for LogisticRegression on Anonymous: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:16:36,479 - INFO - Computed 8 metric(s) for LogisticRegression on Anonymous
+2025-04-21 22:16:36,480 - INFO - Evaluating LogisticRegression on CTGAN_HYBRID...
+2025-04-21 22:16:36,539 - INFO - Predictions completed for LogisticRegression on CTGAN_HYBRID
+2025-04-21 22:16:36,548 - INFO - Prediction distribution for LogisticRegression on CTGAN_HYBRID: {'Invest Cont': 28367, 'Adult Arrest': 15105, 'Adult Other': 11490, 'UNK': 7334, 'Juv Arrest': 2805}
+2025-04-21 22:16:36,780 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:36,781 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:36,935 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:36,935 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:37,089 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:37,089 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:37,168 - WARNING -  Failed to compute AUC-ROC for LogisticRegression on CTGAN_HYBRID: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:16:37,389 - WARNING -  Failed to compute LogLoss for LogisticRegression on CTGAN_HYBRID: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:16:37,512 - INFO - Computed 8 metric(s) for LogisticRegression on CTGAN_HYBRID
+2025-04-21 22:16:37,513 - INFO - Evaluating LogisticRegression on GaussianCopula_HYBRID...
+2025-04-21 22:16:37,567 - INFO - Predictions completed for LogisticRegression on GaussianCopula_HYBRID
+2025-04-21 22:16:37,571 - INFO - Prediction distribution for LogisticRegression on GaussianCopula_HYBRID: {'Invest Cont': 64951, 'Juv Other': 150}
+2025-04-21 22:16:37,785 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:37,938 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:38,090 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:38,224 - WARNING -  Failed to compute AUC-ROC for LogisticRegression on GaussianCopula_HYBRID: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:16:38,405 - WARNING -  Failed to compute LogLoss for LogisticRegression on GaussianCopula_HYBRID: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:16:38,525 - INFO - Computed 8 metric(s) for LogisticRegression on GaussianCopula_HYBRID
+2025-04-21 22:16:38,525 - INFO - Evaluating LogisticRegression on TVAE_HYBRID...
+2025-04-21 22:16:38,589 - INFO - Predictions completed for LogisticRegression on TVAE_HYBRID
+2025-04-21 22:16:38,594 - INFO - Prediction distribution for LogisticRegression on TVAE_HYBRID: {'Invest Cont': 64906, 'Juv Arrest': 174, 'Adult Arrest': 21}
+2025-04-21 22:16:38,807 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:38,959 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:39,112 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:16:39,592 - INFO - Computed 8 metric(s) for LogisticRegression on TVAE_HYBRID
+2025-04-21 22:16:39,593 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-04-21 22:16:39,593 - INFO - Evaluating RandomForest on Original...
+2025-04-21 22:16:46,024 - INFO - Predictions completed for RandomForest on Original
+2025-04-21 22:16:46,027 - INFO - Prediction distribution for RandomForest on Original: {'Invest Cont': 50793, 'Adult Other': 11286, 'Adult Arrest': 2973, 'Juv Other': 25, 'Juv Arrest': 24}
+2025-04-21 22:16:50,286 - WARNING -  Failed to compute AUC-ROC for RandomForest on Original: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:16:54,567 - WARNING -  Failed to compute LogLoss for RandomForest on Original: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:16:54,687 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-04-21 22:16:54,687 - INFO - Evaluating RandomForest on Anonymous...
+2025-04-21 22:17:00,422 - INFO - Predictions completed for RandomForest on Anonymous
+2025-04-21 22:17:00,425 - INFO - Prediction distribution for RandomForest on Anonymous: {'Invest Cont': 50306, 'Adult Other': 10263, 'Adult Arrest': 4451, 'Juv Other': 42, 'Juv Arrest': 39}
+2025-04-21 22:17:04,023 - WARNING -  Failed to compute AUC-ROC for RandomForest on Anonymous: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:17:07,205 - WARNING -  Failed to compute LogLoss for RandomForest on Anonymous: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:17:07,326 - INFO - Computed 8 metric(s) for RandomForest on Anonymous
+2025-04-21 22:17:07,327 - INFO - Evaluating RandomForest on CTGAN_HYBRID...
+2025-04-21 22:17:09,723 - INFO - Predictions completed for RandomForest on CTGAN_HYBRID
+2025-04-21 22:17:09,726 - INFO - Prediction distribution for RandomForest on CTGAN_HYBRID: {'Invest Cont': 54289, 'Adult Other': 8008, 'Adult Arrest': 2686, 'UNK': 116, 'Juv Other': 1, 'Juv Arrest': 1}
+2025-04-21 22:17:09,915 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:17:10,068 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:17:10,220 - WARNING - [UndefinedMetricWarning] Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:17:11,721 - WARNING -  Failed to compute AUC-ROC for RandomForest on CTGAN_HYBRID: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:17:13,317 - WARNING -  Failed to compute LogLoss for RandomForest on CTGAN_HYBRID: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:17:13,437 - INFO - Computed 8 metric(s) for RandomForest on CTGAN_HYBRID
+2025-04-21 22:17:13,438 - INFO - Evaluating RandomForest on GaussianCopula_HYBRID...
+2025-04-21 22:17:14,766 - INFO - Predictions completed for RandomForest on GaussianCopula_HYBRID
+2025-04-21 22:17:14,769 - INFO - Prediction distribution for RandomForest on GaussianCopula_HYBRID: {'Invest Cont': 56297, 'Adult Other': 7369, 'Adult Arrest': 1435}
+2025-04-21 22:17:14,958 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:17:15,110 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:17:15,260 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:17:16,671 - WARNING -  Failed to compute AUC-ROC for RandomForest on GaussianCopula_HYBRID: Number of classes in y_true not equal to the number of columns in 'y_score'
+2025-04-21 22:17:18,109 - WARNING -  Failed to compute LogLoss for RandomForest on GaussianCopula_HYBRID: y_true and y_pred contain different number of classes 5, 6. Please provide the true labels explicitly through the labels argument. Classes found in y_true: ['Adult Arrest' 'Adult Other' 'Invest Cont' 'Juv Arrest' 'Juv Other']
+2025-04-21 22:17:18,230 - INFO - Computed 8 metric(s) for RandomForest on GaussianCopula_HYBRID
+2025-04-21 22:17:18,230 - INFO - Evaluating RandomForest on TVAE_HYBRID...
+2025-04-21 22:17:19,741 - INFO - Predictions completed for RandomForest on TVAE_HYBRID
+2025-04-21 22:17:19,744 - INFO - Prediction distribution for RandomForest on TVAE_HYBRID: {'Invest Cont': 53877, 'Adult Other': 8005, 'Adult Arrest': 3216, 'Juv Other': 3}
+2025-04-21 22:17:19,932 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:17:20,083 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:17:20,234 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:17:23,549 - INFO - Computed 8 metric(s) for RandomForest on TVAE_HYBRID
+2025-04-21 22:17:23,549 - INFO - Preparing evaluation for model 'SVM' across all datasets...
+2025-04-21 22:17:23,549 - INFO - Evaluating SVM on Original...
+2025-04-21 22:30:02,315 - INFO - Predictions completed for SVM on Original
+2025-04-21 22:30:02,318 - INFO - Prediction distribution for SVM on Original: {'Invest Cont': 65101}
+2025-04-21 22:30:02,320 - WARNING -  [WARNING] :SVM on Original predicted only one class: {'Invest Cont'}
+2025-04-21 22:30:02,511 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:30:02,663 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:30:02,812 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:30:02,931 - INFO - Computed 8 metric(s) for SVM on Original
+2025-04-21 22:30:02,931 - INFO - Evaluating SVM on Anonymous...
+2025-04-21 22:42:47,788 - INFO - Predictions completed for SVM on Anonymous
+2025-04-21 22:42:47,791 - INFO - Prediction distribution for SVM on Anonymous: {'Invest Cont': 65101}
+2025-04-21 22:42:47,793 - WARNING -  [WARNING] :SVM on Anonymous predicted only one class: {'Invest Cont'}
+2025-04-21 22:42:47,977 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:42:48,126 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:42:48,276 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:42:48,394 - INFO - Computed 8 metric(s) for SVM on Anonymous
+2025-04-21 22:42:48,395 - INFO - Evaluating SVM on CTGAN_HYBRID...
+2025-04-21 22:55:27,659 - INFO - Predictions completed for SVM on CTGAN_HYBRID
+2025-04-21 22:55:27,662 - INFO - Prediction distribution for SVM on CTGAN_HYBRID: {'Invest Cont': 65101}
+2025-04-21 22:55:27,663 - WARNING -  [WARNING] :SVM on CTGAN_HYBRID predicted only one class: {'Invest Cont'}
+2025-04-21 22:55:27,842 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:55:27,991 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:55:28,143 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 22:55:28,261 - INFO - Computed 8 metric(s) for SVM on CTGAN_HYBRID
+2025-04-21 22:55:28,262 - INFO - Evaluating SVM on GaussianCopula_HYBRID...
+2025-04-21 23:07:31,574 - INFO - Predictions completed for SVM on GaussianCopula_HYBRID
+2025-04-21 23:07:31,577 - INFO - Prediction distribution for SVM on GaussianCopula_HYBRID: {'Invest Cont': 65101}
+2025-04-21 23:07:31,579 - WARNING -  [WARNING] :SVM on GaussianCopula_HYBRID predicted only one class: {'Invest Cont'}
+2025-04-21 23:07:31,757 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 23:07:31,906 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 23:07:32,057 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 23:07:32,176 - INFO - Computed 8 metric(s) for SVM on GaussianCopula_HYBRID
+2025-04-21 23:07:32,177 - INFO - Evaluating SVM on TVAE_HYBRID...
+2025-04-21 23:20:28,793 - INFO - Predictions completed for SVM on TVAE_HYBRID
+2025-04-21 23:20:28,796 - INFO - Prediction distribution for SVM on TVAE_HYBRID: {'Invest Cont': 65101}
+2025-04-21 23:20:28,798 - WARNING -  [WARNING] :SVM on TVAE_HYBRID predicted only one class: {'Invest Cont'}
+2025-04-21 23:20:28,983 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 23:20:29,132 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 23:20:29,280 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-04-21 23:20:29,396 - INFO - Computed 8 metric(s) for SVM on TVAE_HYBRID
+2025-04-21 23:20:29,404 - INFO - Evaluation completed for all models.
+2025-04-21 23:20:29,405 - INFO - Model evaluation completed in 3964.41 seconds.
+2025-04-21 23:20:29,415 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest', 'SVM']
+2025-04-21 23:20:29,415 - INFO - Model Training and Evaluation completed.
+2025-04-21 23:20:30,029 - INFO -  Visualizations saved.
+2025-04-21 23:20:30,029 - INFO -  Benchmarking Completed. Results saved in output folder.
+2025-04-21 23:20:30,184 - INFO - Deleted anonymized file: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k10_l2_sup10_anonymized.csv
+2025-04-21 23:20:30,184 - INFO - Deleted anonymized file: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k10_l2_sup10_anonymized_encoded.csv
+2025-04-21 23:20:30,185 - INFO - Deleted anonymized file: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/crimeData_k10_l2_sup10_anonymized_processed.csv
