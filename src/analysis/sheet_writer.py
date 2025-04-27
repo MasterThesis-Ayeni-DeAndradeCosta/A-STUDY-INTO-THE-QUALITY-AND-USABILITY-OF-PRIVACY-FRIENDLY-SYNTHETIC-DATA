@@ -29,6 +29,10 @@ def generate_analysis_sheets(excel_path, df):
     ws_synth = wb.create_sheet("Synth_Results")
     _write_synth_results(ws_synth, df)
 
+    # 3) Full hybrid pivot  --- NEW
+    ws_hybrid = wb.create_sheet("Hybrid_Results")
+    _write_hybrid_results(ws_hybrid, df)
+
     # 3) Top 3 anonymized rows per (Model, Metric)
     ws_anon_best = wb.create_sheet("Anon_Best")
     _write_anon_best(ws_anon_best, df)
@@ -36,6 +40,10 @@ def generate_analysis_sheets(excel_path, df):
     # 4) Top 3 synthetic rows per (Model, Metric)
     ws_synth_best = wb.create_sheet("Synth_Best")
     _write_synth_best(ws_synth_best, df)
+
+    # 6) Top 3 hybrid rows --- NEW
+    ws_hybrid_best = wb.create_sheet("Hybrid_Best")
+    _write_hybrid_best(ws_hybrid_best, df)
 
     # Auto-size columns
     for sname in ["Anon_Results","Synth_Results","Anon_Best","Synth_Best"]:
@@ -176,6 +184,71 @@ def _write_synth_best(ws, df):
     best_df = best_df.sort_values(by=["Model","WhichMetric","Rank"], ascending=True)
 
     _write_df_to_sheet(ws, best_df)
+
+def _write_hybrid_results(ws, df):
+    """
+    Write pivot table summarizing Hybrid results (e.g., CTGAN_HYBRID, TVAE_HYBRID).
+    """
+    sub = df[df["Dataset"].str.endswith("_HYBRID")]
+    if sub.empty:
+        ws["A1"] = "No Hybrid rows found."
+        return
+
+    keep_cols = ["Dataset", "Model", "k_anonymity", "l_diversity", "suppression_limit",
+                 "epochs", "rows_generated_at_runtime", "Accuracy", "Precision", "Recall", "F1", "AUC-ROC"]
+
+    keep_cols = [col for col in keep_cols if col in sub.columns]
+
+    pivot_hybrid = sub[keep_cols]
+
+    _write_df_to_sheet(ws, pivot_hybrid)
+
+
+def _write_hybrid_best(ws, df):
+    """
+    Write pivot table summarizing the best Hybrid results per dataset/model.
+    """
+    sub = df[df["Dataset"].str.endswith("_HYBRID")]
+    if sub.empty:
+        ws["A1"] = "No Hybrid rows found."
+        return
+
+    metrics = ["Accuracy", "Precision", "Recall", "F1", "AUC-ROC"]
+    metrics = [m for m in metrics if m in sub.columns]
+
+    best_rows = []
+    for model in sub["Model"].unique():
+        model_df = sub[sub["Model"] == model]
+        for metric in metrics:
+            valid_df = model_df[model_df[metric].notna()]
+            if valid_df.empty:
+                continue
+            top_3 = valid_df.nlargest(3, metric)
+            for rank, (idx, row_data) in enumerate(top_3.iterrows(), start=1):
+                row_data = row_data.copy()
+                row_data["WhichMetric"] = metric
+                row_data["Rank"] = rank
+                row_data["MetricValue"] = row_data[metric]
+                best_rows.append(row_data)
+
+    if not best_rows:
+        ws["A1"] = "No best Hybrid rows found."
+        return
+
+    best_df = pd.DataFrame(best_rows)
+
+    keep_cols = ["Dataset", "Model", "WhichMetric", "Rank", "MetricValue",
+                 "k_anonymity", "l_diversity", "suppression_limit", "epochs", "rows_generated_at_runtime",
+                 "Accuracy", "Precision", "Recall", "F1", "AUC-ROC"]
+
+    keep_cols = [col for col in keep_cols if col in best_df.columns]
+
+    best_df = best_df[keep_cols]
+
+    best_df = best_df.sort_values(by=["Model", "WhichMetric", "Rank"], ascending=True)
+
+    _write_df_to_sheet(ws, best_df)
+
 
 
 # -------------------------------------------------------------------
