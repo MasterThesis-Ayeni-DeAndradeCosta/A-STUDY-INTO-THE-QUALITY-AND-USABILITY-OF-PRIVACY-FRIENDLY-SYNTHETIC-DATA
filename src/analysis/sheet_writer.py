@@ -79,24 +79,21 @@ def _write_anon_results(ws, df):
 # -------------------------------------------------------------------
 # HELPER 2: Full pivot for synthetic data
 def _write_synth_results(ws, df):
-    sub = df[df["Dataset"].isin(["CTGAN","TVAE","GaussianCopula","Hybrid"])]
+    """
+    Write pivot table summarizing synthetic results (CTGAN, TVAE, GaussianCopula).
+    """
+    sub = df[df["Dataset"].isin(["CTGAN", "TVAE", "GaussianCopula"])]  # 🔵 Only real synthetics
     if sub.empty:
         ws["A1"] = "No Synthetic rows found."
         return
 
-    metrics = ["Accuracy","Precision","Recall","F1","AUC-ROC"]
-    metrics = [m for m in metrics if m in sub.columns]
-    if not metrics:
-        ws["A1"] = "No metric columns found in Synthetic data."
-        return
+    keep_cols = ["Dataset", "Model", "epochs", "rows_generated_at_runtime", "Accuracy", "Precision", "Recall", "F1", "AUC-ROC"]
+    keep_cols = [c for c in keep_cols if c in sub.columns]
 
-    pivot_synth = (
-        sub.groupby(["Dataset","epochs","custom_generated_rows","Model"])[metrics]
-        .mean(numeric_only=True)
-        .reset_index()
-    )
+    pivot_synth = sub[keep_cols]
 
     _write_df_to_sheet(ws, pivot_synth)
+
 
 
 # -------------------------------------------------------------------
@@ -147,17 +144,20 @@ def _write_anon_best(ws, df):
 # -------------------------------------------------------------------
 # HELPER 4: Top 3 synthetic rows per (Model, Metric)
 def _write_synth_best(ws, df):
-    sub = df[df["Dataset"].isin(["CTGAN","TVAE","GaussianCopula","Hybrid"])]
+    """
+    Write pivot table summarizing the best synthetic results per dataset/model.
+    """
+    sub = df[df["Dataset"].isin(["CTGAN", "TVAE", "GaussianCopula"])]  # 🔵 Only real synthetics
     if sub.empty:
         ws["A1"] = "No Synthetic rows found."
         return
 
-    metrics = ["Accuracy","Precision","Recall","F1","AUC-ROC"]
+    metrics = ["Accuracy", "Precision", "Recall", "F1", "AUC-ROC"]
     metrics = [m for m in metrics if m in sub.columns]
 
     best_rows = []
     for model in sub["Model"].unique():
-        model_df = sub[sub["Model"]==model]
+        model_df = sub[sub["Model"] == model]
         for metric in metrics:
             valid_df = model_df[model_df[metric].notna()]
             if valid_df.empty:
@@ -175,15 +175,18 @@ def _write_synth_best(ws, df):
         return
 
     best_df = pd.DataFrame(best_rows)
-    keep_cols = ["Dataset","Model","WhichMetric","Rank","MetricValue",
-                 "epochs","custom_generated_rows",
-                 "Accuracy","Precision","Recall","F1","AUC-ROC"]
+
+    keep_cols = ["Dataset", "Model", "WhichMetric", "Rank", "MetricValue",
+                 "epochs", "rows_generated_at_runtime",
+                 "Accuracy", "Precision", "Recall", "F1", "AUC-ROC"]
     keep_cols = [c for c in keep_cols if c in best_df.columns]
+
     best_df = best_df[keep_cols]
 
-    best_df = best_df.sort_values(by=["Model","WhichMetric","Rank"], ascending=True)
+    best_df = best_df.sort_values(by=["Model", "WhichMetric", "Rank"], ascending=True)
 
     _write_df_to_sheet(ws, best_df)
+
 
 def _write_hybrid_results(ws, df):
     """
