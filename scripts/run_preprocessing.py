@@ -25,6 +25,7 @@ def run_preprocessing(dataset_path, separator, target_column,  config_path="conf
     """
     config = load_config(config_path)
     test_size = config["dataset"]["test_size"]
+    excluded_columns = config["dataset"].get("excluded_columns", [])
     handle_missing = config["preprocessing"]["handle_missing_values"]
     encoding_type = config["preprocessing"]["encoding_type"]
 
@@ -58,6 +59,12 @@ def run_preprocessing(dataset_path, separator, target_column,  config_path="conf
 
     # Full preprocessing flow
     original_data, _ = load_dataset(dataset_path, separator)
+
+    if excluded_columns:
+        original_data.drop(columns=excluded_columns, errors="ignore", inplace=True)
+        if logger:
+            logger.info(f"[PREPROCESSING] Dropped excluded columns: {excluded_columns}")
+
     cleaned_full = handle_missing_values(original_data, strategy=handle_missing)
     if logger:
         logger.info(f"[PREPROCESSING] Missing value handling strategy: '{handle_missing}' applied.")
