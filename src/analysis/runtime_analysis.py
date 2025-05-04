@@ -6,11 +6,14 @@ import pandas as pd
 from datetime import datetime
 from typing import Any, Dict, Optional
 
-# Regex that matches e.g. "2025-04-11 14:57:20,005"
 TS_REGEX = re.compile(r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}),\d+")
+#DURATION_REGEX = re.compile(r"Fitting complete for (CTGAN|TVAE|GaussianCopula)\. Duration: ([\d.]+) seconds\.")
+DURATION_REGEX = re.compile(r"(?:\[SYNTHETIC\] )?Fitting complete for (CTGAN|TVAE|GaussianCopula)\. Duration: ([\d.]+) seconds\.")
+
+HYBRID_DURATION_REGEX = re.compile(r"Hybrid pipeline duration: ([\d.]+) seconds\.")
+EVALUATION_DURATION_REGEX = re.compile(r"Model evaluation completed in ([\d.]+) seconds\.")
 
 def parse_timestamp(line: str) -> Optional[datetime]:
-    """Extract a datetime from the front of a log line or None if not matched."""
     match = TS_REGEX.match(line)
     if match:
         return datetime.strptime(match.group(1), "%Y-%m-%d %H:%M:%S")
@@ -24,39 +27,32 @@ def humanize_seconds(seconds: float) -> str:
     return f"{h} hours {m} minutes {s} secs"
 
 def extract_runtime_from_log(log_path: str) -> Dict[str, Any]:
-    """
-    Reads one benchmark.log, finds relevant timestamps for:
-      - Preprocessing
-      - Anonymization
-      - Synthesis total
-      - CTGAN fit→sample
-      - TVAE fit→sample
-      - GaussianCopula fit→sample
-      - ML training
-      - ML evaluation
-      - total time
-    Returns them as numeric durations (seconds) or None if not found.
-    """
-    # We'll store raw timestamps as optional datetimes
     t: Dict[str, Optional[datetime]] = {
-        "start": None,               # "Benchmarking started"
-        "preprocess_done": None,     # "Preprocessing completed."
-        "anon_start": None,          # "Running Java Anonymization Program"
-        "anon_end": None,            # "Java anonymization completed"
-        "synth_start": None,         # "Starting Synthetic Data Generation Pipeline"
-        "synth_end": None,           # "Synthetic Data Generation Completed."
-        "ctgan_fit": None,           # "'EVENT': 'Fit' ... CTGANSynthesizer"
-        "ctgan_sample": None,        # "'EVENT': 'Sample' ... CTGANSynthesizer"
-        "tvae_fit": None,            # "'EVENT': 'Fit' ... TVAESynthesizer"
-        "tvae_sample": None,         # "'EVENT': 'Sample' ... TVAESynthesizer"
-        "gau_fit": None,             # "'EVENT': 'Fit' ... GaussianCopulaSynthesizer"
-        "gau_sample": None,          # "'EVENT': 'Sample' ... GaussianCopulaSynthesizer"
-        "train_start": None,         # "Training models on all datasets"
-        "train_end": None,           # "Model Training Completed."
-        "eval_start": None,          # "Evaluating models..."
-        "eval_end": None,            # "Model Training and Evaluation completed"
-        "end": None,                 # "Benchmarking Completed."
+        "benchmark_start": None,
+        "benchmark_end": None,
+        "preprocess_start": None,
+        "preprocess_done": None,
+        "anon_start": None,
+        "anon_end": None,
+        "synth_start": None,
+        "synth_end": None,
+        "hybrid_start": None,
+        "hybrid_end": None,
+        "train_start": None,
+        "train_end": None,
     }
+    durations: Dict[str, Optional[float]] = {
+        "ctgan_sec": None,
+        "tvae_sec": None,
+        "gaussian_sec": None,
+        "hybrid_ctgan_sec": None,
+        "hybrid_tvae_sec": None,
+        "hybrid_gaussian_sec": None,
+        "hybrid_duration_sec": None,
+        "evaluation_sec": None
+    }
+
+    in_hybrid_block = False
 
     with open(log_path, "r", encoding="utf-8") as f:
         for line in f:
@@ -64,85 +60,75 @@ def extract_runtime_from_log(log_path: str) -> Dict[str, Any]:
             if not dt:
                 continue
 
-            # Overall start/end
             if "Benchmarking started for dataset:" in line:
-                t["start"] = dt
+                t["benchmark_start"] = dt
             elif "Benchmarking Completed." in line:
-                t["end"] = dt
+                t["benchmark_end"] = dt
 
-            # Preprocessing
+            if "Running preprocessing..." in line:
+                t["preprocess_start"] = dt
             elif "Preprocessing completed." in line:
                 t["preprocess_done"] = dt
 
-            # Anonymization
-            elif "Running Java Anonymization Program" in line:
+            elif "Starting Anonymization Pipeline" in line:
                 t["anon_start"] = dt
-            elif "Java anonymization completed" in line:
+            elif "Postprocessing report saved at" in line:
                 t["anon_end"] = dt
 
-            # Synthesis
-            elif "Starting Synthetic Data Generation Pipeline" in line:
+            elif "Starting standard Synthetic Data Generation pipeline..." in line:
                 t["synth_start"] = dt
-            elif "Synthetic Data Generation Completed." in line:
+            elif "Synthetic data generated with" in line:
                 t["synth_end"] = dt
 
-            # Synthesizer fit/sample
-            elif "'EVENT': 'Fit'" in line and "CTGANSynthesizer" in line:
-                t["ctgan_fit"] = dt
-            elif "'EVENT': 'Sample'" in line and "CTGANSynthesizer" in line:
-                t["ctgan_sample"] = dt
+            elif "[HYBRID] Starting synthetic generation for hybrid pipeline..." in line:
+                t["hybrid_start"] = dt
+                in_hybrid_block = True
+            elif "Hybrid pipeline completed successfully." in line:
+                t["hybrid_end"] = dt
+                in_hybrid_block = False
 
-            elif "'EVENT': 'Fit'" in line and "TVAESynthesizer" in line:
-                t["tvae_fit"] = dt
-            elif "'EVENT': 'Sample'" in line and "TVAESynthesizer" in line:
-                t["tvae_sample"] = dt
-
-            elif "'EVENT': 'Fit'" in line and "GaussianCopulaSynthesizer" in line:
-                t["gau_fit"] = dt
-            elif "'EVENT': 'Sample'" in line and "GaussianCopulaSynthesizer" in line:
-                t["gau_sample"] = dt
-
-            # ML training/eval
-            elif "Training models on all datasets" in line:
+            elif "[TRAINING] Training models from scratch..." in line:
                 t["train_start"] = dt
-            elif "Model Training Completed." in line:
+            elif "[UTILITY] Model Training Completed." in line:
                 t["train_end"] = dt
-            elif "Evaluating models..." in line:
-                t["eval_start"] = dt
-            elif "Model Training and Evaluation completed" in line:
-                t["eval_end"] = dt
+
+            m = DURATION_REGEX.search(line)
+            if m:
+                model, secs = m.group(1), float(m.group(2))
+                model = model.lower()
+                if in_hybrid_block:
+                #if "[HYBRID]" in line:
+                    durations[f"hybrid_{model}_sec"] = secs
+                else:
+                    durations[f"{model}_sec"] = secs
+
+            m_hybrid = HYBRID_DURATION_REGEX.search(line)
+            if m_hybrid:
+                durations["hybrid_duration_sec"] = float(m_hybrid.group(1))
+
+            m_eval = EVALUATION_DURATION_REGEX.search(line)
+            if m_eval:
+                durations["evaluation_sec"] = float(m_eval.group(1))
 
     def dur(k1: str, k2: str) -> Optional[float]:
-        """
-        Return the duration in seconds from t[k1] to t[k2], or None if either is missing.
-        """
         start_dt = t[k1]
-        end_dt   = t[k2]
+        end_dt = t[k2]
         if start_dt is not None and end_dt is not None:
             return round((end_dt - start_dt).total_seconds(), 2)
         return None
 
-    # Now build final numeric durations
     result: Dict[str, Any] = {}
-    result["total_sec"]          = dur("start", "end")
-    result["preprocessing_sec"]  = dur("start", "preprocess_done")
-    result["anonymization_sec"]  = dur("anon_start", "anon_end")
-    result["synthesis_sec"]      = dur("synth_start", "synth_end")
-    # per-synth
-    result["ctgan_sec"]          = dur("ctgan_fit", "ctgan_sample")
-    result["tvae_sec"]           = dur("tvae_fit", "tvae_sample")
-    result["gaussian_sec"]       = dur("gau_fit", "gau_sample")
-    # ML train/eval
-    result["train_sec"]          = dur("train_start", "train_end")
-    result["evaluation_sec"]     = dur("eval_start", "eval_end")
+    result["runtime_sec"] = dur("benchmark_start", "benchmark_end")
+    result["preprocessing_sec"] = dur("preprocess_start", "preprocess_done")
+    result["anonymization_sec"] = dur("anon_start", "anon_end")
+    result["synthesis_sec"] = dur("synth_start", "synth_end")
+    result["hybrid_synthesis_sec"] = dur("hybrid_start", "hybrid_end")
+    result.update(durations)
+    result["model_training_sec"] = dur("train_start", "train_end")
 
     return result
 
 def collect_runtimes_for_batch(batch_dir: str) -> pd.DataFrame:
-    """
-    For each subfolder in 'batch_dir', parse its benchmark.log to get durations.
-    Return a DataFrame of results (one row per subfolder).
-    """
     rows = []
     for run_name in os.listdir(batch_dir):
         run_path = os.path.join(batch_dir, run_name)
@@ -153,9 +139,7 @@ def collect_runtimes_for_batch(batch_dir: str) -> pd.DataFrame:
         if not os.path.isfile(log_path):
             continue
 
-        # Extract run times
         row = extract_runtime_from_log(log_path)
-        # Store the run_name so we can see which subfolder it is
         row["run_name"] = run_name
         rows.append(row)
 
@@ -163,20 +147,53 @@ def collect_runtimes_for_batch(batch_dir: str) -> pd.DataFrame:
     if df.empty:
         return df
 
-    # Reorder columns
+    time_cols = [
+        "preprocessing_sec", "anonymization_sec", "synthesis_sec", "ctgan_sec", "tvae_sec", "gaussian_sec",
+        "hybrid_synthesis_sec", "hybrid_ctgan_sec", "hybrid_tvae_sec", "hybrid_gaussian_sec", "model_training_sec", "evaluation_sec"
+    ]
+    df["total_runtime_sec"] = df[time_cols].sum(axis=1, skipna=True)
+    df["total_runtime_human"] = df["total_runtime_sec"].apply(lambda x: humanize_seconds(x) if pd.notnull(x) else "")
+
+    numeric_cols = [col for col in df.columns if col.endswith("_sec")]
+    sums = df[numeric_cols].sum(numeric_only=True)
+    totals_row: Dict[str, Any] = {"run_name": "BatchTotals"}
+    for c in numeric_cols:
+        val = sums.get(c, 0.0)
+        totals_row[c] = None if pd.isna(val) else round(float(val), 2)
+
+    totals_row["total_runtime_human"] = humanize_seconds(totals_row["total_runtime_sec"]) if totals_row.get("total_runtime_sec") else ""
+
+    df = pd.concat([df, pd.DataFrame([totals_row])], ignore_index=True)
+
+     # 🆕 Add the human-readable row below totals
+    readable_row: Dict[str, Any] = {"run_name": ""}
+    for c in numeric_cols:
+        val = totals_row.get(c)
+        readable_row[c] = humanize_seconds(val) if val is not None else ""
+    readable_row["total_runtime_human"] = totals_row.get("total_runtime_human", "")
+    
+    df = pd.concat([df, pd.DataFrame([readable_row])], ignore_index=True)
+
+
     col_order = [
         "run_name",
-        "total_sec",
+        "runtime_sec",
         "preprocessing_sec",
         "anonymization_sec",
         "synthesis_sec",
         "ctgan_sec",
         "tvae_sec",
         "gaussian_sec",
-        "train_sec",
-        "evaluation_sec"
+        "hybrid_synthesis_sec",
+        "hybrid_duration_sec",
+        "hybrid_ctgan_sec",
+        "hybrid_tvae_sec",
+        "hybrid_gaussian_sec",
+        "model_training_sec",
+        "evaluation_sec",
+        "total_runtime_sec",
+        "total_runtime_human"
     ]
-    # Keep only the columns that exist
     final_cols = [c for c in col_order if c in df.columns]
     return df[final_cols]
 
@@ -195,38 +212,12 @@ def main():
         print("⚠️ No runs with logs found in that batch.")
         return
 
-    # We'll sum up each numeric column to produce a “BatchTotals” row
-    numeric_cols = [
-        "total_sec","preprocessing_sec","anonymization_sec",
-        "synthesis_sec","ctgan_sec","tvae_sec","gaussian_sec",
-        "train_sec","evaluation_sec"
-    ]
-    sums = df[numeric_cols].sum(numeric_only=True)
-
-    # Build a new row
-    totals_row: Dict[str, Any] = {"run_name": "BatchTotals"}
-    for c in numeric_cols:
-        val = sums.get(c, 0.0)
-        totals_row[c] = None if pd.isna(val) else round(float(val), 2)
-
-    # Append that row with pd.concat (since .append is removed)
-    total_df = pd.DataFrame([totals_row])
-    df = pd.concat([df, total_df], ignore_index=True)
-
-    # Add human-readable version under each numeric column
-    readable_row: Dict[str, Any] = {"run_name": ""}
-    for c in numeric_cols:
-        val = totals_row.get(c)
-        readable_row[c] = humanize_seconds(val) if val is not None else ""
-    df = pd.concat([df, pd.DataFrame([readable_row])], ignore_index=True)
-
-    # Write to CSV
     dataset_name = os.path.basename(batch_dir).replace("batch_", "")
-    filename = f"{dataset_name}_runtime_summary.csv"
     analysis_dir = os.path.join(batch_dir, "batch_analysis")
     os.makedirs(analysis_dir, exist_ok=True)
-    outpath = os.path.join(analysis_dir, filename)
-    df.to_csv(outpath, index=False)
+    outpath = os.path.join(analysis_dir, f"{dataset_name}_runtime_summary.xlsx")
+    df.to_excel(outpath, index=False)
+
     print(f"✅ Created {outpath}")
 
 if __name__ == "__main__":

@@ -1,7 +1,8 @@
 import os
 import yaml
 import pandas as pd
-from analysis.metadata_utils import parse_rows_generated_from_log
+from analysis.metadata_utils import parse_rows_generated_from_log, parse_suppression_stats_from_log
+
 
 def extract_config_metadata(config_path, dataset_type):
     with open(config_path, "r") as f:
@@ -16,7 +17,7 @@ def extract_config_metadata(config_path, dataset_type):
         meta["l_diversity"] = anon.get("models", {}).get("l_diversity", {}).get("value")
         meta["suppression_limit"] = anon.get("suppression_limit")
         meta["epochs"] = None
-        meta["custom_generated_rows"] = None
+        meta["row_multiplier"] = None
 
     elif dataset_type in ["CTGAN", "TVAE", "GaussianCopula"]:
         meta["k_anonymity"] = None
@@ -26,11 +27,11 @@ def extract_config_metadata(config_path, dataset_type):
         for synth_name, synth_conf in config.get("synthesis", {}).get("synthesizers", {}).items():
             if synth_conf.get("enabled"):
                 meta["epochs"] = synth_conf.get("params", {}).get("epochs")
-                meta["custom_generated_rows"] = synth_conf.get("custom_generated_rows")
+                meta["row_multiplier"] = synth_conf.get("row_multiplier")
                 break
         else:
             meta["epochs"] = None
-            meta["custom_generated_rows"] = None
+            meta["row_multiplier"] = None
 
     elif dataset_type == "Hybrid":  # NEW separated Hybrid block
         # Fetch both anonymization and synthesis
@@ -42,11 +43,11 @@ def extract_config_metadata(config_path, dataset_type):
         for synth_name, synth_conf in config.get("synthesis", {}).get("synthesizers", {}).items():
             if synth_conf.get("enabled"):
                 meta["epochs"] = synth_conf.get("params", {}).get("epochs")
-                meta["custom_generated_rows"] = synth_conf.get("custom_generated_rows")
+                meta["row_multiplier"] = synth_conf.get("row_multiplier") 
                 break
         else:
             meta["epochs"] = None
-            meta["custom_generated_rows"] = None
+            meta["row_multiplier"] = None
 
 
     else:
@@ -54,7 +55,7 @@ def extract_config_metadata(config_path, dataset_type):
         meta["l_diversity"] = None
         meta["suppression_limit"] = None
         meta["epochs"] = None
-        meta["custom_generated_rows"] = None
+        meta["row_multiplier"] = None
 
     return meta
 
@@ -96,8 +97,23 @@ def generate_combined_df(batch_folder):
         log_path = os.path.join(run_path, "benchmark.log")
         rows_generated = parse_rows_generated_from_log(log_path)
 
+        # 🔹 NEW: Extract suppression info
+        suppr_rec, suppr_pct = parse_suppression_stats_from_log(log_path)
+
+
+
         # First set rows_generated_at_runtime to None
         df_part["rows_generated_at_runtime"] = None
+        # Ensure the two new columns exist
+        for col in ["suppressed_records", "suppression_percentage"]:
+            if col not in df_part.columns:
+                df_part[col] = None
+        
+        # Fill them only for Anonymous datasets (or *_HYBRID, if you prefer)
+        for ds_type in df_part["Dataset"].unique():
+            if ds_type == "Anonymous" or ds_type.endswith("_HYBRID"):
+                df_part.loc[df_part["Dataset"] == ds_type, "suppressed_records"] = suppr_rec
+                df_part.loc[df_part["Dataset"] == ds_type, "suppression_percentage"] = suppr_pct
 
         # Only assign rows_generated for non-Anonymous datasets
         if rows_generated:

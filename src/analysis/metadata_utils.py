@@ -1,4 +1,9 @@
 import os
+from typing import Pattern
+import re
+
+_SUPPR_REC_RE: Pattern[str] = re.compile(r"Suppressed Records:\s+(\d+)")
+_SUPPR_PCT_RE: Pattern[str] = re.compile(r"Suppression Percentage:\s+([\d.]+)")
 
 def parse_rows_generated_from_log(log_path):
     """
@@ -30,3 +35,26 @@ def parse_rows_generated_from_log(log_path):
         rows_generated = None
 
     return rows_generated
+
+def parse_suppression_stats_from_log(log_path: str) -> tuple[int | None, float | None]:
+    """
+    Returns (suppressed_records, suppression_percentage) if they can be found
+    in `benchmark.log`, otherwise (None, None).
+    """
+    suppressed = pct = None
+    try:
+        with open(log_path, "r", encoding="utf-8") as f:
+            for line in f:
+                if suppressed is None:
+                    m = _SUPPR_REC_RE.search(line)
+                    if m:
+                        suppressed = int(m.group(1))
+                        continue
+                if pct is None:
+                    m = _SUPPR_PCT_RE.search(line)
+                    if m:
+                        pct = float(m.group(1))
+                        # no break → keep reading in case the other value is later
+    except FileNotFoundError:
+        pass
+    return suppressed, pct
