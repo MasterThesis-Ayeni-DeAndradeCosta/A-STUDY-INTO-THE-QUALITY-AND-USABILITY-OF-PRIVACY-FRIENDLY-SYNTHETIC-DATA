@@ -21,8 +21,5 @@ def delete_encoders():
         print(f"Folder not found: {base_path}")
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     delete_encoders()
-=======
-    delete_encoders()
->>>>>>> dev
+
