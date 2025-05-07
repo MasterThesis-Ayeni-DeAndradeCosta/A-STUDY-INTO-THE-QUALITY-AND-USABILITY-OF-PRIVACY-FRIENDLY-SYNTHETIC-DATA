@@ -161,35 +161,48 @@ public class AnonymizationManager {
         }
     }
 
-     public void createIntervalHierarchy(String attributeName, int numIntervals) throws IOException {
+    public void createIntervalHierarchy(String attributeName, int numIntervals) throws IOException {
         DataHandle handle = data.getHandle();
         int columnIndex = handle.getColumnIndexOf(attributeName);
-        
-        // Check if attribute exists in the dataset
+    
         if (columnIndex == -1) {
             throw new IllegalArgumentException("Attribute not found: " + attributeName);
         }
+    
+        // Step 1: Compute min and max
+        double min = Double.MAX_VALUE;
+        double max = Double.MIN_VALUE;
+    
+        for (int i = 0; i < handle.getNumRows(); i++) {
+            String value = handle.getValue(i, columnIndex);
+            if (value != null && !value.isEmpty()) {
+                double numValue = Double.parseDouble(value);
+                if (numValue < min) min = numValue;
+                if (numValue > max) max = numValue;
+            }
+        }
+    
+        // Step 2: Compute interval size
+        double intervalSize = (max - min) / numIntervals;
+    
+        // Step 3: Create hierarchy
         DataType<Double> dataType = DataType.createDecimal("#.####", Locale.ENGLISH);
-        double lower = Double.MIN_VALUE;
-        double upper = Double.MIN_VALUE;
-        double interval = (upper - lower) / numIntervals; 
-        
-
-
+    
+        double lower = min;
+        double upper = max;
+    
         HierarchyBuilderIntervalBased<Double> builder = HierarchyBuilderIntervalBased.create(
-                                                            dataType,
-                                                          new Range<Double>(lower, lower, lower),
-                                                          new Range<Double>(upper, upper, upper));
-
-        // Define base intervals
+            dataType,
+            new Range<>(lower, lower, lower),
+            new Range<>(upper, upper, upper)
+        );
+    
         builder.setAggregateFunction(dataType.createAggregate().createIntervalFunction(true, false));
-        builder.addInterval(0d, Double.valueOf(interval));
-
-        // Define grouping fanouts
+        builder.addInterval(0d, intervalSize);
+    
         builder.getLevel(0).addGroup(2);
         builder.getLevel(1).addGroup(3);
-
-        // Assign the generated hierarchy to the attribute
+    
         setHierarchyToAtt(attributeName, builder);
     }
 }

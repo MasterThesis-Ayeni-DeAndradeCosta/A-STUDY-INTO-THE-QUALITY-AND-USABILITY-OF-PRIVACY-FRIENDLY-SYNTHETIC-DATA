@@ -2,6 +2,8 @@ dataset:
   path: "datasets/original/bankMarketing.csv" # Path to the dataset
   separator: ";" # Delimiter used in the dataset (e.g., "," or "\t")
   target_column: "y" # Name of the target column
+  excluded_columns:
+    - "duration"
   test_size: 0.2
 
 preprocessing:
@@ -16,19 +18,19 @@ synthesis:
       import_path: "sdv.single_table"
       class_name: "CTGANSynthesizer"
       params:
-        epochs: 50
+        epochs: 300
       num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
       custom_generated_rows: 10000 # Only used if num_generated_rows is "custom"
-      row_multiplier: 8
+      row_multiplier: 1
     TVAE:
       enabled: false
       import_path: "sdv.single_table"
       class_name: "TVAESynthesizer"
       params:
-        epochs: 50
+        epochs: 300
       num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
       custom_generated_rows: 5000 # TVAE will generate 5000 rows
-      row_multiplier: 8
+      row_multiplier: 1
     GaussianCopula:
       enabled: false
       import_path: "sdv.single_table"
@@ -44,40 +46,51 @@ synthesis:
         noise_factor: 0.2
       num_generated_rows: "custom" # Options: "same_as_original", "custom", "multiple"
       custom_generated_rows: 7000
-      row_multiplier: 8
+      row_multiplier: 1
 
 anonymization:
   enable_anonymization: true # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
   delete_after_evaluation: false
-  suppression_limit: 0.1
+  suppression_limit: 0.01
   attributes:
     quasi_identifiers:
       - "age"
       - "marital"
       - "education"
+      - "job"
+      - "housing"
 
     sensitive_attributes:
-      - "balance"
+      - "loan"
+
     insensitive_attributes:
+      - "default"
+      - "balance"
       - "contact"
+      - "day"
+      - "month"
+      - "campaign"
       - "pdays"
       - "previous"
+      - "poutcome"
       - "y"
 
   hierarchies:
     "age": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/age.csv"
     "marital": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/marital.csv"
     "education": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/education.csv"
+    "job": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/job.csv"
+    "housing": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/housing.csv"
 
   hierarchy_config: {}
   models:
-    k_anonymity: 5
+    k_anonymity: 2
     l_diversity:
-      attribute: "balance"
-      value: 2
+      attribute: "loan"
+      value: 1
 
 hybrid:
-  enable_hybrid: true
+  enable_hybrid: false
   delete_hybrid_after_evaluation: false
   reuse_params: true
   save_intermediate_files: false

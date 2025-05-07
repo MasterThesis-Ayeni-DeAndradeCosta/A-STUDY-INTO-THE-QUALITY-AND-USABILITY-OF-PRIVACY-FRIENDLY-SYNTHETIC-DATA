@@ -29,6 +29,7 @@ import pandas as pd
 _RE_RANGE  = re.compile(r"\[?(\d+)[-–](\d+)\]?")       # "[20‑30]" or "20-30"
 _RE_TOP    = re.compile(r">=?\s*(\d+)")                # ">=90" or ">90"
 _RE_BOTTOM = re.compile(r"<\s*(\d+)")                  # "<5"
+_RE_ARX_RANGE = re.compile(r"\[?(\d+(?:\.\d+)?),\s*(\d+(?:\.\d+)?)\[?") #ARX-style range: [17, 71[
 
 
 # ---------------------------------------------------------------------------#
@@ -81,6 +82,12 @@ def _clean_scalar(
     if m:
         a, b = m.groups()
         return _mid(a, b)
+    
+    # ARX-style range: [17, 71[
+    m = _RE_ARX_RANGE.fullmatch(s)
+    if m:
+        a, b = m.groups()
+        return _mid(a, b)        
 
     # ------------------------------------------------------------------#
     # c) Top‑coded (">=90")                                             #
