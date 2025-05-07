@@ -1,9 +1,8 @@
 import org.deidentifier.arx.ARXConfiguration;
 import org.deidentifier.arx.Data;
+// Importação correta!
 import org.deidentifier.arx.criteria.*;
-import org.deidentifier.arx.criteria.EqualDistanceTCloseness; // Importação correta!
 import org.deidentifier.arx.DataSubset;
-import org.deidentifier.arx.criteria.DPresence;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -65,10 +64,25 @@ public class AnonymizationModel {
             addKAnonymity((int) config.get("k_anonymity"));
         }
 
+        // if (config.containsKey("l_diversity")) {
+        //     Map<String, Object> lDiv = (Map<String, Object>) config.get("l_diversity");
+        //     addLDiversity((String) lDiv.get("attribute"), (int) lDiv.get("value"));
+        // }
         if (config.containsKey("l_diversity")) {
             Map<String, Object> lDiv = (Map<String, Object>) config.get("l_diversity");
-            addLDiversity((String) lDiv.get("attribute"), (int) lDiv.get("value"));
+            String attribute = (String) lDiv.get("attribute");
+            int value = (int) lDiv.get("value");
+            String model = (String) lDiv.getOrDefault("model", "distinct");
+
+            if ("entropy".equalsIgnoreCase(model)) {
+                addEntropyLDiversity(attribute, value);
+                System.out.printf("✓ Applied Entropy L-Diversity on: %s (l=%d)%n", attribute, value);
+            } else {
+                addLDiversity(attribute, value);
+                System.out.printf("✓ Applied Distinct L-Diversity on: %s (l=%d)%n", attribute, value);
+            }
         }
+
 
         if (config.containsKey("t_closeness")) {
             Map<String, Object> tClose = (Map<String, Object>) config.get("t_closeness");

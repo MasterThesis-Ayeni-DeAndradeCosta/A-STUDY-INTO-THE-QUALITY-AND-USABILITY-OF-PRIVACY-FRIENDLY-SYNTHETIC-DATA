@@ -2,6 +2,8 @@ dataset:
   path: "datasets/original/loan.csv" # Path to the dataset
   separator: "," # Delimiter used in the dataset (e.g., "," or "\t")
   target_column: "Loan_Status" # Name of the target column
+  excluded_columns:
+    - "Loan_ID"
   test_size: 0.2
 
 preprocessing:
@@ -9,7 +11,7 @@ preprocessing:
   encoding_type: "binary" # Type of encoding, currently only "binary" is supported
 
 synthesis:
-  enable_synthetic_generation: true # Set to false to skip # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
+  enable_synthetic_generation: false # Set to false to skip # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
   synthesizers:
     CTGAN:
       enabled: true
@@ -19,7 +21,7 @@ synthesis:
         epochs: 300
       num_generated_rows: "same_as_original" # Options: "same_as_original", "custom"
       custom_generated_rows: 10000 # Only used if num_generated_rows is "custom"
-      row_multiplier: 8
+      row_multiplier: 1
     TVAE:
       enabled: true
       import_path: "sdv.single_table"
@@ -28,7 +30,7 @@ synthesis:
         epochs: 300
       num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
       custom_generated_rows: 10000 # TVAE will generate 5000 rows
-      row_multiplier: 8
+      row_multiplier: 1
     GaussianCopula:
       enabled: true
       import_path: "sdv.single_table"
@@ -36,7 +38,7 @@ synthesis:
       params: {}
       num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
       custom_generated_rows: 10000
-      row_multiplier: 8
+      row_multiplier: 1
     CustomSynthesizer:
       enabled: false # Set to true if using a custom one
       import_path: "custom.custom_synthesizer"
@@ -45,40 +47,51 @@ synthesis:
         noise_factor: 0.2
       num_generated_rows: "custom" # Options: "same_as_original", "custom", "multiple"
       custom_generated_rows: 7000
-      row_multiplier: 8
+      row_multiplier: 1
 
 anonymization:
   enable_anonymization: true # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
-  delete_after_evaluation: true
-  suppression_limit: 0.1
+  delete_after_evaluation: false
+  suppression_limit: 0.05
   attributes:
     quasi_identifiers:
       - "Gender"
       - "Married"
       - "Education"
+      - "Dependents"
+      - "Self_Employed"
+      - "Property_Area"
+      - "Credit_History"
+      - "Loan_Amount_Term"
 
     sensitive_attributes:
-      - "ApplicantIncome"
+      - "LoanAmount"
 
-    insensitive_attributes:
-      - "Loan_Amount_Term"
-      - "Dependents"
+    insensitive_attributes: # target colum must be present in insensitve attributes so it doesnt get surpessed
       - "Loan_Status"
+      - "ApplicantIncome"
+      - "CoapplicantIncome"
 
   hierarchies:
     "Gender": "src/anonymization/anonymARXij/src/hierarchies_loan/gender.csv"
     "Married": "src/anonymization/anonymARXij/src/hierarchies_loan/married.csv"
     "Education": "src/anonymization/anonymARXij/src/hierarchies_loan/education.csv"
+    "Dependents": "src/anonymization/anonymARXij/src/hierarchies_loan/dependents.csv"
+    "Self_Employed": "src/anonymization/anonymARXij/src/hierarchies_loan/self_employed.csv"
+    "Property_Area": "src/anonymization/anonymARXij/src/hierarchies_loan/property_area.csv"
+    "Credit_History": "src/anonymization/anonymARXij/src/hierarchies_loan/credit_history.csv"
+    "Loan_Amount_Term": "src/anonymization/anonymARXij/src/hierarchies_loan/loan_amount_terms.csv"
 
   hierarchy_config: {}
   models:
-    k_anonymity: 5
+    k_anonymity: 3
     l_diversity:
-      attribute: "ApplicantIncome"
+      attribute: "LoanAmount"
       value: 2
+      model: entropy
 
 hybrid:
-  enable_hybrid: true
+  enable_hybrid: false
   delete_hybrid_after_evaluation: false
   reuse_params: true
   save_intermediate_files: false

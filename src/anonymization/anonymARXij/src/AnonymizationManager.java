@@ -1,12 +1,14 @@
 import org.deidentifier.arx.*;
 import org.deidentifier.arx.aggregates.HierarchyBuilder;
 import org.deidentifier.arx.aggregates.HierarchyBuilderIntervalBased;
+import org.deidentifier.arx.aggregates.HierarchyBuilderIntervalBased.Range;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.io.File;
+import java.util.Locale;
 
 /**
  * The AnonymizationManager class is responsible for:
@@ -159,19 +161,18 @@ public class AnonymizationManager {
         }
     }
 
-     public void createIntervalHierarchy(String attributeName, int numIntervals) throws IOException {
+    public void createIntervalHierarchy(String attributeName, int numIntervals) throws IOException {
         DataHandle handle = data.getHandle();
         int columnIndex = handle.getColumnIndexOf(attributeName);
-        
-        // Check if attribute exists in the dataset
+    
         if (columnIndex == -1) {
             throw new IllegalArgumentException("Attribute not found: " + attributeName);
         }
-
-        // Find min and max values for the attribute
+    
+        // Step 1: Compute min and max
         double min = Double.MAX_VALUE;
         double max = Double.MIN_VALUE;
-
+    
         for (int i = 0; i < handle.getNumRows(); i++) {
             String value = handle.getValue(i, columnIndex);
             if (value != null && !value.isEmpty()) {
@@ -180,27 +181,28 @@ public class AnonymizationManager {
                 if (numValue > max) max = numValue;
             }
         }
-
-        // Calculate interval size
+    
+        // Step 2: Compute interval size
         double intervalSize = (max - min) / numIntervals;
-        HierarchyBuilderIntervalBased<Double> builder = HierarchyBuilderIntervalBased.create(DataType.DECIMAL);
-
-        // Define intervals and add them to the builder
-        double currentStart = min;
-        for (int i = 0; i < numIntervals; i++) {
-            double currentEnd = currentStart + intervalSize;
-            if (i == numIntervals - 1) {
-                currentEnd = max + 0.000001; // Ensure max value is included
-            }
-            builder.addInterval(currentStart, currentEnd);
-            currentStart = currentEnd;
-        }
-
-        // Define hierarchy levels (groups of intervals)
+    
+        // Step 3: Create hierarchy
+        DataType<Double> dataType = DataType.createDecimal("#.####", Locale.ENGLISH);
+    
+        double lower = min;
+        double upper = max;
+    
+        HierarchyBuilderIntervalBased<Double> builder = HierarchyBuilderIntervalBased.create(
+            dataType,
+            new Range<>(lower, lower, lower),
+            new Range<>(upper, upper, upper)
+        );
+    
+        builder.setAggregateFunction(dataType.createAggregate().createIntervalFunction(true, false));
+        builder.addInterval(0d, intervalSize);
+    
         builder.getLevel(0).addGroup(2);
         builder.getLevel(1).addGroup(3);
-
-        // Assign the generated hierarchy to the attribute
+    
         setHierarchyToAtt(attributeName, builder);
     }
 }

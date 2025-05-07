@@ -1,9 +1,8 @@
 dataset:
-  path: "datasets/original/bankMarketing.csv" # Path to the dataset
-  separator: ";" # Delimiter used in the dataset (e.g., "," or "\t")
-  target_column: "y" # Name of the target column
+  path: "datasets/original/censusIncome.csv" # Path to the dataset
+  separator: "," # Delimiter used in the dataset (e.g., "," or "\t")
+  target_column: "income" # Name of the target column
   excluded_columns:
-    - "duration"
   test_size: 0.2
 
 preprocessing:
@@ -11,7 +10,7 @@ preprocessing:
   encoding_type: "binary" # Type of encoding, currently only "binary" is supported
 
 synthesis:
-  enable_synthetic_generation: true # Set to false to skip # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
+  enable_synthetic_generation: false # Set to false to skip # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
   synthesizers:
     CTGAN:
       enabled: true
@@ -19,25 +18,26 @@ synthesis:
       class_name: "CTGANSynthesizer"
       params:
         epochs: 300
-      num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
+      num_generated_rows: "same_as_original" # Options: "same_as_original", "custom"
       custom_generated_rows: 10000 # Only used if num_generated_rows is "custom"
       row_multiplier: 1
     TVAE:
-      enabled: false
+      enabled: true
       import_path: "sdv.single_table"
       class_name: "TVAESynthesizer"
       params:
         epochs: 300
       num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
-      custom_generated_rows: 5000 # TVAE will generate 5000 rows
+      custom_generated_rows: 10000 # TVAE will generate 5000 rows
       row_multiplier: 1
     GaussianCopula:
-      enabled: false
+      enabled: true
       import_path: "sdv.single_table"
       class_name: "GaussianCopulaSynthesizer"
       params: {}
-      num_generated_rows: "same_as_original"
-      custom_generated_rows: 5000
+      num_generated_rows: "same_as_original" # Options: "same_as_original", "custom", "multiple"
+      custom_generated_rows: 10000
+      row_multiplier: 1
     CustomSynthesizer:
       enabled: false # Set to true if using a custom one
       import_path: "custom.custom_synthesizer"
@@ -47,51 +47,48 @@ synthesis:
       num_generated_rows: "custom" # Options: "same_as_original", "custom", "multiple"
       custom_generated_rows: 7000
       row_multiplier: 1
-
 anonymization:
   enable_anonymization: true # IMPORTANT: Ensure that boolean values are lowercase (true/false), not capitalized (True/False).
   delete_after_evaluation: false
-  suppression_limit: 0.01
+  suppression_limit: 0.50
   attributes:
     quasi_identifiers:
       - "age"
-      - "marital"
       - "education"
-      - "job"
-      - "housing"
+      - "workclass"
+      - "marital-status"
+      - "occupation"
+      - "race"
+      - "sex"
+      - "native-country"
 
     sensitive_attributes:
-      - "loan"
+      - "income"
 
-    insensitive_attributes:
-      - "default"
-      - "balance"
-      - "contact"
-      - "day"
-      - "month"
-      - "campaign"
-      - "pdays"
-      - "previous"
-      - "poutcome"
-      - "y"
+    insensitive_attributes: # target colum must be present in insensitve attributes so it doesnt get surpessed
+      - "fnlwgt"
+      - "hours-per-week"
+      - "capital-gain"
+      - "capital-loss"
+      - "relationship"
+      - "education-num"
 
   hierarchies:
-    "age": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/age.csv"
-    "marital": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/marital.csv"
-    "education": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/education.csv"
-    "job": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/job.csv"
-    "housing": "src/anonymization/anonymARXij/src/hierarchies_bankMarketing/housing.csv"
+    "age": "src/anonymization/anonymARXij/src/hierarchies_censusIncome/age.csv"
+    "education": "src/anonymization/anonymARXij/src/hierarchies_censusIncome/education.csv"
+    "marital-status": "src/anonymization/anonymARXij/src/hierarchies_censusIncome/marital-status.csv"
+    "native-country": "src/anonymization/anonymARXij/src/hierarchies_censusIncome/native-country.csv"
+    "occupation": "src/anonymization/anonymARXij/src/hierarchies_censusIncome/occupation.csv"
+    "race": "src/anonymization/anonymARXij/src/hierarchies_censusIncome/race.csv"
+    "sex": "src/anonymization/anonymARXij/src/hierarchies_censusIncome/sex.csv"
+    "workclass": "src/anonymization/anonymARXij/src/hierarchies_censusIncome/workclass.csv"
 
   hierarchy_config: {}
   models:
-<<<<<<< HEAD
-    k_anonymity: 10
-=======
-    k_anonymity: 2
->>>>>>> dev
+    k_anonymity: 50
     l_diversity:
-      attribute: "loan"
-      value: 1
+      attribute: "income"
+      value: 2
 
 hybrid:
   enable_hybrid: false
@@ -106,7 +103,7 @@ utility:
     KNN: true
     RandomForest: true
     DecisionTree: true
-    SVM: false
+    SVM: true
     XGBoost: false
 
   metrics:
