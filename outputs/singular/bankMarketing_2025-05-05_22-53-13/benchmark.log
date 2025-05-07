@@ -1,0 +1,69 @@
+2025-05-05 22:53:13,719 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-05-05 22:53:13,719 - INFO -  Benchmarking started for dataset: bankMarketing
+2025-05-05 22:53:13,719 - INFO - Using dataset path: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\original\bankMarketing.csv
+2025-05-05 22:53:13,719 - INFO - Target column: y, separator: ';'
+2025-05-05 22:53:13,719 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False, enable_hybrid = False, enable_utility = True, delete_after_evaluation = False
+2025-05-05 22:53:13,719 - INFO - Running preprocessing...
+2025-05-05 22:53:13,724 - INFO -  [PREPROCESSING] Preprocessed files found. Skipping preprocessing.
+2025-05-05 22:53:13,877 - INFO - Preprocessing completed. Rows before: 45211, after: 36168
+2025-05-05 22:53:13,878 - INFO - Preprocessed data saved to: outputs\singular\bankMarketing_2025-05-05_22-53-13\preprocessing_report.txt
+2025-05-05 22:53:13,878 - INFO - enable_anonymization = True
+2025-05-05 22:53:13,879 - INFO - Starting Anonymization Pipeline with output path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\bankMarketing_k200_l2_sup01_anonymized.csv.......
+2025-05-05 22:53:13,883 - INFO -  [ANONYMIZATION] Executing run_anonymization, config_path : configs/benchmark_config.yaml...........
+2025-05-05 22:53:13,883 - INFO -  [ANONYMIZATION] Using JAR file at C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\bin\anonymARXij.jar to anonymize the dataset.
+2025-05-05 22:53:15,509 - ERROR -  [ANONYMIZATION] Java anonymization failed with exit code: 1
+2025-05-05 22:53:15,509 - ERROR -  [ANONYMIZATION] STDERR: Exception in thread "main" java.lang.IllegalArgumentException: No privacy model specified for sensitive attribute: 'balance'
+	at org.deidentifier.arx.ARXAnonymizer.checkBeforeEncoding(ARXAnonymizer.java:475)
+	at org.deidentifier.arx.ARXAnonymizer.anonymize(ARXAnonymizer.java:212)
+	at Main.main(Main.java:114)
+2025-05-05 22:53:15,509 - ERROR - Anonymization Pipeline failed!
+2025-05-05 22:53:15,509 - INFO - enable_synthetic_generation = False
+2025-05-05 22:53:15,509 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-05-05 22:53:15,509 - INFO - Hybrid Pipeline skipped (disabled in configuration).
+2025-05-05 22:53:15,509 - INFO - Starting Utility...
+2025-05-05 22:53:15,509 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-05-05 22:53:15,509 - INFO - [UTILITY] Original Data - Training Size: 36168, Testing Size: 9043
+2025-05-05 22:53:15,522 - INFO - [UTILITY] Target class distribution (Original): {'no': 31937, 'yes': 4231}
+2025-05-05 22:53:15,523 - INFO - [UTILITY] Training models on all datasets...
+2025-05-05 22:53:15,523 - INFO - [UTILITY] Total datasets used for training: 1
+2025-05-05 22:53:15,524 - INFO - [TRAINING] Training models from scratch...
+2025-05-05 22:53:15,524 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 36168, Features: 30
+2025-05-05 22:53:15,524 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-05-05 22:53:15,626 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 0.10 sec
+2025-05-05 22:53:15,627 - INFO - [TRAINING] Training KNN on Original...
+2025-05-05 22:53:15,645 - INFO - [TRAINING] KNN trained successfully on Original in 0.02 sec
+2025-05-05 22:53:15,646 - INFO - [TRAINING] Training RandomForest on Original...
+2025-05-05 22:53:18,759 - INFO - [TRAINING] RandomForest trained successfully on Original in 3.12 sec
+2025-05-05 22:53:18,759 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-05-05 22:53:18,998 - INFO - [TRAINING] DecisionTree trained successfully on Original in 0.23 sec
+2025-05-05 22:53:18,998 - INFO - [TRAINING] Finished training 4 model(s) for dataset: Original
+2025-05-05 22:53:18,998 - INFO - [TRAINING] Total models trained across all datasets: 4
+2025-05-05 22:53:18,998 - INFO - [UTILITY] Trained model names: ['Original']
+2025-05-05 22:53:18,998 - INFO - [UTILITY] Model Training Completed.
+2025-05-05 22:53:18,999 - INFO - Starting the Evaluating of models...
+2025-05-05 22:53:18,999 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-05-05 22:53:18,999 - INFO - Evaluating LogisticRegression on Original...
+2025-05-05 22:53:19,004 - INFO - Predictions completed for LogisticRegression on Original
+2025-05-05 22:53:19,007 - INFO - Prediction distribution for LogisticRegression on Original: {'no': 8778, 'yes': 265}
+2025-05-05 22:53:19,110 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-05-05 22:53:19,110 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-05-05 22:53:19,110 - INFO - Evaluating KNN on Original...
+2025-05-05 22:53:24,345 - INFO - Predictions completed for KNN on Original
+2025-05-05 22:53:24,345 - INFO - Prediction distribution for KNN on Original: {'no': 8753, 'yes': 290}
+2025-05-05 22:53:34,943 - INFO - Computed 8 metric(s) for KNN on Original
+2025-05-05 22:53:34,951 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-05-05 22:53:34,951 - INFO - Evaluating RandomForest on Original...
+2025-05-05 22:53:35,116 - INFO - Predictions completed for RandomForest on Original
+2025-05-05 22:53:35,117 - INFO - Prediction distribution for RandomForest on Original: {'no': 8671, 'yes': 372}
+2025-05-05 22:53:35,525 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-05-05 22:53:35,525 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-05-05 22:53:35,525 - INFO - Evaluating DecisionTree on Original...
+2025-05-05 22:53:35,525 - INFO - Predictions completed for DecisionTree on Original
+2025-05-05 22:53:35,540 - INFO - Prediction distribution for DecisionTree on Original: {'no': 7836, 'yes': 1207}
+2025-05-05 22:53:35,653 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-05-05 22:53:35,658 - INFO - Evaluation completed for all models.
+2025-05-05 22:53:35,660 - INFO - Model evaluation completed in 16.66 seconds.
+2025-05-05 22:53:35,665 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest']
+2025-05-05 22:53:35,665 - INFO - Model Training and Evaluation completed.
+2025-05-05 22:53:36,137 - INFO -  Visualizations saved.
+2025-05-05 22:53:36,138 - INFO -  Benchmarking Completed. Results saved in output folder.

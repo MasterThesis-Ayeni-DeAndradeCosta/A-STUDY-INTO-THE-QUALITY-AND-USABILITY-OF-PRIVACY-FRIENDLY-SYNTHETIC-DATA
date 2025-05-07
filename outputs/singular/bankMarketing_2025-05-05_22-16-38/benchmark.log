@@ -1,0 +1,80 @@
+2025-05-05 22:16:38,058 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-05-05 22:16:38,058 - INFO -  Benchmarking started for dataset: bankMarketing
+2025-05-05 22:16:38,058 - INFO - Using dataset path: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\original\bankMarketing.csv
+2025-05-05 22:16:38,058 - INFO - Target column: y, separator: ';'
+2025-05-05 22:16:38,058 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False, enable_hybrid = False, enable_utility = True, delete_after_evaluation = False
+2025-05-05 22:16:38,058 - INFO - Running preprocessing...
+2025-05-05 22:16:38,065 - INFO - [PREPROCESSING] No preprocessed files found. Starting full preprocessing pipeline...
+2025-05-05 22:16:38,119 - INFO - [PREPROCESSING] Dropped excluded columns: ['duration']
+2025-05-05 22:16:38,134 - INFO - [PREPROCESSING] Missing value handling strategy: 'drop' applied.
+2025-05-05 22:16:38,156 - INFO - [PREPROCESSING] Split data into train (36168 rows) and test (9043 rows). Test size: 0.2
+2025-05-05 22:16:38,611 - INFO -  [PREPROCESSING] Saved raw train set to: datasets/train/bankMarketing_train_raw.csv
+2025-05-05 22:16:38,611 - INFO -  [PREPROCESSING] Saved encoder to: artifacts/bankMarketing_binary_encoder.pkl
+2025-05-05 22:16:38,611 - INFO -  [PREPROCESSING]Saved encoded train set to: datasets/cleaned/bankMarketing_cleaned.csv
+2025-05-05 22:16:38,611 - INFO -  [PREPROCESSING] Saved encoded test set to: datasets/test/bankMarketing_test_set.csv
+2025-05-05 22:16:38,611 - INFO - [PREPROCESSING] run_preprocessing finished executing.
+2025-05-05 22:16:38,635 - INFO - Preprocessing completed. Rows before: 45211, after: 36168
+2025-05-05 22:16:38,635 - INFO - Preprocessed data saved to: outputs\singular\bankMarketing_2025-05-05_22-16-38\preprocessing_report.txt
+2025-05-05 22:16:38,635 - INFO - enable_anonymization = True
+2025-05-05 22:16:38,636 - INFO - Starting Anonymization Pipeline with output path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\bankMarketing_k20_l2_sup01_anonymized.csv.......
+2025-05-05 22:16:38,640 - INFO -  [ANONYMIZATION] Executing run_anonymization, config_path : configs/benchmark_config.yaml...........
+2025-05-05 22:16:38,641 - INFO -  [ANONYMIZATION] Compiling Java source files...
+2025-05-05 22:16:39,684 - INFO -  [ANONYMIZATION] Java compilation successful.
+2025-05-05 22:16:39,685 - INFO - [ANONYMIZATION] Creating JAR file for anonymization...
+2025-05-05 22:16:39,968 - INFO -  [ANONYMIZATION] JAR file created successfully.
+2025-05-05 22:16:41,304 - ERROR -  [ANONYMIZATION] Java anonymization failed with exit code: 1
+2025-05-05 22:16:41,304 - ERROR -  [ANONYMIZATION] STDERR: Exception in thread "main" java.lang.IllegalArgumentException: Insensitive attribute 'day_of_week' is not contained in the dataset
+	at org.deidentifier.arx.ARXAnonymizer.checkBeforeEncoding(ARXAnonymizer.java:524)
+	at org.deidentifier.arx.ARXAnonymizer.anonymize(ARXAnonymizer.java:212)
+	at Main.main(Main.java:114)
+2025-05-05 22:16:41,304 - ERROR - Anonymization Pipeline failed!
+2025-05-05 22:16:41,304 - INFO - enable_synthetic_generation = False
+2025-05-05 22:16:41,304 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-05-05 22:16:41,304 - INFO - Hybrid Pipeline skipped (disabled in configuration).
+2025-05-05 22:16:41,304 - INFO - Starting Utility...
+2025-05-05 22:16:41,304 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-05-05 22:16:41,304 - INFO - [UTILITY] Original Data - Training Size: 36168, Testing Size: 9043
+2025-05-05 22:16:41,312 - INFO - [UTILITY] Target class distribution (Original): {'no': 31937, 'yes': 4231}
+2025-05-05 22:16:41,312 - INFO - [UTILITY] Training models on all datasets...
+2025-05-05 22:16:41,313 - INFO - [UTILITY] Total datasets used for training: 1
+2025-05-05 22:16:41,313 - INFO - [TRAINING] Training models from scratch...
+2025-05-05 22:16:41,314 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 36168, Features: 30
+2025-05-05 22:16:41,314 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-05-05 22:16:41,409 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 0.10 sec
+2025-05-05 22:16:41,410 - INFO - [TRAINING] Training KNN on Original...
+2025-05-05 22:16:41,435 - INFO - [TRAINING] KNN trained successfully on Original in 0.02 sec
+2025-05-05 22:16:41,435 - INFO - [TRAINING] Training RandomForest on Original...
+2025-05-05 22:16:44,031 - INFO - [TRAINING] RandomForest trained successfully on Original in 2.59 sec
+2025-05-05 22:16:44,031 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-05-05 22:16:44,225 - INFO - [TRAINING] DecisionTree trained successfully on Original in 0.19 sec
+2025-05-05 22:16:44,225 - INFO - [TRAINING] Finished training 4 model(s) for dataset: Original
+2025-05-05 22:16:44,226 - INFO - [TRAINING] Total models trained across all datasets: 4
+2025-05-05 22:16:44,226 - INFO - [UTILITY] Trained model names: ['Original']
+2025-05-05 22:16:44,226 - INFO - [UTILITY] Model Training Completed.
+2025-05-05 22:16:44,226 - INFO - Starting the Evaluating of models...
+2025-05-05 22:16:44,227 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-05-05 22:16:44,227 - INFO - Evaluating LogisticRegression on Original...
+2025-05-05 22:16:44,232 - INFO - Predictions completed for LogisticRegression on Original
+2025-05-05 22:16:44,234 - INFO - Prediction distribution for LogisticRegression on Original: {'no': 8778, 'yes': 265}
+2025-05-05 22:16:44,343 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-05-05 22:16:44,343 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-05-05 22:16:44,344 - INFO - Evaluating KNN on Original...
+2025-05-05 22:16:49,268 - INFO - Predictions completed for KNN on Original
+2025-05-05 22:16:49,268 - INFO - Prediction distribution for KNN on Original: {'no': 8753, 'yes': 290}
+2025-05-05 22:16:59,352 - INFO - Computed 8 metric(s) for KNN on Original
+2025-05-05 22:16:59,352 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-05-05 22:16:59,352 - INFO - Evaluating RandomForest on Original...
+2025-05-05 22:16:59,556 - INFO - Predictions completed for RandomForest on Original
+2025-05-05 22:16:59,556 - INFO - Prediction distribution for RandomForest on Original: {'no': 8675, 'yes': 368}
+2025-05-05 22:17:00,066 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-05-05 22:17:00,066 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-05-05 22:17:00,067 - INFO - Evaluating DecisionTree on Original...
+2025-05-05 22:17:00,075 - INFO - Predictions completed for DecisionTree on Original
+2025-05-05 22:17:00,076 - INFO - Prediction distribution for DecisionTree on Original: {'no': 7852, 'yes': 1191}
+2025-05-05 22:17:00,219 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-05-05 22:17:00,219 - INFO - Evaluation completed for all models.
+2025-05-05 22:17:00,219 - INFO - Model evaluation completed in 15.99 seconds.
+2025-05-05 22:17:00,230 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest']
+2025-05-05 22:17:00,230 - INFO - Model Training and Evaluation completed.
+2025-05-05 22:17:01,063 - INFO -  Visualizations saved.
+2025-05-05 22:17:01,064 - INFO -  Benchmarking Completed. Results saved in output folder.

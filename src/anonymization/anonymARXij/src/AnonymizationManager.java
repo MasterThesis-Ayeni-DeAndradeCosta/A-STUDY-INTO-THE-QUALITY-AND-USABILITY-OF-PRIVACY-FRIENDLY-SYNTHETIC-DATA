@@ -1,12 +1,14 @@
 import org.deidentifier.arx.*;
 import org.deidentifier.arx.aggregates.HierarchyBuilder;
 import org.deidentifier.arx.aggregates.HierarchyBuilderIntervalBased;
+import org.deidentifier.arx.aggregates.HierarchyBuilderIntervalBased.Range;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.io.File;
+import java.util.Locale;
 
 /**
  * The AnonymizationManager class is responsible for:
@@ -167,36 +169,23 @@ public class AnonymizationManager {
         if (columnIndex == -1) {
             throw new IllegalArgumentException("Attribute not found: " + attributeName);
         }
+        DataType<Double> dataType = DataType.createDecimal("#.####", Locale.ENGLISH);
+        double lower = Double.MIN_VALUE;
+        double upper = Double.MIN_VALUE;
+        double interval = (upper - lower) / numIntervals; 
+        
 
-        // Find min and max values for the attribute
-        double min = Double.MAX_VALUE;
-        double max = Double.MIN_VALUE;
 
-        for (int i = 0; i < handle.getNumRows(); i++) {
-            String value = handle.getValue(i, columnIndex);
-            if (value != null && !value.isEmpty()) {
-                double numValue = Double.parseDouble(value);
-                if (numValue < min) min = numValue;
-                if (numValue > max) max = numValue;
-            }
-        }
+        HierarchyBuilderIntervalBased<Double> builder = HierarchyBuilderIntervalBased.create(
+                                                            dataType,
+                                                          new Range<Double>(lower, lower, lower),
+                                                          new Range<Double>(upper, upper, upper));
 
-        // Calculate interval size
-        double intervalSize = (max - min) / numIntervals;
-        HierarchyBuilderIntervalBased<Double> builder = HierarchyBuilderIntervalBased.create(DataType.DECIMAL);
+        // Define base intervals
+        builder.setAggregateFunction(dataType.createAggregate().createIntervalFunction(true, false));
+        builder.addInterval(0d, Double.valueOf(interval));
 
-        // Define intervals and add them to the builder
-        double currentStart = min;
-        for (int i = 0; i < numIntervals; i++) {
-            double currentEnd = currentStart + intervalSize;
-            if (i == numIntervals - 1) {
-                currentEnd = max + 0.000001; // Ensure max value is included
-            }
-            builder.addInterval(currentStart, currentEnd);
-            currentStart = currentEnd;
-        }
-
-        // Define hierarchy levels (groups of intervals)
+        // Define grouping fanouts
         builder.getLevel(0).addGroup(2);
         builder.getLevel(1).addGroup(3);
 

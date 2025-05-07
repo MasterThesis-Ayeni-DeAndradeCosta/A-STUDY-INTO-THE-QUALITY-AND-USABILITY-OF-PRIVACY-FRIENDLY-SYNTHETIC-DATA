@@ -99,17 +99,31 @@ def _clean_scalar(
     # ------------------------------------------------------------------#
     # e) Partially masked numeric ("12.3*")                             #
     # ------------------------------------------------------------------#
-    if s.endswith("*") and s[:-1].replace(".", "", 1).isdigit():
-        return float(s[:-1])
+    # if s.endswith("*") and s[:-1].replace(".", "", 1).isdigit():
+    #     return float(s[:-1])
+    
+        # ------------------------------------------------------------------#
+    # e) Partially masked numeric with any number of * ("12.3*", "7**") #
+    # ------------------------------------------------------------------#
+    m = re.fullmatch(r"([0-9]+(?:\.[0-9]+)?)\*+", s)
+    if m:
+        return float(m.group(1))
+    
+    #   f) NEW – label with trailing asterisks ("management*", "blue-collar**")
+    m = re.fullmatch(r"(.+?)\*+$", s)          # non‑greedy
+    if m:
+        cleaned = m.group(1)
+        return cleaned if cleaned in cat_uniques.get(col, set()) else cat_modes.get(col, cleaned)
+
 
     # ------------------------------------------------------------------#
-    # f) Suppression token "*"                                          #
+    # g) Suppression token "*"                                          #
     # ------------------------------------------------------------------#
     if s == "*":
         # Prefer categorical mode; fall back to numeric median; last resort NaN
         return cat_modes.get(col, num_modes.get(col, np.nan))
     
-    # g) NEW: Fallback for stringified float lists like "[30.9, 34.3]"
+    # h) NEW: Fallback for stringified float lists like "[30.9, 34.3]"
     if s.startswith("[") and s.endswith("]"):
         try:
             nums = [float(x.strip()) for x in s[1:-1].split(",")]
@@ -118,7 +132,7 @@ def _clean_scalar(
             return np.nan
 
     # ------------------------------------------------------------------#
-    # h) Any *other* categorical string                                #
+    # i) Any *other* categorical string                                #
     #    -> if we've never seen it in raw training data,                #
     #       replace by the column's mode.                               #
     # ------------------------------------------------------------------#
