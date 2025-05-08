@@ -5,39 +5,63 @@ analysis:
 anonymization:
   attributes:
     insensitive_attributes:
+    - Debtor
+    - Tuition fees up to date
     - Application mode
     - Application order
+    - Admission grade
+    - Daytime/evening attendance
+    - Previous qualification (grade)
+    - Mother's qualification
+    - Father's qualification
+    - Mother's occupation
+    - Father's occupation
+    - Unemployment rate
+    - Inflation rate
+    - GDP
+    - Displaced
     - Curricular units 1st sem (credited)
     - Curricular units 1st sem (enrolled)
     - Curricular units 1st sem (evaluations)
     - Curricular units 1st sem (approved)
+    - Curricular units 1st sem (grade)
     - Curricular units 1st sem (without evaluations)
     - Curricular units 2nd sem (credited)
     - Curricular units 2nd sem (enrolled)
     - Curricular units 2nd sem (evaluations)
     - Curricular units 2nd sem (approved)
+    - Curricular units 2nd sem (grade)
     - Curricular units 2nd sem (without evaluations)
-    - Course
     - Target
     quasi_identifiers:
     - Age at enrollment
     - Gender
     - Nacionality
+    - Marital status
+    - Course
+    - Previous qualification
+    - Educational special needs
+    - International
     sensitive_attributes:
     - Scholarship_holder
   delete_after_evaluation: false
   enable_anonymization: true
   hierarchies:
     Age at enrollment: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/age_enrollment.csv
+    Course: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/course.csv
+    Educational special needs: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/educational_special_needs.csv
     Gender: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/gender.csv
-    Nacionality: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/nacionality.csv
+    International: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/international.csv
+    Marital status: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/marital_status.csv
+    Nacionality: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/nationality.csv
+    Previous qualification: src/anonymization/anonymARXij/src/hierarchies_studentPerformance/previous_qualification.csv
   hierarchy_config: {}
   models:
     k_anonymity: 5
     l_diversity:
       attribute: Scholarship_holder
       value: 2
-  suppression_limit: 0.1
+  suppression_limit: 0.01
 dataset:
   path: datasets/original/studentPerformance.csv
   separator: ;
@@ -45,7 +69,7 @@ dataset:
   test_size: 0.45
 hybrid:
   delete_hybrid_after_evaluation: false
-  enable_hybrid: true
+  enable_hybrid: false
   reuse_params: true
   save_intermediate_files: false
 preprocessing:
@@ -62,7 +86,7 @@ synthesis:
       num_generated_rows: same_as_original
       params:
         epochs: 300
-      row_multiplier: 8
+      row_multiplier: 1
     CustomSynthesizer:
       class_name: CustomSynthesizer
       custom_generated_rows: 7000
@@ -71,7 +95,7 @@ synthesis:
       num_generated_rows: custom
       params:
         noise_factor: 0.2
-      row_multiplier: 8
+      row_multiplier: 1
     GaussianCopula:
       class_name: GaussianCopulaSynthesizer
       custom_generated_rows: 5000
@@ -79,7 +103,7 @@ synthesis:
       import_path: sdv.single_table
       num_generated_rows: same_as_original
       params: {}
-      row_multiplier: 8
+      row_multiplier: 1
     TVAE:
       class_name: TVAESynthesizer
       custom_generated_rows: 5000
@@ -88,7 +112,7 @@ synthesis:
       num_generated_rows: same_as_original
       params:
         epochs: 300
-      row_multiplier: 8
+      row_multiplier: 1
 utility:
   enable_utility_evaluation: true
   metrics:

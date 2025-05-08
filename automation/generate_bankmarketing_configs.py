@@ -30,10 +30,11 @@ ORIG_DATA = f"datasets/original/{DATASET}.csv"
 OUT_DIR = Path(f"configs/generated_configs/{DATASET}")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-SUPPRESSION = [0.01, 0.03, 0.05, 0.08, 0.10, 0.25, 0.50]
-K_ANON = [5, 10, 20]
-L_DIV = 2
+K_ANON = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 50, 100]
+SUPPRESSION = [0.05, 0.30, 1.0]
+L_DIV = [1, 2]
 HYBRID_EPOCHS = 300
+HYBRID_ELIGIBLE_K = {2, 6, 10, 14, 20}
 
 EPOCHS = [50, 100, 200, 300, 500, 750, 1000]
 MULTIPLIERS = [1, 2, 3, 5, 10]
@@ -55,7 +56,7 @@ def generate():
     rows = n_rows(ORIG_DATA)
 
     # ---- 1) Anonymization + Hybrid ---------------------------------------
-    for sl, k in itertools.product(SUPPRESSION, K_ANON):
+    for sl, k, l in itertools.product(SUPPRESSION, K_ANON, L_DIV):
         cfg = load(BASE_CFG)
         cfg["dataset"]["test_size"] = TEST_SIZE_FIXED
         cfg["anonymization"].update({
@@ -63,9 +64,13 @@ def generate():
             "suppression_limit": sl,
         })
         cfg["anonymization"]["models"]["k_anonymity"] = k
-        cfg["anonymization"]["models"]["l_diversity"]["value"] = L_DIV
+        cfg["anonymization"]["models"]["l_diversity"]["value"] = l
 
-        cfg["hybrid"].update({"enable_hybrid": True, "synthesizer": "TVAE"})
+        # Enable hybrid only for selected k values
+        cfg["hybrid"]["enable_hybrid"] = k in HYBRID_ELIGIBLE_K
+        if cfg["hybrid"]["enable_hybrid"]:
+            cfg["hybrid"]["synthesizer"] = "TVAE"
+
         cfg["synthesis"]["enable_synthetic_generation"] = False
 
         for name, s in cfg["synthesis"]["synthesizers"].items():

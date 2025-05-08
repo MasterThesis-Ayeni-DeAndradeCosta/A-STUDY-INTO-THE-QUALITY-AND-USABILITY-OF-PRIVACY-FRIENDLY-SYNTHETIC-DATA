@@ -21,9 +21,9 @@ ORIG_DATA = f"datasets/original/{DATASET}.csv"
 OUT_DIR = Path(f"configs/generated_configs/{DATASET}")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-SUPPRESSION_LIMITS = [0.01, 0.02, 0.03, 0.04, 0.05, 0.08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
-K_ANONYMITY = [2, 5, 10, 20]
-L_DIVERSITY = 2
+SUPPRESSION_LIMITS = [0.01, 0.20, 0.50, 1.0]
+K_ANONYMITY = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+L_DIVERSITY = [1, 2]
 EPOCHS = [20, 40, 60, 80, 100, 120, 150, 200, 250, 300, 400, 500, 750, 1000]
 ROW_MULTIPLIERS = [1, 2, 3, 5, 10]
 TEST_SIZES = [round(x * 0.05, 2) for x in range(1, 12)]
@@ -46,14 +46,13 @@ def generate():
     rows = n_rows(ORIG_DATA)
 
     # ---- 1. Anonymization + Hybrid --------------------------------------
-    for sl, k in itertools.product(SUPPRESSION_LIMITS, K_ANONYMITY):
+    for sl, k, l in itertools.product(SUPPRESSION_LIMITS, K_ANONYMITY, L_DIVERSITY):
         cfg = load(BASE_CFG)
         cfg["dataset"]["test_size"] = DEFAULT_TS
         cfg["anonymization"]["enable_anonymization"] = True
         cfg["anonymization"]["suppression_limit"] = sl
         cfg["anonymization"]["models"]["k_anonymity"] = k
-        cfg["anonymization"]["models"]["l_diversity"]["value"] = L_DIVERSITY
-
+        cfg["anonymization"]["models"]["l_diversity"]["value"] = l
         cfg["hybrid"]["enable_hybrid"] = True
         cfg["hybrid"]["synthesizer"] = "TVAE"
         cfg["synthesis"]["enable_synthetic_generation"] = False
@@ -65,7 +64,7 @@ def generate():
             elif name == "GaussianCopula" and "params" in s:
                 s["params"].pop("epochs", None)
 
-        fname = f"{DATASET}_anon_k{k}_sl{str(sl).replace('.', 'p')}_l2"
+        fname = f"{DATASET}_anon_k{k}_sl{str(sl).replace('.', 'p')}_l{l}"
         save(cfg, fname)
         total += 1
 
