@@ -1,0 +1,91 @@
+2025-05-08 18:38:47,774 - INFO - Loaded config file: configs/generated_configs/loan/loan_anon_k13_sl1_l15.yaml
+2025-05-08 18:38:47,774 - INFO -  Benchmarking started for dataset: loan
+2025-05-08 18:38:47,774 - INFO - Using dataset path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/original/loan.csv
+2025-05-08 18:38:47,774 - INFO - Target column: Loan_Status, separator: ','
+2025-05-08 18:38:47,774 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False, enable_hybrid = True, enable_utility = True, delete_after_evaluation = False
+2025-05-08 18:38:47,774 - INFO - Running preprocessing...
+2025-05-08 18:38:47,779 - INFO - [PREPROCESSING] No preprocessed files found. Starting full preprocessing pipeline...
+2025-05-08 18:38:47,784 - INFO - [PREPROCESSING] Dropped excluded columns: ['Loan_ID']
+2025-05-08 18:38:47,785 - INFO - [PREPROCESSING] Missing value handling strategy: 'drop' applied.
+2025-05-08 18:38:47,786 - INFO - [PREPROCESSING] Split data into train (336 rows) and test (144 rows). Test size: 0.3
+2025-05-08 18:38:47,822 - INFO -  [PREPROCESSING] Saved raw train set to: datasets/train/loan_train_raw.csv
+2025-05-08 18:38:47,822 - INFO -  [PREPROCESSING] Saved encoder to: artifacts/loan_binary_encoder.pkl
+2025-05-08 18:38:47,822 - INFO -  [PREPROCESSING]Saved encoded train set to: datasets/cleaned/loan_cleaned.csv
+2025-05-08 18:38:47,822 - INFO -  [PREPROCESSING] Saved encoded test set to: datasets/test/loan_test_set.csv
+2025-05-08 18:38:47,823 - INFO - [PREPROCESSING] run_preprocessing finished executing.
+2025-05-08 18:38:47,824 - INFO - Preprocessing completed. Rows before: 614, after: 336
+2025-05-08 18:38:47,824 - INFO - Preprocessed data saved to: outputs/batch/loan_batch_2025-05-08_18-38-44/loan_anon_k13_sl1_l15/preprocessing_report.txt
+2025-05-08 18:38:47,824 - INFO - enable_anonymization = True
+2025-05-08 18:38:47,824 - INFO - Starting Anonymization Pipeline with output path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/loan_k13_l15_sup100_anonymized.csv.......
+2025-05-08 18:38:47,829 - INFO -  [ANONYMIZATION] Executing run_anonymization, config_path : configs/generated_configs/loan/loan_anon_k13_sl1_l15.yaml...........
+2025-05-08 18:38:47,829 - INFO -  [ANONYMIZATION] Using JAR file at /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/bin/anonymARXij.jar to anonymize the dataset.
+2025-05-08 18:38:47,994 - ERROR -  [ANONYMIZATION] Java anonymization failed with exit code: 1
+2025-05-08 18:38:47,995 - ERROR -  [ANONYMIZATION] STDERR: Exception in thread "main" java.lang.ClassCastException: class java.lang.Integer cannot be cast to class java.lang.Double (java.lang.Integer and java.lang.Double are in module java.base of loader 'bootstrap')
+	at Main.main(Main.java:57)
+2025-05-08 18:38:47,995 - ERROR - Anonymization Pipeline failed!
+2025-05-08 18:38:47,995 - INFO - enable_synthetic_generation = False
+2025-05-08 18:38:47,995 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-05-08 18:38:47,995 - INFO - Running Hybrid Pipeline...
+2025-05-08 18:38:47,995 - INFO -  [HYBRID] Executing run_hybrid...
+2025-05-08 18:38:47,995 - INFO -  [HYBRID] Looking for encoded anonymized data in /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/loan_k13_l15_1_anonymized_encoded.csv
+2025-05-08 18:38:47,995 - INFO -  [HYBRID] No anonymized CSV - running ARX anonymization on datasets/train/loan_train_raw.csv …
+2025-05-08 18:38:48,214 - ERROR -  [HYBRID] Hybrid pipeline: anonymization failed.
+2025-05-08 18:38:48,214 - ERROR - Hybrid pipeline failed: Hybrid pipeline: anonymization failed.
+2025-05-08 18:38:48,215 - INFO - Starting Utility...
+2025-05-08 18:38:48,215 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-05-08 18:38:48,216 - INFO - [UTILITY] Original Data - Training Size: 336, Testing Size: 144
+2025-05-08 18:38:48,217 - INFO - [UTILITY] Target class distribution (Original): {'Y': 232, 'N': 104}
+2025-05-08 18:38:48,217 - INFO - [UTILITY] Training models on all datasets...
+2025-05-08 18:38:48,217 - INFO - [UTILITY] Total datasets used for training: 1
+2025-05-08 18:38:48,217 - INFO - [TRAINING] Training models from scratch...
+2025-05-08 18:38:48,217 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 336, Features: 18
+2025-05-08 18:38:48,217 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-05-08 18:38:48,222 - INFO - [TRAINING] DecisionTree trained successfully on Original in 0.00 sec
+2025-05-08 18:38:48,222 - INFO - [TRAINING] Training KNN on Original...
+2025-05-08 18:38:48,224 - INFO - [TRAINING] KNN trained successfully on Original in 0.00 sec
+2025-05-08 18:38:48,224 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-05-08 18:38:48,305 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 0.08 sec
+2025-05-08 18:38:48,305 - INFO - [TRAINING] Training RandomForest on Original...
+2025-05-08 18:38:48,560 - INFO - [TRAINING] RandomForest trained successfully on Original in 0.25 sec
+2025-05-08 18:38:48,560 - INFO - [TRAINING] Training SVM on Original...
+2025-05-08 18:38:48,579 - INFO - [TRAINING] SVM trained successfully on Original in 0.02 sec
+2025-05-08 18:38:48,579 - INFO - [TRAINING] Finished training 5 model(s) for dataset: Original
+2025-05-08 18:38:48,579 - INFO - [TRAINING] Total models trained across all datasets: 5
+2025-05-08 18:38:48,579 - INFO - [UTILITY] Trained model names: ['Original']
+2025-05-08 18:38:48,580 - INFO - [UTILITY] Model Training Completed.
+2025-05-08 18:38:48,580 - INFO - Starting the Evaluating of models...
+2025-05-08 18:38:48,580 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-05-08 18:38:48,580 - INFO - Evaluating DecisionTree on Original...
+2025-05-08 18:38:48,583 - INFO - Predictions completed for DecisionTree on Original
+2025-05-08 18:38:48,584 - INFO - Prediction distribution for DecisionTree on Original: {'Y': 91, 'N': 53}
+2025-05-08 18:38:48,600 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-05-08 18:38:48,600 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-05-08 18:38:48,600 - INFO - Evaluating KNN on Original...
+2025-05-08 18:38:48,687 - INFO - Predictions completed for KNN on Original
+2025-05-08 18:38:48,688 - INFO - Prediction distribution for KNN on Original: {'Y': 115, 'N': 29}
+2025-05-08 18:38:48,739 - INFO - Computed 8 metric(s) for KNN on Original
+2025-05-08 18:38:48,739 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-05-08 18:38:48,739 - INFO - Evaluating LogisticRegression on Original...
+2025-05-08 18:38:48,741 - INFO - Predictions completed for LogisticRegression on Original
+2025-05-08 18:38:48,742 - INFO - Prediction distribution for LogisticRegression on Original: {'Y': 115, 'N': 29}
+2025-05-08 18:38:48,754 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-05-08 18:38:48,754 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-05-08 18:38:48,754 - INFO - Evaluating RandomForest on Original...
+2025-05-08 18:38:48,762 - INFO - Predictions completed for RandomForest on Original
+2025-05-08 18:38:48,762 - INFO - Prediction distribution for RandomForest on Original: {'Y': 109, 'N': 35}
+2025-05-08 18:38:48,786 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-05-08 18:38:48,787 - INFO - Preparing evaluation for model 'SVM' across all datasets...
+2025-05-08 18:38:48,787 - INFO - Evaluating SVM on Original...
+2025-05-08 18:38:48,790 - INFO - Predictions completed for SVM on Original
+2025-05-08 18:38:48,790 - INFO - Prediction distribution for SVM on Original: {'Y': 144}
+2025-05-08 18:38:48,790 - WARNING -  [WARNING] :SVM on Original predicted only one class: {'Y'}
+2025-05-08 18:38:48,792 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 18:38:48,794 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 18:38:48,796 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 18:38:48,798 - INFO - Computed 8 metric(s) for SVM on Original
+2025-05-08 18:38:48,802 - INFO - Evaluation completed for all models.
+2025-05-08 18:38:48,802 - INFO - Model evaluation completed in 0.22 seconds.
+2025-05-08 18:38:48,805 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest', 'SVM']
+2025-05-08 18:38:48,805 - INFO - Model Training and Evaluation completed.
+2025-05-08 18:38:49,494 - INFO -  Visualizations saved.
+2025-05-08 18:38:49,494 - INFO -  Benchmarking Completed. Results saved in output folder.

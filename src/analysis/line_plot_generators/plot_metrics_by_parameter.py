@@ -6,18 +6,36 @@ import dataframe_image as dfi
 
 
 # === CONFIGURATION (Only edit this block) ===
-excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\outputs\batch\crimeData_batch_2025-04-20_21-30-12\batch_analysis\combined_results.xlsx"
-output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\saved outputs\sorted analysis\crimeData\line_plots"
-dataset_display_name = "Crime Data"
-model_to_compare = "RandomForest"
-x_axis = "suppression_percentage"
+
+#loan paths
+# excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\outputs\batch\loan_batch_2025-05-08_17-32-48\batch_analysis\combined_results.xlsx"
+# output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\loan\plots"
+
+# studentPerformance paths
+# excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\outputs\batch\studentPerformance_batch_2025-05-08_17-32-48\batch_analysis\combined_results.xlsx"
+# output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\studentPerformance\plots"
+
+# bankMarketing paths
+# excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\outputs\batch\bankMarketing_batch_2025-05-08_13-17-59\batch_analysis\combined_results.xlsx"
+# output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\bankMarketing\plots"
+
+# censusIncome paths
+excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\outputs\batch\censusIncome_batch_2025-05-08_10-04-54\batch_analysis\combined_results.xlsx"
+output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\censusIncome\plots"
+#dataset_display_name = "Census Income"
+
+
+
+dataset_display_name = "Census Income"  # Display name for the dataset in the plot title
+model_to_compare = "DecisionTree"
+x_axis = "k_anonymity"
 
 
 filters = {
-    "Model": "RandomForest",
+    "Model": "DecisionTree",
     "Dataset": "Anonymous",
-    "k_anonymity": 5,
-    "l_diversity": 2,
+    "l_diversity": 1,
+    "suppression_limit": 0.05,
 }
 
 

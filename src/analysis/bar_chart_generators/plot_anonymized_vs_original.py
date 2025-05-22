@@ -1,96 +1,105 @@
-import os
-import sys
-import matplotlib.pyplot as plt
+"""
+loan_best_anonymized.py
+────────────────────────────────────────────────────────────────────────────
+• Reads the combined results for the *Loan* dataset
+• Finds … 
+    – the single best Anonymous row (highest F1)
+    – the matching best Original row for **that** model
+    – the Top-5 Anonymous rows (F1 ranking)
+• Exports three neat tables  (CSV + PNG)
+• Plots the usual bar-chart    (Original vs best Anonymous)
+"""
 
-# Dynamically fix the path (DO NOT CHANGE THIS)
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.abspath(os.path.join(current_dir))
-sys.path.insert(0, parent_dir)
-from color_palette import COLOR_MAP
+import os, pandas as pd, dataframe_image as dfi
+import matplotlib.pyplot as plt      # only for the bar-chart
+from color_palette import COLOR_MAP 
+import numpy as np
 
-def plot_comparison(metric_dict1, metric_dict2, label1, label2, title, save_dir, suffix="", k=None, l=None, suppression=None):
-    metrics = list(metric_dict1.keys())
-    values1 = [metric_dict1[m] for m in metrics]
-    values2 = [metric_dict2[m] for m in metrics]
+# ── loan PATHS ──────────────────────────────────────────────────────────────────
+# excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\loan\loan_combined_results.xlsx"
+# out_dir    = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\loan\bar charts\anonymous"
 
-    x = range(len(metrics))
-    bar_width = 0.35
+# ── studentPerformance PATHS ────────────────────────────────────────────────────
+excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\studentPerformance\studentPerformance_combined_results.xlsx"
+out_dir    = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\studentPerformance\plots\anonymous"
 
-    plt.figure(figsize=(10, 6))
-    plt.bar([i - bar_width/2 for i in x], values1, width=bar_width,
-            label=label1, color=COLOR_MAP.get(label1, "#2E86AB"), edgecolor="black")
-    plt.bar([i + bar_width/2 for i in x], values2, width=bar_width,
-            label=label2, color=COLOR_MAP.get(label2, "#E27D60"), edgecolor="black")
-
-    plt.xticks(ticks=x, labels=metrics, rotation=45, fontsize=10)
-    plt.yticks(fontsize=10)
-    plt.ylim(0, 1)
-    plt.ylabel("Score", fontsize=12)
-    plt.suptitle(title, fontsize=14, weight="bold")
-
-    if k is not None and l is not None and suppression is not None:
-        subtitle = f"Anonymization settings: k={k}, l={l}, suppression={suppression}"
-        plt.title(subtitle, fontsize=10)
-
-    plt.legend()
-    plt.grid(axis='y', linestyle='--', alpha=0.5)
-    plt.tight_layout()
-    # Add value labels
-    for i, (v1, v2) in enumerate(zip(values1, values2)):
-        plt.text(i - bar_width/2, v1 + 0.01, f"{v1:.3f}", ha='center', va='bottom', fontsize=9)
-        plt.text(i + bar_width/2, v2 + 0.01, f"{v2:.3f}", ha='center', va='bottom', fontsize=9)
+# ── bankMarketing PATHS ────────────────────────────────────────────────────────
+# excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\bankMarketing\bankMarketing_combined_results.xlsx"
+# out_dir    = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\bankMarketing\anonymous"
 
 
-    filename = f"{label1.lower()}_vs_{label2.lower()}_{suffix}.png"
-    os.makedirs(save_dir, exist_ok=True)
-    full_path = os.path.join(save_dir, filename)
-    plt.savefig(full_path, dpi=300)
-    print(f"✅ Graph saved to: {full_path}")
-    plt.show()
+
+# === PATHS ===
+# excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\censusIncome\censusIncome_combined_results.xlsx"
+# out_dir    = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\censusIncome\anonymous"
 
 
-if __name__ == "__main__":
-    # === Tweak values here only ===
-    output_folder = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\Semester 2\writing the thesis\graphs\loan\anonymous"
-    suffix = "best_anonymous"
+os.makedirs(out_dir, exist_ok=True)
 
-    title = "Random Forest Performance: Original vs Anonymized (Loan Dataset)"
+# ── CONFIG ────────────────────────────────────────────────────────────────
+dataset_name     = "StudentPerformance"  # "Loan", "StudentPerformance", "BankMarketing"
+model_to_compare   = "RandomForest"  # "LogisticRegression", "RandomForest", …
+primary_metric   = "MCC"     # change to "Accuracy", … if needed
+top_k            = 5
+metrics_for_plot = ["Accuracy", "Precision", "Recall", "F1", "AUC-ROC"]
+drop_cols          = ["epochs", "row_multiplier", "rows_generated_at_runtime"]
 
-    label1 = "Original"
-    label2 = "Anonymous"
+# === LOAD & FILTER ===
+df = pd.read_excel(excel_path)
+anon_sorted = df[(df["Dataset"] == "Anonymous") & (df["Model"] == model_to_compare)].sort_values(primary_metric, ascending=False)
 
-    original_metrics = {
-        "Accuracy": 0.854,
-        "Precision": 0.860,
-        "Recall": 0.854,
-        "F1": 0.844,
-        "AUC-ROC": 0.853,
-    }
+if anon_sorted.empty:
+    raise SystemExit(f"❌ No Anonymous rows found for model '{model_to_compare}'.")
 
-    anonymized_metrics = {
-    "Accuracy": 0.6389,
-    "Precision": 0.6297,
-    "Recall": 0.6389,
-    "F1": 0.6338,
-    "AUC-ROC": 0.5728,
-}
+best_anon = anon_sorted.iloc[[0]]
 
+orig_rows = df[(df["Dataset"] == "Original") & (df["Model"] == model_to_compare)]
+if orig_rows.empty:
+    raise SystemExit(f"❌ No Original rows found for model '{model_to_compare}'.")
 
-    anonymization_k = 5
-    anonymization_l = 2
-    suppression_limit = 0.08
+best_orig = orig_rows.loc[orig_rows[primary_metric].idxmax()].to_frame().T
 
+# === EXPORT TABLES ===
+def save_table(table: pd.DataFrame, stub: str) -> None:
+    csv = os.path.join(out_dir, f"{stub}.csv")
+    png = os.path.join(out_dir, f"{stub}.png")
+    table_cleaned = table.drop(columns=[c for c in drop_cols if c in table.columns])
+    table_cleaned.to_csv(csv, index=False)
+    styled = table_cleaned.copy()
+    styled.index = range(1, len(styled) + 1)
+    dfi.export(styled.style.set_caption(stub.replace('_', ' ').title()), png)
+    print(f"📄 {csv}\n🖼️  {png}")
 
-    # === Call plotting function ===
-    plot_comparison(
-        original_metrics,
-        anonymized_metrics,
-        label1,
-        label2,
-        title,
-        save_dir=output_folder,
-        suffix=suffix,
-        k=anonymization_k,
-        l=anonymization_l,
-        suppression=suppression_limit
-    )
+save_table(best_anon, f"{dataset_name}_anonymous_best_{model_to_compare}")
+save_table(pd.concat([best_orig, best_anon], ignore_index=True),
+           f"{dataset_name}_original_vs_best_anonymous_{model_to_compare}")
+
+# === BAR CHART ===
+x = np.arange(len(metrics_for_plot))
+bar_width = 0.35
+orig_vals = [float(best_orig.iloc[0][m]) for m in metrics_for_plot]
+anon_vals = [float(best_anon.iloc[0][m]) for m in metrics_for_plot]
+
+plt.figure(figsize=(10, 5))
+plt.bar(x - bar_width/2, orig_vals, width=bar_width,
+        color=COLOR_MAP.get("Original", "#2E86AB"),
+        label="Original", edgecolor="black")
+plt.bar(x + bar_width/2, anon_vals, width=bar_width,
+        color=COLOR_MAP.get("Anonymous", "#E27D60"),
+        label="Anonymous", edgecolor="black")
+
+for i, (v1, v2) in enumerate(zip(orig_vals, anon_vals)):
+    plt.text(i - bar_width/2, v1 + 0.01, f"{v1:.3f}", ha="center", va="bottom", fontsize=8)
+    plt.text(i + bar_width/2, v2 + 0.01, f"{v2:.3f}", ha="center", va="bottom", fontsize=8)
+
+plt.xticks(x, metrics_for_plot, rotation=45)
+plt.ylim(0, 1)
+plt.ylabel("Score")
+plt.title(f"{model_to_compare}: Original vs Anonymous ({dataset_name.title()}) — ranked by {primary_metric}")
+plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.15), ncol=2)
+plt.tight_layout(rect=[0, 0.15, 1, 1])
+
+chart_path = os.path.join(out_dir, f"{dataset_name}_bar_original_vs_anonymous_{model_to_compare}.png")
+plt.savefig(chart_path, dpi=300)
+plt.close()
+print(f"📊 Bar-chart saved: {chart_path}")

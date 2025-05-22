@@ -1,0 +1,197 @@
+2025-05-16 13:41:25,928 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-05-16 13:41:25,928 - INFO -  Benchmarking started for dataset: studentPerformance
+2025-05-16 13:41:25,928 - INFO - Using dataset path: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\original\studentPerformance.csv
+2025-05-16 13:41:25,929 - INFO - Target column: Target, separator: ';'
+2025-05-16 13:41:25,929 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False, enable_hybrid = False, enable_utility = True, delete_after_evaluation = False
+2025-05-16 13:41:25,929 - INFO - Running preprocessing...
+2025-05-16 13:41:25,934 - INFO - [PREPROCESSING] No preprocessed files found. Starting full preprocessing pipeline...
+2025-05-16 13:41:25,962 - INFO - [PREPROCESSING] Missing value handling strategy: 'mode' applied.
+2025-05-16 13:41:25,966 - INFO - [PREPROCESSING] Split data into train (3539 rows) and test (885 rows). Test size: 0.2
+2025-05-16 13:41:26,020 - INFO -  [PREPROCESSING] Saved raw train set to: datasets/train/studentPerformance_train_raw.csv
+2025-05-16 13:41:26,020 - INFO -  [PREPROCESSING] Saved encoder to: artifacts/studentPerformance_binary_encoder.pkl
+2025-05-16 13:41:26,022 - INFO -  [PREPROCESSING]Saved encoded train set to: datasets/cleaned/studentPerformance_cleaned.csv
+2025-05-16 13:41:26,022 - INFO -  [PREPROCESSING] Saved encoded test set to: datasets/test/studentPerformance_test_set.csv
+2025-05-16 13:41:26,022 - INFO - [PREPROCESSING] run_preprocessing finished executing.
+2025-05-16 13:41:26,025 - INFO - Preprocessing completed. Rows before: 4424, after: 3539
+2025-05-16 13:41:26,026 - INFO - Preprocessed data saved to: outputs\singular\studentPerformance_2025-05-16_13-41-25\preprocessing_report.txt
+2025-05-16 13:41:26,026 - INFO - enable_anonymization = True
+2025-05-16 13:41:26,027 - INFO - Starting Anonymization Pipeline with output path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k50_l2_sup02_anonymized.csv.......
+2025-05-16 13:41:26,033 - INFO -  [ANONYMIZATION] Executing run_anonymization, config_path : configs/benchmark_config.yaml...........
+2025-05-16 13:41:26,034 - INFO -  [ANONYMIZATION] Compiling Java source files...
+2025-05-16 13:41:27,238 - INFO -  [ANONYMIZATION] Java compilation successful.
+2025-05-16 13:41:27,239 - INFO - [ANONYMIZATION] Creating JAR file for anonymization...
+2025-05-16 13:41:27,648 - INFO -  [ANONYMIZATION] JAR file created successfully.
+2025-05-16 13:41:29,547 - INFO -  [ANONYMIZATION] Anonimized file saved to : C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k50_l2_sup02_anonymized.csv
+2025-05-16 13:41:29,548 - INFO -  [ANONYMIZATION] Java anonymization completed successfully.
+2025-05-16 13:41:29,548 - INFO -  [ANONYMIZATION] Java STDOUT:
+? Java received config path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+? Loading config from: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+Loading config from: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+? Dataset Path (from args): C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\train\studentPerformance_train_raw.csv
+? Dataset Separator: ;
+? Suppression Limit: 0.02
+
+? Configured Attributes:
+  ? Quasi-Identifier: Age at enrollment
+  ? Quasi-Identifier: Gender
+  ? Quasi-Identifier: Nacionality
+  ? Quasi-Identifier: Marital status
+  ? Quasi-Identifier: Course
+  ? Quasi-Identifier: Previous qualification
+  ? Quasi-Identifier: Educational special needs
+  ? Quasi-Identifier: International
+  ? Sensitive Attribute: Scholarship_holder
+  ? Insensitive Attribute: Debtor
+  ? Insensitive Attribute: Tuition fees up to date
+  ? Insensitive Attribute: Application mode
+  ? Insensitive Attribute: Application order
+  ? Insensitive Attribute: Admission grade
+  ? Insensitive Attribute: Daytime/evening attendance
+  ? Insensitive Attribute: Previous qualification (grade)
+  ? Insensitive Attribute: Mother's qualification
+  ? Insensitive Attribute: Father's qualification
+  ? Insensitive Attribute: Mother's occupation
+  ? Insensitive Attribute: Father's occupation
+  ? Insensitive Attribute: Unemployment rate
+  ? Insensitive Attribute: Inflation rate
+  ? Insensitive Attribute: GDP
+  ? Insensitive Attribute: Displaced
+  ? Insensitive Attribute: Curricular units 1st sem (credited)
+  ? Insensitive Attribute: Curricular units 1st sem (enrolled)
+  ? Insensitive Attribute: Curricular units 1st sem (evaluations)
+  ? Insensitive Attribute: Curricular units 1st sem (approved)
+  ? Insensitive Attribute: Curricular units 1st sem (grade)
+  ? Insensitive Attribute: Curricular units 1st sem (without evaluations)
+  ? Insensitive Attribute: Curricular units 2nd sem (credited)
+  ? Insensitive Attribute: Curricular units 2nd sem (enrolled)
+  ? Insensitive Attribute: Curricular units 2nd sem (evaluations)
+  ? Insensitive Attribute: Curricular units 2nd sem (approved)
+  ? Insensitive Attribute: Curricular units 2nd sem (grade)
+  ? Insensitive Attribute: Curricular units 2nd sem (without evaluations)
+  ? Insensitive Attribute: Target
+
+? Defined Hierarchies:
+  ? Age at enrollment -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\age_enrollment.csv
+  ? Marital status -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\marital_status.csv
+  ? Educational special needs -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\educational_special_needs.csv
+  ? Gender -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\gender.csv
+  ? Nacionality -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\nationality.csv
+  ? Course -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\course.csv
+  ? Previous qualification -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\previous_qualification.csv
+  ? International -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\international.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\age_enrollment.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\marital_status.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\educational_special_needs.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\gender.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\nationality.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\course.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\previous_qualification.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_studentPerformance\international.csv
+? Applied Distinct L-Diversity on: Scholarship_holder (l=2)
+? Privacy Models Configured
+? Anonymized Output Path (from args): C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k50_l2_sup02_anonymized.csv
+? Anonymized Output Path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k50_l2_sup02_anonymized.csv
+? Anonymization completed. Output saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k50_l2_sup02_anonymized.csv
+Anonymized Data Quality Metrics:
+ - Ambiguity: 0.9517460810350002
+ - AECS: 0.8044257372090093
+ - Discernibility: 0.5830684950579099
+ - Granularity: 0.36043937811006455
+ - MSE: 0.008719124437551518
+ - Non-Uniform Entropy: 0.15139969102193407
+ - Precision: 0.4088961100122439
+ - Record-level SE: 0.26902301301835174
+Equivalence Class Statistics:
+ - Number of Classes: 5
+ - Average Class Size: 694.6
+Suppression Statistics:
+ - Suppressed Records: 66
+ - Suppression Percentage: 1.86%
+2025-05-16 13:41:29,548 - INFO - Anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k50_l2_sup02_anonymized.csv
+2025-05-16 13:41:29,682 - INFO - Anonymous data report saved at: outputs\singular\studentPerformance_2025-05-16_13-41-25\anonymous_data_report.txt
+2025-05-16 13:41:29,683 - INFO -  [POSTPROCESSING] Postprocessing anonymized data: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k50_l2_sup02_anonymized.csv
+2025-05-16 13:41:29,690 - INFO -  [POSTPROCESSING] Loaded anonymized data: (3539, 37)
+2025-05-16 13:41:29,726 - INFO -  [POSTPROCESSING] Loaded fallback maps from training data. Categorical cols: 1, Numeric cols: 36
+2025-05-16 13:41:29,727 - INFO -  [POSTPROCESSING] Normalizing anonymized data using ARX artifact cleaning and fallback values.
+2025-05-16 13:41:29,980 - INFO -  [POSTPROCESSING] Normalized anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\studentPerformance_k50_l2_sup02_anonymized_processed.csv
+2025-05-16 13:41:29,981 - INFO -  [POSTPROCESSING] No encoder present. Skipping encoding of anonymized data.Will use processed anonymous data directly
+2025-05-16 13:41:29,981 - INFO - Postprocessing report saved at: outputs\singular\studentPerformance_2025-05-16_13-41-25\postprocessing_report.txt
+2025-05-16 13:41:29,982 - INFO - enable_synthetic_generation = False
+2025-05-16 13:41:29,982 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-05-16 13:41:29,982 - INFO - Hybrid Pipeline skipped (disabled in configuration).
+2025-05-16 13:41:29,982 - INFO - Starting Utility...
+2025-05-16 13:41:29,982 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-05-16 13:41:29,984 - INFO - [UTILITY] Original Data - Training Size: 3539, Testing Size: 885
+2025-05-16 13:41:29,986 - INFO - [UTILITY] Target class distribution (Original): {'Graduate': 1767, 'Dropout': 1137, 'Enrolled': 635}
+2025-05-16 13:41:29,987 - INFO - [UTILITY] Processing anonymized dataset...
+2025-05-16 13:41:29,988 - INFO - [UTILITY] Anonymized Data - Training Size: 3539
+2025-05-16 13:41:29,989 - INFO - [UTILITY] Target class distribution (Anonymous): {'Graduate': 1767, 'Dropout': 1137, 'Enrolled': 635}
+2025-05-16 13:41:29,989 - INFO - [UTILITY] Training models on all datasets...
+2025-05-16 13:41:29,990 - INFO - [UTILITY] Total datasets used for training: 2
+2025-05-16 13:41:29,990 - INFO - [TRAINING] Training models from scratch...
+2025-05-16 13:41:29,990 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 3539, Features: 36
+2025-05-16 13:41:29,991 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-05-16 13:41:30,065 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 0.07 sec
+2025-05-16 13:41:30,065 - INFO - [TRAINING] Training KNN on Original...
+2025-05-16 13:41:30,070 - INFO - [TRAINING] KNN trained successfully on Original in 0.00 sec
+2025-05-16 13:41:30,071 - INFO - [TRAINING] Training RandomForest on Original...
+2025-05-16 13:41:30,586 - INFO - [TRAINING] RandomForest trained successfully on Original in 0.51 sec
+2025-05-16 13:41:30,587 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-05-16 13:41:30,619 - INFO - [TRAINING] DecisionTree trained successfully on Original in 0.03 sec
+2025-05-16 13:41:30,619 - INFO - [TRAINING] Finished training 4 model(s) for dataset: Original
+2025-05-16 13:41:30,620 - INFO - [TRAINING] Starting training for dataset: Anonymous — Rows: 3539, Features: 36
+2025-05-16 13:41:30,620 - INFO - [TRAINING] Training LogisticRegression on Anonymous...
+2025-05-16 13:41:30,708 - INFO - [TRAINING] LogisticRegression trained successfully on Anonymous in 0.09 sec
+2025-05-16 13:41:30,708 - INFO - [TRAINING] Training KNN on Anonymous...
+2025-05-16 13:41:30,723 - INFO - [TRAINING] KNN trained successfully on Anonymous in 0.01 sec
+2025-05-16 13:41:30,724 - INFO - [TRAINING] Training RandomForest on Anonymous...
+2025-05-16 13:41:31,217 - INFO - [TRAINING] RandomForest trained successfully on Anonymous in 0.49 sec
+2025-05-16 13:41:31,217 - INFO - [TRAINING] Training DecisionTree on Anonymous...
+2025-05-16 13:41:31,258 - INFO - [TRAINING] DecisionTree trained successfully on Anonymous in 0.04 sec
+2025-05-16 13:41:31,258 - INFO - [TRAINING] Finished training 4 model(s) for dataset: Anonymous
+2025-05-16 13:41:31,259 - INFO - [TRAINING] Total models trained across all datasets: 8
+2025-05-16 13:41:31,259 - INFO - [UTILITY] Trained model names: ['Original', 'Anonymous']
+2025-05-16 13:41:31,259 - INFO - [UTILITY] Model Training Completed.
+2025-05-16 13:41:31,260 - INFO - Starting the Evaluating of models...
+2025-05-16 13:41:31,260 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-05-16 13:41:31,261 - INFO - Evaluating LogisticRegression on Original...
+2025-05-16 13:41:31,265 - INFO - Predictions completed for LogisticRegression on Original
+2025-05-16 13:41:31,265 - INFO - Prediction distribution for LogisticRegression on Original: {'Graduate': 509, 'Dropout': 275, 'Enrolled': 101}
+2025-05-16 13:41:31,283 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-05-16 13:41:31,284 - INFO - Evaluating LogisticRegression on Anonymous...
+2025-05-16 13:41:31,286 - INFO - Predictions completed for LogisticRegression on Anonymous
+2025-05-16 13:41:31,287 - INFO - Prediction distribution for LogisticRegression on Anonymous: {'Graduate': 505, 'Dropout': 256, 'Enrolled': 124}
+2025-05-16 13:41:31,304 - INFO - Computed 8 metric(s) for LogisticRegression on Anonymous
+2025-05-16 13:41:31,305 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-05-16 13:41:31,306 - INFO - Evaluating KNN on Original...
+2025-05-16 13:41:31,516 - INFO - Predictions completed for KNN on Original
+2025-05-16 13:41:31,517 - INFO - Prediction distribution for KNN on Original: {'Graduate': 479, 'Dropout': 273, 'Enrolled': 133}
+2025-05-16 13:41:31,567 - INFO - Computed 8 metric(s) for KNN on Original
+2025-05-16 13:41:31,567 - INFO - Evaluating KNN on Anonymous...
+2025-05-16 13:41:31,636 - INFO - Predictions completed for KNN on Anonymous
+2025-05-16 13:41:31,637 - INFO - Prediction distribution for KNN on Anonymous: {'Graduate': 543, 'Dropout': 231, 'Enrolled': 111}
+2025-05-16 13:41:31,692 - INFO - Computed 8 metric(s) for KNN on Anonymous
+2025-05-16 13:41:31,692 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-05-16 13:41:31,693 - INFO - Evaluating RandomForest on Original...
+2025-05-16 13:41:31,724 - INFO - Predictions completed for RandomForest on Original
+2025-05-16 13:41:31,725 - INFO - Prediction distribution for RandomForest on Original: {'Graduate': 517, 'Dropout': 260, 'Enrolled': 108}
+2025-05-16 13:41:31,802 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-05-16 13:41:31,802 - INFO - Evaluating RandomForest on Anonymous...
+2025-05-16 13:41:31,819 - INFO - Predictions completed for RandomForest on Anonymous
+2025-05-16 13:41:31,820 - INFO - Prediction distribution for RandomForest on Anonymous: {'Graduate': 514, 'Dropout': 260, 'Enrolled': 111}
+2025-05-16 13:41:31,873 - INFO - Computed 8 metric(s) for RandomForest on Anonymous
+2025-05-16 13:41:31,874 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-05-16 13:41:31,875 - INFO - Evaluating DecisionTree on Original...
+2025-05-16 13:41:31,877 - INFO - Predictions completed for DecisionTree on Original
+2025-05-16 13:41:31,878 - INFO - Prediction distribution for DecisionTree on Original: {'Graduate': 439, 'Dropout': 282, 'Enrolled': 164}
+2025-05-16 13:41:31,900 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-05-16 13:41:31,901 - INFO - Evaluating DecisionTree on Anonymous...
+2025-05-16 13:41:31,903 - INFO - Predictions completed for DecisionTree on Anonymous
+2025-05-16 13:41:31,904 - INFO - Prediction distribution for DecisionTree on Anonymous: {'Graduate': 405, 'Dropout': 288, 'Enrolled': 192}
+2025-05-16 13:41:31,925 - INFO - Computed 8 metric(s) for DecisionTree on Anonymous
+2025-05-16 13:41:31,932 - INFO - Evaluation completed for all models.
+2025-05-16 13:41:31,932 - INFO - Model evaluation completed in 0.67 seconds.
+2025-05-16 13:41:31,937 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest']
+2025-05-16 13:41:31,937 - INFO - Model Training and Evaluation completed.
+2025-05-16 13:41:33,945 - INFO -  Visualizations saved.
+2025-05-16 13:41:33,946 - INFO -  Benchmarking Completed. Results saved in output folder.

@@ -1,0 +1,114 @@
+analysis:
+  enable_analysis: true
+  generate_excel_summary: true
+  generate_interactive_plots: false
+anonymization:
+  attributes:
+    insensitive_attributes:
+    - fnlwgt
+    - hours-per-week
+    - capital-gain
+    - capital-loss
+    - relationship
+    - education-num
+    quasi_identifiers:
+    - age
+    - education
+    - workclass
+    - marital-status
+    - occupation
+    - race
+    - sex
+    - native-country
+    sensitive_attributes:
+    - income
+  delete_after_evaluation: false
+  enable_anonymization: true
+  hierarchies:
+    age: src/anonymization/anonymARXij/src/hierarchies_censusIncome/age.csv
+    education: src/anonymization/anonymARXij/src/hierarchies_censusIncome/education.csv
+    marital-status: src/anonymization/anonymARXij/src/hierarchies_censusIncome/marital-status.csv
+    native-country: src/anonymization/anonymARXij/src/hierarchies_censusIncome/native-country.csv
+    occupation: src/anonymization/anonymARXij/src/hierarchies_censusIncome/occupation.csv
+    race: src/anonymization/anonymARXij/src/hierarchies_censusIncome/race.csv
+    sex: src/anonymization/anonymARXij/src/hierarchies_censusIncome/sex.csv
+    workclass: src/anonymization/anonymARXij/src/hierarchies_censusIncome/workclass.csv
+  hierarchy_config: {}
+  models:
+    k_anonymity: 50
+    l_diversity:
+      attribute: income
+      value: 2
+  suppression_limit: 0.05
+dataset:
+  excluded_columns: null
+  path: datasets/original/censusIncome.csv
+  separator: ','
+  target_column: income
+  test_size: 0.2
+hybrid:
+  delete_hybrid_after_evaluation: false
+  enable_hybrid: true
+  reuse_params: true
+  save_intermediate_files: false
+  synthesizer: TVAE
+output_dir: outputs/batch/censusIncome_batch_2025-05-08_10-04-54/censusIncome_anon_k50_sl0p05_l2
+preprocessing:
+  encoding_type: binary
+  handle_missing_values: drop
+synthesis:
+  enable_synthetic_generation: false
+  synthesizers:
+    CTGAN:
+      class_name: CTGANSynthesizer
+      custom_generated_rows: 10000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params:
+        epochs: 300
+      row_multiplier: 1
+    CustomSynthesizer:
+      class_name: CustomSynthesizer
+      custom_generated_rows: 7000
+      enabled: false
+      import_path: custom.custom_synthesizer
+      num_generated_rows: custom
+      params:
+        noise_factor: 0.2
+      row_multiplier: 1
+    GaussianCopula:
+      class_name: GaussianCopulaSynthesizer
+      custom_generated_rows: 10000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params: {}
+      row_multiplier: 1
+    TVAE:
+      class_name: TVAESynthesizer
+      custom_generated_rows: 10000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params:
+        epochs: 300
+      row_multiplier: 1
+utility:
+  enable_utility_evaluation: true
+  metrics:
+    AUC-ROC: true
+    Accuracy: true
+    CohenKappa: true
+    F1: true
+    LogLoss: true
+    MCC: true
+    Precision: true
+    Recall: true
+  models:
+    DecisionTree: true
+    KNN: true
+    LogisticRegression: true
+    RandomForest: true
+    SVM: true
+    XGBoost: false

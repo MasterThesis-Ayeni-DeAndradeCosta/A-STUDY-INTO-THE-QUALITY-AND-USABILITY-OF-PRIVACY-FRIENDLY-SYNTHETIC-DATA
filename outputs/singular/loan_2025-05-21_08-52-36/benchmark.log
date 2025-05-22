@@ -1,0 +1,196 @@
+2025-05-21 08:52:36,069 - INFO - Loaded config file: configs/benchmark_config.yaml
+2025-05-21 08:52:36,069 - INFO -  Benchmarking started for dataset: loan
+2025-05-21 08:52:36,070 - INFO - Using dataset path: c:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\original\loan.csv
+2025-05-21 08:52:36,070 - INFO - Target column: Loan_Status, separator: ','
+2025-05-21 08:52:36,070 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False, enable_hybrid = False, enable_utility = True, delete_after_evaluation = False
+2025-05-21 08:52:36,070 - INFO - Running preprocessing...
+2025-05-21 08:52:36,078 - INFO - [PREPROCESSING] No preprocessed files found. Starting full preprocessing pipeline...
+2025-05-21 08:52:36,084 - INFO - [PREPROCESSING] Dropped excluded columns: ['Loan_ID']
+2025-05-21 08:52:36,086 - INFO - [PREPROCESSING] Missing value handling strategy: 'drop' applied.
+2025-05-21 08:52:36,089 - INFO - [PREPROCESSING] Split data into train (336 rows) and test (144 rows). Test size: 0.3
+2025-05-21 08:52:36,145 - INFO -  [PREPROCESSING] Saved raw train set to: datasets/train/loan_train_raw.csv
+2025-05-21 08:52:36,146 - INFO -  [PREPROCESSING] Saved encoder to: artifacts/loan_binary_encoder.pkl
+2025-05-21 08:52:36,146 - INFO -  [PREPROCESSING]Saved encoded train set to: datasets/cleaned/loan_cleaned.csv
+2025-05-21 08:52:36,146 - INFO -  [PREPROCESSING] Saved encoded test set to: datasets/test/loan_test_set.csv
+2025-05-21 08:52:36,147 - INFO - [PREPROCESSING] run_preprocessing finished executing.
+2025-05-21 08:52:36,152 - INFO - Preprocessing completed. Rows before: 614, after: 336
+2025-05-21 08:52:36,153 - INFO - Preprocessed data saved to: outputs\singular\loan_2025-05-21_08-52-36\preprocessing_report.txt
+2025-05-21 08:52:36,154 - INFO - enable_anonymization = True
+2025-05-21 08:52:36,155 - INFO - Starting Anonymization Pipeline with output path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k3_l2_sup10_anonymized.csv.......
+2025-05-21 08:52:36,161 - INFO -  [ANONYMIZATION] Executing run_anonymization, config_path : configs/benchmark_config.yaml...........
+2025-05-21 08:52:36,162 - INFO -  [ANONYMIZATION] Compiling Java source files...
+2025-05-21 08:52:37,494 - INFO -  [ANONYMIZATION] Java compilation successful.
+2025-05-21 08:52:37,495 - INFO - [ANONYMIZATION] Creating JAR file for anonymization...
+2025-05-21 08:52:37,703 - INFO -  [ANONYMIZATION] JAR file created successfully.
+2025-05-21 08:52:39,364 - INFO -  [ANONYMIZATION] Anonimized file saved to : C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k3_l2_sup10_anonymized.csv
+2025-05-21 08:52:39,365 - INFO -  [ANONYMIZATION] Java anonymization completed successfully.
+2025-05-21 08:52:39,365 - INFO -  [ANONYMIZATION] Java STDOUT:
+? Java received config path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+? Loading config from: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+Loading config from: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\configs\benchmark_config.yaml
+? Dataset Path (from args): C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\train\loan_train_raw.csv
+? Dataset Separator: ,
+? Suppression Limit: 0.1
+
+? Configured Attributes:
+  ? Quasi-Identifier: Gender
+  ? Quasi-Identifier: Married
+  ? Quasi-Identifier: Education
+  ? Quasi-Identifier: Dependents
+  ? Quasi-Identifier: Self_Employed
+  ? Quasi-Identifier: Property_Area
+  ? Quasi-Identifier: Credit_History
+  ? Quasi-Identifier: Loan_Amount_Term
+  ? Sensitive Attribute: LoanAmount
+  ? Insensitive Attribute: Loan_Status
+  ? Insensitive Attribute: ApplicantIncome
+  ? Insensitive Attribute: CoapplicantIncome
+
+? Defined Hierarchies:
+  ? Self_Employed -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\self_employed.csv
+  ? Property_Area -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\property_area.csv
+  ? Dependents -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\dependents.csv
+  ? Credit_History -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\credit_history.csv
+  ? Married -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\married.csv
+  ? Education -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\education.csv
+  ? Loan_Amount_Term -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\loan_amount_terms.csv
+  ? Gender -> C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\gender.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\self_employed.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\property_area.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\dependents.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\credit_history.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\married.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\education.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\loan_amount_terms.csv
+Java is searching for hierarchy file at: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\src\anonymization\anonymARXij\src\hierarchies_loan\gender.csv
+? Applied Entropy L-Diversity on: LoanAmount (l=2)
+? Privacy Models Configured
+? Anonymized Output Path (from args): C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k3_l2_sup10_anonymized.csv
+? Anonymized Output Path: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k3_l2_sup10_anonymized.csv
+? Anonymization completed. Output saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k3_l2_sup10_anonymized.csv
+Anonymized Data Quality Metrics:
+ - Ambiguity: 0.9032819739466035
+ - AECS: 0.9734434674482636
+ - Discernibility: 0.8275145469659185
+ - Granularity: 0.6948325071353456
+ - MSE: 0.797571044546851
+ - Non-Uniform Entropy: 0.5273828966553882
+ - Precision: 0.6597222222222225
+ - Record-level SE: 0.6334226875498641
+Equivalence Class Statistics:
+ - Number of Classes: 27
+ - Average Class Size: 11.25925925925926
+Suppression Statistics:
+ - Suppressed Records: 32
+ - Suppression Percentage: 9.52%
+2025-05-21 08:52:39,366 - INFO - Anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k3_l2_sup10_anonymized.csv
+2025-05-21 08:52:39,416 - INFO - Anonymous data report saved at: outputs\singular\loan_2025-05-21_08-52-36\anonymous_data_report.txt
+2025-05-21 08:52:39,417 - INFO -  [POSTPROCESSING] Postprocessing anonymized data: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k3_l2_sup10_anonymized.csv
+2025-05-21 08:52:39,421 - INFO -  [POSTPROCESSING] Loaded anonymized data: (336, 12)
+2025-05-21 08:52:39,450 - INFO -  [POSTPROCESSING] Loaded fallback maps from training data. Categorical cols: 7, Numeric cols: 5
+2025-05-21 08:52:39,451 - INFO -  [POSTPROCESSING] Normalizing anonymized data using ARX artifact cleaning and fallback values.
+2025-05-21 08:52:39,464 - INFO -  [POSTPROCESSING] Normalized anonymized data saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k3_l2_sup10_anonymized_processed.csv
+2025-05-21 08:52:39,475 - INFO -  [POSTPROCESSING] Binary Encoding applied to anonymized data. Encoded shape: (336, 19)
+2025-05-21 08:52:39,479 - INFO -  [POSTPROCESSING] Encoded anonymized dataset saved to: C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\MasterThesisCode\datasets\anonymized\loan_k3_l2_sup10_anonymized_encoded.csv
+2025-05-21 08:52:39,480 - INFO -  [POSTPROCESSING] Encoding map generated for anonymized data: 0 original categorical columns.
+2025-05-21 08:52:39,480 - INFO - Postprocessing report saved at: outputs\singular\loan_2025-05-21_08-52-36\postprocessing_report.txt
+2025-05-21 08:52:39,481 - INFO - enable_synthetic_generation = False
+2025-05-21 08:52:39,481 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-05-21 08:52:39,481 - INFO - Hybrid Pipeline skipped (disabled in configuration).
+2025-05-21 08:52:39,482 - INFO - Starting Utility...
+2025-05-21 08:52:39,482 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-05-21 08:52:39,484 - INFO - [UTILITY] Original Data - Training Size: 336, Testing Size: 144
+2025-05-21 08:52:39,485 - INFO - [UTILITY] Target class distribution (Original): {'Y': 232, 'N': 104}
+2025-05-21 08:52:39,486 - INFO - [UTILITY] Processing anonymized dataset...
+2025-05-21 08:52:39,487 - INFO - [UTILITY] Anonymized Data - Training Size: 336
+2025-05-21 08:52:39,487 - INFO - [UTILITY] Target class distribution (Anonymous): {'Y': 232, 'N': 104}
+2025-05-21 08:52:39,488 - INFO - [UTILITY] Training models on all datasets...
+2025-05-21 08:52:39,488 - INFO - [UTILITY] Total datasets used for training: 2
+2025-05-21 08:52:39,489 - INFO - [TRAINING] Training models from scratch...
+2025-05-21 08:52:39,489 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 336, Features: 18
+2025-05-21 08:52:39,490 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-05-21 08:52:39,495 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 0.01 sec
+2025-05-21 08:52:39,496 - INFO - [TRAINING] Training KNN on Original...
+2025-05-21 08:52:39,499 - INFO - [TRAINING] KNN trained successfully on Original in 0.00 sec
+2025-05-21 08:52:39,499 - INFO - [TRAINING] Training RandomForest on Original...
+2025-05-21 08:52:39,607 - INFO - [TRAINING] RandomForest trained successfully on Original in 0.11 sec
+2025-05-21 08:52:39,607 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-05-21 08:52:39,610 - INFO - [TRAINING] DecisionTree trained successfully on Original in 0.00 sec
+2025-05-21 08:52:39,611 - INFO - [TRAINING] Training SVM on Original...
+2025-05-21 08:52:39,616 - INFO - [TRAINING] SVM trained successfully on Original in 0.00 sec
+2025-05-21 08:52:39,616 - INFO - [TRAINING] Finished training 5 model(s) for dataset: Original
+2025-05-21 08:52:39,617 - INFO - [TRAINING] Starting training for dataset: Anonymous — Rows: 336, Features: 18
+2025-05-21 08:52:39,617 - INFO - [TRAINING] Training LogisticRegression on Anonymous...
+2025-05-21 08:52:39,626 - INFO - [TRAINING] LogisticRegression trained successfully on Anonymous in 0.01 sec
+2025-05-21 08:52:39,626 - INFO - [TRAINING] Training KNN on Anonymous...
+2025-05-21 08:52:39,628 - INFO - [TRAINING] KNN trained successfully on Anonymous in 0.00 sec
+2025-05-21 08:52:39,628 - INFO - [TRAINING] Training RandomForest on Anonymous...
+2025-05-21 08:52:39,726 - INFO - [TRAINING] RandomForest trained successfully on Anonymous in 0.10 sec
+2025-05-21 08:52:39,727 - INFO - [TRAINING] Training DecisionTree on Anonymous...
+2025-05-21 08:52:39,730 - INFO - [TRAINING] DecisionTree trained successfully on Anonymous in 0.00 sec
+2025-05-21 08:52:39,731 - INFO - [TRAINING] Training SVM on Anonymous...
+2025-05-21 08:52:39,736 - INFO - [TRAINING] SVM trained successfully on Anonymous in 0.00 sec
+2025-05-21 08:52:39,736 - INFO - [TRAINING] Finished training 5 model(s) for dataset: Anonymous
+2025-05-21 08:52:39,737 - INFO - [TRAINING] Total models trained across all datasets: 10
+2025-05-21 08:52:39,737 - INFO - [UTILITY] Trained model names: ['Original', 'Anonymous']
+2025-05-21 08:52:39,737 - INFO - [UTILITY] Model Training Completed.
+2025-05-21 08:52:39,737 - INFO - Starting the Evaluating of models...
+2025-05-21 08:52:39,737 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-05-21 08:52:39,738 - INFO - Evaluating LogisticRegression on Original...
+2025-05-21 08:52:39,740 - INFO - Predictions completed for LogisticRegression on Original
+2025-05-21 08:52:39,740 - INFO - Prediction distribution for LogisticRegression on Original: {'Y': 115, 'N': 29}
+2025-05-21 08:52:39,752 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-05-21 08:52:39,753 - INFO - Evaluating LogisticRegression on Anonymous...
+2025-05-21 08:52:39,755 - INFO - Predictions completed for LogisticRegression on Anonymous
+2025-05-21 08:52:39,755 - INFO - Prediction distribution for LogisticRegression on Anonymous: {'Y': 118, 'N': 26}
+2025-05-21 08:52:39,765 - INFO - Computed 8 metric(s) for LogisticRegression on Anonymous
+2025-05-21 08:52:39,766 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-05-21 08:52:39,767 - INFO - Evaluating KNN on Original...
+2025-05-21 08:52:39,956 - INFO - Predictions completed for KNN on Original
+2025-05-21 08:52:39,957 - INFO - Prediction distribution for KNN on Original: {'Y': 115, 'N': 29}
+2025-05-21 08:52:40,003 - INFO - Computed 8 metric(s) for KNN on Original
+2025-05-21 08:52:40,003 - INFO - Evaluating KNN on Anonymous...
+2025-05-21 08:52:40,018 - INFO - Predictions completed for KNN on Anonymous
+2025-05-21 08:52:40,019 - INFO - Prediction distribution for KNN on Anonymous: {'Y': 113, 'N': 31}
+2025-05-21 08:52:40,047 - INFO - Computed 8 metric(s) for KNN on Anonymous
+2025-05-21 08:52:40,048 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-05-21 08:52:40,048 - INFO - Evaluating RandomForest on Original...
+2025-05-21 08:52:40,054 - INFO - Predictions completed for RandomForest on Original
+2025-05-21 08:52:40,055 - INFO - Prediction distribution for RandomForest on Original: {'Y': 108, 'N': 36}
+2025-05-21 08:52:40,075 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-05-21 08:52:40,075 - INFO - Evaluating RandomForest on Anonymous...
+2025-05-21 08:52:40,081 - INFO - Predictions completed for RandomForest on Anonymous
+2025-05-21 08:52:40,082 - INFO - Prediction distribution for RandomForest on Anonymous: {'Y': 104, 'N': 40}
+2025-05-21 08:52:40,100 - INFO - Computed 8 metric(s) for RandomForest on Anonymous
+2025-05-21 08:52:40,101 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-05-21 08:52:40,102 - INFO - Evaluating DecisionTree on Original...
+2025-05-21 08:52:40,104 - INFO - Predictions completed for DecisionTree on Original
+2025-05-21 08:52:40,104 - INFO - Prediction distribution for DecisionTree on Original: {'Y': 92, 'N': 52}
+2025-05-21 08:52:40,113 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-05-21 08:52:40,113 - INFO - Evaluating DecisionTree on Anonymous...
+2025-05-21 08:52:40,115 - INFO - Predictions completed for DecisionTree on Anonymous
+2025-05-21 08:52:40,116 - INFO - Prediction distribution for DecisionTree on Anonymous: {'Y': 86, 'N': 58}
+2025-05-21 08:52:40,128 - INFO - Computed 8 metric(s) for DecisionTree on Anonymous
+2025-05-21 08:52:40,129 - INFO - Preparing evaluation for model 'SVM' across all datasets...
+2025-05-21 08:52:40,130 - INFO - Evaluating SVM on Original...
+2025-05-21 08:52:40,133 - INFO - Predictions completed for SVM on Original
+2025-05-21 08:52:40,134 - INFO - Prediction distribution for SVM on Original: {'Y': 144}
+2025-05-21 08:52:40,135 - WARNING -  [WARNING] :SVM on Original predicted only one class: {'Y'}
+2025-05-21 08:52:40,137 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-05-21 08:52:40,139 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-05-21 08:52:40,141 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-05-21 08:52:40,143 - INFO - Computed 8 metric(s) for SVM on Original
+2025-05-21 08:52:40,144 - INFO - Evaluating SVM on Anonymous...
+2025-05-21 08:52:40,147 - INFO - Predictions completed for SVM on Anonymous
+2025-05-21 08:52:40,148 - INFO - Prediction distribution for SVM on Anonymous: {'Y': 144}
+2025-05-21 08:52:40,149 - WARNING -  [WARNING] :SVM on Anonymous predicted only one class: {'Y'}
+2025-05-21 08:52:40,152 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-05-21 08:52:40,154 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-05-21 08:52:40,156 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from C:\Users\delea\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_classification.py:1565)
+2025-05-21 08:52:40,158 - INFO - Computed 8 metric(s) for SVM on Anonymous
+2025-05-21 08:52:40,163 - INFO - Evaluation completed for all models.
+2025-05-21 08:52:40,163 - INFO - Model evaluation completed in 0.43 seconds.
+2025-05-21 08:52:40,171 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest', 'SVM']
+2025-05-21 08:52:40,171 - INFO - Model Training and Evaluation completed.
+2025-05-21 08:52:40,870 - INFO -  Visualizations saved.
+2025-05-21 08:52:40,871 - INFO -  Benchmarking Completed. Results saved in output folder.

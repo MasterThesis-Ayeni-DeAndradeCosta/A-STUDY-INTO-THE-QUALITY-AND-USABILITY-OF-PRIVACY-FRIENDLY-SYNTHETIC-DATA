@@ -1,0 +1,374 @@
+2025-05-08 18:51:41,658 - INFO - Loaded config file: configs/generated_configs/loan/loan_synth_ep1000_rows5x.yaml
+2025-05-08 18:51:41,658 - INFO -  Benchmarking started for dataset: loan
+2025-05-08 18:51:41,658 - INFO - Using dataset path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/original/loan.csv
+2025-05-08 18:51:41,658 - INFO - Target column: Loan_Status, separator: ','
+2025-05-08 18:51:41,658 - INFO - Configuration loaded: enable_anonymization = False, enable_synthesis = True, enable_hybrid = False, enable_utility = True, delete_after_evaluation = False
+2025-05-08 18:51:41,658 - INFO - Running preprocessing...
+2025-05-08 18:51:41,662 - INFO -  [PREPROCESSING] Preprocessed files found. Skipping preprocessing.
+2025-05-08 18:51:41,671 - INFO - Preprocessing completed. Rows before: 614, after: 336
+2025-05-08 18:51:41,671 - INFO - Preprocessed data saved to: outputs/batch/loan_batch_2025-05-08_18-38-44/loan_synth_ep1000_rows5x/preprocessing_report.txt
+2025-05-08 18:51:41,671 - INFO - enable_anonymization = False
+2025-05-08 18:51:41,671 - INFO - Anonymization Skipped (Disabled in Configuration).
+2025-05-08 18:51:41,671 - INFO - enable_synthetic_generation = True
+2025-05-08 18:51:41,671 - INFO - Starting standard Synthetic Data Generation pipeline...
+2025-05-08 18:51:41,671 - INFO - Executing run_synthetic.....
+2025-05-08 18:51:41,671 - INFO - [SYNTHETIC PIPELINE] executing run_synthetic for loan...
+2025-05-08 18:51:41,671 - INFO - [SYNTHETIC] Processing dataset: loan
+2025-05-08 18:51:41,671 - INFO - [SYNTHETIC] Original dataset size: 336 rows
+2025-05-08 18:51:41,681 - INFO - Detected metadata:
+2025-05-08 18:51:41,681 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "Gender_0": {
+            "sdtype": "categorical"
+        },
+        "Gender_1": {
+            "sdtype": "categorical"
+        },
+        "Married_0": {
+            "sdtype": "categorical"
+        },
+        "Married_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_0": {
+            "sdtype": "categorical"
+        },
+        "Dependents_1": {
+            "sdtype": "categorical"
+        },
+        "Dependents_2": {
+            "sdtype": "categorical"
+        },
+        "Education_0": {
+            "sdtype": "categorical"
+        },
+        "Education_1": {
+            "sdtype": "categorical"
+        },
+        "Self_Employed_0": {
+            "sdtype": "categorical"
+        },
+        "Self_Employed_1": {
+            "sdtype": "categorical"
+        },
+        "ApplicantIncome": {
+            "sdtype": "numerical"
+        },
+        "CoapplicantIncome": {
+            "sdtype": "numerical"
+        },
+        "LoanAmount": {
+            "sdtype": "numerical"
+        },
+        "Loan_Amount_Term": {
+            "sdtype": "categorical"
+        },
+        "Credit_History": {
+            "sdtype": "categorical"
+        },
+        "Property_Area_0": {
+            "sdtype": "categorical"
+        },
+        "Property_Area_1": {
+            "sdtype": "categorical"
+        },
+        "Loan_Status": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-05-08 18:51:41,681 - INFO - [SYNTHETIC] Preparing synthesizer: CTGAN
+2025-05-08 18:51:41,681 - INFO - [SYNTHETIC] Params from config: {'epochs': 1000}
+2025-05-08 18:51:41,681 - INFO - [SYNTHETIC] Found existing CTGAN synthesizer: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/artifacts/synthesizers/loan_CTGAN_epochs1000_synthesizer.pkl
+2025-05-08 18:51:41,955 - INFO - {'EVENT': 'Load', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 18, 51, 41, 955344), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_cb05a990105f45f4a393e1e9e01f2c5f'}
+2025-05-08 18:51:41,955 - INFO - [SYNTHETIC] Preparing synthesizer: TVAE
+2025-05-08 18:51:41,955 - INFO - [SYNTHETIC] Params from config: {'epochs': 1000}
+2025-05-08 18:51:41,955 - INFO - [SYNTHETIC] Found existing TVAE synthesizer: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/artifacts/synthesizers/loan_TVAE_epochs1000_synthesizer.pkl
+2025-05-08 18:51:41,985 - INFO - {'EVENT': 'Load', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 18, 51, 41, 985509), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_3c1a66098f48470ab96ef02372178f24'}
+2025-05-08 18:51:41,985 - INFO - [SYNTHETIC] Using CTGAN to generate 1680 rows...
+2025-05-08 18:51:42,292 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 18, 51, 41, 985739), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_cb05a990105f45f4a393e1e9e01f2c5f', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 1680, 'TOTAL NUMBER OF COLUMNS': 19}
+2025-05-08 18:51:42,292 - INFO - [SYNTHETIC] CTGAN completed: 1680 rows generated.
+2025-05-08 18:51:42,293 - INFO - [SYNTHETIC] Target class distribution for CTGAN: {'Y': 1228, 'N': 452}
+2025-05-08 18:51:42,293 - INFO - [SYNTHETIC] Using TVAE to generate 1680 rows...
+2025-05-08 18:51:42,350 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 18, 51, 42, 293226), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_3c1a66098f48470ab96ef02372178f24', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 1680, 'TOTAL NUMBER OF COLUMNS': 19}
+2025-05-08 18:51:42,350 - INFO - [SYNTHETIC] TVAE completed: 1680 rows generated.
+2025-05-08 18:51:42,351 - INFO - [SYNTHETIC] Target class distribution for TVAE: {'Y': 1237, 'N': 443}
+2025-05-08 18:51:42,351 - INFO - [SYNTHETIC PIPELINE] Synthetic Data Generation Completed.
+2025-05-08 18:51:42,352 - INFO - [SYNTHETIC PIPELINE] Synthesizers used: ['CTGAN', 'TVAE']
+2025-05-08 18:51:42,352 - INFO - [SYNTHETIC PIPELINE] Evaluating synthetic dataset generated by CTGAN...
+2025-05-08 18:51:42,352 - INFO - [SYNTHETIC EVAL] Real data columns     (19): ['Gender_0', 'Gender_1', 'Married_0', 'Married_1', 'Dependents_0', 'Dependents_1', 'Dependents_2', 'Education_0', 'Education_1', 'Self_Employed_0', 'Self_Employed_1', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area_0', 'Property_Area_1', 'Loan_Status']
+2025-05-08 18:51:42,352 - INFO - [SYNTHETIC EVAL] Synthetic data columns (19): ['Gender_0', 'Gender_1', 'Married_0', 'Married_1', 'Dependents_0', 'Dependents_1', 'Dependents_2', 'Education_0', 'Education_1', 'Self_Employed_0', 'Self_Employed_1', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area_0', 'Property_Area_1', 'Loan_Status']
+2025-05-08 18:51:42,352 - INFO - [SYNTHETIC EVAL] Metadata columns      (19): ['Gender_0', 'Gender_1', 'Married_0', 'Married_1', 'Dependents_0', 'Dependents_1', 'Dependents_2', 'Education_0', 'Education_1', 'Self_Employed_0', 'Self_Employed_1', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area_0', 'Property_Area_1', 'Loan_Status']
+2025-05-08 18:51:42,352 - INFO - [SYNTHETIC EVAL] Shape — Real: (336, 19), Synthetic: (1680, 19)
+2025-05-08 18:51:42,352 - INFO - [SYNTHETIC EVAL] Metadata structure:
+{
+  "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+  "columns": {
+    "Gender_0": {
+      "sdtype": "categorical"
+    },
+    "Gender_1": {
+      "sdtype": "categorical"
+    },
+    "Married_0": {
+      "sdtype": "categorical"
+    },
+    "Married_1": {
+      "sdtype": "categorical"
+    },
+    "Dependents_0": {
+      "sdtype": "categorical"
+    },
+    "Dependents_1": {
+      "sdtype": "categorical"
+    },
+    "Dependents_2": {
+      "sdtype": "categorical"
+    },
+    "Education_0": {
+      "sdtype": "categorical"
+    },
+    "Education_1": {
+      "sdtype": "categorical"
+    },
+    "Self_Employed_0": {
+      "sdtype": "categorical"
+    },
+    "Self_Employed_1": {
+      "sdtype": "categorical"
+    },
+    "ApplicantIncome": {
+      "sdtype": "numerical"
+    },
+    "CoapplicantIncome": {
+      "sdtype": "numerical"
+    },
+    "LoanAmount": {
+      "sdtype": "numerical"
+    },
+    "Loan_Amount_Term": {
+      "sdtype": "categorical"
+    },
+    "Credit_History": {
+      "sdtype": "categorical"
+    },
+    "Property_Area_0": {
+      "sdtype": "categorical"
+    },
+    "Property_Area_1": {
+      "sdtype": "categorical"
+    },
+    "Loan_Status": {
+      "sdtype": "categorical"
+    }
+  }
+}
+2025-05-08 18:51:42,721 - INFO - [SYNTHETIC PIPELINE] Evaluating synthetic dataset generated by TVAE...
+2025-05-08 18:51:42,721 - INFO - [SYNTHETIC EVAL] Real data columns     (19): ['Gender_0', 'Gender_1', 'Married_0', 'Married_1', 'Dependents_0', 'Dependents_1', 'Dependents_2', 'Education_0', 'Education_1', 'Self_Employed_0', 'Self_Employed_1', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area_0', 'Property_Area_1', 'Loan_Status']
+2025-05-08 18:51:42,721 - INFO - [SYNTHETIC EVAL] Synthetic data columns (19): ['Gender_0', 'Gender_1', 'Married_0', 'Married_1', 'Dependents_0', 'Dependents_1', 'Dependents_2', 'Education_0', 'Education_1', 'Self_Employed_0', 'Self_Employed_1', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area_0', 'Property_Area_1', 'Loan_Status']
+2025-05-08 18:51:42,721 - INFO - [SYNTHETIC EVAL] Metadata columns      (19): ['Gender_0', 'Gender_1', 'Married_0', 'Married_1', 'Dependents_0', 'Dependents_1', 'Dependents_2', 'Education_0', 'Education_1', 'Self_Employed_0', 'Self_Employed_1', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Property_Area_0', 'Property_Area_1', 'Loan_Status']
+2025-05-08 18:51:42,721 - INFO - [SYNTHETIC EVAL] Shape — Real: (336, 19), Synthetic: (1680, 19)
+2025-05-08 18:51:42,721 - INFO - [SYNTHETIC EVAL] Metadata structure:
+{
+  "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+  "columns": {
+    "Gender_0": {
+      "sdtype": "categorical"
+    },
+    "Gender_1": {
+      "sdtype": "categorical"
+    },
+    "Married_0": {
+      "sdtype": "categorical"
+    },
+    "Married_1": {
+      "sdtype": "categorical"
+    },
+    "Dependents_0": {
+      "sdtype": "categorical"
+    },
+    "Dependents_1": {
+      "sdtype": "categorical"
+    },
+    "Dependents_2": {
+      "sdtype": "categorical"
+    },
+    "Education_0": {
+      "sdtype": "categorical"
+    },
+    "Education_1": {
+      "sdtype": "categorical"
+    },
+    "Self_Employed_0": {
+      "sdtype": "categorical"
+    },
+    "Self_Employed_1": {
+      "sdtype": "categorical"
+    },
+    "ApplicantIncome": {
+      "sdtype": "numerical"
+    },
+    "CoapplicantIncome": {
+      "sdtype": "numerical"
+    },
+    "LoanAmount": {
+      "sdtype": "numerical"
+    },
+    "Loan_Amount_Term": {
+      "sdtype": "categorical"
+    },
+    "Credit_History": {
+      "sdtype": "categorical"
+    },
+    "Property_Area_0": {
+      "sdtype": "categorical"
+    },
+    "Property_Area_1": {
+      "sdtype": "categorical"
+    },
+    "Loan_Status": {
+      "sdtype": "categorical"
+    }
+  }
+}
+2025-05-08 18:51:43,117 - INFO -  [SYNTHETIC PIPELINE]  Synthetic Data Evaluation Completed.
+2025-05-08 18:51:43,125 - INFO -  [SYNTHETIC PIPELINE] Synthetic Data Report Generated Successfully.
+2025-05-08 18:51:43,207 - INFO - Synthetic data generated with 2 synthesizer(s).
+2025-05-08 18:51:43,208 - INFO - Hybrid Pipeline skipped (disabled in configuration).
+2025-05-08 18:51:43,208 - INFO - Starting Utility...
+2025-05-08 18:51:43,208 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-05-08 18:51:43,208 - INFO - [UTILITY] Original Data - Training Size: 336, Testing Size: 144
+2025-05-08 18:51:43,209 - INFO - [UTILITY] Target class distribution (Original): {'Y': 232, 'N': 104}
+2025-05-08 18:51:43,209 - INFO - [UTILITY] Processing synthetic dataset generated by CTGAN...
+2025-05-08 18:51:43,209 - INFO - [UTILITY] Synthetic Data (CTGAN) - Training Size: 1680
+2025-05-08 18:51:43,209 - INFO - [UTILITY] Target class distribution (CTGAN): {'Y': 1228, 'N': 452}
+2025-05-08 18:51:43,210 - INFO - [UTILITY] Processing synthetic dataset generated by TVAE...
+2025-05-08 18:51:43,210 - INFO - [UTILITY] Synthetic Data (TVAE) - Training Size: 1680
+2025-05-08 18:51:43,210 - INFO - [UTILITY] Target class distribution (TVAE): {'Y': 1237, 'N': 443}
+2025-05-08 18:51:43,210 - INFO - [UTILITY] Training models on all datasets...
+2025-05-08 18:51:43,210 - INFO - [UTILITY] Total datasets used for training: 3
+2025-05-08 18:51:43,210 - INFO - [TRAINING] Training models from scratch...
+2025-05-08 18:51:43,210 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 336, Features: 18
+2025-05-08 18:51:43,211 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-05-08 18:51:43,213 - INFO - [TRAINING] DecisionTree trained successfully on Original in 0.00 sec
+2025-05-08 18:51:43,213 - INFO - [TRAINING] Training KNN on Original...
+2025-05-08 18:51:43,215 - INFO - [TRAINING] KNN trained successfully on Original in 0.00 sec
+2025-05-08 18:51:43,215 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-05-08 18:51:43,219 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 0.00 sec
+2025-05-08 18:51:43,219 - INFO - [TRAINING] Training RandomForest on Original...
+2025-05-08 18:51:43,327 - INFO - [TRAINING] RandomForest trained successfully on Original in 0.11 sec
+2025-05-08 18:51:43,327 - INFO - [TRAINING] Training SVM on Original...
+2025-05-08 18:51:43,331 - INFO - [TRAINING] SVM trained successfully on Original in 0.00 sec
+2025-05-08 18:51:43,331 - INFO - [TRAINING] Finished training 5 model(s) for dataset: Original
+2025-05-08 18:51:43,331 - INFO - [TRAINING] Starting training for dataset: CTGAN — Rows: 1680, Features: 18
+2025-05-08 18:51:43,331 - INFO - [TRAINING] Training DecisionTree on CTGAN...
+2025-05-08 18:51:43,340 - INFO - [TRAINING] DecisionTree trained successfully on CTGAN in 0.01 sec
+2025-05-08 18:51:43,340 - INFO - [TRAINING] Training KNN on CTGAN...
+2025-05-08 18:51:43,341 - INFO - [TRAINING] KNN trained successfully on CTGAN in 0.00 sec
+2025-05-08 18:51:43,342 - INFO - [TRAINING] Training LogisticRegression on CTGAN...
+2025-05-08 18:51:43,346 - INFO - [TRAINING] LogisticRegression trained successfully on CTGAN in 0.00 sec
+2025-05-08 18:51:43,346 - INFO - [TRAINING] Training RandomForest on CTGAN...
+2025-05-08 18:51:43,556 - INFO - [TRAINING] RandomForest trained successfully on CTGAN in 0.21 sec
+2025-05-08 18:51:43,556 - INFO - [TRAINING] Training SVM on CTGAN...
+2025-05-08 18:51:43,606 - INFO - [TRAINING] SVM trained successfully on CTGAN in 0.05 sec
+2025-05-08 18:51:43,606 - INFO - [TRAINING] Finished training 5 model(s) for dataset: CTGAN
+2025-05-08 18:51:43,606 - INFO - [TRAINING] Starting training for dataset: TVAE — Rows: 1680, Features: 18
+2025-05-08 18:51:43,606 - INFO - [TRAINING] Training DecisionTree on TVAE...
+2025-05-08 18:51:43,614 - INFO - [TRAINING] DecisionTree trained successfully on TVAE in 0.01 sec
+2025-05-08 18:51:43,614 - INFO - [TRAINING] Training KNN on TVAE...
+2025-05-08 18:51:43,615 - INFO - [TRAINING] KNN trained successfully on TVAE in 0.00 sec
+2025-05-08 18:51:43,615 - INFO - [TRAINING] Training LogisticRegression on TVAE...
+2025-05-08 18:51:43,622 - INFO - [TRAINING] LogisticRegression trained successfully on TVAE in 0.01 sec
+2025-05-08 18:51:43,622 - INFO - [TRAINING] Training RandomForest on TVAE...
+2025-05-08 18:51:43,815 - INFO - [TRAINING] RandomForest trained successfully on TVAE in 0.19 sec
+2025-05-08 18:51:43,816 - INFO - [TRAINING] Training SVM on TVAE...
+2025-05-08 18:51:43,864 - INFO - [TRAINING] SVM trained successfully on TVAE in 0.05 sec
+2025-05-08 18:51:43,864 - INFO - [TRAINING] Finished training 5 model(s) for dataset: TVAE
+2025-05-08 18:51:43,864 - INFO - [TRAINING] Total models trained across all datasets: 15
+2025-05-08 18:51:43,864 - INFO - [UTILITY] Trained model names: ['Original', 'CTGAN', 'TVAE']
+2025-05-08 18:51:43,864 - INFO - [UTILITY] Model Training Completed.
+2025-05-08 18:51:43,864 - INFO - Starting the Evaluating of models...
+2025-05-08 18:51:43,864 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-05-08 18:51:43,864 - INFO - Evaluating DecisionTree on Original...
+2025-05-08 18:51:43,865 - INFO - Predictions completed for DecisionTree on Original
+2025-05-08 18:51:43,866 - INFO - Prediction distribution for DecisionTree on Original: {'Y': 92, 'N': 52}
+2025-05-08 18:51:43,875 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-05-08 18:51:43,875 - INFO - Evaluating DecisionTree on CTGAN...
+2025-05-08 18:51:43,876 - INFO - Predictions completed for DecisionTree on CTGAN
+2025-05-08 18:51:43,876 - INFO - Prediction distribution for DecisionTree on CTGAN: {'Y': 102, 'N': 42}
+2025-05-08 18:51:43,884 - INFO - Computed 8 metric(s) for DecisionTree on CTGAN
+2025-05-08 18:51:43,884 - INFO - Evaluating DecisionTree on TVAE...
+2025-05-08 18:51:43,885 - INFO - Predictions completed for DecisionTree on TVAE
+2025-05-08 18:51:43,886 - INFO - Prediction distribution for DecisionTree on TVAE: {'Y': 89, 'N': 55}
+2025-05-08 18:51:43,894 - INFO - Computed 8 metric(s) for DecisionTree on TVAE
+2025-05-08 18:51:43,894 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-05-08 18:51:43,894 - INFO - Evaluating KNN on Original...
+2025-05-08 18:51:43,934 - INFO - Predictions completed for KNN on Original
+2025-05-08 18:51:43,934 - INFO - Prediction distribution for KNN on Original: {'Y': 115, 'N': 29}
+2025-05-08 18:51:43,948 - INFO - Computed 8 metric(s) for KNN on Original
+2025-05-08 18:51:43,948 - INFO - Evaluating KNN on CTGAN...
+2025-05-08 18:51:43,955 - INFO - Predictions completed for KNN on CTGAN
+2025-05-08 18:51:43,956 - INFO - Prediction distribution for KNN on CTGAN: {'Y': 107, 'N': 37}
+2025-05-08 18:51:43,979 - INFO - Computed 8 metric(s) for KNN on CTGAN
+2025-05-08 18:51:43,979 - INFO - Evaluating KNN on TVAE...
+2025-05-08 18:51:43,986 - INFO - Predictions completed for KNN on TVAE
+2025-05-08 18:51:43,986 - INFO - Prediction distribution for KNN on TVAE: {'Y': 129, 'N': 15}
+2025-05-08 18:51:44,018 - INFO - Computed 8 metric(s) for KNN on TVAE
+2025-05-08 18:51:44,019 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-05-08 18:51:44,019 - INFO - Evaluating LogisticRegression on Original...
+2025-05-08 18:51:44,021 - INFO - Predictions completed for LogisticRegression on Original
+2025-05-08 18:51:44,021 - INFO - Prediction distribution for LogisticRegression on Original: {'Y': 115, 'N': 29}
+2025-05-08 18:51:44,035 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-05-08 18:51:44,035 - INFO - Evaluating LogisticRegression on CTGAN...
+2025-05-08 18:51:44,036 - INFO - Predictions completed for LogisticRegression on CTGAN
+2025-05-08 18:51:44,037 - INFO - Prediction distribution for LogisticRegression on CTGAN: {'Y': 127, 'N': 17}
+2025-05-08 18:51:44,050 - INFO - Computed 8 metric(s) for LogisticRegression on CTGAN
+2025-05-08 18:51:44,050 - INFO - Evaluating LogisticRegression on TVAE...
+2025-05-08 18:51:44,052 - INFO - Predictions completed for LogisticRegression on TVAE
+2025-05-08 18:51:44,052 - INFO - Prediction distribution for LogisticRegression on TVAE: {'Y': 116, 'N': 28}
+2025-05-08 18:51:44,066 - INFO - Computed 8 metric(s) for LogisticRegression on TVAE
+2025-05-08 18:51:44,066 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-05-08 18:51:44,066 - INFO - Evaluating RandomForest on Original...
+2025-05-08 18:51:44,075 - INFO - Predictions completed for RandomForest on Original
+2025-05-08 18:51:44,076 - INFO - Prediction distribution for RandomForest on Original: {'Y': 107, 'N': 37}
+2025-05-08 18:51:44,103 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-05-08 18:51:44,103 - INFO - Evaluating RandomForest on CTGAN...
+2025-05-08 18:51:44,113 - INFO - Predictions completed for RandomForest on CTGAN
+2025-05-08 18:51:44,113 - INFO - Prediction distribution for RandomForest on CTGAN: {'Y': 126, 'N': 18}
+2025-05-08 18:51:44,142 - INFO - Computed 8 metric(s) for RandomForest on CTGAN
+2025-05-08 18:51:44,142 - INFO - Evaluating RandomForest on TVAE...
+2025-05-08 18:51:44,151 - INFO - Predictions completed for RandomForest on TVAE
+2025-05-08 18:51:44,152 - INFO - Prediction distribution for RandomForest on TVAE: {'Y': 104, 'N': 40}
+2025-05-08 18:51:44,176 - INFO - Computed 8 metric(s) for RandomForest on TVAE
+2025-05-08 18:51:44,176 - INFO - Preparing evaluation for model 'SVM' across all datasets...
+2025-05-08 18:51:44,176 - INFO - Evaluating SVM on Original...
+2025-05-08 18:51:44,178 - INFO - Predictions completed for SVM on Original
+2025-05-08 18:51:44,179 - INFO - Prediction distribution for SVM on Original: {'Y': 144}
+2025-05-08 18:51:44,179 - WARNING -  [WARNING] :SVM on Original predicted only one class: {'Y'}
+2025-05-08 18:51:44,180 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 18:51:44,182 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 18:51:44,184 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 18:51:44,185 - INFO - Computed 8 metric(s) for SVM on Original
+2025-05-08 18:51:44,185 - INFO - Evaluating SVM on CTGAN...
+2025-05-08 18:51:44,191 - INFO - Predictions completed for SVM on CTGAN
+2025-05-08 18:51:44,191 - INFO - Prediction distribution for SVM on CTGAN: {'Y': 144}
+2025-05-08 18:51:44,191 - WARNING -  [WARNING] :SVM on CTGAN predicted only one class: {'Y'}
+2025-05-08 18:51:44,193 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 18:51:44,194 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 18:51:44,195 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 18:51:44,197 - INFO - Computed 8 metric(s) for SVM on CTGAN
+2025-05-08 18:51:44,197 - INFO - Evaluating SVM on TVAE...
+2025-05-08 18:51:44,203 - INFO - Predictions completed for SVM on TVAE
+2025-05-08 18:51:44,203 - INFO - Prediction distribution for SVM on TVAE: {'Y': 144}
+2025-05-08 18:51:44,203 - WARNING -  [WARNING] :SVM on TVAE predicted only one class: {'Y'}
+2025-05-08 18:51:44,204 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 18:51:44,206 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 18:51:44,207 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 18:51:44,209 - INFO - Computed 8 metric(s) for SVM on TVAE
+2025-05-08 18:51:44,212 - INFO - Evaluation completed for all models.
+2025-05-08 18:51:44,212 - INFO - Model evaluation completed in 0.35 seconds.
+2025-05-08 18:51:44,214 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest', 'SVM']
+2025-05-08 18:51:44,214 - INFO - Model Training and Evaluation completed.
+2025-05-08 18:51:44,727 - INFO -  Visualizations saved.
+2025-05-08 18:51:44,727 - INFO -  Benchmarking Completed. Results saved in output folder.

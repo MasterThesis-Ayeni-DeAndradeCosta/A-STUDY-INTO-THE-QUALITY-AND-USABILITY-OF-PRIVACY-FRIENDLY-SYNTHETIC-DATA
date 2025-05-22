@@ -1,0 +1,112 @@
+analysis:
+  enable_analysis: true
+  generate_excel_summary: true
+  generate_interactive_plots: false
+anonymization:
+  attributes:
+    insensitive_attributes:
+    - Loan_Status
+    - ApplicantIncome
+    - CoapplicantIncome
+    quasi_identifiers:
+    - Gender
+    - Married
+    - Education
+    - Dependents
+    - Self_Employed
+    - Property_Area
+    - Credit_History
+    - Loan_Amount_Term
+    sensitive_attributes:
+    - LoanAmount
+  delete_after_evaluation: false
+  enable_anonymization: true
+  hierarchies:
+    Credit_History: src/anonymization/anonymARXij/src/hierarchies_loan/credit_history.csv
+    Dependents: src/anonymization/anonymARXij/src/hierarchies_loan/dependents.csv
+    Education: src/anonymization/anonymARXij/src/hierarchies_loan/education.csv
+    Gender: src/anonymization/anonymARXij/src/hierarchies_loan/gender.csv
+    Loan_Amount_Term: src/anonymization/anonymARXij/src/hierarchies_loan/loan_amount_terms.csv
+    Married: src/anonymization/anonymARXij/src/hierarchies_loan/married.csv
+    Property_Area: src/anonymization/anonymARXij/src/hierarchies_loan/property_area.csv
+    Self_Employed: src/anonymization/anonymARXij/src/hierarchies_loan/self_employed.csv
+  hierarchy_config: {}
+  models:
+    k_anonymity: 8
+    l_diversity:
+      attribute: LoanAmount
+      model: entropy
+      value: 15
+  suppression_limit: 1
+dataset:
+  excluded_columns:
+  - Loan_ID
+  path: datasets/original/loan.csv
+  separator: ','
+  target_column: Loan_Status
+  test_size: 0.3
+hybrid:
+  delete_hybrid_after_evaluation: false
+  enable_hybrid: true
+  reuse_params: true
+  save_intermediate_files: false
+  synthesizer: TVAE
+output_dir: outputs/batch/loan_batch_2025-05-08_18-38-44/loan_anon_k8_sl1_l15
+preprocessing:
+  encoding_type: binary
+  handle_missing_values: drop
+synthesis:
+  enable_synthetic_generation: false
+  synthesizers:
+    CTGAN:
+      class_name: CTGANSynthesizer
+      custom_generated_rows: 10000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params:
+        epochs: 300
+      row_multiplier: 1
+    CustomSynthesizer:
+      class_name: CustomSynthesizer
+      custom_generated_rows: 7000
+      enabled: false
+      import_path: custom.custom_synthesizer
+      num_generated_rows: custom
+      params:
+        noise_factor: 0.2
+      row_multiplier: 1
+    GaussianCopula:
+      class_name: GaussianCopulaSynthesizer
+      custom_generated_rows: 10000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      row_multiplier: 1
+    TVAE:
+      class_name: TVAESynthesizer
+      custom_generated_rows: 10000
+      enabled: true
+      import_path: sdv.single_table
+      num_generated_rows: same_as_original
+      params:
+        epochs: 300
+      row_multiplier: 1
+utility:
+  enable_utility_evaluation: true
+  metrics:
+    AUC-ROC: true
+    Accuracy: true
+    CohenKappa: true
+    F1: true
+    LogLoss: true
+    MCC: true
+    Precision: true
+    Recall: true
+  models:
+    DecisionTree: true
+    KNN: true
+    LogisticRegression: true
+    RandomForest: true
+    SVM: true
+    XGBoost: false

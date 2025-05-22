@@ -1,139 +1,111 @@
+import pandas as pd
+import matplotlib.pyplot as plt
 import os
 import sys
-import matplotlib.pyplot as plt
 import numpy as np
+import dataframe_image as dfi
 
-# Fix path
+# Fix import path
 current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.abspath(os.path.join(current_dir))
+parent_dir = os.path.abspath(os.path.join(current_dir, ".."))
 sys.path.insert(0, parent_dir)
 from color_palette import COLOR_MAP
 
+# === CONFIG ===
+# excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\loan\loan_combined_results.xlsx"
+# output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\loan\bar charts\synthetic"
+# dataset_name = "loan"
 
-def plot_grouped_metrics(metrics_dict, params_dict, save_path, dataset_name):
-    variants = list(metrics_dict.keys())                         # e.g. Original, CTGAN, …
-    metrics  = list(next(iter(metrics_dict.values())).keys())     # e.g. Accuracy, F1, …
+# studentPerformance
+excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\studentPerformance\studentPerformance_combined_results.xlsx"
+output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\studentPerformance\plots\synthetic"
+dataset_name = "StudentPerformance"
 
-    n_variants = len(variants)
-    x          = np.arange(len(metrics))
-    bar_width  = 0.15
+# bankMarketing
+# excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\bankMarketing\bankMarketing_combined_results.xlsx"
+# output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\bankMarketing\synthetic"
+# dataset_name = "bankMarketing"
 
-    plt.figure(figsize=(12, 7))
+# censusIncome
+# excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\censusIncome\censusIncome_combined_results.xlsx"
+# output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\censusIncome\synthetic"
+# dataset_name = "censusIncome"
 
-    # ───────────────────────────────────────────────────────── plot bars
-    for i, variant in enumerate(variants):
-        scores = [metrics_dict[variant][m] for m in metrics]
-        plt.bar(
-            x + i * bar_width,
-            scores,
-            width=bar_width,
-            label=variant,
-            color=COLOR_MAP.get(variant, "#CCCCCC"),
-            edgecolor="black",
-        )
+selected_metric = "MCC"
+model_to_compare = "RandomForest"
+metrics = ["Accuracy", "Precision", "Recall", "F1", "AUC-ROC"]
+synth_datasets = ["CTGAN", "TVAE", "GaussianCopula"]
+top_k = 5
+drop_cols = ["suppressed_records", "suppression_percentage", "k_anonymity", "l_diversity", "suppression_limit"]
 
-        # value labels
-        for j, score in enumerate(scores):
-            plt.text(
-                x[j] + i * bar_width,
-                score + 0.01,
-                f"{score:.3f}",
-                ha="center",
-                va="bottom",
-                fontsize=8,
-            )
+# Ensure output directory exists
+os.makedirs(output_dir, exist_ok=True)
 
-    # ───────────────────────────────────────────────────────── cosmetics
-    plt.xticks(x + bar_width * (n_variants - 1) / 2, metrics, rotation=45, fontsize=10)
-    plt.yticks(fontsize=10)
-    plt.ylabel("Score", fontsize=12)
-    plt.ylim(0, 1)
+# === LOAD DATA ===
+df = pd.read_excel(excel_path)
 
-    # Title
-    plt.title(
-        f"Random Forest Performance on {dataset_name}: Original vs Synthetic",
-        fontsize=14, weight="bold",
-    )
+# === BAR CHART: BEST OF EACH SYNTH vs ORIGINAL ===
+original_df = df[(df["Dataset"] == "Original") & (df["Model"] == model_to_compare)]
+best_original = original_df.loc[original_df[selected_metric].idxmax()]
+rows = [("Original", best_original)]
 
-    # Legend centered below chart
-    plt.legend(
-        loc="upper center",
-        bbox_to_anchor=(0.5, -0.18),
-        ncol=n_variants,
-        fontsize=10,
-        frameon=False,
-    )
+for synth in synth_datasets:
+    synth_df = df[(df["Dataset"] == synth) & (df["Model"] == model_to_compare)]
+    if not synth_df.empty:
+        best_synth = synth_df.loc[synth_df[selected_metric].idxmax()]
+        rows.append((synth, best_synth))
 
-    # Footnote with synthesizer parameters
-    param_note = " | ".join(
-        f"{v}: epochs={p['epochs']}, mult={p['w_multiplier']}"
-        for v, p in params_dict.items() if v != "Original"
-    )
-    plt.figtext(0.5, -0.28, param_note, wrap=True, ha="center", fontsize=9)
+# === Format combined DataFrame
+combined = pd.DataFrame([row[1] for row in rows])
+combined.insert(0, "Source", [row[0] for row in rows])
+combined.drop(columns=[col for col in drop_cols if col in combined.columns], inplace=True)
 
-    # Reserve vertical space for both legend and footnote
-    plt.subplots_adjust(bottom=0.35)
-    plt.tight_layout(rect=[0, 0.1, 1, 0.95])
+# === Export table ===
+csv_path = os.path.join(output_dir, f"{dataset_name}_original_vs_best_synthetics_table_{model_to_compare}.csv")
+img_path = os.path.join(output_dir, f"{dataset_name}_original_vs_best_synthetics_table_{model_to_compare}.png")
+combined.to_csv(csv_path, index=False)
+dfi.export(combined.style.set_caption(f"{dataset_name.title()} – Original vs Best Synthetics ({model_to_compare})"), img_path)
 
-    # Save (no bbox_inches, avoids layout override)
-    os.makedirs(os.path.dirname(save_path), exist_ok=True)
-    plt.savefig(save_path, dpi=300)
-    print(f"✅ Saved plot to: {save_path}")
-    plt.show()
+# === Plot chart ===
+x = np.arange(len(metrics))
+bar_width = 0.2
+plt.figure(figsize=(10, 5))
 
+for i, row in enumerate(rows):
+    label = row[0]
+    values = [row[1][metric] for metric in metrics]
+    plt.bar(x + i * bar_width, values, width=bar_width,
+            label=label, color=COLOR_MAP.get(label, "#999999"), edgecolor="black")
+    for j, val in enumerate(values):
+        plt.text(x[j] + i * bar_width, val + 0.01, f"{val:.3f}", ha='center', fontsize=8)
 
-if __name__ == "__main__":
-    output_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\Semester 2\writing the thesis\graphs\loan\synthetic\original_vs_all_synthetic_grouped.png"
-    dataset_name = "Loan Dataset"
+plt.xticks(x + bar_width * (len(rows) - 1) / 2, metrics)
+plt.ylim(0, 1)
+plt.ylabel("Score")
+plt.title(f"{model_to_compare} on {dataset_name.title()} Dataset: Original vs Synthetic")
+plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.15), ncol=len(rows))
+plt.tight_layout(rect=[0, 0.15, 1, 1])
 
-    metrics_dict = {
-    "Original": {
-        "Accuracy": 0.854,
-        "Precision": 0.860,
-        "Recall": 0.854,
-        "F1": 0.844,
-        "AUC-ROC": 0.853,
-    },
-    "CTGAN": {
-        "Accuracy": 0.4028,
-        "Precision": 0.4651,
-        "Recall": 0.4028,
-        "F1": 0.4256,
-        "AUC-ROC": 0.2959,
-    },
-    "TVAE": {
-        "Accuracy": 0.6667,
-        "Precision": 0.4762,
-        "Recall": 0.6667,
-        "F1": 0.5556,
-        "AUC-ROC": 0.5085,
-    },
-    "GaussianCopula": {
-        "Accuracy": 0.6875,
-        "Precision": 0.5845,
-        "Recall": 0.6875,
-        "F1": 0.5778,
-        "AUC-ROC": 0.7324,
-    }
-}
+plot_path = os.path.join(output_dir, f"{dataset_name}_original_vs_best_synthetics_{model_to_compare}.png")
+plt.savefig(plot_path, dpi=300)
+plt.close()
+print(f"📊 Saved plot: {plot_path}")
 
-    params_dict = {
-        "CTGAN": {
-            "epochs": 300,
-            "w_multiplier": 3,
-            "rows_generated": 1008
-        },
-        "TVAE": {
-            "epochs": 400,
-            "w_multiplier": 3,
-            "rows_generated": 1008
-        },
-        "GaussianCopula": {
-            "epochs": 300,
-            "w_multiplier": 8,
-            "rows_generated": 336
-        }
-    }
+# === TOP-K TABLES PER SYNTHETIC TYPE + COMBINED ===
+def export_top_table(synth_name, top_df, suffix):
+    top_df_clean = top_df.drop(columns=[c for c in drop_cols if c in top_df.columns])
+    csv_path = os.path.join(output_dir, f"{dataset_name}_top{top_k}_{suffix}.csv")
+    img_path = os.path.join(output_dir, f"{dataset_name}_top{top_k}_{suffix}.png")
+    top_df_clean.to_csv(csv_path, index=False)
+    dfi.export(top_df_clean.style.set_caption(f"{dataset_name.title()} Top-{top_k} — {suffix.replace('_', ' ').title()}"), img_path)
+    print(f"✅ Saved Top-{top_k} table for: {synth_name}")
 
+top_all = []
+for synth in synth_datasets:
+    synth_df = df[(df["Dataset"] == synth) & (df["Model"] == model_to_compare)]
+    top_k_rows = synth_df.sort_values(selected_metric, ascending=False).head(top_k)
+    export_top_table(synth, top_k_rows, suffix=synth.lower())
+    top_all.append(top_k_rows)
 
-    plot_grouped_metrics(metrics_dict, params_dict, output_path, dataset_name)
+top_combined = pd.concat(top_all).sort_values(selected_metric, ascending=False).head(top_k)
+export_top_table("combined_synthetics", top_combined, suffix="synthetic_all")

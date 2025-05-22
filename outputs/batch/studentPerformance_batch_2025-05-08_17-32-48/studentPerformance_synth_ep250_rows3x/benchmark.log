@@ -1,0 +1,602 @@
+2025-05-08 17:40:19,155 - INFO - Loaded config file: configs/generated_configs/studentPerformance/studentPerformance_synth_ep250_rows3x.yaml
+2025-05-08 17:40:19,155 - INFO -  Benchmarking started for dataset: studentPerformance
+2025-05-08 17:40:19,156 - INFO - Using dataset path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/original/studentPerformance.csv
+2025-05-08 17:40:19,156 - INFO - Target column: Target, separator: ';'
+2025-05-08 17:40:19,156 - INFO - Configuration loaded: enable_anonymization = False, enable_synthesis = True, enable_hybrid = False, enable_utility = True, delete_after_evaluation = False
+2025-05-08 17:40:19,156 - INFO - Running preprocessing...
+2025-05-08 17:40:19,161 - INFO -  [PREPROCESSING] Preprocessed files found. Skipping preprocessing.
+2025-05-08 17:40:19,181 - INFO - Preprocessing completed. Rows before: 4424, after: 3096
+2025-05-08 17:40:19,181 - INFO - Preprocessed data saved to: outputs/batch/studentPerformance_batch_2025-05-08_17-32-48/studentPerformance_synth_ep250_rows3x/preprocessing_report.txt
+2025-05-08 17:40:19,181 - INFO - enable_anonymization = False
+2025-05-08 17:40:19,181 - INFO - Anonymization Skipped (Disabled in Configuration).
+2025-05-08 17:40:19,181 - INFO - enable_synthetic_generation = True
+2025-05-08 17:40:19,181 - INFO - Starting standard Synthetic Data Generation pipeline...
+2025-05-08 17:40:19,181 - INFO - Executing run_synthetic.....
+2025-05-08 17:40:19,181 - INFO - [SYNTHETIC PIPELINE] executing run_synthetic for studentPerformance...
+2025-05-08 17:40:19,181 - INFO - [SYNTHETIC] Processing dataset: studentPerformance
+2025-05-08 17:40:19,181 - INFO - [SYNTHETIC] Original dataset size: 3096 rows
+2025-05-08 17:40:19,201 - INFO - Detected metadata:
+2025-05-08 17:40:19,201 - INFO - {
+    "columns": {
+        "Marital status": {
+            "sdtype": "categorical"
+        },
+        "Application mode": {
+            "sdtype": "numerical"
+        },
+        "Application order": {
+            "sdtype": "categorical"
+        },
+        "Course": {
+            "sdtype": "numerical"
+        },
+        "Daytime/evening attendance": {
+            "sdtype": "categorical"
+        },
+        "Previous qualification": {
+            "sdtype": "numerical"
+        },
+        "Previous qualification (grade)": {
+            "sdtype": "numerical"
+        },
+        "Nacionality": {
+            "sdtype": "numerical"
+        },
+        "Mother's qualification": {
+            "sdtype": "numerical"
+        },
+        "Father's qualification": {
+            "sdtype": "numerical"
+        },
+        "Mother's occupation": {
+            "sdtype": "numerical"
+        },
+        "Father's occupation": {
+            "sdtype": "numerical"
+        },
+        "Admission grade": {
+            "sdtype": "numerical"
+        },
+        "Displaced": {
+            "sdtype": "categorical"
+        },
+        "Educational special needs": {
+            "sdtype": "categorical"
+        },
+        "Debtor": {
+            "sdtype": "categorical"
+        },
+        "Tuition fees up to date": {
+            "sdtype": "categorical"
+        },
+        "Gender": {
+            "sdtype": "categorical"
+        },
+        "Scholarship_holder": {
+            "sdtype": "categorical"
+        },
+        "Age at enrollment": {
+            "sdtype": "numerical"
+        },
+        "International": {
+            "sdtype": "categorical"
+        },
+        "Curricular units 1st sem (credited)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (enrolled)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (evaluations)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (approved)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (grade)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 1st sem (without evaluations)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (credited)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (enrolled)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (evaluations)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (approved)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (grade)": {
+            "sdtype": "numerical"
+        },
+        "Curricular units 2nd sem (without evaluations)": {
+            "sdtype": "categorical"
+        },
+        "Unemployment rate": {
+            "sdtype": "numerical"
+        },
+        "Inflation rate": {
+            "sdtype": "numerical"
+        },
+        "GDP": {
+            "sdtype": "numerical"
+        },
+        "Target": {
+            "sdtype": "categorical"
+        }
+    },
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1"
+}
+2025-05-08 17:40:19,202 - INFO - [SYNTHETIC] Preparing synthesizer: CTGAN
+2025-05-08 17:40:19,202 - INFO - [SYNTHETIC] Params from config: {'epochs': 250}
+2025-05-08 17:40:19,202 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-05-08 17:40:19,202 - INFO - [SYNTHETIC] Training new CTGAN synthesizer from scratch...
+2025-05-08 17:40:19,202 - WARNING - [FutureWarning] The 'SingleTableMetadata' is deprecated. Please use the new 'Metadata' class for synthesizers. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sdv/single_table/base.py:119)
+2025-05-08 17:40:19,202 - WARNING - [UserWarning] We strongly recommend saving the metadata using 'save_to_json' for replicability in future SDV versions. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sdv/single_table/base.py:104)
+2025-05-08 17:40:19,206 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 17, 40, 19, 206947), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_0ce10ce48f024d7a9f0e4b426065e905'}
+2025-05-08 17:40:19,207 - INFO - [SYNTHETIC] CTGAN initialized with epochs: 250
+2025-05-08 17:40:19,207 - INFO - [SYNTHETIC] Training parameters for CTGAN: {}
+2025-05-08 17:40:19,207 - INFO - [SYNTHETIC] fitting CTGAN 
+2025-05-08 17:40:19,207 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 17, 40, 19, 207178), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_0ce10ce48f024d7a9f0e4b426065e905', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3096, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-05-08 17:40:19,232 - INFO - Fitting table  metadata
+2025-05-08 17:40:19,233 - INFO - Fitting formatters for table 
+2025-05-08 17:40:19,238 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-05-08 17:40:19,240 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-05-08 17:40:19,242 - INFO - Fitting constraints for table 
+2025-05-08 17:40:19,242 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-05-08 17:40:19,250 - INFO - Fitting HyperTransformer for table 
+2025-05-08 17:40:19,289 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-05-08 17:40:19,304 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-05-08 17:40:19,350 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 17, 40, 19, 350606), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_0ce10ce48f024d7a9f0e4b426065e905', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3096, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-05-08 17:40:19,374 - INFO - Guidance: There are no missing values in column Application mode. Extra column not created.
+2025-05-08 17:40:19,598 - INFO - Guidance: There are no missing values in column Course. Extra column not created.
+2025-05-08 17:40:19,796 - INFO - Guidance: There are no missing values in column Previous qualification. Extra column not created.
+2025-05-08 17:40:19,829 - INFO - Guidance: There are no missing values in column Previous qualification (grade). Extra column not created.
+2025-05-08 17:40:20,001 - INFO - Guidance: There are no missing values in column Nacionality. Extra column not created.
+2025-05-08 17:40:20,048 - INFO - Guidance: There are no missing values in column Mother's qualification. Extra column not created.
+2025-05-08 17:40:20,113 - INFO - Guidance: There are no missing values in column Father's qualification. Extra column not created.
+2025-05-08 17:40:20,199 - INFO - Guidance: There are no missing values in column Mother's occupation. Extra column not created.
+2025-05-08 17:40:20,255 - INFO - Guidance: There are no missing values in column Father's occupation. Extra column not created.
+2025-05-08 17:40:20,374 - INFO - Guidance: There are no missing values in column Admission grade. Extra column not created.
+2025-05-08 17:40:20,555 - INFO - Guidance: There are no missing values in column Age at enrollment. Extra column not created.
+2025-05-08 17:40:20,728 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (credited). Extra column not created.
+2025-05-08 17:40:20,916 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (enrolled). Extra column not created.
+2025-05-08 17:40:21,072 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (evaluations). Extra column not created.
+2025-05-08 17:40:21,202 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (approved). Extra column not created.
+2025-05-08 17:40:21,327 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (grade). Extra column not created.
+2025-05-08 17:40:21,491 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (without evaluations). Extra column not created.
+2025-05-08 17:40:21,563 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (credited). Extra column not created.
+2025-05-08 17:40:21,697 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (enrolled). Extra column not created.
+2025-05-08 17:40:21,781 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (evaluations). Extra column not created.
+2025-05-08 17:40:21,949 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (approved). Extra column not created.
+2025-05-08 17:40:21,982 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (grade). Extra column not created.
+2025-05-08 17:40:22,147 - INFO - Guidance: There are no missing values in column Unemployment rate. Extra column not created.
+2025-05-08 17:40:22,224 - INFO - Guidance: There are no missing values in column Inflation rate. Extra column not created.
+2025-05-08 17:40:22,346 - INFO - Guidance: There are no missing values in column GDP. Extra column not created.
+2025-05-08 17:46:39,504 - INFO - [SYNTHETIC] Fitting complete for CTGAN. Duration: 380.30 seconds.
+2025-05-08 17:46:39,504 - INFO - [SYNTHETIC] CONFIRMATION CTGAN actually trained with epochs = 250
+2025-05-08 17:46:39,505 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 17, 46, 39, 505041), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_0ce10ce48f024d7a9f0e4b426065e905'}
+2025-05-08 17:46:39,597 - INFO - [SYNTHETIC] CTGAN trained and saved.
+2025-05-08 17:46:39,597 - INFO - [SYNTHETIC] Preparing synthesizer: TVAE
+2025-05-08 17:46:39,597 - INFO - [SYNTHETIC] Params from config: {'epochs': 250}
+2025-05-08 17:46:39,598 - INFO -  [SYNTHETIC] No pre-trained synthesizer found
+2025-05-08 17:46:39,598 - INFO - [SYNTHETIC] Training new TVAE synthesizer from scratch...
+2025-05-08 17:46:39,598 - WARNING - [FutureWarning] The 'SingleTableMetadata' is deprecated. Please use the new 'Metadata' class for synthesizers. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sdv/single_table/base.py:119)
+2025-05-08 17:46:39,602 - INFO - {'EVENT': 'Instance', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 17, 46, 39, 602756), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_054df80608cb451ca1872c605228e2d3'}
+2025-05-08 17:46:39,602 - INFO - [SYNTHETIC] TVAE initialized with epochs: 250
+2025-05-08 17:46:39,603 - INFO - [SYNTHETIC] Training parameters for TVAE: {}
+2025-05-08 17:46:39,603 - INFO - [SYNTHETIC] fitting TVAE 
+2025-05-08 17:46:39,603 - INFO - {'EVENT': 'Fit', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 17, 46, 39, 603254), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_054df80608cb451ca1872c605228e2d3', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3096, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-05-08 17:46:39,651 - INFO - Fitting table  metadata
+2025-05-08 17:46:39,652 - INFO - Fitting formatters for table 
+2025-05-08 17:46:39,660 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-05-08 17:46:39,663 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-05-08 17:46:39,665 - INFO - Fitting constraints for table 
+2025-05-08 17:46:39,665 - INFO - Setting the configuration for the ``HyperTransformer`` for table 
+2025-05-08 17:46:39,681 - INFO - Fitting HyperTransformer for table 
+2025-05-08 17:46:39,752 - INFO - No rounding scheme detected for column 'Curricular units 1st sem (grade)'. Data will not be rounded.
+2025-05-08 17:46:39,779 - INFO - No rounding scheme detected for column 'Curricular units 2nd sem (grade)'. Data will not be rounded.
+2025-05-08 17:46:39,857 - INFO - {'EVENT': 'Fit processed data', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 17, 46, 39, 857917), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_054df80608cb451ca1872c605228e2d3', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 3096, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-05-08 17:46:39,862 - INFO - Guidance: There are no missing values in column Application mode. Extra column not created.
+2025-05-08 17:46:40,358 - INFO - Guidance: There are no missing values in column Course. Extra column not created.
+2025-05-08 17:46:40,676 - INFO - Guidance: There are no missing values in column Previous qualification. Extra column not created.
+2025-05-08 17:46:40,732 - INFO - Guidance: There are no missing values in column Previous qualification (grade). Extra column not created.
+2025-05-08 17:46:40,929 - INFO - Guidance: There are no missing values in column Nacionality. Extra column not created.
+2025-05-08 17:46:40,979 - INFO - Guidance: There are no missing values in column Mother's qualification. Extra column not created.
+2025-05-08 17:46:41,046 - INFO - Guidance: There are no missing values in column Father's qualification. Extra column not created.
+2025-05-08 17:46:41,140 - INFO - Guidance: There are no missing values in column Mother's occupation. Extra column not created.
+2025-05-08 17:46:41,197 - INFO - Guidance: There are no missing values in column Father's occupation. Extra column not created.
+2025-05-08 17:46:41,325 - INFO - Guidance: There are no missing values in column Admission grade. Extra column not created.
+2025-05-08 17:46:41,520 - INFO - Guidance: There are no missing values in column Age at enrollment. Extra column not created.
+2025-05-08 17:46:41,699 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (credited). Extra column not created.
+2025-05-08 17:46:41,900 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (enrolled). Extra column not created.
+2025-05-08 17:46:42,065 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (evaluations). Extra column not created.
+2025-05-08 17:46:42,202 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (approved). Extra column not created.
+2025-05-08 17:46:42,339 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (grade). Extra column not created.
+2025-05-08 17:46:42,511 - INFO - Guidance: There are no missing values in column Curricular units 1st sem (without evaluations). Extra column not created.
+2025-05-08 17:46:42,591 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (credited). Extra column not created.
+2025-05-08 17:46:42,733 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (enrolled). Extra column not created.
+2025-05-08 17:46:42,822 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (evaluations). Extra column not created.
+2025-05-08 17:46:42,998 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (approved). Extra column not created.
+2025-05-08 17:46:43,030 - INFO - Guidance: There are no missing values in column Curricular units 2nd sem (grade). Extra column not created.
+2025-05-08 17:46:43,205 - INFO - Guidance: There are no missing values in column Unemployment rate. Extra column not created.
+2025-05-08 17:46:43,288 - INFO - Guidance: There are no missing values in column Inflation rate. Extra column not created.
+2025-05-08 17:46:43,418 - INFO - Guidance: There are no missing values in column GDP. Extra column not created.
+2025-05-08 17:47:24,154 - INFO - [SYNTHETIC] Fitting complete for TVAE. Duration: 44.55 seconds.
+2025-05-08 17:47:24,154 - INFO - [SYNTHETIC] CONFIRMATION TVAE actually trained with epochs = 250
+2025-05-08 17:47:24,154 - INFO - {'EVENT': 'Save', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 17, 47, 24, 154300), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_054df80608cb451ca1872c605228e2d3'}
+2025-05-08 17:47:24,224 - INFO - [SYNTHETIC] TVAE trained and saved.
+2025-05-08 17:47:24,224 - INFO - [SYNTHETIC] Using CTGAN to generate 9288 rows...
+2025-05-08 17:47:26,589 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 17, 47, 24, 224400), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_0ce10ce48f024d7a9f0e4b426065e905', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 9288, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-05-08 17:47:26,589 - INFO - [SYNTHETIC] CTGAN completed: 9288 rows generated.
+2025-05-08 17:47:26,590 - INFO - [SYNTHETIC] Target class distribution for CTGAN: {'Graduate': 4900, 'Dropout': 3102, 'Enrolled': 1286}
+2025-05-08 17:47:26,590 - INFO - [SYNTHETIC] Using TVAE to generate 9288 rows...
+2025-05-08 17:47:26,844 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 17, 47, 26, 590309), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_054df80608cb451ca1872c605228e2d3', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 9288, 'TOTAL NUMBER OF COLUMNS': 37}
+2025-05-08 17:47:26,844 - INFO - [SYNTHETIC] TVAE completed: 9288 rows generated.
+2025-05-08 17:47:26,845 - INFO - [SYNTHETIC] Target class distribution for TVAE: {'Graduate': 4919, 'Dropout': 3420, 'Enrolled': 949}
+2025-05-08 17:47:26,846 - INFO - [SYNTHETIC PIPELINE] Synthetic Data Generation Completed.
+2025-05-08 17:47:26,846 - INFO - [SYNTHETIC PIPELINE] Synthesizers used: ['CTGAN', 'TVAE']
+2025-05-08 17:47:26,846 - INFO - [SYNTHETIC PIPELINE] Evaluating synthetic dataset generated by CTGAN...
+2025-05-08 17:47:26,846 - INFO - [SYNTHETIC EVAL] Real data columns     (37): ['Marital status', 'Application mode', 'Application order', 'Course', 'Daytime/evening attendance', 'Previous qualification', 'Previous qualification (grade)', 'Nacionality', "Mother's qualification", "Father's qualification", "Mother's occupation", "Father's occupation", 'Admission grade', 'Displaced', 'Educational special needs', 'Debtor', 'Tuition fees up to date', 'Gender', 'Scholarship_holder', 'Age at enrollment', 'International', 'Curricular units 1st sem (credited)', 'Curricular units 1st sem (enrolled)', 'Curricular units 1st sem (evaluations)', 'Curricular units 1st sem (approved)', 'Curricular units 1st sem (grade)', 'Curricular units 1st sem (without evaluations)', 'Curricular units 2nd sem (credited)', 'Curricular units 2nd sem (enrolled)', 'Curricular units 2nd sem (evaluations)', 'Curricular units 2nd sem (approved)', 'Curricular units 2nd sem (grade)', 'Curricular units 2nd sem (without evaluations)', 'Unemployment rate', 'Inflation rate', 'GDP', 'Target']
+2025-05-08 17:47:26,846 - INFO - [SYNTHETIC EVAL] Synthetic data columns (37): ['Marital status', 'Application mode', 'Application order', 'Course', 'Daytime/evening attendance', 'Previous qualification', 'Previous qualification (grade)', 'Nacionality', "Mother's qualification", "Father's qualification", "Mother's occupation", "Father's occupation", 'Admission grade', 'Displaced', 'Educational special needs', 'Debtor', 'Tuition fees up to date', 'Gender', 'Scholarship_holder', 'Age at enrollment', 'International', 'Curricular units 1st sem (credited)', 'Curricular units 1st sem (enrolled)', 'Curricular units 1st sem (evaluations)', 'Curricular units 1st sem (approved)', 'Curricular units 1st sem (grade)', 'Curricular units 1st sem (without evaluations)', 'Curricular units 2nd sem (credited)', 'Curricular units 2nd sem (enrolled)', 'Curricular units 2nd sem (evaluations)', 'Curricular units 2nd sem (approved)', 'Curricular units 2nd sem (grade)', 'Curricular units 2nd sem (without evaluations)', 'Unemployment rate', 'Inflation rate', 'GDP', 'Target']
+2025-05-08 17:47:26,847 - INFO - [SYNTHETIC EVAL] Metadata columns      (37): ['Marital status', 'Application mode', 'Application order', 'Course', 'Daytime/evening attendance', 'Previous qualification', 'Previous qualification (grade)', 'Nacionality', "Mother's qualification", "Father's qualification", "Mother's occupation", "Father's occupation", 'Admission grade', 'Displaced', 'Educational special needs', 'Debtor', 'Tuition fees up to date', 'Gender', 'Scholarship_holder', 'Age at enrollment', 'International', 'Curricular units 1st sem (credited)', 'Curricular units 1st sem (enrolled)', 'Curricular units 1st sem (evaluations)', 'Curricular units 1st sem (approved)', 'Curricular units 1st sem (grade)', 'Curricular units 1st sem (without evaluations)', 'Curricular units 2nd sem (credited)', 'Curricular units 2nd sem (enrolled)', 'Curricular units 2nd sem (evaluations)', 'Curricular units 2nd sem (approved)', 'Curricular units 2nd sem (grade)', 'Curricular units 2nd sem (without evaluations)', 'Unemployment rate', 'Inflation rate', 'GDP', 'Target']
+2025-05-08 17:47:26,847 - INFO - [SYNTHETIC EVAL] Shape — Real: (3096, 37), Synthetic: (9288, 37)
+2025-05-08 17:47:26,847 - INFO - [SYNTHETIC EVAL] Metadata structure:
+{
+  "columns": {
+    "Marital status": {
+      "sdtype": "categorical"
+    },
+    "Application mode": {
+      "sdtype": "numerical"
+    },
+    "Application order": {
+      "sdtype": "categorical"
+    },
+    "Course": {
+      "sdtype": "numerical"
+    },
+    "Daytime/evening attendance": {
+      "sdtype": "categorical"
+    },
+    "Previous qualification": {
+      "sdtype": "numerical"
+    },
+    "Previous qualification (grade)": {
+      "sdtype": "numerical"
+    },
+    "Nacionality": {
+      "sdtype": "numerical"
+    },
+    "Mother's qualification": {
+      "sdtype": "numerical"
+    },
+    "Father's qualification": {
+      "sdtype": "numerical"
+    },
+    "Mother's occupation": {
+      "sdtype": "numerical"
+    },
+    "Father's occupation": {
+      "sdtype": "numerical"
+    },
+    "Admission grade": {
+      "sdtype": "numerical"
+    },
+    "Displaced": {
+      "sdtype": "categorical"
+    },
+    "Educational special needs": {
+      "sdtype": "categorical"
+    },
+    "Debtor": {
+      "sdtype": "categorical"
+    },
+    "Tuition fees up to date": {
+      "sdtype": "categorical"
+    },
+    "Gender": {
+      "sdtype": "categorical"
+    },
+    "Scholarship_holder": {
+      "sdtype": "categorical"
+    },
+    "Age at enrollment": {
+      "sdtype": "numerical"
+    },
+    "International": {
+      "sdtype": "categorical"
+    },
+    "Curricular units 1st sem (credited)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 1st sem (enrolled)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 1st sem (evaluations)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 1st sem (approved)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 1st sem (grade)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 1st sem (without evaluations)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 2nd sem (credited)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 2nd sem (enrolled)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 2nd sem (evaluations)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 2nd sem (approved)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 2nd sem (grade)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 2nd sem (without evaluations)": {
+      "sdtype": "categorical"
+    },
+    "Unemployment rate": {
+      "sdtype": "numerical"
+    },
+    "Inflation rate": {
+      "sdtype": "numerical"
+    },
+    "GDP": {
+      "sdtype": "numerical"
+    },
+    "Target": {
+      "sdtype": "categorical"
+    }
+  },
+  "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1"
+}
+2025-05-08 17:47:29,260 - INFO - [SYNTHETIC PIPELINE] Evaluating synthetic dataset generated by TVAE...
+2025-05-08 17:47:29,260 - INFO - [SYNTHETIC EVAL] Real data columns     (37): ['Marital status', 'Application mode', 'Application order', 'Course', 'Daytime/evening attendance', 'Previous qualification', 'Previous qualification (grade)', 'Nacionality', "Mother's qualification", "Father's qualification", "Mother's occupation", "Father's occupation", 'Admission grade', 'Displaced', 'Educational special needs', 'Debtor', 'Tuition fees up to date', 'Gender', 'Scholarship_holder', 'Age at enrollment', 'International', 'Curricular units 1st sem (credited)', 'Curricular units 1st sem (enrolled)', 'Curricular units 1st sem (evaluations)', 'Curricular units 1st sem (approved)', 'Curricular units 1st sem (grade)', 'Curricular units 1st sem (without evaluations)', 'Curricular units 2nd sem (credited)', 'Curricular units 2nd sem (enrolled)', 'Curricular units 2nd sem (evaluations)', 'Curricular units 2nd sem (approved)', 'Curricular units 2nd sem (grade)', 'Curricular units 2nd sem (without evaluations)', 'Unemployment rate', 'Inflation rate', 'GDP', 'Target']
+2025-05-08 17:47:29,260 - INFO - [SYNTHETIC EVAL] Synthetic data columns (37): ['Marital status', 'Application mode', 'Application order', 'Course', 'Daytime/evening attendance', 'Previous qualification', 'Previous qualification (grade)', 'Nacionality', "Mother's qualification", "Father's qualification", "Mother's occupation", "Father's occupation", 'Admission grade', 'Displaced', 'Educational special needs', 'Debtor', 'Tuition fees up to date', 'Gender', 'Scholarship_holder', 'Age at enrollment', 'International', 'Curricular units 1st sem (credited)', 'Curricular units 1st sem (enrolled)', 'Curricular units 1st sem (evaluations)', 'Curricular units 1st sem (approved)', 'Curricular units 1st sem (grade)', 'Curricular units 1st sem (without evaluations)', 'Curricular units 2nd sem (credited)', 'Curricular units 2nd sem (enrolled)', 'Curricular units 2nd sem (evaluations)', 'Curricular units 2nd sem (approved)', 'Curricular units 2nd sem (grade)', 'Curricular units 2nd sem (without evaluations)', 'Unemployment rate', 'Inflation rate', 'GDP', 'Target']
+2025-05-08 17:47:29,260 - INFO - [SYNTHETIC EVAL] Metadata columns      (37): ['Marital status', 'Application mode', 'Application order', 'Course', 'Daytime/evening attendance', 'Previous qualification', 'Previous qualification (grade)', 'Nacionality', "Mother's qualification", "Father's qualification", "Mother's occupation", "Father's occupation", 'Admission grade', 'Displaced', 'Educational special needs', 'Debtor', 'Tuition fees up to date', 'Gender', 'Scholarship_holder', 'Age at enrollment', 'International', 'Curricular units 1st sem (credited)', 'Curricular units 1st sem (enrolled)', 'Curricular units 1st sem (evaluations)', 'Curricular units 1st sem (approved)', 'Curricular units 1st sem (grade)', 'Curricular units 1st sem (without evaluations)', 'Curricular units 2nd sem (credited)', 'Curricular units 2nd sem (enrolled)', 'Curricular units 2nd sem (evaluations)', 'Curricular units 2nd sem (approved)', 'Curricular units 2nd sem (grade)', 'Curricular units 2nd sem (without evaluations)', 'Unemployment rate', 'Inflation rate', 'GDP', 'Target']
+2025-05-08 17:47:29,260 - INFO - [SYNTHETIC EVAL] Shape — Real: (3096, 37), Synthetic: (9288, 37)
+2025-05-08 17:47:29,260 - INFO - [SYNTHETIC EVAL] Metadata structure:
+{
+  "columns": {
+    "Marital status": {
+      "sdtype": "categorical"
+    },
+    "Application mode": {
+      "sdtype": "numerical"
+    },
+    "Application order": {
+      "sdtype": "categorical"
+    },
+    "Course": {
+      "sdtype": "numerical"
+    },
+    "Daytime/evening attendance": {
+      "sdtype": "categorical"
+    },
+    "Previous qualification": {
+      "sdtype": "numerical"
+    },
+    "Previous qualification (grade)": {
+      "sdtype": "numerical"
+    },
+    "Nacionality": {
+      "sdtype": "numerical"
+    },
+    "Mother's qualification": {
+      "sdtype": "numerical"
+    },
+    "Father's qualification": {
+      "sdtype": "numerical"
+    },
+    "Mother's occupation": {
+      "sdtype": "numerical"
+    },
+    "Father's occupation": {
+      "sdtype": "numerical"
+    },
+    "Admission grade": {
+      "sdtype": "numerical"
+    },
+    "Displaced": {
+      "sdtype": "categorical"
+    },
+    "Educational special needs": {
+      "sdtype": "categorical"
+    },
+    "Debtor": {
+      "sdtype": "categorical"
+    },
+    "Tuition fees up to date": {
+      "sdtype": "categorical"
+    },
+    "Gender": {
+      "sdtype": "categorical"
+    },
+    "Scholarship_holder": {
+      "sdtype": "categorical"
+    },
+    "Age at enrollment": {
+      "sdtype": "numerical"
+    },
+    "International": {
+      "sdtype": "categorical"
+    },
+    "Curricular units 1st sem (credited)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 1st sem (enrolled)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 1st sem (evaluations)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 1st sem (approved)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 1st sem (grade)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 1st sem (without evaluations)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 2nd sem (credited)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 2nd sem (enrolled)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 2nd sem (evaluations)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 2nd sem (approved)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 2nd sem (grade)": {
+      "sdtype": "numerical"
+    },
+    "Curricular units 2nd sem (without evaluations)": {
+      "sdtype": "categorical"
+    },
+    "Unemployment rate": {
+      "sdtype": "numerical"
+    },
+    "Inflation rate": {
+      "sdtype": "numerical"
+    },
+    "GDP": {
+      "sdtype": "numerical"
+    },
+    "Target": {
+      "sdtype": "categorical"
+    }
+  },
+  "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1"
+}
+2025-05-08 17:47:31,465 - INFO -  [SYNTHETIC PIPELINE]  Synthetic Data Evaluation Completed.
+2025-05-08 17:47:31,473 - INFO -  [SYNTHETIC PIPELINE] Synthetic Data Report Generated Successfully.
+2025-05-08 17:47:31,739 - INFO - Synthetic data generated with 2 synthesizer(s).
+2025-05-08 17:47:31,739 - INFO - Hybrid Pipeline skipped (disabled in configuration).
+2025-05-08 17:47:31,740 - INFO - Starting Utility...
+2025-05-08 17:47:31,740 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-05-08 17:47:31,740 - INFO - [UTILITY] Original Data - Training Size: 3096, Testing Size: 1328
+2025-05-08 17:47:31,740 - INFO - [UTILITY] Target class distribution (Original): {'Graduate': 1546, 'Dropout': 994, 'Enrolled': 556}
+2025-05-08 17:47:31,741 - INFO - [UTILITY] Processing synthetic dataset generated by CTGAN...
+2025-05-08 17:47:31,742 - INFO - [UTILITY] Synthetic Data (CTGAN) - Training Size: 9288
+2025-05-08 17:47:31,742 - INFO - [UTILITY] Target class distribution (CTGAN): {'Graduate': 4900, 'Dropout': 3102, 'Enrolled': 1286}
+2025-05-08 17:47:31,743 - INFO - [UTILITY] Processing synthetic dataset generated by TVAE...
+2025-05-08 17:47:31,744 - INFO - [UTILITY] Synthetic Data (TVAE) - Training Size: 9288
+2025-05-08 17:47:31,744 - INFO - [UTILITY] Target class distribution (TVAE): {'Graduate': 4919, 'Dropout': 3420, 'Enrolled': 949}
+2025-05-08 17:47:31,744 - INFO - [UTILITY] Training models on all datasets...
+2025-05-08 17:47:31,744 - INFO - [UTILITY] Total datasets used for training: 3
+2025-05-08 17:47:31,744 - INFO - [TRAINING] Training models from scratch...
+2025-05-08 17:47:31,744 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 3096, Features: 36
+2025-05-08 17:47:31,744 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-05-08 17:47:31,771 - INFO - [TRAINING] DecisionTree trained successfully on Original in 0.03 sec
+2025-05-08 17:47:31,771 - INFO - [TRAINING] Training KNN on Original...
+2025-05-08 17:47:31,773 - INFO - [TRAINING] KNN trained successfully on Original in 0.00 sec
+2025-05-08 17:47:31,773 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-05-08 17:47:31,861 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 0.09 sec
+2025-05-08 17:47:31,861 - INFO - [TRAINING] Training RandomForest on Original...
+2025-05-08 17:47:32,246 - INFO - [TRAINING] RandomForest trained successfully on Original in 0.38 sec
+2025-05-08 17:47:32,246 - INFO - [TRAINING] Finished training 4 model(s) for dataset: Original
+2025-05-08 17:47:32,246 - INFO - [TRAINING] Starting training for dataset: CTGAN — Rows: 9288, Features: 36
+2025-05-08 17:47:32,246 - INFO - [TRAINING] Training DecisionTree on CTGAN...
+2025-05-08 17:47:32,397 - INFO - [TRAINING] DecisionTree trained successfully on CTGAN in 0.15 sec
+2025-05-08 17:47:32,397 - INFO - [TRAINING] Training KNN on CTGAN...
+2025-05-08 17:47:32,403 - INFO - [TRAINING] KNN trained successfully on CTGAN in 0.01 sec
+2025-05-08 17:47:32,404 - INFO - [TRAINING] Training LogisticRegression on CTGAN...
+2025-05-08 17:47:32,494 - INFO - [TRAINING] LogisticRegression trained successfully on CTGAN in 0.09 sec
+2025-05-08 17:47:32,494 - INFO - [TRAINING] Training RandomForest on CTGAN...
+2025-05-08 17:47:34,363 - INFO - [TRAINING] RandomForest trained successfully on CTGAN in 1.87 sec
+2025-05-08 17:47:34,363 - INFO - [TRAINING] Finished training 4 model(s) for dataset: CTGAN
+2025-05-08 17:47:34,363 - INFO - [TRAINING] Starting training for dataset: TVAE — Rows: 9288, Features: 36
+2025-05-08 17:47:34,363 - INFO - [TRAINING] Training DecisionTree on TVAE...
+2025-05-08 17:47:34,454 - INFO - [TRAINING] DecisionTree trained successfully on TVAE in 0.09 sec
+2025-05-08 17:47:34,454 - INFO - [TRAINING] Training KNN on TVAE...
+2025-05-08 17:47:34,460 - INFO - [TRAINING] KNN trained successfully on TVAE in 0.01 sec
+2025-05-08 17:47:34,461 - INFO - [TRAINING] Training LogisticRegression on TVAE...
+2025-05-08 17:47:34,511 - INFO - [TRAINING] LogisticRegression trained successfully on TVAE in 0.05 sec
+2025-05-08 17:47:34,511 - INFO - [TRAINING] Training RandomForest on TVAE...
+2025-05-08 17:47:35,558 - INFO - [TRAINING] RandomForest trained successfully on TVAE in 1.05 sec
+2025-05-08 17:47:35,559 - INFO - [TRAINING] Finished training 4 model(s) for dataset: TVAE
+2025-05-08 17:47:35,559 - INFO - [TRAINING] Total models trained across all datasets: 12
+2025-05-08 17:47:35,559 - INFO - [UTILITY] Trained model names: ['Original', 'CTGAN', 'TVAE']
+2025-05-08 17:47:35,559 - INFO - [UTILITY] Model Training Completed.
+2025-05-08 17:47:35,559 - INFO - Starting the Evaluating of models...
+2025-05-08 17:47:35,559 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-05-08 17:47:35,559 - INFO - Evaluating DecisionTree on Original...
+2025-05-08 17:47:35,561 - INFO - Predictions completed for DecisionTree on Original
+2025-05-08 17:47:35,561 - INFO - Prediction distribution for DecisionTree on Original: {'Graduate': 618, 'Dropout': 399, 'Enrolled': 311}
+2025-05-08 17:47:35,580 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-05-08 17:47:35,580 - INFO - Evaluating DecisionTree on CTGAN...
+2025-05-08 17:47:35,582 - INFO - Predictions completed for DecisionTree on CTGAN
+2025-05-08 17:47:35,582 - INFO - Prediction distribution for DecisionTree on CTGAN: {'Graduate': 642, 'Dropout': 505, 'Enrolled': 181}
+2025-05-08 17:47:35,600 - INFO - Computed 8 metric(s) for DecisionTree on CTGAN
+2025-05-08 17:47:35,600 - INFO - Evaluating DecisionTree on TVAE...
+2025-05-08 17:47:35,602 - INFO - Predictions completed for DecisionTree on TVAE
+2025-05-08 17:47:35,602 - INFO - Prediction distribution for DecisionTree on TVAE: {'Graduate': 562, 'Dropout': 501, 'Enrolled': 265}
+2025-05-08 17:47:35,620 - INFO - Computed 8 metric(s) for DecisionTree on TVAE
+2025-05-08 17:47:35,620 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-05-08 17:47:35,620 - INFO - Evaluating KNN on Original...
+2025-05-08 17:47:35,658 - INFO - Predictions completed for KNN on Original
+2025-05-08 17:47:35,658 - INFO - Prediction distribution for KNN on Original: {'Graduate': 717, 'Dropout': 397, 'Enrolled': 214}
+2025-05-08 17:47:35,687 - INFO - Computed 8 metric(s) for KNN on Original
+2025-05-08 17:47:35,687 - INFO - Evaluating KNN on CTGAN...
+2025-05-08 17:47:35,726 - INFO - Predictions completed for KNN on CTGAN
+2025-05-08 17:47:35,727 - INFO - Prediction distribution for KNN on CTGAN: {'Graduate': 773, 'Dropout': 486, 'Enrolled': 69}
+2025-05-08 17:47:35,765 - INFO - Computed 8 metric(s) for KNN on CTGAN
+2025-05-08 17:47:35,765 - INFO - Evaluating KNN on TVAE...
+2025-05-08 17:47:35,803 - INFO - Predictions completed for KNN on TVAE
+2025-05-08 17:47:35,803 - INFO - Prediction distribution for KNN on TVAE: {'Graduate': 671, 'Dropout': 504, 'Enrolled': 153}
+2025-05-08 17:47:35,841 - INFO - Computed 8 metric(s) for KNN on TVAE
+2025-05-08 17:47:35,841 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-05-08 17:47:35,841 - INFO - Evaluating LogisticRegression on Original...
+2025-05-08 17:47:35,843 - INFO - Predictions completed for LogisticRegression on Original
+2025-05-08 17:47:35,843 - INFO - Prediction distribution for LogisticRegression on Original: {'Graduate': 773, 'Dropout': 398, 'Enrolled': 157}
+2025-05-08 17:47:35,862 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-05-08 17:47:35,862 - INFO - Evaluating LogisticRegression on CTGAN...
+2025-05-08 17:47:35,864 - INFO - Predictions completed for LogisticRegression on CTGAN
+2025-05-08 17:47:35,864 - INFO - Prediction distribution for LogisticRegression on CTGAN: {'Graduate': 1076, 'Dropout': 252}
+2025-05-08 17:47:35,868 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 17:47:35,871 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 17:47:35,874 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 17:47:35,883 - INFO - Computed 8 metric(s) for LogisticRegression on CTGAN
+2025-05-08 17:47:35,883 - INFO - Evaluating LogisticRegression on TVAE...
+2025-05-08 17:47:35,885 - INFO - Predictions completed for LogisticRegression on TVAE
+2025-05-08 17:47:35,885 - INFO - Prediction distribution for LogisticRegression on TVAE: {'Graduate': 601, 'Dropout': 596, 'Enrolled': 131}
+2025-05-08 17:47:35,904 - INFO - Computed 8 metric(s) for LogisticRegression on TVAE
+2025-05-08 17:47:35,904 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-05-08 17:47:35,904 - INFO - Evaluating RandomForest on Original...
+2025-05-08 17:47:35,920 - INFO - Predictions completed for RandomForest on Original
+2025-05-08 17:47:35,921 - INFO - Prediction distribution for RandomForest on Original: {'Graduate': 784, 'Dropout': 405, 'Enrolled': 139}
+2025-05-08 17:47:35,968 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-05-08 17:47:35,968 - INFO - Evaluating RandomForest on CTGAN...
+2025-05-08 17:47:35,991 - INFO - Predictions completed for RandomForest on CTGAN
+2025-05-08 17:47:35,991 - INFO - Prediction distribution for RandomForest on CTGAN: {'Graduate': 989, 'Dropout': 339}
+2025-05-08 17:47:35,995 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 17:47:35,998 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 17:47:36,001 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 17:47:36,052 - INFO - Computed 8 metric(s) for RandomForest on CTGAN
+2025-05-08 17:47:36,052 - INFO - Evaluating RandomForest on TVAE...
+2025-05-08 17:47:36,069 - INFO - Predictions completed for RandomForest on TVAE
+2025-05-08 17:47:36,070 - INFO - Prediction distribution for RandomForest on TVAE: {'Graduate': 658, 'Dropout': 507, 'Enrolled': 163}
+2025-05-08 17:47:36,120 - INFO - Computed 8 metric(s) for RandomForest on TVAE
+2025-05-08 17:47:36,123 - INFO - Evaluation completed for all models.
+2025-05-08 17:47:36,123 - INFO - Model evaluation completed in 0.56 seconds.
+2025-05-08 17:47:36,125 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest']
+2025-05-08 17:47:36,125 - INFO - Model Training and Evaluation completed.
+2025-05-08 17:47:36,646 - INFO -  Visualizations saved.
+2025-05-08 17:47:36,646 - INFO -  Benchmarking Completed. Results saved in output folder.

@@ -1,128 +1,182 @@
+import pandas as pd
+import matplotlib.pyplot as plt
 import os
 import sys
-import matplotlib.pyplot as plt
 import numpy as np
+import dataframe_image as dfi
 
-# Fix path
+# Fix import path
 current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.abspath(os.path.join(current_dir))
+parent_dir = os.path.abspath(os.path.join(current_dir, ".."))
 sys.path.insert(0, parent_dir)
 from color_palette import COLOR_MAP
 
-def plot_grouped_metrics(metrics_dict, params_dict, save_path, dataset_name):
-    variants = list(metrics_dict.keys())                         # e.g. Original, CTGAN_HYBRID, …
-    metrics  = list(next(iter(metrics_dict.values())).keys())     # e.g. Accuracy, F1, …
+# loan paths
+# excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\loan\loan_combined_results.xlsx"
+# output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\loan\bar charts\hybrid"
+# dataset_name = "Loan"
 
-    n_variants = len(variants)
-    x          = np.arange(len(metrics))
-    bar_width  = 0.15
+# --- studentPerformance paths (active) ---
+excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\studentPerformance\studentPerformance_combined_results.xlsx"
+output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\studentPerformance\plots\hybrid"
+dataset_name = "studentPerformance"
 
-    plt.figure(figsize=(12, 7))
+# bankMarketing paths
+# excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\bankMarketing\bankMarketing_combined_results.xlsx"
+# output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\bankMarketing\hybrid"
+# dataset_name = "bankMarketing"
 
-    for i, variant in enumerate(variants):
-        scores = [metrics_dict[variant][m] for m in metrics]
-        plt.bar(
-            x + i * bar_width,
-            scores,
-            width=bar_width,
-            label=variant,
-            color=COLOR_MAP.get(variant, "#CCCCCC"),
-            edgecolor="black",
-        )
+# censusIncome
+# excel_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\censusIncome\censusIncome_combined_results.xlsx"
+# output_dir = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\censusIncome\plots\hybrid"
+# dataset_name = "censusIncome"
 
-        for j, score in enumerate(scores):
-            plt.text(
-                x[j] + i * bar_width,
-                score + 0.01,
-                f"{score:.3f}",
-                ha="center",
-                va="bottom",
-                fontsize=8,
-            )
 
-    plt.xticks(x + bar_width * (n_variants - 1) / 2, metrics, rotation=45, fontsize=10)
-    plt.yticks(fontsize=10)
-    plt.ylabel("Score", fontsize=12)
+# === CONFIG ===
+model_to_compare = "RandomForest"  # "LogisticRegression", "RandomForest", …
+selected_metric = "MCC"
+metrics = ["Accuracy", "Precision", "Recall", "F1", "AUC-ROC"]
+synth_bases = ["CTGAN", "TVAE", "GaussianCopula"]
+
+# Always keep these fields visible
+important_config_cols = [
+    "k_anonymity", "l_diversity", "suppression_limit", "suppressed_records", "suppression_percentage",
+    "test_size", "epochs", "row_multiplier", "rows_generated_at_runtime"
+]
+
+os.makedirs(output_dir, exist_ok=True)
+
+# === LOAD DATA ===
+df = pd.read_excel(excel_path)
+df = df[df["Model"] == model_to_compare]
+
+# === PART 1: OVERALL COMPARISON ===
+original_df = df[df["Dataset"] == "Original"]
+if original_df.empty:
+    raise SystemExit("❌ No Original rows found.")
+best_original = original_df.loc[original_df[selected_metric].idxmax()]
+rows = [("Original", best_original)]
+
+for synth in synth_bases:
+    hybrid_label = f"{synth}_HYBRID"
+    hybrid_df = df[df["Dataset"] == hybrid_label]
+    if hybrid_df.empty:
+        print(f"⚠️ No rows for {hybrid_label}, skipping.")
+        continue
+    best_hybrid = hybrid_df.loc[hybrid_df[selected_metric].idxmax()]
+    rows.append((hybrid_label, best_hybrid))
+
+overall_df = pd.DataFrame([r[1] for r in rows])
+overall_df.insert(0, "Source", [r[0] for r in rows])
+
+# Export full table
+csv_path = os.path.join(output_dir, f"{dataset_name}_bar_chart_rows_{model_to_compare}.csv")
+png_path = os.path.join(output_dir, f"{dataset_name}_bar_chart_rows_{model_to_compare}.png")
+overall_df.to_csv(csv_path, index=False)
+dfi.export(overall_df.style.set_caption(f"{dataset_name.title()} – Hybrid vs Original ({model_to_compare})"), png_path)
+
+# Bar chart
+x = np.arange(len(metrics))
+bar_width = 0.15
+plt.figure(figsize=(10, 5))
+for i, (label, row) in enumerate(rows):
+    values = [row[m] for m in metrics]
+    color = COLOR_MAP.get(label, "#888")
+    plt.bar(x + i * bar_width, values, width=bar_width, label=label, color=color, edgecolor="black")
+    for j, val in enumerate(values):
+        plt.text(x[j] + i * bar_width, val + 0.01, f"{val:.3f}", ha="center", fontsize=8)
+plt.xticks(x + bar_width * (len(rows)-1)/2, metrics)
+plt.ylim(0, 1)
+plt.ylabel("Score")
+plt.title(f"{model_to_compare} on {dataset_name.title()} Dataset: Original vs Best Hybrids")
+plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.15), ncol=len(rows))
+plt.tight_layout(rect=[0, 0.15, 1, 1])
+chart_path = os.path.join(output_dir, f"{dataset_name}_bar_original_vs_hybrids_{model_to_compare}.png")
+plt.savefig(chart_path, dpi=300)
+plt.close()
+
+# === PART 2: STEPWISE CHAINS ===
+for synth in synth_bases:
+    step_rows = []
+
+    # Original
+    step_rows.append(("Original", best_original))
+
+    # Best HYBRID row
+    hybrid_label = synth + "_HYBRID"
+    hybrid_df = df[df["Dataset"] == hybrid_label]
+    if hybrid_df.empty:
+        print(f"⚠️ No {hybrid_label} rows found. Skipping {synth}.")
+        continue
+    best_hybrid = hybrid_df.loc[hybrid_df[selected_metric].idxmax()]
+
+    # Match Anonymous config to hybrid's k/l/s
+    k = best_hybrid.get("k_anonymity")
+    l = best_hybrid.get("l_diversity")
+    s = best_hybrid.get("suppression_limit")
+    anon_df = df[
+        (df["Dataset"] == "Anonymous") &
+        (df["k_anonymity"] == k) &
+        (df["l_diversity"] == l) &
+        (df["suppression_limit"] == s)
+    ]
+    if anon_df.empty:
+        print(f"⚠️ No matching Anonymous row for {synth} (k={k}, l={l}, s={s}). Skipping.")
+        continue
+    best_anon = anon_df.loc[anon_df[selected_metric].idxmax()]
+
+    # Best Synth row
+    synth_df = df[df["Dataset"] == synth]
+    if synth_df.empty:
+        print(f"⚠️ No {synth} rows found. Skipping.")
+        continue
+    best_synth = synth_df.loc[synth_df[selected_metric].idxmax()]
+
+    # Chain
+    step_rows.extend([
+        ("Anonymous", best_anon),
+        (synth, best_synth),
+        (hybrid_label, best_hybrid)
+    ])
+
+    # Build table
+    full_table = pd.DataFrame([r[1] for r in step_rows])
+    full_table.insert(0, "Source", [r[0] for r in step_rows])
+
+    # Force consistent column order
+    front_cols = ["Source", "Model", "Dataset"] + metrics + [selected_metric, "AUC-ROC"] + important_config_cols
+    full_table = full_table[[col for col in front_cols if col in full_table.columns] + 
+                            [col for col in full_table.columns if col not in front_cols]]
+
+    # Export full and clean tables
+    base = synth.lower()
+    clean_table = full_table.drop(columns=[c for c in full_table.columns if c not in metrics + ["Source", "Model", "Dataset", selected_metric, "AUC-ROC"]])
+
+    clean_csv = os.path.join(output_dir, f"{dataset_name}_stepwise_chain_{base}.csv")
+    clean_png = os.path.join(output_dir, f"{dataset_name}_stepwise_chain_{base}.png")
+    full_csv = os.path.join(output_dir, f"{dataset_name}_stepwise_chain_{base}_full.csv")
+    full_png = os.path.join(output_dir, f"{dataset_name}_stepwise_chain_{base}_full.png")
+
+    clean_table.to_csv(clean_csv, index=False)
+    dfi.export(clean_table.style.set_caption(f"{dataset_name.title()} – Stepwise (Metrics Only) – {synth}"), clean_png)
+    full_table.to_csv(full_csv, index=False)
+    dfi.export(full_table.style.set_caption(f"{dataset_name.title()} – Stepwise (Full Config) – {synth}"), full_png)
+
+    # Stepwise plot
+    plt.figure(figsize=(10, 5))
+    for i, (label, row) in enumerate(step_rows):
+        values = [row[m] for m in metrics]
+        color = COLOR_MAP.get(label, "#888")
+        plt.bar(x + i * bar_width, values, width=bar_width,
+                label=label, color=color, edgecolor="black")
+        for j, val in enumerate(values):
+            plt.text(x[j] + i * bar_width, val + 0.01, f"{val:.3f}", ha="center", fontsize=8)
+    plt.xticks(x + bar_width * (len(step_rows) - 1)/2, metrics)
     plt.ylim(0, 1)
-
-    plt.title(
-        f"Random Forest Performance on {dataset_name}: Original vs Hybrid",
-        fontsize=14, weight="bold",
-    )
-
-    plt.legend(
-        loc="upper center",
-        bbox_to_anchor=(0.5, -0.18),
-        ncol=n_variants,
-        fontsize=10,
-        frameon=False,
-    )
-
-    param_note = " | ".join(
-        f"{v}: epochs={p['epochs']}, mult={p['w_multiplier']}"
-        for v, p in params_dict.items() if v != "Original"
-    )
-    plt.figtext(0.5, -0.28, param_note, wrap=True, ha="center", fontsize=9)
-
-    plt.subplots_adjust(bottom=0.35)
-    plt.tight_layout(rect=[0, 0.1, 1, 0.95])
-
-    os.makedirs(os.path.dirname(save_path), exist_ok=True)
-    plt.savefig(save_path, dpi=300)
-    print(f"✅ Saved plot to: {save_path}")
-    plt.show()
-
-if __name__ == "__main__":
-    output_path = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\Semester 2\writing the thesis\graphs\loan\hybrid\original_vs_all_hybrid_grouped.png"
-    dataset_name = "Loan Dataset"
-
-    metrics_dict = {
-    "Original": {
-        "Accuracy": 0.854,
-        "Precision": 0.860,
-        "Recall": 0.854,
-        "F1": 0.844,
-        "AUC-ROC": 0.853,
-    },
-    "CTGAN_HYBRID": {
-        "Accuracy": 0.7014,
-        "Precision": 0.6729,
-        "Recall": 0.7014,
-        "F1": 0.6069,
-        "AUC-ROC": 0.5609,
-    },
-    "TVAE_HYBRID": {
-        "Accuracy": 0.7014,
-        "Precision": 0.7912,
-        "Recall": 0.7014,
-        "F1": 0.5851,
-        "AUC-ROC": 0.516,
-    },
-    "GaussianCopula_HYBRID": {
-        "Accuracy": 0.6667,
-        "Precision": 0.6625,
-        "Recall": 0.6667,
-        "F1": 0.6644,
-        "AUC-ROC": 0.5715,
-    }
-}
-
-    params_dict = {
-        "CTGAN_HYBRID": {
-            "epochs": 300,
-            "w_multiplier": 3,
-            "rows_generated": 1008
-        },
-        "TVAE_HYBRID": {
-            "epochs": 400,
-            "w_multiplier": 3,
-            "rows_generated": 1008
-        },
-        "GaussianCopula_HYBRID": {
-            "epochs": 300,
-            "w_multiplier": 8,
-            "rows_generated": 336
-        }
-    }
-
-    plot_grouped_metrics(metrics_dict, params_dict, output_path, dataset_name)
+    plt.ylabel("Score")
+    plt.title(f"{hybrid_label} – Original → Anonymous → {synth} → Hybrid")
+    plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.15), ncol=len(step_rows))
+    plt.tight_layout(rect=[0, 0.15, 1, 1])
+    stepwise_chart = os.path.join(output_dir, f"{dataset_name}_stepwise_chain_{base}_chart.png")
+    plt.savefig(stepwise_chart, dpi=300)
+    plt.close()

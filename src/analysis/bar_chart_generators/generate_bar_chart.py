@@ -42,19 +42,21 @@ def plot_custom_metrics(model_name, dataset_name, metric_values, show_settings, 
 
 
 if __name__ == "__main__":
-    model = "Random Forest"
+    model = "LogisticRegression"
     dataset = "Loan Dataset (Original)"
 
     metric_values = {
-        "Accuracy": 0.8194,
-        "Precision": 0.8197,
-        "Recall": 0.8194,
-        "F1": 0.8061,
-        "AUC-ROC": 0.7933,
-        "CohenKappa": 0.5263,
-        "MCC": 0.5502,
-        "Average Metric": 0.81615,
-}
+        "Accuracy": 0.8403,
+        "Precision": 0.8431,
+        "Recall": 0.8403,
+        "F1": 0.8294,
+        "AUC-ROC": 0.788,
+        "LogLoss": 0.4495,
+        "CohenKappa": 0.5839,
+        "MCC": 0.6067,
+        "Average Metric": 0.838275,
+    }
+
 
     show_metrics = {
         "Accuracy": True,
@@ -67,7 +69,8 @@ if __name__ == "__main__":
         "Average Metric": False,
     }
 
-    output_folder = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\Semester 2\writing the thesis\graphs\loan\original"
-    suffix = "worst"
+    output_folder = r"C:\Users\delea\OneDrive\Documents\Desktop\Master_Thesis\results analysis\loan\bar charts"
+
+    suffix = "best"
 
     plot_custom_metrics(model, dataset, metric_values, show_metrics, save_dir=output_folder, suffix=suffix)

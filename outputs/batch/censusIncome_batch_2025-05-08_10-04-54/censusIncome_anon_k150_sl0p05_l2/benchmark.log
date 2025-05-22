@@ -1,0 +1,199 @@
+2025-05-08 10:05:04,336 - INFO - Loaded config file: configs/generated_configs/censusIncome/censusIncome_anon_k150_sl0p05_l2.yaml
+2025-05-08 10:05:04,336 - INFO -  Benchmarking started for dataset: censusIncome
+2025-05-08 10:05:04,336 - INFO - Using dataset path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/original/censusIncome.csv
+2025-05-08 10:05:04,336 - INFO - Target column: income, separator: ','
+2025-05-08 10:05:04,336 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False, enable_hybrid = False, enable_utility = True, delete_after_evaluation = False
+2025-05-08 10:05:04,336 - INFO - Running preprocessing...
+2025-05-08 10:05:04,341 - INFO - [PREPROCESSING] No preprocessed files found. Starting full preprocessing pipeline...
+2025-05-08 10:05:04,467 - INFO - [PREPROCESSING] Missing value handling strategy: 'drop' applied.
+2025-05-08 10:05:04,496 - INFO - [PREPROCESSING] Split data into train (39073 rows) and test (9769 rows). Test size: 0.2
+2025-05-08 10:05:31,244 - INFO -  [PREPROCESSING] Saved raw train set to: datasets/train/censusIncome_train_raw.csv
+2025-05-08 10:05:31,244 - INFO -  [PREPROCESSING] Saved encoder to: artifacts/censusIncome_binary_encoder.pkl
+2025-05-08 10:05:31,244 - INFO -  [PREPROCESSING]Saved encoded train set to: datasets/cleaned/censusIncome_cleaned.csv
+2025-05-08 10:05:31,244 - INFO -  [PREPROCESSING] Saved encoded test set to: datasets/test/censusIncome_test_set.csv
+2025-05-08 10:05:31,245 - INFO - [PREPROCESSING] run_preprocessing finished executing.
+2025-05-08 10:05:31,272 - INFO - Preprocessing completed. Rows before: 48842, after: 39073
+2025-05-08 10:05:31,272 - INFO - Preprocessed data saved to: outputs/batch/censusIncome_batch_2025-05-08_10-04-54/censusIncome_anon_k150_sl0p05_l2/preprocessing_report.txt
+2025-05-08 10:05:31,272 - INFO - enable_anonymization = True
+2025-05-08 10:05:31,272 - INFO - Starting Anonymization Pipeline with output path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/censusIncome_k150_l2_sup05_anonymized.csv.......
+2025-05-08 10:05:31,278 - INFO -  [ANONYMIZATION] Executing run_anonymization, config_path : configs/generated_configs/censusIncome/censusIncome_anon_k150_sl0p05_l2.yaml...........
+2025-05-08 10:05:31,278 - INFO -  [ANONYMIZATION] Using JAR file at /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/bin/anonymARXij.jar to anonymize the dataset.
+2025-05-08 10:05:36,912 - INFO -  [ANONYMIZATION] Anonimized file saved to : /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/censusIncome_k150_l2_sup05_anonymized.csv
+2025-05-08 10:05:36,912 - INFO -  [ANONYMIZATION] Java anonymization completed successfully.
+2025-05-08 10:05:36,912 - INFO -  [ANONYMIZATION] Java STDOUT:
+📄 Java received config path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/configs/generated_configs/censusIncome/censusIncome_anon_k150_sl0p05_l2.yaml
+🔹 Loading config from: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/configs/generated_configs/censusIncome/censusIncome_anon_k150_sl0p05_l2.yaml
+Loading config from: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/configs/generated_configs/censusIncome/censusIncome_anon_k150_sl0p05_l2.yaml
+📂 Dataset Path (from args): /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/train/censusIncome_train_raw.csv
+🔹 Dataset Separator: ,
+🔹 Suppression Limit: 0.05
+
+🔹 Configured Attributes:
+  ✅ Quasi-Identifier: age
+  ✅ Quasi-Identifier: education
+  ✅ Quasi-Identifier: workclass
+  ✅ Quasi-Identifier: marital-status
+  ✅ Quasi-Identifier: occupation
+  ✅ Quasi-Identifier: race
+  ✅ Quasi-Identifier: sex
+  ✅ Quasi-Identifier: native-country
+  ✅ Sensitive Attribute: income
+  ✅ Insensitive Attribute: fnlwgt
+  ✅ Insensitive Attribute: hours-per-week
+  ✅ Insensitive Attribute: capital-gain
+  ✅ Insensitive Attribute: capital-loss
+  ✅ Insensitive Attribute: relationship
+  ✅ Insensitive Attribute: education-num
+
+🔹 Defined Hierarchies:
+  ✅ education -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/education.csv
+  ✅ occupation -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/occupation.csv
+  ✅ workclass -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/workclass.csv
+  ✅ native-country -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/native-country.csv
+  ✅ race -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/race.csv
+  ✅ sex -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/sex.csv
+  ✅ marital-status -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/marital-status.csv
+  ✅ age -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/age.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/education.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/occupation.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/workclass.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/native-country.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/race.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/sex.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/marital-status.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_censusIncome/age.csv
+✓ Applied Distinct L-Diversity on: income (l=2)
+🔹 Privacy Models Configured
+📂 Anonymized Output Path (from args): /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/censusIncome_k150_l2_sup05_anonymized.csv
+📂 Anonymized Output Path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/censusIncome_k150_l2_sup05_anonymized.csv
+✅ Anonymization completed. Output saved to: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/censusIncome_k150_l2_sup05_anonymized.csv
+Anonymized Data Quality Metrics:
+ - Ambiguity: 0.9599087843359219
+ - AECS: 0.966798567689384
+ - Discernibility: 0.8483675280292782
+ - Granularity: 0.45735311036480286
+ - MSE: 0.4495262662160664
+ - Non-Uniform Entropy: 0.21719278753671267
+ - Precision: 0.36869834150490377
+ - Record-level SE: 0.3754911950398947
+Equivalence Class Statistics:
+ - Number of Classes: 29
+ - Average Class Size: 1298.9310344827586
+Suppression Statistics:
+ - Suppressed Records: 1404
+ - Suppression Percentage: 3.59%
+2025-05-08 10:05:36,912 - INFO - Anonymized data saved to: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/censusIncome_k150_l2_sup05_anonymized.csv
+2025-05-08 10:05:37,032 - INFO - Anonymous data report saved at: outputs/batch/censusIncome_batch_2025-05-08_10-04-54/censusIncome_anon_k150_sl0p05_l2/anonymous_data_report.txt
+2025-05-08 10:05:37,032 - INFO -  [POSTPROCESSING] Postprocessing anonymized data: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/censusIncome_k150_l2_sup05_anonymized.csv
+2025-05-08 10:05:37,070 - INFO -  [POSTPROCESSING] Loaded anonymized data: (39073, 15)
+2025-05-08 10:05:37,164 - INFO -  [POSTPROCESSING] Loaded fallback maps from training data. Categorical cols: 9, Numeric cols: 6
+2025-05-08 10:05:37,164 - INFO -  [POSTPROCESSING] Normalizing anonymized data using ARX artifact cleaning and fallback values.
+2025-05-08 10:05:38,368 - INFO -  [POSTPROCESSING] Normalized anonymized data saved to: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/censusIncome_k150_l2_sup05_anonymized_processed.csv
+2025-05-08 10:05:38,513 - INFO -  [POSTPROCESSING] Binary Encoding applied to anonymized data. Encoded shape: (39073, 37)
+2025-05-08 10:05:38,736 - INFO -  [POSTPROCESSING] Encoded anonymized dataset saved to: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/censusIncome_k150_l2_sup05_anonymized_encoded.csv
+2025-05-08 10:05:38,736 - INFO -  [POSTPROCESSING] Encoding map generated for anonymized data: 0 original categorical columns.
+2025-05-08 10:05:38,741 - INFO - Postprocessing report saved at: outputs/batch/censusIncome_batch_2025-05-08_10-04-54/censusIncome_anon_k150_sl0p05_l2/postprocessing_report.txt
+2025-05-08 10:05:38,741 - INFO - enable_synthetic_generation = False
+2025-05-08 10:05:38,741 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-05-08 10:05:38,742 - INFO - Hybrid Pipeline skipped (disabled in configuration).
+2025-05-08 10:05:38,742 - INFO - Starting Utility...
+2025-05-08 10:05:38,742 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-05-08 10:05:38,745 - INFO - [UTILITY] Original Data - Training Size: 39073, Testing Size: 9769
+2025-05-08 10:05:38,748 - INFO - [UTILITY] Target class distribution (Original): {'<=50K': 19775, '<=50K.': 9948, '>50K': 6273, '>50K.': 3077}
+2025-05-08 10:05:38,750 - INFO - [UTILITY] Processing anonymized dataset...
+2025-05-08 10:05:38,754 - INFO - [UTILITY] Anonymized Data - Training Size: 39073
+2025-05-08 10:05:38,756 - INFO - [UTILITY] Target class distribution (Anonymous): {'<=50K': 19775, '<=50K.': 9948, '>50K': 6273, '>50K.': 3077}
+2025-05-08 10:05:38,756 - INFO - [UTILITY] Training models on all datasets...
+2025-05-08 10:05:38,756 - INFO - [UTILITY] Total datasets used for training: 2
+2025-05-08 10:05:38,756 - INFO - [TRAINING] Training models from scratch...
+2025-05-08 10:05:38,757 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 39073, Features: 36
+2025-05-08 10:05:38,757 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-05-08 10:05:39,339 - INFO - [TRAINING] DecisionTree trained successfully on Original in 0.58 sec
+2025-05-08 10:05:39,340 - INFO - [TRAINING] Training KNN on Original...
+2025-05-08 10:05:39,380 - INFO - [TRAINING] KNN trained successfully on Original in 0.04 sec
+2025-05-08 10:05:39,381 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-05-08 10:05:40,616 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 1.23 sec
+2025-05-08 10:05:40,616 - INFO - [TRAINING] Training RandomForest on Original...
+2025-05-08 10:05:46,232 - INFO - [TRAINING] RandomForest trained successfully on Original in 5.62 sec
+2025-05-08 10:05:46,232 - INFO - [TRAINING] Training SVM on Original...
+2025-05-08 10:08:13,292 - INFO - [TRAINING] SVM trained successfully on Original in 147.06 sec
+2025-05-08 10:08:13,292 - INFO - [TRAINING] Finished training 5 model(s) for dataset: Original
+2025-05-08 10:08:13,292 - INFO - [TRAINING] Starting training for dataset: Anonymous — Rows: 39073, Features: 36
+2025-05-08 10:08:13,292 - INFO - [TRAINING] Training DecisionTree on Anonymous...
+2025-05-08 10:08:13,610 - INFO - [TRAINING] DecisionTree trained successfully on Anonymous in 0.32 sec
+2025-05-08 10:08:13,610 - INFO - [TRAINING] Training KNN on Anonymous...
+2025-05-08 10:08:13,680 - INFO - [TRAINING] KNN trained successfully on Anonymous in 0.07 sec
+2025-05-08 10:08:13,680 - INFO - [TRAINING] Training LogisticRegression on Anonymous...
+2025-05-08 10:08:14,928 - INFO - [TRAINING] LogisticRegression trained successfully on Anonymous in 1.25 sec
+2025-05-08 10:08:14,929 - INFO - [TRAINING] Training RandomForest on Anonymous...
+2025-05-08 10:08:19,570 - INFO - [TRAINING] RandomForest trained successfully on Anonymous in 4.64 sec
+2025-05-08 10:08:19,570 - INFO - [TRAINING] Training SVM on Anonymous...
+2025-05-08 10:11:05,584 - INFO - [TRAINING] SVM trained successfully on Anonymous in 166.01 sec
+2025-05-08 10:11:05,584 - INFO - [TRAINING] Finished training 5 model(s) for dataset: Anonymous
+2025-05-08 10:11:05,584 - INFO - [TRAINING] Total models trained across all datasets: 10
+2025-05-08 10:11:05,584 - INFO - [UTILITY] Trained model names: ['Original', 'Anonymous']
+2025-05-08 10:11:05,584 - INFO - [UTILITY] Model Training Completed.
+2025-05-08 10:11:05,584 - INFO - Starting the Evaluating of models...
+2025-05-08 10:11:05,584 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-05-08 10:11:05,585 - INFO - Evaluating DecisionTree on Original...
+2025-05-08 10:11:05,590 - INFO - Predictions completed for DecisionTree on Original
+2025-05-08 10:11:05,592 - INFO - Prediction distribution for DecisionTree on Original: {'<=50K': 4722, '<=50K.': 2565, '>50K': 1631, '>50K.': 851}
+2025-05-08 10:11:05,859 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-05-08 10:11:05,860 - INFO - Evaluating DecisionTree on Anonymous...
+2025-05-08 10:11:05,866 - INFO - Predictions completed for DecisionTree on Anonymous
+2025-05-08 10:11:05,867 - INFO - Prediction distribution for DecisionTree on Anonymous: {'<=50K': 4313, '<=50K.': 2367, '>50K': 2051, '>50K.': 1038}
+2025-05-08 10:11:06,031 - INFO - Computed 8 metric(s) for DecisionTree on Anonymous
+2025-05-08 10:11:06,032 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-05-08 10:11:06,032 - INFO - Evaluating KNN on Original...
+2025-05-08 10:11:11,367 - INFO - Predictions completed for KNN on Original
+2025-05-08 10:11:11,373 - INFO - Prediction distribution for KNN on Original: {'<=50K': 7038, '<=50K.': 1542, '>50K': 1005, '>50K.': 184}
+2025-05-08 10:11:23,119 - INFO - Computed 8 metric(s) for KNN on Original
+2025-05-08 10:11:23,120 - INFO - Evaluating KNN on Anonymous...
+2025-05-08 10:11:30,585 - INFO - Predictions completed for KNN on Anonymous
+2025-05-08 10:11:30,587 - INFO - Prediction distribution for KNN on Anonymous: {'<=50K': 7105, '<=50K.': 1556, '>50K': 930, '>50K.': 178}
+2025-05-08 10:11:41,443 - INFO - Computed 8 metric(s) for KNN on Anonymous
+2025-05-08 10:11:41,443 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-05-08 10:11:41,444 - INFO - Evaluating LogisticRegression on Original...
+2025-05-08 10:11:41,454 - INFO - Predictions completed for LogisticRegression on Original
+2025-05-08 10:11:41,455 - INFO - Prediction distribution for LogisticRegression on Original: {'<=50K': 7883, '>50K': 1884, '>50K.': 2}
+2025-05-08 10:11:41,496 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 10:11:41,523 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 10:11:41,551 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 10:11:41,623 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-05-08 10:11:41,624 - INFO - Evaluating LogisticRegression on Anonymous...
+2025-05-08 10:11:41,628 - INFO - Predictions completed for LogisticRegression on Anonymous
+2025-05-08 10:11:41,629 - INFO - Prediction distribution for LogisticRegression on Anonymous: {'<=50K': 7950, '>50K': 1817, '>50K.': 2}
+2025-05-08 10:11:41,666 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 10:11:41,693 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 10:11:41,720 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 10:11:41,941 - INFO - Computed 8 metric(s) for LogisticRegression on Anonymous
+2025-05-08 10:11:41,947 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-05-08 10:11:41,953 - INFO - Evaluating RandomForest on Original...
+2025-05-08 10:11:42,302 - INFO - Predictions completed for RandomForest on Original
+2025-05-08 10:11:42,304 - INFO - Prediction distribution for RandomForest on Original: {'<=50K': 6609, '>50K': 1710, '<=50K.': 1120, '>50K.': 330}
+2025-05-08 10:11:44,716 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-05-08 10:11:44,716 - INFO - Evaluating RandomForest on Anonymous...
+2025-05-08 10:11:44,967 - INFO - Predictions completed for RandomForest on Anonymous
+2025-05-08 10:11:44,968 - INFO - Prediction distribution for RandomForest on Anonymous: {'<=50K': 6126, '>50K': 1697, '<=50K.': 1477, '>50K.': 469}
+2025-05-08 10:11:46,350 - INFO - Computed 8 metric(s) for RandomForest on Anonymous
+2025-05-08 10:11:46,350 - INFO - Preparing evaluation for model 'SVM' across all datasets...
+2025-05-08 10:11:46,350 - INFO - Evaluating SVM on Original...
+2025-05-08 10:12:21,024 - INFO - Predictions completed for SVM on Original
+2025-05-08 10:12:21,025 - INFO - Prediction distribution for SVM on Original: {'<=50K': 9395, '>50K': 374}
+2025-05-08 10:12:21,063 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 10:12:21,158 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 10:12:21,188 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 10:12:21,224 - INFO - Computed 8 metric(s) for SVM on Original
+2025-05-08 10:12:21,224 - INFO - Evaluating SVM on Anonymous...
+2025-05-08 10:12:57,606 - INFO - Predictions completed for SVM on Anonymous
+2025-05-08 10:12:57,607 - INFO - Prediction distribution for SVM on Anonymous: {'<=50K': 9395, '>50K': 374}
+2025-05-08 10:12:57,726 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 10:12:57,848 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 10:12:57,931 - WARNING - [UndefinedMetricWarning] Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior. (from /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1565)
+2025-05-08 10:12:57,987 - INFO - Computed 8 metric(s) for SVM on Anonymous
+2025-05-08 10:12:58,004 - INFO - Evaluation completed for all models.
+2025-05-08 10:12:58,004 - INFO - Model evaluation completed in 112.42 seconds.
+2025-05-08 10:12:58,012 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest', 'SVM']
+2025-05-08 10:12:58,012 - INFO - Model Training and Evaluation completed.
+2025-05-08 10:12:59,631 - INFO -  Visualizations saved.
+2025-05-08 10:12:59,631 - INFO -  Benchmarking Completed. Results saved in output folder.

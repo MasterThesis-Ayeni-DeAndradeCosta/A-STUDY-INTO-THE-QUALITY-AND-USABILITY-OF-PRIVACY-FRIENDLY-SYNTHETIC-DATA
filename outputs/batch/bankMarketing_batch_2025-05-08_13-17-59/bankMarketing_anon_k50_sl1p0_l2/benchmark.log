@@ -1,0 +1,170 @@
+2025-05-08 13:18:02,554 - INFO - Loaded config file: configs/generated_configs/bankMarketing/bankMarketing_anon_k50_sl1p0_l2.yaml
+2025-05-08 13:18:02,554 - INFO -  Benchmarking started for dataset: bankMarketing
+2025-05-08 13:18:02,554 - INFO - Using dataset path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/original/bankMarketing.csv
+2025-05-08 13:18:02,554 - INFO - Target column: y, separator: ';'
+2025-05-08 13:18:02,554 - INFO - Configuration loaded: enable_anonymization = True, enable_synthesis = False, enable_hybrid = False, enable_utility = True, delete_after_evaluation = False
+2025-05-08 13:18:02,554 - INFO - Running preprocessing...
+2025-05-08 13:18:02,559 - INFO - [PREPROCESSING] No preprocessed files found. Starting full preprocessing pipeline...
+2025-05-08 13:18:02,616 - INFO - [PREPROCESSING] Dropped excluded columns: ['duration']
+2025-05-08 13:18:02,637 - INFO - [PREPROCESSING] Missing value handling strategy: 'drop' applied.
+2025-05-08 13:18:02,671 - INFO - [PREPROCESSING] Split data into train (36168 rows) and test (9043 rows). Test size: 0.2
+2025-05-08 13:18:03,322 - INFO -  [PREPROCESSING] Saved raw train set to: datasets/train/bankMarketing_train_raw.csv
+2025-05-08 13:18:03,323 - INFO -  [PREPROCESSING] Saved encoder to: artifacts/bankMarketing_binary_encoder.pkl
+2025-05-08 13:18:03,323 - INFO -  [PREPROCESSING]Saved encoded train set to: datasets/cleaned/bankMarketing_cleaned.csv
+2025-05-08 13:18:03,323 - INFO -  [PREPROCESSING] Saved encoded test set to: datasets/test/bankMarketing_test_set.csv
+2025-05-08 13:18:03,323 - INFO - [PREPROCESSING] run_preprocessing finished executing.
+2025-05-08 13:18:03,364 - INFO - Preprocessing completed. Rows before: 45211, after: 36168
+2025-05-08 13:18:03,368 - INFO - Preprocessed data saved to: outputs/batch/bankMarketing_batch_2025-05-08_13-17-59/bankMarketing_anon_k50_sl1p0_l2/preprocessing_report.txt
+2025-05-08 13:18:03,368 - INFO - enable_anonymization = True
+2025-05-08 13:18:03,368 - INFO - Starting Anonymization Pipeline with output path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/bankMarketing_k50_l2_sup100_anonymized.csv.......
+2025-05-08 13:18:03,378 - INFO -  [ANONYMIZATION] Executing run_anonymization, config_path : configs/generated_configs/bankMarketing/bankMarketing_anon_k50_sl1p0_l2.yaml...........
+2025-05-08 13:18:03,378 - INFO -  [ANONYMIZATION] Using JAR file at /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/bin/anonymARXij.jar to anonymize the dataset.
+2025-05-08 13:18:13,901 - INFO -  [ANONYMIZATION] Anonimized file saved to : /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/bankMarketing_k50_l2_sup100_anonymized.csv
+2025-05-08 13:18:13,901 - INFO -  [ANONYMIZATION] Java anonymization completed successfully.
+2025-05-08 13:18:13,902 - INFO -  [ANONYMIZATION] Java STDOUT:
+📄 Java received config path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/configs/generated_configs/bankMarketing/bankMarketing_anon_k50_sl1p0_l2.yaml
+🔹 Loading config from: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/configs/generated_configs/bankMarketing/bankMarketing_anon_k50_sl1p0_l2.yaml
+Loading config from: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/configs/generated_configs/bankMarketing/bankMarketing_anon_k50_sl1p0_l2.yaml
+📂 Dataset Path (from args): /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/train/bankMarketing_train_raw.csv
+🔹 Dataset Separator: ;
+🔹 Suppression Limit: 1.0
+
+🔹 Configured Attributes:
+  ✅ Quasi-Identifier: age
+  ✅ Quasi-Identifier: marital
+  ✅ Quasi-Identifier: education
+  ✅ Quasi-Identifier: job
+  ✅ Quasi-Identifier: housing
+  ✅ Sensitive Attribute: loan
+  ✅ Insensitive Attribute: default
+  ✅ Insensitive Attribute: balance
+  ✅ Insensitive Attribute: contact
+  ✅ Insensitive Attribute: day
+  ✅ Insensitive Attribute: month
+  ✅ Insensitive Attribute: campaign
+  ✅ Insensitive Attribute: pdays
+  ✅ Insensitive Attribute: previous
+  ✅ Insensitive Attribute: poutcome
+  ✅ Insensitive Attribute: y
+
+🔹 Defined Hierarchies:
+  ✅ marital -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_bankMarketing/marital.csv
+  ✅ education -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_bankMarketing/education.csv
+  ✅ housing -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_bankMarketing/housing.csv
+  ✅ job -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_bankMarketing/job.csv
+  ✅ age -> /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_bankMarketing/age.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_bankMarketing/marital.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_bankMarketing/education.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_bankMarketing/housing.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_bankMarketing/job.csv
+Java is searching for hierarchy file at: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/src/anonymization/anonymARXij/src/hierarchies_bankMarketing/age.csv
+✓ Applied Distinct L-Diversity on: loan (l=2)
+🔹 Privacy Models Configured
+📂 Anonymized Output Path (from args): /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/bankMarketing_k50_l2_sup100_anonymized.csv
+📂 Anonymized Output Path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/bankMarketing_k50_l2_sup100_anonymized.csv
+✅ Anonymization completed. Output saved to: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/bankMarketing_k50_l2_sup100_anonymized.csv
+Anonymized Data Quality Metrics:
+ - Ambiguity: 0.9156349348964553
+ - AECS: 0.9910835319843223
+ - Discernibility: 0.8958468531413937
+ - Granularity: 0.7750455462130877
+ - MSE: 0.7622038083363917
+ - Non-Uniform Entropy: 0.4972200281639161
+ - Precision: 0.6677694568204363
+ - Record-level SE: 0.6350667000339665
+Equivalence Class Statistics:
+ - Number of Classes: 101
+ - Average Class Size: 329.3762376237624
+Suppression Statistics:
+ - Suppressed Records: 2901
+ - Suppression Percentage: 8.02%
+2025-05-08 13:18:13,902 - INFO - Anonymized data saved to: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/bankMarketing_k50_l2_sup100_anonymized.csv
+2025-05-08 13:18:14,426 - INFO - Anonymous data report saved at: outputs/batch/bankMarketing_batch_2025-05-08_13-17-59/bankMarketing_anon_k50_sl1p0_l2/anonymous_data_report.txt
+2025-05-08 13:18:14,426 - INFO -  [POSTPROCESSING] Postprocessing anonymized data: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/bankMarketing_k50_l2_sup100_anonymized.csv
+2025-05-08 13:18:14,460 - INFO -  [POSTPROCESSING] Loaded anonymized data: (36168, 16)
+2025-05-08 13:18:14,561 - INFO -  [POSTPROCESSING] Loaded fallback maps from training data. Categorical cols: 10, Numeric cols: 6
+2025-05-08 13:18:14,561 - INFO -  [POSTPROCESSING] Normalizing anonymized data using ARX artifact cleaning and fallback values.
+2025-05-08 13:18:21,808 - INFO -  [POSTPROCESSING] Normalized anonymized data saved to: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/bankMarketing_k50_l2_sup100_anonymized_processed.csv
+2025-05-08 13:18:22,483 - INFO -  [POSTPROCESSING] Binary Encoding applied to anonymized data. Encoded shape: (36168, 31)
+2025-05-08 13:18:23,977 - INFO -  [POSTPROCESSING] Encoded anonymized dataset saved to: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/anonymized/bankMarketing_k50_l2_sup100_anonymized_encoded.csv
+2025-05-08 13:18:23,977 - INFO -  [POSTPROCESSING] Encoding map generated for anonymized data: 0 original categorical columns.
+2025-05-08 13:18:24,001 - INFO - Postprocessing report saved at: outputs/batch/bankMarketing_batch_2025-05-08_13-17-59/bankMarketing_anon_k50_sl1p0_l2/postprocessing_report.txt
+2025-05-08 13:18:24,001 - INFO - enable_synthetic_generation = False
+2025-05-08 13:18:24,001 - INFO - Synthetic Data Generation Skipped (Disabled in Configuration).
+2025-05-08 13:18:24,001 - INFO - Hybrid Pipeline skipped (disabled in configuration).
+2025-05-08 13:18:24,001 - INFO - Starting Utility...
+2025-05-08 13:18:24,001 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-05-08 13:18:24,007 - INFO - [UTILITY] Original Data - Training Size: 36168, Testing Size: 9043
+2025-05-08 13:18:24,019 - INFO - [UTILITY] Target class distribution (Original): {'no': 31937, 'yes': 4231}
+2025-05-08 13:18:24,027 - INFO - [UTILITY] Processing anonymized dataset...
+2025-05-08 13:18:24,043 - INFO - [UTILITY] Anonymized Data - Training Size: 36168
+2025-05-08 13:18:24,056 - INFO - [UTILITY] Target class distribution (Anonymous): {'no': 31937, 'yes': 4231}
+2025-05-08 13:18:24,056 - INFO - [UTILITY] Training models on all datasets...
+2025-05-08 13:18:24,056 - INFO - [UTILITY] Total datasets used for training: 2
+2025-05-08 13:18:24,056 - INFO - [TRAINING] Training models from scratch...
+2025-05-08 13:18:24,056 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 36168, Features: 30
+2025-05-08 13:18:24,056 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-05-08 13:18:26,033 - INFO - [TRAINING] DecisionTree trained successfully on Original in 1.98 sec
+2025-05-08 13:18:26,034 - INFO - [TRAINING] Training KNN on Original...
+2025-05-08 13:18:26,203 - INFO - [TRAINING] KNN trained successfully on Original in 0.16 sec
+2025-05-08 13:18:26,203 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-05-08 13:18:28,669 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 2.47 sec
+2025-05-08 13:18:28,669 - INFO - [TRAINING] Training RandomForest on Original...
+2025-05-08 13:18:58,678 - INFO - [TRAINING] RandomForest trained successfully on Original in 30.01 sec
+2025-05-08 13:18:58,679 - INFO - [TRAINING] Finished training 4 model(s) for dataset: Original
+2025-05-08 13:18:58,683 - INFO - [TRAINING] Starting training for dataset: Anonymous — Rows: 36168, Features: 30
+2025-05-08 13:18:58,683 - INFO - [TRAINING] Training DecisionTree on Anonymous...
+2025-05-08 13:19:01,121 - INFO - [TRAINING] DecisionTree trained successfully on Anonymous in 2.42 sec
+2025-05-08 13:19:01,125 - INFO - [TRAINING] Training KNN on Anonymous...
+2025-05-08 13:19:02,084 - INFO - [TRAINING] KNN trained successfully on Anonymous in 0.96 sec
+2025-05-08 13:19:02,106 - INFO - [TRAINING] Training LogisticRegression on Anonymous...
+2025-05-08 13:19:07,584 - INFO - [TRAINING] LogisticRegression trained successfully on Anonymous in 5.47 sec
+2025-05-08 13:19:07,584 - INFO - [TRAINING] Training RandomForest on Anonymous...
+2025-05-08 13:19:39,423 - INFO - [TRAINING] RandomForest trained successfully on Anonymous in 31.84 sec
+2025-05-08 13:19:39,423 - INFO - [TRAINING] Finished training 4 model(s) for dataset: Anonymous
+2025-05-08 13:19:39,424 - INFO - [TRAINING] Total models trained across all datasets: 8
+2025-05-08 13:19:39,424 - INFO - [UTILITY] Trained model names: ['Original', 'Anonymous']
+2025-05-08 13:19:39,424 - INFO - [UTILITY] Model Training Completed.
+2025-05-08 13:19:39,424 - INFO - Starting the Evaluating of models...
+2025-05-08 13:19:39,424 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-05-08 13:19:39,425 - INFO - Evaluating DecisionTree on Original...
+2025-05-08 13:19:39,450 - INFO - Predictions completed for DecisionTree on Original
+2025-05-08 13:19:39,462 - INFO - Prediction distribution for DecisionTree on Original: {'no': 7868, 'yes': 1175}
+2025-05-08 13:19:41,347 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-05-08 13:19:41,362 - INFO - Evaluating DecisionTree on Anonymous...
+2025-05-08 13:19:41,397 - INFO - Predictions completed for DecisionTree on Anonymous
+2025-05-08 13:19:41,405 - INFO - Prediction distribution for DecisionTree on Anonymous: {'no': 7775, 'yes': 1268}
+2025-05-08 13:19:43,025 - INFO - Computed 8 metric(s) for DecisionTree on Anonymous
+2025-05-08 13:19:43,037 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-05-08 13:19:43,041 - INFO - Evaluating KNN on Original...
+2025-05-08 13:20:06,659 - INFO - Predictions completed for KNN on Original
+2025-05-08 13:20:06,673 - INFO - Prediction distribution for KNN on Original: {'no': 8753, 'yes': 290}
+2025-05-08 13:20:42,378 - INFO - Computed 8 metric(s) for KNN on Original
+2025-05-08 13:20:42,378 - INFO - Evaluating KNN on Anonymous...
+2025-05-08 13:21:00,297 - INFO - Predictions completed for KNN on Anonymous
+2025-05-08 13:21:00,308 - INFO - Prediction distribution for KNN on Anonymous: {'no': 8739, 'yes': 304}
+2025-05-08 13:21:42,052 - INFO - Computed 8 metric(s) for KNN on Anonymous
+2025-05-08 13:21:42,083 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-05-08 13:21:42,083 - INFO - Evaluating LogisticRegression on Original...
+2025-05-08 13:21:42,086 - INFO - Predictions completed for LogisticRegression on Original
+2025-05-08 13:21:42,117 - INFO - Prediction distribution for LogisticRegression on Original: {'no': 8778, 'yes': 265}
+2025-05-08 13:21:43,779 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-05-08 13:21:43,779 - INFO - Evaluating LogisticRegression on Anonymous...
+2025-05-08 13:21:43,814 - INFO - Predictions completed for LogisticRegression on Anonymous
+2025-05-08 13:21:43,815 - INFO - Prediction distribution for LogisticRegression on Anonymous: {'no': 8755, 'yes': 288}
+2025-05-08 13:21:45,747 - INFO - Computed 8 metric(s) for LogisticRegression on Anonymous
+2025-05-08 13:21:45,784 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-05-08 13:21:45,784 - INFO - Evaluating RandomForest on Original...
+2025-05-08 13:21:47,001 - INFO - Predictions completed for RandomForest on Original
+2025-05-08 13:21:47,005 - INFO - Prediction distribution for RandomForest on Original: {'no': 8655, 'yes': 388}
+2025-05-08 13:21:50,383 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-05-08 13:21:50,387 - INFO - Evaluating RandomForest on Anonymous...
+2025-05-08 13:21:51,314 - INFO - Predictions completed for RandomForest on Anonymous
+2025-05-08 13:21:51,315 - INFO - Prediction distribution for RandomForest on Anonymous: {'no': 8634, 'yes': 409}
+2025-05-08 13:21:55,695 - INFO - Computed 8 metric(s) for RandomForest on Anonymous
+2025-05-08 13:21:55,728 - INFO - Evaluation completed for all models.
+2025-05-08 13:21:55,729 - INFO - Model evaluation completed in 136.30 seconds.
+2025-05-08 13:21:55,756 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest']
+2025-05-08 13:21:55,756 - INFO - Model Training and Evaluation completed.
+2025-05-08 13:21:57,862 - INFO -  Visualizations saved.
+2025-05-08 13:21:57,862 - INFO -  Benchmarking Completed. Results saved in output folder.

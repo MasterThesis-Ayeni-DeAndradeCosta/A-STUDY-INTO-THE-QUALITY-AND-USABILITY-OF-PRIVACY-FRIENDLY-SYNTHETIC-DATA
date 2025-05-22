@@ -1,0 +1,163 @@
+Synthetic Data Generation Report
+==================================================
+
+Synthesizer: CTGAN
+Generated Rows: 1008
+Columns: 19
+Sample (First 5 Rows):
+ Gender_0  Gender_1  Married_0  Married_1  Dependents_0  Dependents_1  Dependents_2  Education_0  Education_1  Self_Employed_0  Self_Employed_1  ApplicantIncome  CoapplicantIncome  LoanAmount  Loan_Amount_Term  Credit_History  Property_Area_0  Property_Area_1 Loan_Status
+        1         0          1          1             0             1             0            1            1                0                1             1000        1537.959234        86.0             360.0             1.0                0                0           Y
+        0         1          0          0             1             0             1            0            1                0                1             1000           0.000000       207.0             300.0             0.0                1                0           N
+        0         1          1          1             0             1             0            0            1                0                1             2896           0.000000       236.0             360.0             1.0                0                1           Y
+        1         1          0          0             1             0             1            0            1                0                1             1000        2640.440400       268.0             360.0             1.0                1                1           N
+        1         0          1          1             0             1             0            0            0                0                0             1207         143.664550       193.0             360.0             1.0                0                0           N
+
+Quality Metrics for CTGAN:
+- Overall Quality Score: 0.8811
+
+==================================================
+
+Synthesizer: TVAE
+Generated Rows: 1008
+Columns: 19
+Sample (First 5 Rows):
+ Gender_0  Gender_1  Married_0  Married_1  Dependents_0  Dependents_1  Dependents_2  Education_0  Education_1  Self_Employed_0  Self_Employed_1  ApplicantIncome  CoapplicantIncome  LoanAmount  Loan_Amount_Term  Credit_History  Property_Area_0  Property_Area_1 Loan_Status
+        0         1          0          1             0             1             0            1            0                1                0             2160        1157.957927       122.0             360.0             1.0                1                1           N
+        0         1          0          1             0             1             0            0            1                0                1             4610           0.000000       104.0             360.0             1.0                0                1           Y
+        0         1          0          1             1             0             0            0            1                0                1             2216        1083.105721       104.0             360.0             1.0                1                0           Y
+        0         1          1          0             0             1             0            0            1                0                1             3137        1758.542319       109.0             360.0             1.0                1                0           Y
+        0         1          0          1             0             1             0            1            0                0                1             2416        1835.786084        58.0             360.0             1.0                1                1           Y
+
+Quality Metrics for TVAE:
+- Overall Quality Score: 0.7962
+
+==================================================
+
+
+🔍 Data Distribution Comparison
+==================================================
+
+📌 Original Data Summary:
+         Gender_0    Gender_1   Married_0   Married_1  Dependents_0  Dependents_1  ...  CoapplicantIncome  LoanAmount  Loan_Amount_Term  Credit_History  Property_Area_0  Property_Area_1
+count  336.000000  336.000000  336.000000  336.000000    336.000000    336.000000  ...         336.000000  336.000000        336.000000      336.000000       336.000000       336.000000
+mean     0.187500    0.812500    0.360119    0.639881      0.202381      0.654762  ...        1504.874762  144.767857        343.642857        0.866071         0.616071         0.663690
+std      0.390894    0.390894    0.480751    0.480751      0.402374      0.476155  ...        2784.816340   74.889210         66.201437        0.341083         0.487066         0.473151
+min      0.000000    0.000000    0.000000    0.000000      0.000000      0.000000  ...           0.000000    9.000000         36.000000        0.000000         0.000000         0.000000
+25%      0.000000    1.000000    0.000000    0.000000      0.000000      0.000000  ...           0.000000  102.750000        360.000000        1.000000         0.000000         0.000000
+50%      0.000000    1.000000    0.000000    1.000000      0.000000      1.000000  ...         991.399994  129.000000        360.000000        1.000000         1.000000         1.000000
+75%      0.000000    1.000000    1.000000    1.000000      0.000000      1.000000  ...        2167.000000  175.000000        360.000000        1.000000         1.000000         1.000000
+max      1.000000    1.000000    1.000000    1.000000      1.000000      1.000000  ...       33837.000000  600.000000        480.000000        1.000000         1.000000         1.000000
+
+[8 rows x 18 columns]
+
+📌 Synthetic Data (CTGAN) Summary:
+          Gender_0     Gender_1    Married_0    Married_1  Dependents_0  Dependents_1  ...  CoapplicantIncome   LoanAmount  Loan_Amount_Term  Credit_History  Property_Area_0  Property_Area_1
+count  1008.000000  1008.000000  1008.000000  1008.000000   1008.000000   1008.000000  ...        1008.000000  1008.000000       1008.000000     1008.000000      1008.000000      1008.000000
+mean      0.273810     0.820437     0.329365     0.549603      0.248016      0.519841  ...         428.102522   195.566468        339.166667        0.871032         0.500000         0.730159
+std       0.446134     0.384014     0.470216     0.497780      0.432075      0.499854  ...        1013.638860   104.924106         73.755952        0.335331         0.500248         0.444098
+min       0.000000     0.000000     0.000000     0.000000      0.000000      0.000000  ...           0.000000     9.000000         36.000000        0.000000         0.000000         0.000000
+25%       0.000000     1.000000     0.000000     0.000000      0.000000      0.000000  ...           0.000000   134.750000        360.000000        1.000000         0.000000         0.000000
+50%       0.000000     1.000000     0.000000     1.000000      0.000000      1.000000  ...           0.000000   187.000000        360.000000        1.000000         0.500000         1.000000
+75%       1.000000     1.000000     1.000000     1.000000      0.000000      1.000000  ...         334.433084   230.000000        360.000000        1.000000         1.000000         1.000000
+max       1.000000     1.000000     1.000000     1.000000      1.000000      1.000000  ...        8444.100046   600.000000        480.000000        1.000000         1.000000         1.000000
+
+[8 rows x 18 columns]
+
+⚠ Mean Differences (Synthetic - Original):
+Gender_0                0.086310
+Gender_1                0.007937
+Married_0              -0.030754
+Married_1              -0.090278
+Dependents_0            0.045635
+Dependents_1           -0.134921
+Dependents_2            0.062500
+Education_0            -0.029762
+Education_1             0.033730
+Self_Employed_0        -0.002976
+Self_Employed_1        -0.027778
+ApplicantIncome     -3187.117063
+CoapplicantIncome   -1076.772240
+LoanAmount             50.798611
+Loan_Amount_Term       -4.476190
+Credit_History          0.004960
+Property_Area_0        -0.116071
+Property_Area_1         0.066468
+dtype: float64
+
+⚠ Standard Deviation Differences (Synthetic - Original):
+Gender_0                0.055239
+Gender_1               -0.006881
+Married_0              -0.010535
+Married_1               0.017030
+Dependents_0            0.029702
+Dependents_1            0.023699
+Dependents_2            0.032732
+Education_0            -0.025415
+Education_1            -0.029064
+Self_Employed_0        -0.003182
+Self_Employed_1         0.023870
+ApplicantIncome     -2507.553935
+CoapplicantIncome   -1771.177480
+LoanAmount             30.034897
+Loan_Amount_Term        7.554515
+Credit_History         -0.005752
+Property_Area_0         0.013182
+Property_Area_1        -0.029053
+dtype: float64
+
+📌 Synthetic Data (TVAE) Summary:
+          Gender_0     Gender_1    Married_0    Married_1  Dependents_0  Dependents_1  ...  CoapplicantIncome   LoanAmount  Loan_Amount_Term  Credit_History  Property_Area_0  Property_Area_1
+count  1008.000000  1008.000000  1008.000000  1008.000000   1008.000000   1008.000000  ...        1008.000000  1008.000000            1008.0     1008.000000      1008.000000      1008.000000
+mean      0.042659     0.961310     0.281746     0.713294      0.049603      0.766865  ...         841.068716   121.976190             360.0        0.997024         0.680556         0.761905
+std       0.202187     0.192952     0.450074     0.452448      0.217231      0.423037  ...        1003.938111    37.286398               0.0        0.054500         0.466493         0.426129
+min       0.000000     0.000000     0.000000     0.000000      0.000000      0.000000  ...           0.000000     9.000000             360.0        0.000000         0.000000         0.000000
+25%       0.000000     1.000000     0.000000     0.000000      0.000000      1.000000  ...           0.000000    95.000000             360.0        1.000000         0.000000         1.000000
+50%       0.000000     1.000000     0.000000     1.000000      0.000000      1.000000  ...         152.013222   121.000000             360.0        1.000000         1.000000         1.000000
+75%       0.000000     1.000000     1.000000     1.000000      0.000000      1.000000  ...        1784.883947   148.000000             360.0        1.000000         1.000000         1.000000
+max       1.000000     1.000000     1.000000     1.000000      1.000000      1.000000  ...        6078.887322   248.000000             360.0        1.000000         1.000000         1.000000
+
+[8 rows x 18 columns]
+
+⚠ Mean Differences (Synthetic - Original):
+Gender_0               -0.144841
+Gender_1                0.148810
+Married_0              -0.078373
+Married_1               0.073413
+Dependents_0           -0.152778
+Dependents_1            0.112103
+Dependents_2           -0.226190
+Education_0            -0.079365
+Education_1             0.082341
+Self_Employed_0        -0.087302
+Self_Employed_1         0.088294
+ApplicantIncome     -1606.008929
+CoapplicantIncome    -663.806046
+LoanAmount            -22.791667
+Loan_Amount_Term       16.357143
+Credit_History          0.130952
+Property_Area_0         0.064484
+Property_Area_1         0.098214
+dtype: float64
+
+⚠ Standard Deviation Differences (Synthetic - Original):
+Gender_0               -0.188708
+Gender_1               -0.197943
+Married_0              -0.030677
+Married_1              -0.028303
+Dependents_0           -0.185142
+Dependents_1           -0.053118
+Dependents_2           -0.330591
+Education_0            -0.077519
+Education_1            -0.081168
+Self_Employed_0        -0.109031
+Self_Employed_1        -0.110704
+ApplicantIncome     -3003.498299
+CoapplicantIncome   -1780.878229
+LoanAmount            -37.602811
+Loan_Amount_Term      -66.201437
+Credit_History         -0.286583
+Property_Area_0        -0.020573
+Property_Area_1        -0.047022
+dtype: float64
+
+==================================================

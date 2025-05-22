@@ -1,0 +1,451 @@
+2025-05-08 16:15:57,513 - INFO - Loaded config file: configs/generated_configs/bankMarketing/bankMarketing_synth_ep200_rows10x.yaml
+2025-05-08 16:15:57,513 - INFO -  Benchmarking started for dataset: bankMarketing
+2025-05-08 16:15:57,513 - INFO - Using dataset path: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/datasets/original/bankMarketing.csv
+2025-05-08 16:15:57,513 - INFO - Target column: y, separator: ';'
+2025-05-08 16:15:57,513 - INFO - Configuration loaded: enable_anonymization = False, enable_synthesis = True, enable_hybrid = False, enable_utility = True, delete_after_evaluation = False
+2025-05-08 16:15:57,513 - INFO - Running preprocessing...
+2025-05-08 16:15:57,517 - INFO -  [PREPROCESSING] Preprocessed files found. Skipping preprocessing.
+2025-05-08 16:15:57,643 - INFO - Preprocessing completed. Rows before: 45211, after: 36168
+2025-05-08 16:15:57,643 - INFO - Preprocessed data saved to: outputs/batch/bankMarketing_batch_2025-05-08_13-17-59/bankMarketing_synth_ep200_rows10x/preprocessing_report.txt
+2025-05-08 16:15:57,643 - INFO - enable_anonymization = False
+2025-05-08 16:15:57,643 - INFO - Anonymization Skipped (Disabled in Configuration).
+2025-05-08 16:15:57,643 - INFO - enable_synthetic_generation = True
+2025-05-08 16:15:57,643 - INFO - Starting standard Synthetic Data Generation pipeline...
+2025-05-08 16:15:57,643 - INFO - Executing run_synthetic.....
+2025-05-08 16:15:57,643 - INFO - [SYNTHETIC PIPELINE] executing run_synthetic for bankMarketing...
+2025-05-08 16:15:57,644 - INFO - [SYNTHETIC] Processing dataset: bankMarketing
+2025-05-08 16:15:57,644 - INFO - [SYNTHETIC] Original dataset size: 36168 rows
+2025-05-08 16:15:57,677 - INFO - Detected metadata:
+2025-05-08 16:15:57,677 - INFO - {
+    "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+    "columns": {
+        "age": {
+            "sdtype": "numerical"
+        },
+        "job_0": {
+            "sdtype": "categorical"
+        },
+        "job_1": {
+            "sdtype": "categorical"
+        },
+        "job_2": {
+            "sdtype": "categorical"
+        },
+        "job_3": {
+            "sdtype": "categorical"
+        },
+        "marital_0": {
+            "sdtype": "categorical"
+        },
+        "marital_1": {
+            "sdtype": "categorical"
+        },
+        "education_0": {
+            "sdtype": "categorical"
+        },
+        "education_1": {
+            "sdtype": "categorical"
+        },
+        "education_2": {
+            "sdtype": "categorical"
+        },
+        "default_0": {
+            "sdtype": "categorical"
+        },
+        "default_1": {
+            "sdtype": "categorical"
+        },
+        "balance": {
+            "sdtype": "numerical"
+        },
+        "housing_0": {
+            "sdtype": "categorical"
+        },
+        "housing_1": {
+            "sdtype": "categorical"
+        },
+        "loan_0": {
+            "sdtype": "categorical"
+        },
+        "loan_1": {
+            "sdtype": "categorical"
+        },
+        "contact_0": {
+            "sdtype": "categorical"
+        },
+        "contact_1": {
+            "sdtype": "categorical"
+        },
+        "day": {
+            "sdtype": "numerical"
+        },
+        "month_0": {
+            "sdtype": "categorical"
+        },
+        "month_1": {
+            "sdtype": "categorical"
+        },
+        "month_2": {
+            "sdtype": "categorical"
+        },
+        "month_3": {
+            "sdtype": "categorical"
+        },
+        "campaign": {
+            "sdtype": "numerical"
+        },
+        "pdays": {
+            "sdtype": "numerical"
+        },
+        "previous": {
+            "sdtype": "numerical"
+        },
+        "poutcome_0": {
+            "sdtype": "categorical"
+        },
+        "poutcome_1": {
+            "sdtype": "categorical"
+        },
+        "poutcome_2": {
+            "sdtype": "categorical"
+        },
+        "y": {
+            "sdtype": "categorical"
+        }
+    }
+}
+2025-05-08 16:15:57,677 - INFO - [SYNTHETIC] Preparing synthesizer: CTGAN
+2025-05-08 16:15:57,677 - INFO - [SYNTHETIC] Params from config: {'epochs': 200}
+2025-05-08 16:15:57,677 - INFO - [SYNTHETIC] Found existing CTGAN synthesizer: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/artifacts/synthesizers/bankMarketing_CTGAN_epochs200_synthesizer.pkl
+2025-05-08 16:15:57,999 - INFO - {'EVENT': 'Load', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 16, 15, 57, 999817), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_bbcad2ee0e0e499eab5717c54a1e3534'}
+2025-05-08 16:15:57,999 - INFO - [SYNTHETIC] Preparing synthesizer: TVAE
+2025-05-08 16:15:58,000 - INFO - [SYNTHETIC] Params from config: {'epochs': 200}
+2025-05-08 16:15:58,000 - INFO - [SYNTHETIC] Found existing TVAE synthesizer: /mnt/NVMETank/Projects/Students/Dele/A-STUDY-INTO-THE-QUALITY-AND-USABILITY-OF-PRIVACY-FRIENDLY-SYNTHETIC-DATA/artifacts/synthesizers/bankMarketing_TVAE_epochs200_synthesizer.pkl
+2025-05-08 16:15:58,058 - INFO - {'EVENT': 'Load', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 16, 15, 58, 58465), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_b751acab737b4022aa68e46c58306395'}
+2025-05-08 16:15:58,058 - INFO - [SYNTHETIC] Using CTGAN to generate 361680 rows...
+2025-05-08 16:16:47,701 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 16, 15, 58, 58658), 'SYNTHESIZER CLASS NAME': 'CTGANSynthesizer', 'SYNTHESIZER ID': 'CTGANSynthesizer_1.18.0_bbcad2ee0e0e499eab5717c54a1e3534', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 361680, 'TOTAL NUMBER OF COLUMNS': 31}
+2025-05-08 16:16:47,701 - INFO - [SYNTHETIC] CTGAN completed: 361680 rows generated.
+2025-05-08 16:16:47,714 - INFO - [SYNTHETIC] Target class distribution for CTGAN: {'no': 331837, 'yes': 29843}
+2025-05-08 16:16:47,714 - INFO - [SYNTHETIC] Using TVAE to generate 361680 rows...
+2025-05-08 16:16:54,801 - INFO - {'EVENT': 'Sample', 'TIMESTAMP': datetime.datetime(2025, 5, 8, 16, 16, 47, 714850), 'SYNTHESIZER CLASS NAME': 'TVAESynthesizer', 'SYNTHESIZER ID': 'TVAESynthesizer_1.18.0_b751acab737b4022aa68e46c58306395', 'TOTAL NUMBER OF TABLES': 1, 'TOTAL NUMBER OF ROWS': 361680, 'TOTAL NUMBER OF COLUMNS': 31}
+2025-05-08 16:16:54,802 - INFO - [SYNTHETIC] TVAE completed: 361680 rows generated.
+2025-05-08 16:16:54,815 - INFO - [SYNTHETIC] Target class distribution for TVAE: {'no': 342686, 'yes': 18994}
+2025-05-08 16:16:54,816 - INFO - [SYNTHETIC PIPELINE] Synthetic Data Generation Completed.
+2025-05-08 16:16:54,816 - INFO - [SYNTHETIC PIPELINE] Synthesizers used: ['CTGAN', 'TVAE']
+2025-05-08 16:16:54,816 - INFO - [SYNTHETIC PIPELINE] Evaluating synthetic dataset generated by CTGAN...
+2025-05-08 16:16:54,816 - INFO - [SYNTHETIC EVAL] Real data columns     (31): ['age', 'job_0', 'job_1', 'job_2', 'job_3', 'marital_0', 'marital_1', 'education_0', 'education_1', 'education_2', 'default_0', 'default_1', 'balance', 'housing_0', 'housing_1', 'loan_0', 'loan_1', 'contact_0', 'contact_1', 'day', 'month_0', 'month_1', 'month_2', 'month_3', 'campaign', 'pdays', 'previous', 'poutcome_0', 'poutcome_1', 'poutcome_2', 'y']
+2025-05-08 16:16:54,816 - INFO - [SYNTHETIC EVAL] Synthetic data columns (31): ['age', 'job_0', 'job_1', 'job_2', 'job_3', 'marital_0', 'marital_1', 'education_0', 'education_1', 'education_2', 'default_0', 'default_1', 'balance', 'housing_0', 'housing_1', 'loan_0', 'loan_1', 'contact_0', 'contact_1', 'day', 'month_0', 'month_1', 'month_2', 'month_3', 'campaign', 'pdays', 'previous', 'poutcome_0', 'poutcome_1', 'poutcome_2', 'y']
+2025-05-08 16:16:54,816 - INFO - [SYNTHETIC EVAL] Metadata columns      (31): ['age', 'job_0', 'job_1', 'job_2', 'job_3', 'marital_0', 'marital_1', 'education_0', 'education_1', 'education_2', 'default_0', 'default_1', 'balance', 'housing_0', 'housing_1', 'loan_0', 'loan_1', 'contact_0', 'contact_1', 'day', 'month_0', 'month_1', 'month_2', 'month_3', 'campaign', 'pdays', 'previous', 'poutcome_0', 'poutcome_1', 'poutcome_2', 'y']
+2025-05-08 16:16:54,816 - INFO - [SYNTHETIC EVAL] Shape — Real: (36168, 31), Synthetic: (361680, 31)
+2025-05-08 16:16:54,817 - INFO - [SYNTHETIC EVAL] Metadata structure:
+{
+  "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+  "columns": {
+    "age": {
+      "sdtype": "numerical"
+    },
+    "job_0": {
+      "sdtype": "categorical"
+    },
+    "job_1": {
+      "sdtype": "categorical"
+    },
+    "job_2": {
+      "sdtype": "categorical"
+    },
+    "job_3": {
+      "sdtype": "categorical"
+    },
+    "marital_0": {
+      "sdtype": "categorical"
+    },
+    "marital_1": {
+      "sdtype": "categorical"
+    },
+    "education_0": {
+      "sdtype": "categorical"
+    },
+    "education_1": {
+      "sdtype": "categorical"
+    },
+    "education_2": {
+      "sdtype": "categorical"
+    },
+    "default_0": {
+      "sdtype": "categorical"
+    },
+    "default_1": {
+      "sdtype": "categorical"
+    },
+    "balance": {
+      "sdtype": "numerical"
+    },
+    "housing_0": {
+      "sdtype": "categorical"
+    },
+    "housing_1": {
+      "sdtype": "categorical"
+    },
+    "loan_0": {
+      "sdtype": "categorical"
+    },
+    "loan_1": {
+      "sdtype": "categorical"
+    },
+    "contact_0": {
+      "sdtype": "categorical"
+    },
+    "contact_1": {
+      "sdtype": "categorical"
+    },
+    "day": {
+      "sdtype": "numerical"
+    },
+    "month_0": {
+      "sdtype": "categorical"
+    },
+    "month_1": {
+      "sdtype": "categorical"
+    },
+    "month_2": {
+      "sdtype": "categorical"
+    },
+    "month_3": {
+      "sdtype": "categorical"
+    },
+    "campaign": {
+      "sdtype": "numerical"
+    },
+    "pdays": {
+      "sdtype": "numerical"
+    },
+    "previous": {
+      "sdtype": "numerical"
+    },
+    "poutcome_0": {
+      "sdtype": "categorical"
+    },
+    "poutcome_1": {
+      "sdtype": "categorical"
+    },
+    "poutcome_2": {
+      "sdtype": "categorical"
+    },
+    "y": {
+      "sdtype": "categorical"
+    }
+  }
+}
+2025-05-08 16:17:03,200 - INFO - [SYNTHETIC PIPELINE] Evaluating synthetic dataset generated by TVAE...
+2025-05-08 16:17:03,201 - INFO - [SYNTHETIC EVAL] Real data columns     (31): ['age', 'job_0', 'job_1', 'job_2', 'job_3', 'marital_0', 'marital_1', 'education_0', 'education_1', 'education_2', 'default_0', 'default_1', 'balance', 'housing_0', 'housing_1', 'loan_0', 'loan_1', 'contact_0', 'contact_1', 'day', 'month_0', 'month_1', 'month_2', 'month_3', 'campaign', 'pdays', 'previous', 'poutcome_0', 'poutcome_1', 'poutcome_2', 'y']
+2025-05-08 16:17:03,201 - INFO - [SYNTHETIC EVAL] Synthetic data columns (31): ['age', 'job_0', 'job_1', 'job_2', 'job_3', 'marital_0', 'marital_1', 'education_0', 'education_1', 'education_2', 'default_0', 'default_1', 'balance', 'housing_0', 'housing_1', 'loan_0', 'loan_1', 'contact_0', 'contact_1', 'day', 'month_0', 'month_1', 'month_2', 'month_3', 'campaign', 'pdays', 'previous', 'poutcome_0', 'poutcome_1', 'poutcome_2', 'y']
+2025-05-08 16:17:03,201 - INFO - [SYNTHETIC EVAL] Metadata columns      (31): ['age', 'job_0', 'job_1', 'job_2', 'job_3', 'marital_0', 'marital_1', 'education_0', 'education_1', 'education_2', 'default_0', 'default_1', 'balance', 'housing_0', 'housing_1', 'loan_0', 'loan_1', 'contact_0', 'contact_1', 'day', 'month_0', 'month_1', 'month_2', 'month_3', 'campaign', 'pdays', 'previous', 'poutcome_0', 'poutcome_1', 'poutcome_2', 'y']
+2025-05-08 16:17:03,201 - INFO - [SYNTHETIC EVAL] Shape — Real: (36168, 31), Synthetic: (361680, 31)
+2025-05-08 16:17:03,201 - INFO - [SYNTHETIC EVAL] Metadata structure:
+{
+  "METADATA_SPEC_VERSION": "SINGLE_TABLE_V1",
+  "columns": {
+    "age": {
+      "sdtype": "numerical"
+    },
+    "job_0": {
+      "sdtype": "categorical"
+    },
+    "job_1": {
+      "sdtype": "categorical"
+    },
+    "job_2": {
+      "sdtype": "categorical"
+    },
+    "job_3": {
+      "sdtype": "categorical"
+    },
+    "marital_0": {
+      "sdtype": "categorical"
+    },
+    "marital_1": {
+      "sdtype": "categorical"
+    },
+    "education_0": {
+      "sdtype": "categorical"
+    },
+    "education_1": {
+      "sdtype": "categorical"
+    },
+    "education_2": {
+      "sdtype": "categorical"
+    },
+    "default_0": {
+      "sdtype": "categorical"
+    },
+    "default_1": {
+      "sdtype": "categorical"
+    },
+    "balance": {
+      "sdtype": "numerical"
+    },
+    "housing_0": {
+      "sdtype": "categorical"
+    },
+    "housing_1": {
+      "sdtype": "categorical"
+    },
+    "loan_0": {
+      "sdtype": "categorical"
+    },
+    "loan_1": {
+      "sdtype": "categorical"
+    },
+    "contact_0": {
+      "sdtype": "categorical"
+    },
+    "contact_1": {
+      "sdtype": "categorical"
+    },
+    "day": {
+      "sdtype": "numerical"
+    },
+    "month_0": {
+      "sdtype": "categorical"
+    },
+    "month_1": {
+      "sdtype": "categorical"
+    },
+    "month_2": {
+      "sdtype": "categorical"
+    },
+    "month_3": {
+      "sdtype": "categorical"
+    },
+    "campaign": {
+      "sdtype": "numerical"
+    },
+    "pdays": {
+      "sdtype": "numerical"
+    },
+    "previous": {
+      "sdtype": "numerical"
+    },
+    "poutcome_0": {
+      "sdtype": "categorical"
+    },
+    "poutcome_1": {
+      "sdtype": "categorical"
+    },
+    "poutcome_2": {
+      "sdtype": "categorical"
+    },
+    "y": {
+      "sdtype": "categorical"
+    }
+  }
+}
+2025-05-08 16:17:11,722 - INFO -  [SYNTHETIC PIPELINE]  Synthetic Data Evaluation Completed.
+2025-05-08 16:17:11,727 - INFO -  [SYNTHETIC PIPELINE] Synthetic Data Report Generated Successfully.
+2025-05-08 16:17:12,651 - INFO - Synthetic data generated with 2 synthesizer(s).
+2025-05-08 16:17:12,651 - INFO - Hybrid Pipeline skipped (disabled in configuration).
+2025-05-08 16:17:12,651 - INFO - Starting Utility...
+2025-05-08 16:17:12,651 - INFO - [UTILITY] Preparing datasets for machine learning...
+2025-05-08 16:17:12,655 - INFO - [UTILITY] Original Data - Training Size: 36168, Testing Size: 9043
+2025-05-08 16:17:12,656 - INFO - [UTILITY] Target class distribution (Original): {'no': 31937, 'yes': 4231}
+2025-05-08 16:17:12,664 - INFO - [UTILITY] Processing synthetic dataset generated by CTGAN...
+2025-05-08 16:17:12,682 - INFO - [UTILITY] Synthetic Data (CTGAN) - Training Size: 361680
+2025-05-08 16:17:12,694 - INFO - [UTILITY] Target class distribution (CTGAN): {'no': 331837, 'yes': 29843}
+2025-05-08 16:17:12,703 - INFO - [UTILITY] Processing synthetic dataset generated by TVAE...
+2025-05-08 16:17:12,760 - INFO - [UTILITY] Synthetic Data (TVAE) - Training Size: 361680
+2025-05-08 16:17:12,774 - INFO - [UTILITY] Target class distribution (TVAE): {'no': 342686, 'yes': 18994}
+2025-05-08 16:17:12,775 - INFO - [UTILITY] Training models on all datasets...
+2025-05-08 16:17:12,775 - INFO - [UTILITY] Total datasets used for training: 3
+2025-05-08 16:17:12,775 - INFO - [TRAINING] Training models from scratch...
+2025-05-08 16:17:12,775 - INFO - [TRAINING] Starting training for dataset: Original — Rows: 36168, Features: 30
+2025-05-08 16:17:12,775 - INFO - [TRAINING] Training DecisionTree on Original...
+2025-05-08 16:17:13,011 - INFO - [TRAINING] DecisionTree trained successfully on Original in 0.24 sec
+2025-05-08 16:17:13,011 - INFO - [TRAINING] Training KNN on Original...
+2025-05-08 16:17:13,031 - INFO - [TRAINING] KNN trained successfully on Original in 0.02 sec
+2025-05-08 16:17:13,031 - INFO - [TRAINING] Training LogisticRegression on Original...
+2025-05-08 16:17:13,424 - INFO - [TRAINING] LogisticRegression trained successfully on Original in 0.39 sec
+2025-05-08 16:17:13,428 - INFO - [TRAINING] Training RandomForest on Original...
+2025-05-08 16:17:17,431 - INFO - [TRAINING] RandomForest trained successfully on Original in 4.00 sec
+2025-05-08 16:17:17,431 - INFO - [TRAINING] Finished training 4 model(s) for dataset: Original
+2025-05-08 16:17:17,431 - INFO - [TRAINING] Starting training for dataset: CTGAN — Rows: 361680, Features: 30
+2025-05-08 16:17:17,431 - INFO - [TRAINING] Training DecisionTree on CTGAN...
+2025-05-08 16:17:21,718 - INFO - [TRAINING] DecisionTree trained successfully on CTGAN in 4.29 sec
+2025-05-08 16:17:21,718 - INFO - [TRAINING] Training KNN on CTGAN...
+2025-05-08 16:17:21,939 - INFO - [TRAINING] KNN trained successfully on CTGAN in 0.22 sec
+2025-05-08 16:17:21,939 - INFO - [TRAINING] Training LogisticRegression on CTGAN...
+2025-05-08 16:17:23,410 - INFO - [TRAINING] LogisticRegression trained successfully on CTGAN in 1.47 sec
+2025-05-08 16:17:23,411 - INFO - [TRAINING] Training RandomForest on CTGAN...
+2025-05-08 16:18:34,712 - INFO - [TRAINING] RandomForest trained successfully on CTGAN in 71.30 sec
+2025-05-08 16:18:34,712 - INFO - [TRAINING] Finished training 4 model(s) for dataset: CTGAN
+2025-05-08 16:18:34,712 - INFO - [TRAINING] Starting training for dataset: TVAE — Rows: 361680, Features: 30
+2025-05-08 16:18:34,712 - INFO - [TRAINING] Training DecisionTree on TVAE...
+2025-05-08 16:18:37,339 - INFO - [TRAINING] DecisionTree trained successfully on TVAE in 2.63 sec
+2025-05-08 16:18:37,339 - INFO - [TRAINING] Training KNN on TVAE...
+2025-05-08 16:18:37,718 - INFO - [TRAINING] KNN trained successfully on TVAE in 0.38 sec
+2025-05-08 16:18:37,719 - INFO - [TRAINING] Training LogisticRegression on TVAE...
+2025-05-08 16:18:39,764 - INFO - [TRAINING] LogisticRegression trained successfully on TVAE in 2.05 sec
+2025-05-08 16:18:39,765 - INFO - [TRAINING] Training RandomForest on TVAE...
+2025-05-08 16:19:33,316 - INFO - [TRAINING] RandomForest trained successfully on TVAE in 53.55 sec
+2025-05-08 16:19:33,317 - INFO - [TRAINING] Finished training 4 model(s) for dataset: TVAE
+2025-05-08 16:19:33,317 - INFO - [TRAINING] Total models trained across all datasets: 12
+2025-05-08 16:19:33,317 - INFO - [UTILITY] Trained model names: ['Original', 'CTGAN', 'TVAE']
+2025-05-08 16:19:33,317 - INFO - [UTILITY] Model Training Completed.
+2025-05-08 16:19:33,317 - INFO - Starting the Evaluating of models...
+2025-05-08 16:19:33,317 - INFO - Preparing evaluation for model 'DecisionTree' across all datasets...
+2025-05-08 16:19:33,318 - INFO - Evaluating DecisionTree on Original...
+2025-05-08 16:19:33,321 - INFO - Predictions completed for DecisionTree on Original
+2025-05-08 16:19:33,322 - INFO - Prediction distribution for DecisionTree on Original: {'no': 7862, 'yes': 1181}
+2025-05-08 16:19:33,636 - INFO - Computed 8 metric(s) for DecisionTree on Original
+2025-05-08 16:19:33,637 - INFO - Evaluating DecisionTree on CTGAN...
+2025-05-08 16:19:33,641 - INFO - Predictions completed for DecisionTree on CTGAN
+2025-05-08 16:19:33,642 - INFO - Prediction distribution for DecisionTree on CTGAN: {'no': 8222, 'yes': 821}
+2025-05-08 16:19:33,959 - INFO - Computed 8 metric(s) for DecisionTree on CTGAN
+2025-05-08 16:19:33,960 - INFO - Evaluating DecisionTree on TVAE...
+2025-05-08 16:19:33,991 - INFO - Predictions completed for DecisionTree on TVAE
+2025-05-08 16:19:33,997 - INFO - Prediction distribution for DecisionTree on TVAE: {'no': 8549, 'yes': 494}
+2025-05-08 16:19:34,311 - INFO - Computed 8 metric(s) for DecisionTree on TVAE
+2025-05-08 16:19:34,315 - INFO - Preparing evaluation for model 'KNN' across all datasets...
+2025-05-08 16:19:34,315 - INFO - Evaluating KNN on Original...
+2025-05-08 16:19:38,847 - INFO - Predictions completed for KNN on Original
+2025-05-08 16:19:38,848 - INFO - Prediction distribution for KNN on Original: {'no': 8753, 'yes': 290}
+2025-05-08 16:19:47,967 - INFO - Computed 8 metric(s) for KNN on Original
+2025-05-08 16:19:47,968 - INFO - Evaluating KNN on CTGAN...
+2025-05-08 16:20:19,971 - INFO - Predictions completed for KNN on CTGAN
+2025-05-08 16:20:19,971 - INFO - Prediction distribution for KNN on CTGAN: {'no': 8854, 'yes': 189}
+2025-05-08 16:21:17,441 - INFO - Computed 8 metric(s) for KNN on CTGAN
+2025-05-08 16:21:17,441 - INFO - Evaluating KNN on TVAE...
+2025-05-08 16:21:56,469 - INFO - Predictions completed for KNN on TVAE
+2025-05-08 16:21:56,470 - INFO - Prediction distribution for KNN on TVAE: {'no': 8031, 'yes': 1012}
+2025-05-08 16:23:57,653 - INFO - Computed 8 metric(s) for KNN on TVAE
+2025-05-08 16:23:57,653 - INFO - Preparing evaluation for model 'LogisticRegression' across all datasets...
+2025-05-08 16:23:57,653 - INFO - Evaluating LogisticRegression on Original...
+2025-05-08 16:23:57,656 - INFO - Predictions completed for LogisticRegression on Original
+2025-05-08 16:23:57,657 - INFO - Prediction distribution for LogisticRegression on Original: {'no': 8778, 'yes': 265}
+2025-05-08 16:23:57,809 - INFO - Computed 8 metric(s) for LogisticRegression on Original
+2025-05-08 16:23:57,809 - INFO - Evaluating LogisticRegression on CTGAN...
+2025-05-08 16:23:57,812 - INFO - Predictions completed for LogisticRegression on CTGAN
+2025-05-08 16:23:57,813 - INFO - Prediction distribution for LogisticRegression on CTGAN: {'no': 8757, 'yes': 286}
+2025-05-08 16:23:57,962 - INFO - Computed 8 metric(s) for LogisticRegression on CTGAN
+2025-05-08 16:23:57,963 - INFO - Evaluating LogisticRegression on TVAE...
+2025-05-08 16:23:57,966 - INFO - Predictions completed for LogisticRegression on TVAE
+2025-05-08 16:23:57,967 - INFO - Prediction distribution for LogisticRegression on TVAE: {'no': 8791, 'yes': 252}
+2025-05-08 16:23:58,128 - INFO - Computed 8 metric(s) for LogisticRegression on TVAE
+2025-05-08 16:23:58,128 - INFO - Preparing evaluation for model 'RandomForest' across all datasets...
+2025-05-08 16:23:58,129 - INFO - Evaluating RandomForest on Original...
+2025-05-08 16:23:58,299 - INFO - Predictions completed for RandomForest on Original
+2025-05-08 16:23:58,304 - INFO - Prediction distribution for RandomForest on Original: {'no': 8671, 'yes': 372}
+2025-05-08 16:23:58,821 - INFO - Computed 8 metric(s) for RandomForest on Original
+2025-05-08 16:23:58,821 - INFO - Evaluating RandomForest on CTGAN...
+2025-05-08 16:23:59,234 - INFO - Predictions completed for RandomForest on CTGAN
+2025-05-08 16:23:59,235 - INFO - Prediction distribution for RandomForest on CTGAN: {'no': 8774, 'yes': 269}
+2025-05-08 16:24:01,471 - INFO - Computed 8 metric(s) for RandomForest on CTGAN
+2025-05-08 16:24:01,479 - INFO - Evaluating RandomForest on TVAE...
+2025-05-08 16:24:01,839 - INFO - Predictions completed for RandomForest on TVAE
+2025-05-08 16:24:01,840 - INFO - Prediction distribution for RandomForest on TVAE: {'no': 8776, 'yes': 267}
+2025-05-08 16:24:02,491 - INFO - Computed 8 metric(s) for RandomForest on TVAE
+2025-05-08 16:24:02,504 - INFO - Evaluation completed for all models.
+2025-05-08 16:24:02,504 - INFO - Model evaluation completed in 269.19 seconds.
+2025-05-08 16:24:02,507 - INFO - Evaluated models: ['DecisionTree', 'KNN', 'LogisticRegression', 'RandomForest']
+2025-05-08 16:24:02,507 - INFO - Model Training and Evaluation completed.
+2025-05-08 16:24:04,229 - INFO -  Visualizations saved.
+2025-05-08 16:24:04,229 - INFO -  Benchmarking Completed. Results saved in output folder.
